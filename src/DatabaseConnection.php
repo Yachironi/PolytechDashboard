@@ -7,13 +7,9 @@
     <script src="script.js"></script>
   </head>
   <body>
-    <!-- page content -->
-  </body>
-</html>
-
 <?php
 echo "Test Cedric";
 ?>
-echo "Test Julien";
-echo "test conflit"
-?>
+  </body>
+</html>
+
