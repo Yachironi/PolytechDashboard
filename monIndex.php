@@ -119,7 +119,7 @@
                 <!-- Onglet ma formation -->
                 <li>
                     <a href="#">
-                        <i class="fa fa-education"></i> <span>Ma formation</span>
+                        <i class="fa fa-education"></i> <span>Ma formation</span>       <!-- Modifier icone -->
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                 </li>
@@ -131,26 +131,35 @@
                     </a>
                     <!-- Liste de sous-onglets : taches attribuées et mes taches -->
                     <ul class="treeview-menu">
-                        <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i>Tâches attribuées</a></li>
-                        <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i>Mes tâches</a></li>
+                        <li><a href="pages/tasks/mytasks.php"><i class="fa fa-circle-o"></i>Mes tâches</a></li>
+                        <li><a href="pages/tasks/assign_task.php"><i class="fa fa-circle-o"></i>Attribuer une tache</a></li>
                     </ul>
                 </li>
                 <!-- Onglet notes -->
                 <li>
                     <a href="pages/notes.php">
-                        <i class="fa fa-stats"></i> <span>Mes notes</span>
+                        <i class="fa fa-stats"></i> <span>Mes notes</span>      <!-- Modifier icone -->
+                        <i class="fa fa-angle-left pull-right"></i>
                     </a>
                 </li>
                 <!-- Onglet Planning -->
                 <li>
                     <a href="pages/calendar.html">
                         <i class="fa fa-calendar"></i> <span>Planning</span>
+                        <i class="fa fa-angle-left pull-right"></i>
                     </a>
                 </li>
                 <!-- Onglet "mes notifications" -->
                 <li>
                     <a href="pages/mailbox/mailbox.html">
                         <i class="fa fa-envelope"></i> <span>Mes notifications</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="pages/mailbox/mailbox.html">
+                        <i class="fa fa-envelope"></i> <span>Contacter quelqu'un</span>     <!-- Modifier icone -->
+                        <i class="fa fa-angle-left pull-right"></i>
                     </a>
                 </li>
 
