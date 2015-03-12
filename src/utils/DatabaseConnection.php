@@ -15,7 +15,7 @@
 	    echo "Connection a la base de donnees SQLite reussie: ";
 	     
 	} catch(Exception $e) {
-	    echo "Impossible d'acceder à la base de donnees SQLite : ".$e->getMessage();
+	    echo "Impossible d'acceder a la base de donnees SQLite : ".$e->getMessage();
 	    die();
 	}
 	?>
