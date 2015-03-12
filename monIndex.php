@@ -71,6 +71,7 @@
                             <li class="user-header">
                                 <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                                 <p>
+                                    <?php echo $prenom_etudiant . " " . $nom_etudiant  ?>
                                     <small><?php echo $formation_etudiant?></small>
                                 </p>
                             </li>
@@ -119,7 +120,7 @@
                 <!-- Onglet ma formation -->
                 <li>
                     <a href="#">
-                        <i class="fa fa-education"></i> <span>Ma formation</span>       <!-- Modifier icone -->
+                        <i class="fa fa-graduation-cap"></i> <span>Ma formation</span>       <!-- Modifier icone -->
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                 </li>
@@ -137,8 +138,8 @@
                 </li>
                 <!-- Onglet notes -->
                 <li>
-                    <a href="pages/notes.php">
-                        <i class="fa fa-stats"></i> <span>Mes notes</span>      <!-- Modifier icone -->
+                    <a href="#">
+                        <i class="fa fa-list-alt"></i> <span>Mes notes</span>      <!-- Modifier icone -->
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                 </li>
@@ -152,7 +153,7 @@
                 <!-- Onglet "mes notifications" -->
                 <li>
                     <a href="pages/mailbox/mailbox.html">
-                        <i class="fa fa-envelope"></i> <span>Mes notifications</span>
+                        <i class="fa fa-bell"></i> <span>Mes notifications</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                 </li>
