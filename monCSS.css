@@ -1,0 +1,39 @@
+.table-note {
+    border: 1px solid #BEBABA;
+    width: 80%;
+    margin: auto;
+}
+.table-note > thead > tr > th,
+.table-note > tbody > tr > th,
+.table-note > tfoot > tr > th,
+.table-note > thead > tr > td,
+.table-note > tbody > tr > td,
+.table-note > tfoot > tr > td {
+    border-color: #BEBABA;
+}
+#entete{
+    background-color: #009FFA;
+    color: #ffffff;
+}
+#matiere{
+    width: 80%;
+    text-align: center;
+}
+
+.moyenne,
+.coefficient{
+    text-align: center;
+}
+
+.titre_matiere{
+    background-color: #ffffff;
+}
+
+.contenu_matiere{
+    background-color: #F5F5F5;
+}
+
+.contenu{
+    padding-top: 25px;
+
+}
