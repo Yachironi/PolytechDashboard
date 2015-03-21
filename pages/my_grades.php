@@ -7,7 +7,7 @@
     <div class="contenu">
         <table class="table table-note">
             <thead>
-                <tr id="entete">
+                <tr class="entete">
                     <th id="matiere">Matière</th>
                     <th class="moyenne">Moyenne</th>
                     <th class="coefficient">Coefficient</th>
