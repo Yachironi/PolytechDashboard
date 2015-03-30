@@ -4,7 +4,7 @@
         Mes tâches
     </h1>
     <div class="contenu">
-        <div class="row">
+        <div class="row row-task">
             <div class="col-lg-6">
                 <h3>Tâches attribuées</h3>
                 <table class="table table-striped table-hover table-task">

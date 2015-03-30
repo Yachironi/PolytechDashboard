@@ -7,7 +7,6 @@ function activateTag(id_tag){
     /* On cache les div qu'il faut caché */
     for(i=0; i<size; i++){
         var tag = document.getElementById(list_tag[i]);
-        /** PB : tag est null **/
         if(tag.style.display == "block"){
             tag.style.display = "none";
         }

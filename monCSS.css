@@ -33,8 +33,9 @@
     text-align: center;
 }
 
+.btn-center,
 .entete > th,
-.row,
+.row-task,
 .moyenne,
 .coefficient{
     text-align: center;
@@ -52,6 +53,7 @@
     padding-top: 25px;
 }
 
+.form-group,
 .table-note,
 .contenu > p{
     margin: auto;
@@ -64,3 +66,9 @@ a > .fa-times{
 a:hover > .fa-times{
     color: rgb(255, 90, 0);
 }
+
+.myform{
+    width: 75%;
+    margin: auto;
+}
+
