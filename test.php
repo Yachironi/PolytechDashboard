@@ -2,8 +2,9 @@
 /**
  * Created by PhpStorm.
  * User: yachironi
- * Date: 11/03/15
- * Time: 20:03
+ * Date: 12/03/15
+ * Time: 12:12
  */
-echo "test";
+echo "Test";
+
 ?>

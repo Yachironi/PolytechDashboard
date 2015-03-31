@@ -1,0 +1,109 @@
+{% extends '::base.html.twig' %}
+
+
+{%  block title %}
+    Hello Page
+{% endblock %}
+
+{% block body %}
+    <div class="wrapper">
+
+
+        <!-- PARTIE DU HAUT -->
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="monIndex.php" class="logo"><b>myDashboard</b></a>           <!-- LOGO EN HAUT A GAUCHE -->
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <!-- BARRE DE NAVIGATION EN HAUT -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- COMPTE DE L'UTILISATEUR -->
+                        <li class="dropdown user user-menu">
+                            <!-- APERCU DE L'UTILISATEUR -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image"/>
+                                <span class="hidden-xs"> Yasser RABI</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- IMAGE DE L'UTILISATEUR -->
+                                <li class="user-header">
+                                    <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
+                                    <p>
+                                        Yasser RABI
+                                        ET4 - Informatique
+                                    </p>
+                                </li>
+                                <!-- Menu Body : A VOIR SI ON UTILISE
+                                <li class="user-body">
+                                </li>
+                                -->
+                                <!-- MENU FOOTER -->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Mon profil</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">Déconnexion</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+
+
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            {% include 'PolytechDashboardHomeBundle:Default:pages/sidebar.html.twig' %}
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div id="main_dashboard" style="display:block;">
+                {% include 'PolytechDashboardHomeBundle:Default:pages/main_dashboard.html.twig' %}
+            </div>
+            <div id="my_study_level" style="display:none;">
+                {% include 'PolytechDashboardHomeBundle:Default:pages/my_study_level.html.twig' %}
+            </div>
+            <div id="my_tasks" style="display:none;">
+                {% include 'PolytechDashboardHomeBundle:Default:pages/tasks/my_tasks.html.twig' %}
+            </div>
+            <div id="assign_task" style="display:none;">
+                {% include 'PolytechDashboardHomeBundle:Default:pages/tasks/assign_task.html.twig' %}
+
+            </div>
+            <div id="my_grades" style="display:none;">
+                {% include 'PolytechDashboardHomeBundle:Default:pages/my_grades.html.twig' %}
+
+            </div>
+            <div id="planning" style="display:none;">
+                {% include 'PolytechDashboardHomeBundle:Default:pages/planning.html.twig' %}
+
+            </div>
+            <div id="my_notifications" style="display:none;">
+                {% include 'PolytechDashboardHomeBundle:Default:pages/my_notifications.html.twig' %}
+
+            </div>
+            <div id="contact" style="display:none;">
+                {% include 'PolytechDashboardHomeBundle:Default:pages/contact.html.twig' %}
+
+            </div>
+        </div>
+        <!-- /.content-wrapper -->
+
+
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2014-2015 </strong>  - Guillaume BLANCHARD, Cédric PORTANERI, Julien PREISNER, Yasser RABI   - All rights reserved.
+        </footer>
+
+    </div><!-- ./wrapper -->
+{% endblock %}

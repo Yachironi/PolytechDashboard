@@ -1,0 +1,3 @@
+polytech_dashboard_home_homepage:
+    path:     /
+    defaults: { _controller: PolytechDashboardHomeBundle:Default:index }
