@@ -8,6 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+
         return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig');
         //return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig', array('name' => $name));
     }

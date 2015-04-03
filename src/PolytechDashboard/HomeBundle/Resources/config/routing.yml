@@ -1,3 +1,7 @@
 polytech_dashboard_home_homepage:
     path:     /
     defaults: { _controller: PolytechDashboardHomeBundle:Default:index }
+
+hello:
+    path:      /hello/{name}
+    defaults:  { _controller: PolytechDashboardHomeBundle:Hello:index }
