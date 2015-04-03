@@ -1,26 +1,4 @@
-<!-- il ne trouve pas form.js -->
-<script type="text/javascript">
-    list_form = new Array('1', '2', '3', '4', '5');
-
-    function afficheForm(ID){
-        var indice_form_a_affiche = document.getElementById(ID).selectedIndex;
-        var i;
-        var size = list_form.length;
-
-        /* On cache les div qu'il faut caché */
-        for(i=0; i<size; i++){
-            var form = document.getElementById(list_form[i]);
-            if(form == null){
-                alert(i);
-            }
-            if(form.style.display == "block" && i != indice_form_a_affiche){
-                form.style.display = "none";
-            }
-        }
-        /* On affiche le formulaire passé en paramètre */
-        document.getElementById(list_form[indice_form_a_affiche]).style.display = "block";
-    }
-</script>
+<!-- La partie JavaScript de cette partie se situe dans monJS.js (fonction afficheForm) -->
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -35,16 +13,16 @@
             <!-- Partie toujours présentes -->
             <div class="form-group">
                 <label for="destinataire">Destinataire</label>
-                <input type="text" class="form-control" id="destinataire">
+                <input type="text" class="form-control" id="destinataire" required>
             </div>
             <div class="form-group">
                 <label for="objet">Objet</label>
-                <input type="text" class="form-control" id="objet">
+                <input type="text" class="form-control" id="objet" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="padding-bottom: 20px;">
                 <label for="type">Type de formulaire</label>
                 <select class="form-control" id="list_form" onchange="afficheForm('list_form')">
-                    <option value="1"></option>
+                    <option value="1" selected="selected"></option>
                     <option value="2">Justifier une absence</option>
                     <option value="3">Demander confirmation</option>
                     <option value="4">Envoyer une pièce jointe</option>
@@ -52,11 +30,12 @@
                 </select>
             </div>
 
+
             <!-- Vide -->
             <div id="1"></div>
 
             <!-- Justification absence -->
-            <div id="2" style="display: none;">
+            <div id="2" class="sous_formulaire" style="display: none;">
                 <!-- Date de début d'absence -->
                 <div class="row">
                     <!-- Date -->
@@ -108,12 +87,12 @@
             </div>
 
             <!-- 3 -->
-            <div id="3" style="display: none;">
+            <div id="3" class="sous_formulaire" style="display: none;">
                 Option 3
             </div>
 
             <!-- Piece jointe -->
-            <div id="4" style="display: none;">
+            <div id="4" class="sous_formulaire" style="display: none;">
                 <div class="form-group">
                     <label>Texte</label>
                     <textarea class="form-control"></textarea>
@@ -130,7 +109,7 @@
             </div>
 
             <!-- Par defaut -->
-            <div id="5" style="display: none;">
+            <div id="5" class="sous_formulaire" style="display: none;">
                 <div class="form-group">
                     <label>Texte</label>
                     <textarea class="form-control"></textarea>

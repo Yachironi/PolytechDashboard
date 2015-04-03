@@ -1,5 +1,4 @@
 <script type="text/javascript" src="{{ asset('js/monJS.js')}}"></script>
-
 <!-- sidebar: style can be found in sidebar.less -->
 <section class="sidebar">
     <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -7,11 +6,16 @@
         <!-- TITRE DE LA BARRE DE NAVIGATION (SUR LA GAUCHE) -->
         <li class="header">MAIN NAVIGATION</li>
         <!-- Onglet ma formation -->
-        <li>
-            <a href="#" onclick="activateTag('my_study_level')">
+        <li class="treeview">
+            <a href="#">
                 <i class="fa fa-graduation-cap"></i> <span>Ma formation</span>       <!-- Modifier icone -->
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
+            <!-- Liste de sous-onglets : taches attribuées et mes taches -->
+            <ul class="treeview-menu">
+                <li><a href="#" onclick="activateTag('my_space_study_level')"><i class="fa fa-circle-o"></i>Mon espace</a></li>
+                <li><a href="#" onclick="activateTag('my_program')"><i class="fa fa-circle-o"></i>Mon programme</a></li>
+            </ul>
         </li>
         <!-- Onglet taches -->
         <li class="treeview">

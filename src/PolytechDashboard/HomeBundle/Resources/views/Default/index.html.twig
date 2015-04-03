@@ -11,7 +11,7 @@
         <!-- PARTIE DU HAUT -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="monIndex.php" class="logo"><b>myDashboard</b></a>           <!-- LOGO EN HAUT A GAUCHE -->
+            <a href="#" onclick="activateTag('main_dashboard')" class="logo"><b>myDashboard</b></a>           <!-- LOGO EN HAUT A GAUCHE -->
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
@@ -67,8 +67,11 @@
             <div id="main_dashboard" style="display:block;">
                 {% include 'PolytechDashboardHomeBundle:Default:pages/main_dashboard.html.twig' %}
             </div>
-            <div id="my_study_level" style="display:none;">
-                {% include 'PolytechDashboardHomeBundle:Default:pages/my_study_level.html.twig' %}
+            <div id="my_space_study_level" style="display:none;">
+                {% include 'PolytechDashboardHomeBundle:Default:pages/formation/my_space_study_level.html.twig' %}
+            </div>
+            <div id="my_program" style="display:none;">
+                {% include 'PolytechDashboardHomeBundle:Default:pages/formation/my_program.html.twig' %}
             </div>
             <div id="my_tasks" style="display:none;">
                 {% include 'PolytechDashboardHomeBundle:Default:pages/tasks/my_tasks.html.twig' %}

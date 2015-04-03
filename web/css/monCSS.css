@@ -1,8 +1,15 @@
+.table-program,
 .table-note,
 .table-task{
     border: 1px solid #BEBABA;
 }
 
+.table-program > thead > tr > th,
+.table-program > tbody > tr > th,
+.table-program > tfoot > tr > th,
+.table-program > thead > tr > td,
+.table-program > tbody > tr > td,
+.table-program > tfoot > tr > td,
 .table-note > thead > tr > th,
 .table-note > tbody > tr > th,
 .table-note > tfoot > tr > th,
@@ -18,29 +25,31 @@
     border-color: #BEBABA;
 }
 
-.table-note{
+.table-note {
     width: 80%;
 }
 
+.table-program{
+    max-width: 100%;
+}
 
 .entete{
     background-color: #009FFA;
     color: #ffffff;
 }
 
-#matiere{
-    width: 80%;
-    text-align: center;
-}
-
 .entete > th,
-.row,
-.moyenne,
-.coefficient{
+.table-program > tbody > tr > th,
+.table-program > tbody > tr > td,
+.table-note > tbody > tr > th,
+.table-note > tbody > tr > td,
+.btn-center,
+.row-task{
     text-align: center;
 }
 
-.titre_matiere{
+.UE,
+.sous_ensemble {
     background-color: #ffffff;
 }
 
@@ -52,15 +61,64 @@
     padding-top: 25px;
 }
 
+.form-group,
 .table-note,
 .contenu > p{
     margin: auto;
 }
 
 a > .fa-times{
-     color: red;
+    color: red;
 }
 
 a:hover > .fa-times{
     color: rgb(255, 90, 0);
+}
+
+.myform{
+    width: 75%;
+    margin: auto;
+    padding-top: 10px;
+}
+
+.sous_formulaire{
+    padding-top: 10px;
+    border-top: 2px solid #009FFA;
+}
+
+
+.form-group{
+    padding-bottom: 10px;
+}
+
+.btn-primary{
+    background-color: #009FFA;
+}
+
+/* Sidebar personnalisé */
+
+.sidebar-perso > .sidebar-menu > li.header {
+    background: #ffffff;
+}
+
+.sidebar-perso > .sidebar-menu > li{
+}
+.sidebar-perso > .sidebar-menu > li > a {
+    border-left-width: 0px;
+    margin-right: 1px;
+    background-color: #009FFA;
+    border: 1px solid #003B59;
+}
+
+.sidebar-perso > .sidebar-menu > li > a:hover,
+.sidebar-perso > .sidebar-menu > li.active > a {
+    color: #fff;
+    background: #00496E;
+}
+
+
+.sidebar-perso > .sidebar-menu > li > .treeview-menu {
+    background: transparent;
+    margin: 0px;
+    padding: 0px;
 }
