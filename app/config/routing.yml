@@ -5,3 +5,7 @@ polytech_dashboard_home:
 app:
     resource: @AppBundle/Controller/
     type:     annotation
+
+Cours:
+    path:      /Cours/{id}
+    defaults:  { _controller: PolytechDashboardHomeBundle:Cours:index }
