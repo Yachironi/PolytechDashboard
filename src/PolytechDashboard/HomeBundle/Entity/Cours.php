@@ -7,47 +7,48 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Cours
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="PolytechDashboard\HomeBundle\Entity\CoursRepository")
+ * @ORM\Table(name="Cours")
+ * @ORM\Entity
  */
 class Cours
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=true)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nomCours", type="string", length=255)
+     * @ORM\Column(name="nomCours", type="text", nullable=true)
      */
-    private $nomCours;
+    private $nomcours;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="coefficient", type="integer")
+     * @ORM\Column(name="idFormation", type="integer", nullable=true)
+     */
+    private $idformation;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="coefficient", type="integer", nullable=true)
      */
     private $coefficient;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="idFormation", type="integer")
+     * @ORM\Column(name="idUE", type="integer", nullable=true)
      */
-    private $idFormation;
+    private $idue;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="idUE", type="integer")
-     */
-    private $idUE;
 
 
     /**
@@ -61,26 +62,49 @@ class Cours
     }
 
     /**
-     * Set nomCours
+     * Set nomcours
      *
-     * @param string $nomCours
+     * @param string $nomcours
      * @return Cours
      */
-    public function setNomCours($nomCours)
+    public function setNomcours($nomcours)
     {
-        $this->nomCours = $nomCours;
+        $this->nomcours = $nomcours;
 
         return $this;
     }
 
     /**
-     * Get nomCours
+     * Get nomcours
      *
      * @return string 
      */
-    public function getNomCours()
+    public function getNomcours()
     {
-        return $this->nomCours;
+        return $this->nomcours;
+    }
+
+    /**
+     * Set idformation
+     *
+     * @param integer $idformation
+     * @return Cours
+     */
+    public function setIdformation($idformation)
+    {
+        $this->idformation = $idformation;
+
+        return $this;
+    }
+
+    /**
+     * Get idformation
+     *
+     * @return integer 
+     */
+    public function getIdformation()
+    {
+        return $this->idformation;
     }
 
     /**
@@ -107,48 +131,25 @@ class Cours
     }
 
     /**
-     * Set idFormation
+     * Set idue
      *
-     * @param integer $idFormation
+     * @param integer $idue
      * @return Cours
      */
-    public function setIdFormation($idFormation)
+    public function setIdue($idue)
     {
-        $this->idFormation = $idFormation;
+        $this->idue = $idue;
 
         return $this;
     }
 
     /**
-     * Get idFormation
+     * Get idue
      *
      * @return integer 
      */
-    public function getIdFormation()
+    public function getIdue()
     {
-        return $this->idFormation;
-    }
-
-    /**
-     * Set idUE
-     *
-     * @param integer $idUE
-     * @return Cours
-     */
-    public function setIdUE($idUE)
-    {
-        $this->idUE = $idUE;
-
-        return $this;
-    }
-
-    /**
-     * Get idUE
-     *
-     * @return integer 
-     */
-    public function getIdUE()
-    {
-        return $this->idUE;
+        return $this->idue;
     }
 }

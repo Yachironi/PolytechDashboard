@@ -3,9 +3,13 @@ polytech_dashboard_home:
     prefix:   /
 
 app:
-    resource: @AppBundle/Controller/
+    resource: "@AppBundle/Controller/"
     type:     annotation
 
 Cours:
     path:      /Cours/{id}
-    defaults:  { _controller: PolytechDashboardHomeBundle:Cours:index }
+    defaults:  { _controller: "PolytechDashboardHomeBundle:Cours:index" }
+
+Note:
+    path:      /Note/{id}
+    defaults:  { _controller: "PolytechDashboardHomeBundle:Note:index" }

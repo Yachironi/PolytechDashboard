@@ -5,42 +5,43 @@ namespace PolytechDashboard\HomeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * UE
+ * Ue
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="PolytechDashboard\HomeBundle\Entity\UERepository")
+ * @ORM\Table(name="UE")
+ * @ORM\Entity
  */
-class UE
+class Ue
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=true)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="text", nullable=true)
      */
     private $nom;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="idFormation", type="integer")
+     * @ORM\Column(name="idFormation", type="integer", nullable=true)
      */
-    private $idFormation;
+    private $idformation;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="coefficient", type="integer")
+     * @ORM\Column(name="Coeff", type="integer", nullable=true)
      */
-    private $coefficient;
+    private $coeff;
+
 
 
     /**
@@ -57,7 +58,7 @@ class UE
      * Set nom
      *
      * @param string $nom
-     * @return UE
+     * @return Ue
      */
     public function setNom($nom)
     {
@@ -77,48 +78,48 @@ class UE
     }
 
     /**
-     * Set idFormation
+     * Set idformation
      *
-     * @param integer $idFormation
-     * @return UE
+     * @param integer $idformation
+     * @return Ue
      */
-    public function setIdFormation($idFormation)
+    public function setIdformation($idformation)
     {
-        $this->idFormation = $idFormation;
+        $this->idformation = $idformation;
 
         return $this;
     }
 
     /**
-     * Get idFormation
+     * Get idformation
      *
      * @return integer 
      */
-    public function getIdFormation()
+    public function getIdformation()
     {
-        return $this->idFormation;
+        return $this->idformation;
     }
 
     /**
-     * Set coefficient
+     * Set coeff
      *
-     * @param integer $coefficient
-     * @return UE
+     * @param integer $coeff
+     * @return Ue
      */
-    public function setCoefficient($coefficient)
+    public function setCoeff($coeff)
     {
-        $this->coefficient = $coefficient;
+        $this->coeff = $coeff;
 
         return $this;
     }
 
     /**
-     * Get coefficient
+     * Get coeff
      *
      * @return integer 
      */
-    public function getCoefficient()
+    public function getCoeff()
     {
-        return $this->coefficient;
+        return $this->coeff;
     }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Etudiantcours" table="EtudiantCours">
+    <many-to-one field="id" target-entity="Formation" inversed-by="cours">
+	    <id name="idcours" type="integer" column="idCours">
+	      <generator strategy="IDENTITY"/>
+	    </id>
+	</many-to-one>    
+    <many-to-one field="id" target-entity="Formation" inversed-by="etudiant">
+        <field name="idetudiant" type="integer" column="idEtudiant" nullable="true"/>
+    </many-to-one>    
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Reponsetache" table="ReponseTache">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="donnee" type="text" column="donnee" nullable="true"/>
+    <many-to-one field="id" target-entity="Etudiant" inversed-by="etudiant">
+        <field name="idetudiant" type="integer" column="idEtudiant" nullable="true"/>
+    </many-to-one>
+    <many-to-one field="id" target-entity="Tache" inversed-by="tache">
+        <field name="idtache" type="integer" column="idTache" nullable="true"/>
+    </many-to-one>
+    <many-to-one field="id" target-entity="Gestionnaire" inversed-by="gestionnaire">
+        <field name="idgestionnaire" type="integer" column="idGestionnaire" nullable="true"/>
+  	</many-to-one>
+  </entity>
+</doctrine-mapping>

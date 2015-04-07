@@ -7,61 +7,62 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tache
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="PolytechDashboard\HomeBundle\Entity\TacheRepository")
+ * @ORM\Table(name="Tache")
+ * @ORM\Entity
  */
 class Tache
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=true)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="type", type="text", nullable=true)
      */
     private $type;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="text", nullable=true)
      */
     private $nom;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="idGestionnaire", type="integer")
+     * @ORM\Column(name="idGestionnaire", type="integer", nullable=true)
      */
-    private $idGestionnaire;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateCreation", type="datetimetz")
-     */
-    private $dateCreation;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateFin", type="datetimetz")
-     */
-    private $dateFin;
+    private $idgestionnaire;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="structure", type="string", length=255)
+     * @ORM\Column(name="dateCreation", type="text", nullable=true)
+     */
+    private $datecreation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dateFin", type="text", nullable=true)
+     */
+    private $datefin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="structure", type="text", nullable=true)
      */
     private $structure;
+
 
 
     /**
@@ -121,72 +122,72 @@ class Tache
     }
 
     /**
-     * Set idGestionnaire
+     * Set idgestionnaire
      *
-     * @param integer $idGestionnaire
+     * @param integer $idgestionnaire
      * @return Tache
      */
-    public function setIdGestionnaire($idGestionnaire)
+    public function setIdgestionnaire($idgestionnaire)
     {
-        $this->idGestionnaire = $idGestionnaire;
+        $this->idgestionnaire = $idgestionnaire;
 
         return $this;
     }
 
     /**
-     * Get idGestionnaire
+     * Get idgestionnaire
      *
      * @return integer 
      */
-    public function getIdGestionnaire()
+    public function getIdgestionnaire()
     {
-        return $this->idGestionnaire;
+        return $this->idgestionnaire;
     }
 
     /**
-     * Set dateCreation
+     * Set datecreation
      *
-     * @param \DateTime $dateCreation
+     * @param string $datecreation
      * @return Tache
      */
-    public function setDateCreation($dateCreation)
+    public function setDatecreation($datecreation)
     {
-        $this->dateCreation = $dateCreation;
+        $this->datecreation = $datecreation;
 
         return $this;
     }
 
     /**
-     * Get dateCreation
+     * Get datecreation
      *
-     * @return \DateTime 
+     * @return string 
      */
-    public function getDateCreation()
+    public function getDatecreation()
     {
-        return $this->dateCreation;
+        return $this->datecreation;
     }
 
     /**
-     * Set dateFin
+     * Set datefin
      *
-     * @param \DateTime $dateFin
+     * @param string $datefin
      * @return Tache
      */
-    public function setDateFin($dateFin)
+    public function setDatefin($datefin)
     {
-        $this->dateFin = $dateFin;
+        $this->datefin = $datefin;
 
         return $this;
     }
 
     /**
-     * Get dateFin
+     * Get datefin
      *
-     * @return \DateTime 
+     * @return string 
      */
-    public function getDateFin()
+    public function getDatefin()
     {
-        return $this->dateFin;
+        return $this->datefin;
     }
 
     /**

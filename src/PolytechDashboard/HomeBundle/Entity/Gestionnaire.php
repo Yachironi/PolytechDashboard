@@ -5,12 +5,12 @@ namespace PolytechDashboard\HomeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Etudiant
+ * Gestionnaire
  *
- * @ORM\Table(name="Etudiant")
+ * @ORM\Table(name="Gestionnaire")
  * @ORM\Entity
  */
-class Etudiant
+class Gestionnaire
 {
     /**
      * @var integer
@@ -20,6 +20,13 @@ class Etudiant
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="text", nullable=true)
+     */
+    private $type;
 
     /**
      * @var string
@@ -42,13 +49,6 @@ class Etudiant
      */
     private $email;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="text", nullable=true)
-     */
-    private $password;
-
 
 
     /**
@@ -62,10 +62,33 @@ class Etudiant
     }
 
     /**
+     * Set type
+     *
+     * @param string $type
+     * @return Gestionnaire
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
      * Set nom
      *
      * @param string $nom
-     * @return Etudiant
+     * @return Gestionnaire
      */
     public function setNom($nom)
     {
@@ -88,7 +111,7 @@ class Etudiant
      * Set prenom
      *
      * @param string $prenom
-     * @return Etudiant
+     * @return Gestionnaire
      */
     public function setPrenom($prenom)
     {
@@ -111,7 +134,7 @@ class Etudiant
      * Set email
      *
      * @param string $email
-     * @return Etudiant
+     * @return Gestionnaire
      */
     public function setEmail($email)
     {
@@ -128,28 +151,5 @@ class Etudiant
     public function getEmail()
     {
         return $this->email;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return Etudiant
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
     }
 }

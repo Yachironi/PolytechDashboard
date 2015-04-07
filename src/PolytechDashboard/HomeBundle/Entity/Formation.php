@@ -7,40 +7,41 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Formation
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="PolytechDashboard\HomeBundle\Entity\FormationRepository")
+ * @ORM\Table(name="Formation")
+ * @ORM\Entity
  */
 class Formation
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=true)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="specialite", type="string", length=255)
+     * @ORM\Column(name="specialite", type="text", nullable=true)
      */
     private $specialite;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="anneeEtude", type="integer")
+     * @ORM\Column(name="anneeEtude", type="integer", nullable=true)
      */
-    private $anneeEtude;
+    private $anneeetude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="type", type="text", nullable=true)
      */
     private $type;
+
 
 
     /**
@@ -77,26 +78,26 @@ class Formation
     }
 
     /**
-     * Set anneeEtude
+     * Set anneeetude
      *
-     * @param integer $anneeEtude
+     * @param integer $anneeetude
      * @return Formation
      */
-    public function setAnneeEtude($anneeEtude)
+    public function setAnneeetude($anneeetude)
     {
-        $this->anneeEtude = $anneeEtude;
+        $this->anneeetude = $anneeetude;
 
         return $this;
     }
 
     /**
-     * Get anneeEtude
+     * Get anneeetude
      *
      * @return integer 
      */
-    public function getAnneeEtude()
+    public function getAnneeetude()
     {
-        return $this->anneeEtude;
+        return $this->anneeetude;
     }
 
     /**
