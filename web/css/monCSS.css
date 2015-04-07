@@ -108,11 +108,12 @@ a:hover > .fa-times{
     margin-right: 1px;
     background-color: #009FFA;
     border: 1px solid #003B59;
+    color: #fff;
 }
+
 
 .sidebar-perso > .sidebar-menu > li > a:hover,
 .sidebar-perso > .sidebar-menu > li.active > a {
-    color: #fff;
     background: #00496E;
 }
 
