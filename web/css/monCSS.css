@@ -100,15 +100,18 @@ a:hover > .fa-times{
 .sidebar-perso > .sidebar-menu > li{
 }
 .sidebar-perso > .sidebar-menu > li > a {
+    text-decoration: none;
     border-left-width: 0px;
     margin-right: 1px;
     background-color: #009FFA;
+    color: #ffffff;
     border: 1px solid #003B59;
 }
 
 .sidebar-perso > .sidebar-menu > li > a:hover,
 .sidebar-perso > .sidebar-menu > li.active > a {
-    color: #fff;
+    text-decoration: none;
+    color: #ffffff;
     background: #00496E;
 }
 
@@ -117,11 +120,4 @@ a:hover > .fa-times{
     background: transparent;
     margin: 0px;
     padding: 0px;
-}
-
-/* Datepicker */
-
-.dropdown-menu {
-    margin-top: -350px;
-    margin-right: -35px;
 }
