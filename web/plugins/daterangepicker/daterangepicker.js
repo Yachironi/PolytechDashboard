@@ -30,23 +30,23 @@
         this.showDropdowns = false;
         this.showWeekNumbers = false;
         this.timePicker = false;
-        this.timePickerIncrement = 30;
-        this.timePicker12Hour = true;
+        this.timePickerIncrement = 15;
+        this.timePicker12Hour = false;
         this.ranges = {};
         this.opens = 'right';
 
         this.buttonClasses = ['btn', 'btn-small'];
-        this.applyClass = 'btn-success';
+        this.applyClass = 'btn-primary';
         this.cancelClass = 'btn-default';
 
-        this.format = 'MM/DD/YYYY';
+        this.format = 'DD/MM/YYYY';
         this.separator = ' - ';
 
         this.locale = {
-            applyLabel: 'Apply',
-            cancelLabel: 'Cancel',
-            fromLabel: 'From',
-            toLabel: 'To',
+            applyLabel: 'Valider',
+            cancelLabel: 'Annuler',
+            fromLabel: 'De',
+            toLabel: 'À',
             weekLabel: 'W',
             customRangeLabel: 'Custom Range',
             daysOfWeek: moment()._lang._weekdaysMin.slice(),
@@ -92,7 +92,8 @@
             }
         }
 
-        var DRPTemplate = '<div class="daterangepicker dropdown-menu">' +
+        var DRPTemplate =
+            '<div class="daterangepicker dropdown-menu" style="margin-top:-350px;margin-right:-35px;">' +
                 '<div class="calendar left"></div>' +
                 '<div class="calendar right"></div>' +
                 '<div class="ranges">' +
