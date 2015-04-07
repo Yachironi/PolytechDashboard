@@ -25,10 +25,13 @@
     border-color: #BEBABA;
 }
 
-.table-note{
+.table-note {
     width: 80%;
 }
 
+.table-program{
+    max-width: 100%;
+}
 
 .entete{
     background-color: #009FFA;
@@ -36,13 +39,17 @@
 }
 
 .entete > th,
-.row,
-.moyenne,
-.coefficient{
+.table-program > tbody > tr > th,
+.table-program > tbody > tr > td,
+.table-note > tbody > tr > th,
+.table-note > tbody > tr > td,
+.btn-center,
+.row-task{
     text-align: center;
 }
 
-.titre_matiere{
+.UE,
+.sous_ensemble {
     background-color: #ffffff;
 }
 
@@ -54,13 +61,14 @@
     padding-top: 25px;
 }
 
+.form-group,
 .table-note,
 .contenu > p{
     margin: auto;
 }
 
 a > .fa-times{
-     color: red;
+    color: red;
 }
 
 a:hover > .fa-times{
@@ -100,12 +108,11 @@ a:hover > .fa-times{
     margin-right: 1px;
     background-color: #009FFA;
     border: 1px solid #003B59;
-    color: #fff;
 }
-
 
 .sidebar-perso > .sidebar-menu > li > a:hover,
 .sidebar-perso > .sidebar-menu > li.active > a {
+    color: #fff;
     background: #00496E;
 }
 
