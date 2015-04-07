@@ -25,13 +25,10 @@
     border-color: #BEBABA;
 }
 
-.table-note {
+.table-note{
     width: 80%;
 }
 
-.table-program{
-    max-width: 100%;
-}
 
 .entete{
     background-color: #009FFA;
@@ -39,17 +36,13 @@
 }
 
 .entete > th,
-.table-program > tbody > tr > th,
-.table-program > tbody > tr > td,
-.table-note > tbody > tr > th,
-.table-note > tbody > tr > td,
-.btn-center,
-.row-task{
+.row,
+.moyenne,
+.coefficient{
     text-align: center;
 }
 
-.UE,
-.sous_ensemble {
+.titre_matiere{
     background-color: #ffffff;
 }
 
@@ -61,14 +54,13 @@
     padding-top: 25px;
 }
 
-.form-group,
 .table-note,
 .contenu > p{
     margin: auto;
 }
 
 a > .fa-times{
-    color: red;
+     color: red;
 }
 
 a:hover > .fa-times{

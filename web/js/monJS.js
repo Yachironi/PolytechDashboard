@@ -17,6 +17,9 @@ function activateTag(id_tag){
 
     /* On affiche l'onglet passé en paramètre */
     document.getElementById(id_tag).style.display = "block";
+    if(id_tag=='planning')  {
+        $('#calendar').fullCalendar('render');
+    }
 }
 
 function activeSemestre(ID){
