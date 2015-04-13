@@ -13,7 +13,12 @@
             <!-- Partie toujours présentes -->
             <div class="form-group">
                 <label for="destinataire">Destinataire</label>
-                <input type="text" class="form-control" id="destinataire" required>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="destinataire" required>
+                    <div class="input-group-addon">
+                        <a href="#" onclick="openPopup('select_dest.html.twig', 700, 500)"><i class="fa fa-sort-alpha-asc"></i></a>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="objet">Objet</label>

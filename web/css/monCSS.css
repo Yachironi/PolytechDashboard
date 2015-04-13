@@ -125,3 +125,13 @@ a:hover > .fa-times{
     margin-top: -350px;
     margin-right: -35px;
 }
+
+.dropdown-menu:after {
+    border: none !important;
+    content: "" !important;
+}
+
+.dropdown-menu:before {
+    border: none !important;
+    content: "" !important;
+}
