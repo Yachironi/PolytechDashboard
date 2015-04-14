@@ -135,3 +135,34 @@ a:hover > .fa-times{
     border: none !important;
     content: "" !important;
 }
+
+/** Modal view **/
+
+.modal-header-task{
+    background-color: #428bca;
+    color:#ffffff;
+    font-weight:bold;
+}
+
+.modal-before-body{
+    text-align: left;
+}
+
+.date_modal{
+    display: block;
+}
+
+.date_debut{
+    display: inline;
+    text-align: left;
+}
+
+.date_fin{
+    display: inline;
+    text-align: right;
+    margin-left: 220px;
+}
+
+.modal-body{
+    text-align: left;
+}

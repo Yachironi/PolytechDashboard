@@ -82,3 +82,8 @@ function openPopup(nom, width, height){
     }
     window.open(nom,'Sélectionner un destinataire','menubar=no, top='+top+', left='+left+', width='+width+', height='+height+'');
 }
+
+function removeTask(ID){
+    //document.getElementById(ID).collapse('hide');
+    document.getElementById(ID).style.display = "none";
+}
