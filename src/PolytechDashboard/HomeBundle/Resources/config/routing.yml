@@ -5,3 +5,7 @@ polytech_dashboard_home_homepage:
 hello:
     path:      /hello/{name}
     defaults:  { _controller: PolytechDashboardHomeBundle:Hello:index }
+
+test:
+    path:     /ajax_handler
+    defaults: { _controller: PolytechDashboardHomeBundle:TestAjax:handler}
