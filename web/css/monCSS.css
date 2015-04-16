@@ -1,6 +1,5 @@
 .table-program,
-.table-note,
-.table-task{
+.table-note{
     border: 1px solid #BEBABA;
 }
 
@@ -15,13 +14,7 @@
 .table-note > tfoot > tr > th,
 .table-note > thead > tr > td,
 .table-note > tbody > tr > td,
-.table-note > tfoot > tr > td,
-.table-task > thead > tr > th,
-.table-task > tbody > tr > th,
-.table-task > tfoot > tr > th,
-.table-task > thead > tr > td,
-.table-task > tbody > tr > td,
-.table-task > tfoot > tr > td{
+.table-note > tfoot > tr > td{
     border-color: #BEBABA;
 }
 
@@ -53,21 +46,18 @@
     background-color: #F5F5F5;
 }
 
-.contenu{
-    padding-top: 25px;
-}
-
+/* Pour centrer les éléments */
 .form-group,
 .table-note,
-.contenu > p{
+.box-task{
     margin: auto;
 }
 
-a > .fa-times{
+a > .fa-trash{
     color: red;
 }
 
-a:hover > .fa-times{
+a:hover > .fa-trash{
     color: rgb(255, 90, 0);
 }
 
@@ -100,18 +90,15 @@ a:hover > .fa-times{
 .sidebar-perso > .sidebar-menu > li{
 }
 .sidebar-perso > .sidebar-menu > li > a {
-    text-decoration: none;
     border-left-width: 0px;
     margin-right: 1px;
     background-color: #009FFA;
-    color: #ffffff;
     border: 1px solid #003B59;
 }
 
 .sidebar-perso > .sidebar-menu > li > a:hover,
 .sidebar-perso > .sidebar-menu > li.active > a {
-    text-decoration: none;
-    color: #ffffff;
+    color: #fff;
     background: #00496E;
 }
 
@@ -120,4 +107,62 @@ a:hover > .fa-times{
     background: transparent;
     margin: 0px;
     padding: 0px;
+}
+
+/* Datepicker */
+
+.dropdown-menu {
+    margin-top: -350px;
+    margin-right: -35px;
+}
+
+.dropdown-menu:after {
+    border: none !important;
+    content: "" !important;
+}
+
+.dropdown-menu:before {
+    border: none !important;
+    content: "" !important;
+}
+
+/** Modal view **/
+
+.modal-header-task{
+    background-color: #428bca;
+    color:#ffffff;
+    font-weight:bold;
+}
+
+.modal-before-body{
+    text-align: left;
+}
+
+.date_modal{
+    display: block;
+}
+
+.date_debut{
+    display: inline;
+    text-align: left;
+}
+
+.date_fin{
+    display: inline;
+    text-align: right;
+    margin-left: 220px;
+}
+
+.modal-body{
+    text-align: left;
+}
+
+/* Tableau représentant les taches */
+.box{
+    border-color: #009FFA;
+}
+
+.box-task{
+    width: 95%;
+    margin-top : 2%;
 }

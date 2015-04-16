@@ -8,23 +8,34 @@ use Symfony\Component\HttpFoundation\Request;
 
 class NoteController extends Controller {
 	public function indexAction($id) {
-		$result = [];
-		
+		$myGrades = [ ];
 		/* liste de notes de l'etudiant */
-		$tabNote = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Note' )->findByIdEtudiant ( $id );
+		$tabNote = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Note' )->findByIdetudiant ( $id );
 		if (! $tabNote) {
 			throw $this->createNotFoundException ( 'Aucune Note trouvé pour cet id : ' . $id );
 		}
-		
+		/* nombre de notes de l'étudiant */
 		$max = sizeof ( $tabNote );
+		
 		for($i = 0; $i < $max; $i ++) {
-			$detailNote = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:DetailNote' )->findById($tabNote[i].id);
-			$cours = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Cours' )->findById($detailNote.id);
-			array_push($result,$cours.nomMatiere,$detailNote.detail,$tabNote[i].moyenne,$cours.coefficient,$detailNote.pourcentage);
+			$tmp = array ();
+			
+			$detailNote = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Detailnote' )->findById ( $tabNote [$i]->getIdetudiant () );
+			$cours = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Cours' )->findById ( $detailNote [0]->getId () );
+			
+			$tmp ['note'] = $tabNote [$i];
+			$tmp ['detailNote'] = $detailNote [0];
+			$tmp ['cours'] = $cours [0];
+			
+			/* ajout de la note a l'array */
+			array_push ( $myGrades, $tmp );
+			unset ( $tmp );
 		}
-				
+		//print_r ( $myGrades );
+
+		
 		return $this->render ( 'PolytechDashboardHomeBundle:Default:index.html.twig', array (
-				'Result' => $result 
+				'myGrades' => $myGrades 
 		) );
 	}
 }

@@ -11,7 +11,7 @@ class CoursController extends Controller {
 		$cours = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Cours' )->find ( $id );
 		
 		if (! $cours) {
-			throw $this->createNotFoundException ( 'Aucun cours trouvé pour cet id : ' . $id );
+			throw $this->createNotFoundException ( 'Aucun cours trouvÃ© pour cet id : ' . $id );
 		}
 		// return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig');
 		// return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig', array('name' => $name));
