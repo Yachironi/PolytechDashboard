@@ -1,12 +1,21 @@
-polytech_dashboard_home_homepage:
-  path: /default
-  defaults:
-    _controller: PolytechDashboardHomeBundle:Default:index
-hello:
-  path: /hello/{name}
-  defaults:
-    _controller: PolytechDashboardHomeBundle:Hello:index
 Note:
-  path: /Note/{id}
-  defaults:
-    _controller: PolytechDashboardHomeBundle:Note:index
+  path:     /Note/{id}
+  defaults: { _controller: "PolytechDashboardHomeBundle:Note:index"}
+    
+polytech_dashboard_home_logout:
+    path:     /logout
+    defaults: { _controller: "PolytechDashboardHomeBundle:Login:logout"}
+
+polytech_dashboard_home_login:
+    path:     /login
+    defaults: { _controller: "PolytechDashboardHomeBundle:Login:index"}    
+    
+polytech_dashboard_home_homepage:
+    path:     /
+    defaults: { _controller: "PolytechDashboardHomeBundle:Default:index"}
+
+
+test:
+    path:     /ajax_handler
+    defaults: { _controller: "PolytechDashboardHomeBundle:TestAjax:handler"}
+    
