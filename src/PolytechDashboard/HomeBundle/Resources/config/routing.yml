@@ -1,6 +1,6 @@
 Note:
   path:     /Note/{id}
-  defaults: { _controller: "PolytechDashboardHomeBundle:Note:index"}
+  defaults:   { _controller: "PolytechDashboardHomeBundle:Note:index"}
     
 polytech_dashboard_home_logout:
     path:     /logout
@@ -13,7 +13,6 @@ polytech_dashboard_home_login:
 polytech_dashboard_home_homepage:
     path:     /
     defaults: { _controller: "PolytechDashboardHomeBundle:Default:index"}
-
 
 test:
     path:     /ajax_handler

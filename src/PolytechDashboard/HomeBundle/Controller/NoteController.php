@@ -7,12 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class NoteController extends Controller {
-	public function indexAction($id) {
+	public static function indexAction($id, $controller) {
+		//print_r ( "INSIDE" );
+		
 		$myGrades = [ ];
 		/* liste de notes de l'etudiant */
-		$tabNote = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Note' )->findByIdetudiant ( $id );
+		$tabNote = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Note' )->findByIdetudiant ( $id );
 		if (! $tabNote) {
-			throw $this->createNotFoundException ( 'Aucune Note trouvé pour cet id : ' . $id );
+			throw $controller->createNotFoundException ( 'Aucune Note trouvé pour cet id : ' . $id );
 		}
 		/* nombre de notes de l'étudiant */
 		$max = sizeof ( $tabNote );
@@ -20,8 +22,8 @@ class NoteController extends Controller {
 		for($i = 0; $i < $max; $i ++) {
 			$tmp = array ();
 			
-			$detailNote = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Detailnote' )->findById ( $tabNote [$i]->getIdetudiant () );
-			$cours = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Cours' )->findById ( $detailNote [0]->getId () );
+			$detailNote = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Detailnote' )->findById ( $tabNote [$i]->getIdetudiant () );
+			$cours = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Cours' )->findById ( $detailNote [0]->getId () );
 			
 			$tmp ['note'] = $tabNote [$i];
 			$tmp ['detailNote'] = $detailNote [0];
@@ -31,11 +33,10 @@ class NoteController extends Controller {
 			array_push ( $myGrades, $tmp );
 			unset ( $tmp );
 		}
-		//print_r ( $myGrades );
-
+		// print_r ( $myGrades );
 		
-		return $this->render ( 'PolytechDashboardHomeBundle:Default:index.html.twig', array (
-				'myGrades' => $myGrades 
-		) );
+		//print_r ( "INSIDE_END" );
+		
+		return $myGrades;
 	}
 }
