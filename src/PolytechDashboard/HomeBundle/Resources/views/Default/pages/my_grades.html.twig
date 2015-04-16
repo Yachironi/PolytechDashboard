@@ -1,46 +1,45 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1>
-        Mes notes
-        <small>Derni√®re mise √† jour : 16/04/2015</small>
-    </h1>
+	<h1>
+		Mes notes <small>Derni√®re mise √† jour : 16/04/2015</small>
+	</h1>
 </section>
 
-	<!-- Content -->
-	<div class="contenu">
-		<table class="table table-note" style="width: 80%;">
-			<thead>
-				<tr class="entete">
-					<th style="width: 80%;">Mati√®re</th>
-					<th>Moyenne</th>
-					<th>Coefficient</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<!-- boucle sur toutes les notes de l'Ètudiant -->
-				{% for grade in myGrades %}
-				<tr class="sous_ensemble">
-					<th style="text-align: left; padding-left: 20px;">{{
-						grade.cours.getNomcours()}}</th>
-					<th>-/20</th>
-					<th>{{ grade.cours.getCoefficient() }}</th>
-				</tr>
-				<tr class="contenu_matiere">
-					<td style="text-align: left; padding-left: 30px;">{{
-						grade.detailNote.getDetail()}}</td>
-					<td>{{ grade.note.getNote() }}/20</td>
-					<td>{{ grade.detailNote.getPourcentage() }}%</td>
-				</tr>
-				{% else %}
-				<tr class="sous_ensemble">
-					<th style="text-align: left; padding-left: 20px;">Aucune note
-						trouvÈe</th>
-				</tr>
-				{% endfor %}
+<!-- Content -->
+<section class="contenu">
+	<table class="table table-note" style="width: 80%;">
+		<thead>
+			<tr class="entete">
+				<th style="width: 80%;">Mati√®re</th>
+				<th>Moyenne</th>
+				<th>Coefficient</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<!-- boucle sur toutes les notes de l'Ètudiant -->
+			{% for grade in myGrades %}
+			<tr class="sous_ensemble">
+				<th style="text-align: left; padding-left: 20px;">{{
+					grade.cours.getNomcours()}}</th>
+				<th>-/20</th>
+				<th>{{ grade.cours.getCoefficient() }}</th>
+			</tr>
+			<tr class="contenu_matiere">
+				<td style="text-align: left; padding-left: 30px;">{{
+					grade.detailNote.getDetail()}}</td>
+				<td>{{ grade.note.getNote() }}/20</td>
+				<td>{{ grade.detailNote.getPourcentage() }}%</td>
+			</tr>
+			{% else %}
+			<tr class="sous_ensemble">
+				<th style="text-align: left; padding-left: 20px;">Aucune note
+					trouvÈe</th>
+			</tr>
+			{% endfor %}
 
 
-			</tbody>
-		</table>
+		</tbody>
+	</table>
 
 </section>
