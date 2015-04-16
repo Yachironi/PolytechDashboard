@@ -27,14 +27,14 @@
                             <!-- APERCU DE L'UTILISATEUR -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image"/>
-                                <span class="hidden-xs"> Prénom NOM</span>
+                                <span class="hidden-xs"> {{prenom}} {{nom}}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- IMAGE DE L'UTILISATEUR -->
                                 <li class="user-header">
                                     <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
                                     <p>
-                                        Prénom NOM
+                                        {{prenom}} {{nom}}
                                         <small>ET4 - Informatique</small>
                                     </p>
                                 </li>
@@ -45,7 +45,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Mon profil</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Déconnexion</a>
+                                        <a href="{{path('polytech_dashboard_home_logout')}}" class="btn btn-default btn-flat">Déconnexion</a>
                                     </div>
                                 </li>
                             </ul>

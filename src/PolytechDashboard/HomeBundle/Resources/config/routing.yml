@@ -1,6 +1,15 @@
+polytech_dashboard_home_logout:
+    path:     /logout
+    defaults: { _controller: PolytechDashboardHomeBundle:Login:logout}
+
+polytech_dashboard_home_login:
+    path:     /login
+    defaults: { _controller: PolytechDashboardHomeBundle:Login:index}    
+    
 polytech_dashboard_home_homepage:
     path:     /
-    defaults: { _controller: PolytechDashboardHomeBundle:Default:index }
+    defaults: { _controller: PolytechDashboardHomeBundle:Default:index}
+
 
 hello:
     path:      /hello/{name}
