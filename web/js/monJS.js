@@ -70,3 +70,20 @@ function afficheForm(ID){
     /* On affiche le formulaire passé en paramètre */
     document.getElementById(list_form[indice_form_a_affiche]).style.display = "block";
 }
+
+function openPopup(nom, width, height){
+    if(window.innerWidth) {
+        var left = (window.innerWidth-width)/2;
+        var top = (window.innerHeight-height)/2;
+    }
+    else {
+        var left = (document.body.clientWidth-width)/2;
+        var top = (document.body.clientHeight-height)/2;
+    }
+    window.open(nom,'Sélectionner un destinataire','menubar=no, top='+top+', left='+left+', width='+width+', height='+height+'');
+}
+
+function removeTask(ID){
+    //document.getElementById(ID).collapse('hide');
+    document.getElementById(ID).style.display = "none";
+}

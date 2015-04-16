@@ -4,3 +4,44 @@
         Contacter quelqu'un
     </h1>
 </section>
+<section class="content">
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            /* Appel d'ajax */
+            $("#search").click(function () {
+                name = $('#name').val();
+                $("#gestionnaires").html("");
+                $.ajax({
+                    /*
+                     * URL du controlleur
+                     */
+                    url: "/ajax_handler",
+
+                    type: "post", //send it through get method
+                    data: {nom: name},
+                    success: function (response) {
+                        var items = [];
+                        for (var i = 0; i < response.values.length; i++) {
+                            items.push("item n° " + i + " : ");
+                            $.each(response.values[i], function (key, val) {
+                                items.push("<li id='" + key + "'>" + val + "</li>");
+                            });
+                        }
+
+                        $("<ul/>", {
+                            "class": "my-new-list",
+                            html: items.join("")
+                        }).appendTo("#gestionnaires");
+                    }
+
+                });
+            });
+        });
+    </script>
+    <input type="text" id="name">
+    <button name="search" value="rechercher" id="search">Chercher</button>
+    <div id="gestionnaires">
+
+    </div>
+
+</section>
