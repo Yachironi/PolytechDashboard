@@ -14,16 +14,16 @@ class NoteController extends Controller {
 		/* liste de notes de l'etudiant */
 		$tabNote = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Note' )->findByIdetudiant ( $id );
 		if (! $tabNote) {
-			throw $controller->createNotFoundException ( 'Aucune Note trouvé pour cet id : ' . $id );
+			return $myGrades;
 		}
-		/* nombre de notes de l'étudiant */
+		/* nombre de notes de l'etudiant */
 		$max = sizeof ( $tabNote );
 		
 		for($i = 0; $i < $max; $i ++) {
 			$tmp = array ();
 			
-			$detailNote = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Detailnote' )->findById ( $tabNote [$i]->getIdetudiant () );
-			$cours = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Cours' )->findById ( $detailNote [0]->getId () );
+			$detailNote = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Detailnote' )->findById ( $tabNote [$i]->getIddetailnote() );
+			$cours = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Cours' )->findById ( $detailNote [0]->getIdCours () );
 			
 			$tmp ['note'] = $tabNote [$i];
 			$tmp ['detailNote'] = $detailNote [0];
