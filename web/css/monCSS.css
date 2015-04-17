@@ -166,3 +166,12 @@ a:hover > .fa-trash{
     width: 95%;
     margin-top : 2%;
 }
+
+/* Niveau d'importance */
+.importance2{
+    color:#f1c40f;
+}
+
+.importance3{
+    color:red;
+}
