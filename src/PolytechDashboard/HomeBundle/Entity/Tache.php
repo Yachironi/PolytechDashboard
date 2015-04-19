@@ -62,7 +62,13 @@ class Tache
      * @ORM\Column(name="structure", type="text", nullable=true)
      */
     private $structure;
-
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="importance", type="integer", nullable=true)
+     */
+    private $importance;
 
 
     /**
@@ -211,5 +217,28 @@ class Tache
     public function getStructure()
     {
         return $this->structure;
+    }
+    
+    /**
+     * Set importance
+     *
+     * @param integer $importance
+     * @return Tache
+     */
+    public function setImportance($importance)
+    {
+    	$this->importance = $importance;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get importance
+     *
+     * @return integer
+     */
+    public function getImportance()
+    {
+    	return $this->importance;
     }
 }

@@ -5,3 +5,6 @@ services:
 
     noteController:
         class: PolytechDashboard\HomeBundle\Controller\NoteController
+        
+    tacheController:
+        class: PolytechDashboard\HomeBundle\Controller\TacheController
