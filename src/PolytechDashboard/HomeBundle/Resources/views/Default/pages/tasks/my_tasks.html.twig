@@ -139,7 +139,7 @@
                                             <span class="fa fa-pencil-square-o"></span> Editer
                                         </button>
                                         <button class="btn btn-primary pull-left" onclick="removeTask()">
-                                            <span class="fa fa-times"></span> Supprimer
+                                            <span class="fa fa-trash"></span> Supprimer
                                         </button>
                                         <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
                                     </div>
@@ -187,6 +187,111 @@
                                     <div class="modal-body">
                                         <h4>Contenu :</h4>
                                         <p>Ceci est une tache attribuée par un gestionnaire</p>
+                                    </div>
+                                    <!-- Footer -->
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary pull-left" onclick="replyTask()">
+                                            <span class="fa fa-reply"></span> Répondre
+                                        </button>
+                                        <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fin modal view -->
+                    </tr>
+
+
+                    <!-- Exemple de tache qui a ete faite -->
+                    <tr class="task_done">
+                        <td>5</td>
+                        <td>2015-05-20</td>
+                        <td>2015-05-22</td>
+                        <td>Marcelo Bielsa</td>
+                        <td>Affichage d'une tache done</td>
+                        <!-- Icone "importance" -->
+                        <td style="text-align:center;">
+                            <i class="fa fa-exclamation-triangle importance1">
+                                <div style="display: none;">1</div>
+                            </i>
+                        </td>
+
+                        <!-- Icone "voir détail" -->
+                        <td style="text-align: center;">
+                            <a href="#infos_task_5" data-toggle="modal"><i class="fa fa-search"></i></a></td>
+                        <!-- Debut modal view -->
+                        <div class="modal fade" id="infos_task_5">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- En tete -->
+                                    <div class="modal-header modal-header-task">
+                                        <button type="button" class="close" data-dismiss="modal">x</button>
+                                        <div class="modal-title">Tache n°5 - Affichage d'une tache done</div>
+                                    </div>
+                                    <!-- En tete présentant le body -->
+                                    <div class="modal-header modal-before-body">
+                                        De : Marcelo Bielsa
+                                        <div class="date_modal">
+                                            <div class="date_debut">Date d'attribution : 2015-05-20</div>
+                                            <div class="date_fin">Échéance : 2015-05-22</div>
+                                        </div>
+                                    </div>
+                                    <!-- Corps -->
+                                    <div class="modal-body">
+                                        <h4>Contenu :</h4>
+                                        <p>Ceci est une tache faite</p>
+                                    </div>
+                                    <!-- Footer -->
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary pull-left" onclick="removeTask()">
+                                            <span class="fa fa-trash"></span> Supprimer
+                                        </button>
+                                        <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fin modal view -->
+                    </tr>
+
+                    <!-- Exemple de tache urgente, dont la deadline est tres proche -->
+                    <tr class="task_urgent">
+                        <td>6</td>
+                        <td>2015-05-20</td>
+                        <td>2015-05-22</td>
+                        <td>Zinedine Zidane</td>
+                        <td>Affichage d'une tache urgente dont la deadline est tres proche</td>
+                        <!-- Icone "importance" -->
+                        <td style="text-align:center;">
+                            <i class="fa fa-exclamation-triangle importance1">
+                                <div style="display: none;">1</div>
+                            </i>
+                        </td>
+
+                        <!-- Icone "voir détail" -->
+                        <td style="text-align: center;">
+                            <a href="#infos_task_6" data-toggle="modal"><i class="fa fa-search"></i></a></td>
+                        <!-- Debut modal view -->
+                        <div class="modal fade" id="infos_task_6">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- En tete -->
+                                    <div class="modal-header modal-header-task">
+                                        <button type="button" class="close" data-dismiss="modal">x</button>
+                                        <div class="modal-title">Tache n°6 - Affichage d'une tache urgente dont la deadline est tres proche</div>
+                                    </div>
+                                    <!-- En tete présentant le body -->
+                                    <div class="modal-header modal-before-body">
+                                        De : Zinedine Zidane
+                                        <div class="date_modal">
+                                            <div class="date_debut">Date d'attribution : 2015-05-20</div>
+                                            <div class="date_fin">Échéance : 2015-05-22</div>
+                                        </div>
+                                    </div>
+                                    <!-- Corps -->
+                                    <div class="modal-body">
+                                        <h4>Contenu :</h4>
+                                        <p>Ceci est une tache urgente dont la deadline est tres proche</p>
                                     </div>
                                     <!-- Footer -->
                                     <div class="modal-footer">

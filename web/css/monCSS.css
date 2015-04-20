@@ -18,18 +18,6 @@
     border-color: #BEBABA;
 }
 
-
-.table-task > thead > tr > th,
-.table-task > tbody > tr > th,
-.table-task > tfoot > tr > th,
-.table-task > thead > tr > td,
-.table-task > tbody > tr > td,
-.table-task > tfoot > tr > td{
-    border: none;
-    border-bottom: 1px solid #BEBABA;
-}
-
-
 .table-program{
     max-width: 100%;
 }
@@ -190,4 +178,12 @@ a:hover > .fa-trash{
 
 .importance3{
     color:red;
+}
+
+.task_done{
+    filter: opacity(0.5);
+}
+
+.task_urgent{
+    background-color: rgba(255, 0, 0, 0.5);
 }

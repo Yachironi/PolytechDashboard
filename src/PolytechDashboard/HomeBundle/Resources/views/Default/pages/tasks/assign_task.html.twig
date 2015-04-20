@@ -14,19 +14,6 @@
         <form>
 
             <!-- Partie toujours présentes -->
-            <div class="form-group">
-                <label for="destinataire">Destinataire</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="destinataire" required>
-                    <div class="input-group-addon">
-                        <a href="#" onclick="openPopup('select_dest.html.twig', 700, 500)"><i class="fa fa-sort-alpha-asc"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="objet">Objet</label>
-                <input type="text" class="form-control" id="objet" required>
-            </div>
             <div class="form-group" style="padding-bottom: 20px;">
                 <label for="type">Type de formulaire</label>
                 <select class="form-control" id="list_form" onchange="afficheForm('list_form')">
@@ -44,6 +31,21 @@
 
             <!-- Justification absence -->
             <div id="2" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="destinataire" value="Nadia Chapiteau - nadia.chapiteau@u-psud.fr" required>
+                        <div class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet -->
+                <div class="form-group">
+                    <label for="objet">Objet</label>
+                    <input type="text" class="form-control" id="objet" value="Justification d'absence" required>
+                </div>
                 <!-- Date and time range - date début absence -->
                 <div class="form-group">
                     <label>Date et durée de l'absence</label>
@@ -60,8 +62,8 @@
                     <textarea class="form-control"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputFile">Sélectionner un fichier</label>
-                    <input type="file" id="exampleInputFile">
+                    <label for="absence_InputFile">Sélectionner votre justificatif</label>
+                    <input type="file" id="absence_InputFile">
                 </div>
                 <!-- Bouton envoyer -->
                 <div class="form-group btn-center">
@@ -76,6 +78,21 @@
 
             <!-- Piece jointe -->
             <div id="4" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="destinataire" required>
+                        <div class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet -->
+                <div class="form-group">
+                    <label for="objet">Objet</label>
+                    <input type="text" class="form-control" id="objet" required>
+                </div>
                 <div class="form-group">
                     <label>Texte</label>
                     <textarea class="form-control"></textarea>
@@ -93,6 +110,21 @@
 
             <!-- Par defaut -->
             <div id="5" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="destinataire" required>
+                        <div class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet -->
+                <div class="form-group">
+                    <label for="objet">Objet</label>
+                    <input type="text" class="form-control" id="objet" required>
+                </div>
                 <div class="form-group">
                     <label>Texte</label>
                     <textarea class="form-control"></textarea>
