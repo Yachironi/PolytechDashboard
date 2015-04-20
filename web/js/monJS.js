@@ -83,7 +83,35 @@ function openPopup(nom, width, height){
     window.open(nom,'Sélectionner un destinataire','menubar=no, top='+top+', left='+left+', width='+width+', height='+height+'');
 }
 
-function removeTask(ID){
-    //document.getElementById(ID).collapse('hide');
-    document.getElementById(ID).style.display = "none";
+/**
+ * Lorsque l'etudiant clique sur le bouton editer sur une tache qu'il s'est lui meme attribue
+ */
+function editTask(){
+
 }
+
+/**
+ * Lorsque l'etudiant clique sur le bouton supprimer sur une tache qu'il s'est lui meme attribue
+ */
+// Il faut faire passer la tache en parametre
+function removeTask(){
+    // Trouve sur internet :
+    //$em->remove($product);
+    //$em->flush();
+}
+
+/**
+ * Lorsque l'etudiant clique sur le bouton Fait sur une tache qu'il s'est lui meme attribue
+ */
+function doneTask(){
+
+}
+
+
+/**
+ * Lorsque l'etudiant clique sur le bouton repondre sur une tache qu'un gestionnaire lui a attribue
+ */
+function replyTask(){
+
+}
+

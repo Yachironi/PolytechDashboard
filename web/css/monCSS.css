@@ -18,6 +18,18 @@
     border-color: #BEBABA;
 }
 
+
+.table-task > thead > tr > th,
+.table-task > tbody > tr > th,
+.table-task > tfoot > tr > th,
+.table-task > thead > tr > td,
+.table-task > tbody > tr > td,
+.table-task > tfoot > tr > td{
+    border: none;
+    border-bottom: 1px solid #BEBABA;
+}
+
+
 .table-program{
     max-width: 100%;
 }
@@ -168,6 +180,10 @@ a:hover > .fa-trash{
 }
 
 /* Niveau d'importance */
+.importance1{
+    display: none;
+}
+
 .importance2{
     color:#f1c40f;
 }

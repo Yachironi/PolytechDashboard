@@ -17,11 +17,12 @@
 			<table class="table table-bordered table-striped table-task">
 				<thead>
 					<tr>
-						<th>N°</th>
-						<th>&Eacutech&eacuteance</th>
+						<th style="width:5%;">N°</th>
+                        <th style="width:12%;">Reçu le</th>
+						<th style="width:12%;">&Eacutech&eacuteance</th>
 						<th>De</th>
-						<th>Titre</th>
-						<th>Importance</th>
+						<th>Objet</th>
+						<th style="width:11%;">Importance</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -30,10 +31,17 @@
 					{% for tasks in myTasks.tasks %}
 					<tr>
 						<td>{{ tasks.getId()}}</td>
+                        <td>{{ tasks.getDatecreation() }}</td>
 						<td>{{ tasks.getDatefin() }}</td>
 						<td>{{ myTasks.admins[loop.index0].getNom() }} {{  myTasks.admins[loop.index0].getPrenom() }}</td>
 						<td>{{ tasks.getNom() }}</td>
-						<td><i class="fa fa-exclamation-triangle importance{{ tasks.getImportance() }}"></i></td>
+                        <!-- Icone "importance" -->
+						<td style="text-align:center;">
+                            <i class="fa fa-exclamation-triangle importance{{ tasks.getImportance() }}">
+                                <div style="display: none;">{{ tasks.getImportance() }}</div>
+                            </i>
+                        </td>
+
 						<!-- Icone "voir détail" -->
 						<td style="text-align: center;"><a href="#infos_task_{{ tasks.getId()}}"
 							data-toggle="modal"><i class="fa fa-search"></i></a></td>
@@ -50,7 +58,7 @@
 									</div>
 									<!-- En tete présentant le body -->
 									<div class="modal-header modal-before-body">
-										De : {{ tasks.getIdgestionnaire() }}
+										De : {{ tasks.getIdgestionnaire() }}    <!-- TODO : Mettre le nom du gestionnaire -->
 										<div class="date_modal">
 											<div class="date_debut">Date d'attribution : {{
 												tasks.getDatecreation() }}</div>
@@ -73,13 +81,126 @@
 						</div>
 						<!-- Fin modal view -->
 					</tr>
-
 					{% else %}
 					<tr class="sous_ensemble">
 						<th style="text-align: left; padding-left: 20px;">Aucune tache
 							trouvee</th>
 					</tr>
 					{% endfor %}
+
+
+                    <!-- Exemple de differenciation entre des taches attribuees par l'étudiant et par un gestionnaire -->
+
+                    <!-- Tache attribue par un etudiant lui meme -->
+                    <tr>
+                        <td>3</td>
+                        <td>2015-04-20</td>
+                        <td>2015-04-22</td>
+                        <td>Moi</td>
+                        <td>Affichage d'une tache que l'etudiant s'est lui meme attribué</td>
+                        <!-- Icone "importance" -->
+                        <td style="text-align:center;">
+                            <i class="fa fa-exclamation-triangle importance1">
+                                <div style="display: none;">1</div>
+                            </i>
+                        </td>
+
+                        <!-- Icone "voir détail" -->
+                        <td style="text-align: center;">
+                            <a href="#infos_task_3" data-toggle="modal"><i class="fa fa-search"></i></a></td>
+                        <!-- Debut modal view -->
+                        <div class="modal fade" id="infos_task_3">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- En tete -->
+                                    <div class="modal-header modal-header-task">
+                                        <button type="button" class="close" data-dismiss="modal">x</button>
+                                        <div class="modal-title">Tache n°3 - Affichage d'une tache que l'etudiant s'est lui meme attribué</div>
+                                    </div>
+                                    <!-- En tete présentant le body -->
+                                    <div class="modal-header modal-before-body">
+                                        De : Moi
+                                        <div class="date_modal">
+                                            <div class="date_debut">Date d'attribution : 2015-04-20</div>
+                                            <div class="date_fin">Échéance : 2015-04-22</div>
+                                        </div>
+                                    </div>
+                                    <!-- Corps -->
+                                    <div class="modal-body">
+                                        <h4>Contenu :</h4>
+                                        <p>Ceci est une tache que l'étudiant s'est lui meme attribué</p>
+                                    </div>
+                                    <!-- Footer -->
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary pull-left" onclick="doneTask()">
+                                            <span class="fa fa-check-square-o"></span> Fait
+                                        </button>
+                                        <button class="btn btn-primary pull-left" onclick="editTask()">
+                                            <span class="fa fa-pencil-square-o"></span> Editer
+                                        </button>
+                                        <button class="btn btn-primary pull-left" onclick="removeTask()">
+                                            <span class="fa fa-times"></span> Supprimer
+                                        </button>
+                                        <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fin modal view -->
+                    </tr>
+
+                    <!-- Tache attribue par un gestionnaire -->
+                    <tr>
+                        <td>4</td>
+                        <td>2015-05-20</td>
+                        <td>2015-05-22</td>
+                        <td>Max Aurélien</td>
+                        <td>Affichage d'une tache attribué par un gestionnaire</td>
+                        <!-- Icone "importance" -->
+                        <td style="text-align:center;">
+                            <i class="fa fa-exclamation-triangle importance1">
+                                <div style="display: none;">1</div>
+                            </i>
+                        </td>
+
+                        <!-- Icone "voir détail" -->
+                        <td style="text-align: center;">
+                            <a href="#infos_task_4" data-toggle="modal"><i class="fa fa-search"></i></a></td>
+                        <!-- Debut modal view -->
+                        <div class="modal fade" id="infos_task_4">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- En tete -->
+                                    <div class="modal-header modal-header-task">
+                                        <button type="button" class="close" data-dismiss="modal">x</button>
+                                        <div class="modal-title">Tache n°4 - Affichage d'une tache attribué par un gestionnaire</div>
+                                    </div>
+                                    <!-- En tete présentant le body -->
+                                    <div class="modal-header modal-before-body">
+                                        De : Aurélien Max
+                                        <div class="date_modal">
+                                            <div class="date_debut">Date d'attribution : 2015-05-20</div>
+                                            <div class="date_fin">Échéance : 2015-05-22</div>
+                                        </div>
+                                    </div>
+                                    <!-- Corps -->
+                                    <div class="modal-body">
+                                        <h4>Contenu :</h4>
+                                        <p>Ceci est une tache attribuée par un gestionnaire</p>
+                                    </div>
+                                    <!-- Footer -->
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary pull-left" onclick="replyTask()">
+                                            <span class="fa fa-reply"></span> Répondre
+                                        </button>
+                                        <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fin modal view -->
+                    </tr>
+
 				</tbody>
 			</table>
 		</div>
