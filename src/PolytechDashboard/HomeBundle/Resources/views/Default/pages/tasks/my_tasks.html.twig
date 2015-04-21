@@ -58,7 +58,7 @@
 									</div>
 									<!-- En tete présentant le body -->
 									<div class="modal-header modal-before-body">
-										De : {{ tasks.getIdgestionnaire() }}    <!-- TODO : Mettre le nom du gestionnaire -->
+										De : {{ myTasks.admins[loop.index0].getNom() }} {{  myTasks.admins[loop.index0].getPrenom() }}
 										<div class="date_modal">
 											<div class="date_debut">Date d'attribution : {{
 												tasks.getDatecreation() }}</div>
