@@ -43,6 +43,13 @@ class Tache
     private $idgestionnaire;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="idEtudiant", type="integer", nullable=true)
+     */
+    private $idetudiant;
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="dateCreation", type="text", nullable=true)
@@ -150,6 +157,29 @@ class Tache
         return $this->idgestionnaire;
     }
 
+    /**
+     * Set idetudiant
+     *
+     * @param integer $idetudiant
+     * @return Tache
+     */
+    public function setIdetudiant($idetudiant)
+    {
+    	$this->idetudiant = $idetudiant;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get idetudiant
+     *
+     * @return integer
+     */
+    public function getIdetudiant()
+    {
+    	return $this->idetudiant;
+    }
+    
     /**
      * Set datecreation
      *

@@ -34,22 +34,28 @@ INSERT INTO `TacheEtudiant` VALUES (5,2,'NONLU');
 INSERT INTO `TacheEtudiant` VALUES (6,2,'NONLU');
 INSERT INTO `TacheEtudiant` VALUES (7,2,'VALIDE');
 INSERT INTO `TacheEtudiant` VALUES (8,2,'LU');
+INSERT INTO `TacheEtudiant` VALUES (21303181,3,'NONLU');
+INSERT INTO `TacheEtudiant` VALUES (21303181,4,'NONLU');
 CREATE TABLE "Tache" (
 	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`type`	TEXT,
 	`nom`	TEXT,
 	`idGestionnaire`	INTEGER,
+	`idEtudiant`	INTEGER,
 	`dateCreation`	TEXT,
 	`dateFin`	TEXT,
 	`structure`	REAL,
 	`importance`	INTEGER,
-	FOREIGN KEY(`idGestionnaire`) REFERENCES Gestionnaire ( id )
+	FOREIGN KEY(`idGestionnaire`) REFERENCES Gestionnaire ( id ),
+	FOREIGN KEY(`idEtudiant`) REFERENCES Etudiant(id)
 );
-INSERT INTO `Tache` VALUES (1,'Rendu Rapport','Rendu tp CO',2,'2015-03-12','2015-03-15','Veuillez rendre votre projet de complément Objet, ce travail comprends des diagrammes explicatifs de votre modélisation, ainsi que le code commenté.
+INSERT INTO `Tache` VALUES (1,'Rendu Rapport','Rendu tp CO',2,NULL,'2015-03-12','2015-03-15','Veuillez rendre votre projet de complément Objet, ce travail comprends des diagrammes explicatifs de votre modélisation, ainsi que le code commenté.
  Veuillez a bien inclure les patrons de conception utilisés',3);
-INSERT INTO `Tache` VALUES (2,'Rendu Projet','Rendu projet C++',5,'2015-03-12','2015-04-11','Vous devez rendre le Projet de C++ a vos gestionnaires,
+INSERT INTO `Tache` VALUES (2,'Rendu Projet','Rendu projet C++',5,NULL,'2015-03-12','2015-04-11','Vous devez rendre le Projet de C++ a vos gestionnaires,
 Votre rendu doit ètr ecomposé d''une archive contenant un rapport et vos codes sources.
 Ces derniers doivent compiler sans aucun warnings.',2);
+INSERT INTO `Tache` VALUES (3,'Rendu Dossier VISA','Visa for china',NULL,21303181,'2015-04-01','2015-04-17','penser a bien préparer tous les papiers, y compris l''original de l''attestation d''accueil de l''université chinoise',1);
+INSERT INTO `Tache` VALUES (4,'Candidature M2R','candidature au Master recherche',NULL,21303181,'2015-04-01','2015-05-12','LM a Mme frenoux + choix des UE',2);
 CREATE TABLE "ReponseTache" (
 	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`donnee`	TEXT,
