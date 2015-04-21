@@ -241,8 +241,21 @@
                 </div>
             </div>
 
-            <!-- Faire une demande d'inscription -->
+            <!-- TODO : Faire une demande d'inscription -->
             <div id="form5" class="sous_formulaire" style="display: none;">
+                <!-- Listes des inscriptions -->
+                <div class="form-group" style="padding-bottom: 20px;">
+                    <label for="type">Type d'inscription</label>
+                    <select class="form-control" id="list_form" onchange="updateInscription('')">
+                        <option value="" selected="selected"></option>
+                        <option value="">TOEIC</option>
+                        <option value="">Bourse</option>
+                        <option value="">M2R</option>
+                        <option value="">Sport</option>
+                        <option value="">Réinscription à Polytech</option>
+                    </select>
+                </div>
+
                 <!-- Destinataire -->
                 <div class="form-group">
                     <label for="destinataire">Destinataire</label>
