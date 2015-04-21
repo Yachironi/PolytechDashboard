@@ -26,6 +26,8 @@ class LoginController extends Controller {
             /* appel du generateur de note du controlleur */
             $noteController = $this->get ( 'noteController' );
             $myGrades = $noteController->indexAction ( $user, $this );
+            $tacheController = $this->get ( 'tacheController' );
+            $myTasks = $tacheController->indexAction ( $user, $this );
             
             if ($user) {
                 if ($remember == 'remember-me') {
@@ -34,7 +36,7 @@ class LoginController extends Controller {
                     $login->setPassword($password);
                     $session->set('login', $login);
                 }
-                return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig', array('prenom' => $user->getPrenom(),'nom' => $user->getNom(),'id' => $user, 'myGrades' => $myGrades ));
+                return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig', array('prenom' => $user->getPrenom(),'nom' => $user->getNom(),'id' => $user, 'myGrades' => $myGrades, 'myTasks' => $myTasks ));
             } else {
                 return $this->render('PolytechDashboardHomeBundle:Default:login.html.twig', array('name' => 'Login Error'));
             }
@@ -50,7 +52,7 @@ class LoginController extends Controller {
         		$noteController = $this->get ( 'noteController' );
         		$myGrades = $noteController->indexAction ( $user, $this );
         		if ($user) {
-        			return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig', array('prenom' => $user->getPrenom(),'nom' => $user->getNom(),'id' => $user, 'myGrades' => $myGrades ));
+        			return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig', array('prenom' => $user->getPrenom(),'nom' => $user->getNom(),'id' => $user, 'myGrades' => $myGrades, 'myTasks' => $myTasks ));
         		}
         	}
             return $this->render('PolytechDashboardHomeBundle:Default:login.html.twig');
