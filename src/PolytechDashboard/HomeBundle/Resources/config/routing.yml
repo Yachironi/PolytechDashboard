@@ -1,6 +1,3 @@
-Note:
-  path:     /Note/{id}
-  defaults:   { _controller: "PolytechDashboardHomeBundle:Note:index"}
     
 polytech_dashboard_home_logout:
     path:     /logout
