@@ -13,29 +13,34 @@
     <div class="myform" id="form_task">
         <form>
 
-            <!-- Partie toujours présentes -->
+            <!-- Listes des formulaires -->
             <div class="form-group" style="padding-bottom: 20px;">
                 <label for="type">Type de formulaire</label>
                 <select class="form-control" id="list_form" onchange="afficheForm('list_form')">
-                    <option value="1" selected="selected"></option>
-                    <option value="2">Justifier une absence</option>
-                    <option value="3">Demander confirmation</option>
-                    <option value="4">Envoyer une pièce jointe</option>
-                    <option value="5">Demande non repertoriée</option>
+                    <option value="form1" selected="selected"></option>
+                    <option value="form2">Justifier une absence</option>
+                    <option value="form3">Prendre un rendez-vous</option>
+                    <option value="form4">Rendre un devoir</option>
+                    <option value="form5">Faire une demande d'inscription</option>
+                    <option value="form6">Faire valider un sujet de stage</option>
+                    <option value="form7">Envoyer une convention de stage</option>
+                    <option value="form8">S'attribuer une tâche personnelle</option>
+                    <option value="form9">Demande non repertoriée</option>
                 </select>
             </div>
 
 
             <!-- Vide -->
-            <div id="1"></div>
+            <div id="form1"></div>
 
-            <!-- Justification absence -->
-            <div id="2" class="sous_formulaire" style="display: none;">
+            <!-- Justifier une absence -->
+            <div id="form2" class="sous_formulaire" style="display: none;">
                 <!-- Destinataire -->
                 <div class="form-group">
                     <label for="destinataire">Destinataire</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="destinataire" value="Nadia Chapiteau - nadia.chapiteau@u-psud.fr" required>
+                        <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
+                        <input type="text" class="form-control" id="destinataire_form2" value="Nadia Chapiteau - nadia.chapiteau@u-psud.fr" required>
                         <div class="input-group-addon">
                             <i class="fa fa-sort-alpha-asc"></i>
                         </div>
@@ -43,8 +48,8 @@
                 </div>
                 <!-- Objet -->
                 <div class="form-group">
-                    <label for="objet">Objet</label>
-                    <input type="text" class="form-control" id="objet" value="Justification d'absence" required>
+                    <label for="objet_form2">Objet</label>
+                    <input type="text" class="form-control" id="objet_form2" value="Justification d'absence" required>
                 </div>
                 <!-- Date and time range - date début absence -->
                 <div class="form-group">
@@ -53,7 +58,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-clock-o"></i>
                         </div>
-                        <input type="text" class="form-control pull-right" id="reservationtime"/>
+                        <input type="text" class="form-control pull-right" id="duree_absence"/>
                     </div>
                 </div>
 
@@ -65,24 +70,36 @@
                     <label for="absence_InputFile">Sélectionner votre justificatif</label>
                     <input type="file" id="absence_InputFile">
                 </div>
+
+                <!-- Echeance -->
+                <div class="form-group">
+                    <label>Échéance</label>
+                    <div class="input-group">
+                        <!-- Checkbox -->
+                        <span class="input-group-addon">
+                            <input type="checkbox" id="checkbox_form2" onchange="showEcheance('checkbox_form2','echeance_form2')">
+                        </span>
+                        <!-- Date picker -->
+                        <input type="text" class="form-control" id="echeance_form2" disabled/>
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Bouton envoyer -->
                 <div class="form-group btn-center">
                     <button type="submit" class="btn btn-primary">Envoyer</button>
                 </div>
             </div>
 
-            <!-- 3 -->
-            <div id="3" class="sous_formulaire" style="display: none;">
-                Option 3
-            </div>
-
-            <!-- Piece jointe -->
-            <div id="4" class="sous_formulaire" style="display: none;">
+            <!-- Prendre un rendez-vous -->
+            <div id="form3" class="sous_formulaire" style="display: none;">
                 <!-- Destinataire -->
                 <div class="form-group">
                     <label for="destinataire">Destinataire</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="destinataire" required>
+                        <input type="text" class="form-control" id="destinataire_form3" value="" required>
                         <div class="input-group-addon">
                             <i class="fa fa-sort-alpha-asc"></i>
                         </div>
@@ -90,8 +107,371 @@
                 </div>
                 <!-- Objet -->
                 <div class="form-group">
-                    <label for="objet">Objet</label>
-                    <input type="text" class="form-control" id="objet" required>
+                    <label for="objet_form3">Objet</label>
+                    <input type="text" class="form-control" id="objet_form3" value="Demande de RDV" required>
+                </div>
+                <!-- Date et heure du RDV -->
+                <div class="form-group">
+                    <div class="row">
+                        <!-- Champ date -->
+                        <div class="col-lg-7">
+                            <label>Date</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                                <input type="text" class="form-control" id="date_rdv"/>
+                            </div>
+                        </div>
+                        <!-- Champ heure : TODO-->
+                        <div class="col-lg-5">
+                            <!-- time Picker -->
+                            <div class="bootstrap-timepicker">
+                                <label>Heure</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control timepicker"/>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TODO : ajouter d'autres? -->
+                <div class="form-group">
+                    <label for="motif">Motif du rendez-vous</label>
+                    <textarea class="form-control"></textarea>
+                </div>
+
+                <!-- Echeance -->
+                <div class="form-group">
+                    <label>Échéance</label>
+                    <div class="input-group">
+                        <!-- Checkbox -->
+                        <span class="input-group-addon">
+                            <input type="checkbox" id="checkbox_form3" onchange="showEcheance('checkbox_form3','echeance_form3')">
+                        </span>
+                        <!-- Date picker -->
+                        <input type="text" class="form-control" id="echeance_form3" disabled/>
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bouton envoyer -->
+                <div class="form-group btn-center">
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </div>
+            </div>
+
+            <!-- Rendre un devoir -->
+            <div id="form4" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="destinataire_form4" value="" required>
+                        <div class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cours + type de devoir -->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- TODO : liste des cours du semestre de l'etudiant -->
+                        <div class="form-group">
+                            <label for="type">Cours</label>
+                            <select class="form-control" id="list_cours" onchange="updateObjetRDV('list_cours', 'list_devoirs', 'objet_form4')">
+                                <option value="" selected></option>
+                                <option value="Compilation">Compilation</option>
+                                <option value="C++">C++</option>
+                                <option value="Vérification & Validation">Vérification & Validation</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Liste des types de devoir a rendre -->
+                        <div class="form-group">
+                            <label for="type">Type de devoir</label>
+                            <select class="form-control" id="list_devoirs" onchange="updateObjetRDV('list_cours', 'list_devoirs', 'objet_form4')">
+                                <!-- TODO : autre a rajouter? -->
+                                <option value="" selected></option>
+                                <option value="TP">TP</option>
+                                <option value="DM">Devoir Maison</option>
+                                <option value="Projet">Projet</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nom du devoir -->
+                <div class="form-group">
+                    <label for="objet_form4">Nom du devoir</label>
+                    <input type="text" class="form-control" id="objet_form4" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="renduDevoir_InputFile">Sélectionner votre devoir</label>
+                    <input type="file" id="renduDevoir_InputFile">
+                </div>
+
+                <!-- Echeance -->
+                <div class="form-group">
+                    <label>Échéance</label>
+                    <div class="input-group">
+                        <!-- Checkbox -->
+                        <span class="input-group-addon">
+                            <input type="checkbox" id="checkbox_form4" onchange="showEcheance('checkbox_form4','echeance_form4')">
+                        </span>
+                        <!-- Date picker -->
+                        <input type="text" class="form-control" id="echeance_form4" disabled/>
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bouton envoyer -->
+                <div class="form-group btn-center">
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </div>
+            </div>
+
+            <!-- Faire une demande d'inscription -->
+            <div id="form5" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
+                        <input type="text" class="form-control" id="destinataire_form5" value="" required>
+                        <div class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet -->
+                <div class="form-group">
+                    <label for="objet_form5">Objet</label>
+                    <input type="text" class="form-control" id="objet_form5" value="Demande d'inscription" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="motif">Motif d'inscription</label>
+                    <textarea class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inscription_InputFile">Sélectionner une pièce jointe</label>
+                    <input type="file" id="inscription_InputFile">
+                </div>
+
+                <!-- Echeance -->
+                <div class="form-group">
+                    <label>Échéance</label>
+                    <div class="input-group">
+                        <!-- Checkbox -->
+                        <span class="input-group-addon">
+                            <input type="checkbox" id="checkbox_form5" onchange="showEcheance('checkbox_form5','echeance_form5')">
+                        </span>
+                        <!-- Date picker -->
+                        <input type="text" class="form-control" id="echeance_form5" disabled/>
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bouton envoyer -->
+                <div class="form-group btn-center">
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </div>
+            </div>
+
+            <!-- Faire valider un sujet de stage -->
+            <div id="form6" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
+                        <input type="text" class="form-control" id="destinataire_form6" value="Aurélien Max - aurelien.max@u-psud.fr" required>
+                        <div class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet -->
+                <div class="form-group">
+                    <label for="objet_form6">Objet</label>
+                    <input type="text" class="form-control" id="objet_form6" value="Validation du sujet de stage" required>
+                </div>
+                <!-- Date stage -->
+                <div class="form-group">
+                    <label>Dates de début et de fin du stage</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right" id="dates_stage"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="motif">Détail</label>
+                    <textarea class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="validStage_InputFile">Sélectionner un fichier</label>
+                    <input type="file" id="validStage_InputFile">
+                </div>
+
+                <!-- Echeance -->
+                <div class="form-group">
+                    <label>Échéance</label>
+                    <div class="input-group">
+                        <!-- Checkbox -->
+                        <span class="input-group-addon">
+                            <input type="checkbox" id="checkbox_form6" onchange="showEcheance('checkbox_form6','echeance_form6')">
+                        </span>
+                        <!-- Date picker -->
+                        <input type="text" class="form-control" id="echeance_form6" disabled/>
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bouton envoyer -->
+                <div class="form-group btn-center">
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </div>
+            </div>
+
+            <!-- Envoyer une convention de stage -->
+            <div id="form7" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
+                        <input type="text" class="form-control" id="destinataire_form7" value="Nadia Chapiteau - nadia.chapiteau@u-psud.fr" required>
+                        <div class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet -->
+                <div class="form-group">
+                    <label for="objet_form7">Objet</label>
+                    <input type="text" class="form-control" id="objet_form7" value="Convention de stage" required>
+                </div>
+
+                <p class="warning_convention">
+                    <i class="icon fa fa-warning"></i>
+                    <label>La convention de stage doit être completée directement sur le PDF, sans signatures</label>
+                </p>
+
+                <div class="form-group">
+                    <label for="motif">Remarque</label>
+                    <textarea class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="absence_InputFile">Sélectionner votre convention de stage</label>
+                    <input type="file" id="absence_InputFile">
+                </div>
+
+                <!-- Echeance -->
+                <div class="form-group">
+                    <label>Échéance</label>
+                    <div class="input-group">
+                        <!-- Checkbox -->
+                        <span class="input-group-addon">
+                            <input type="checkbox" id="checkbox_form7" onchange="showEcheance('checkbox_form7','echeance_form7')">
+                        </span>
+                        <!-- Date picker -->
+                        <input type="text" class="form-control" id="echeance_form7" disabled/>
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bouton envoyer -->
+                <div class="form-group btn-center">
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </div>
+            </div>
+
+            <!-- S'attribuer une tâche personnelle -->
+            <div id="form8" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <!-- TODO : griser cette partie -->
+                    <div class="input-group">
+                        <!-- TODO : lorsque cette tache sera envoye, remplacer "moi" par l'etudiant actuel -->
+                        <input type="text" class="form-control" id="destinataire_form8" value="Moi" disabled>
+                        <div class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet -->
+                <div class="form-group">
+                    <label for="objet_form8">Objet</label>
+                    <input type="text" class="form-control" id="objet_form8" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="motif">Texte</label>
+                    <textarea class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="taskPerso_InputFile">Sélectionner un fichier</label>
+                    <input type="file" id="taskPerso_InputFile">
+                </div>
+
+                <!-- Echeance -->
+                <div class="form-group">
+                    <label>Échéance</label>
+                    <div class="input-group">
+                        <!-- Checkbox -->
+                        <span class="input-group-addon">
+                            <input type="checkbox" id="checkbox_form8" onchange="showEcheance('checkbox_form8','echeance_form8')">
+                        </span>
+                        <!-- Date picker -->
+                        <input type="text" class="form-control" id="echeance_form8" disabled/>
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bouton envoyer -->
+                <div class="form-group btn-center">
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </div>
+            </div>
+
+            <!-- Demande non repertoriee -->
+            <div id="form9" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="destinataire_form9" required>
+                        <div class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet -->
+                <div class="form-group">
+                    <label for="objet_form9">Objet</label>
+                    <input type="text" class="form-control" id="objet_form9" required>
                 </div>
                 <div class="form-group">
                     <label>Texte</label>
@@ -102,38 +482,23 @@
                     <label for="exampleInputFile">Sélectionner un fichier</label>
                     <input type="file" id="exampleInputFile">
                 </div>
-                <!-- Bouton envoyer -->
-                <div class="form-group btn-center">
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
-                </div>
-            </div>
 
-            <!-- Par defaut -->
-            <div id="5" class="sous_formulaire" style="display: none;">
-                <!-- Destinataire -->
+                <!-- Echeance -->
                 <div class="form-group">
-                    <label for="destinataire">Destinataire</label>
+                    <label>Échéance</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="destinataire" required>
+                        <!-- Checkbox -->
+                        <span class="input-group-addon">
+                            <input type="checkbox" id="checkbox_form9" onchange="showEcheance('checkbox_form9','echeance_form9')">
+                        </span>
+                        <!-- Date picker -->
+                        <input type="text" class="form-control" id="echeance_form9" disabled/>
                         <div class="input-group-addon">
-                            <i class="fa fa-sort-alpha-asc"></i>
+                            <i class="fa fa-clock-o"></i>
                         </div>
                     </div>
                 </div>
-                <!-- Objet -->
-                <div class="form-group">
-                    <label for="objet">Objet</label>
-                    <input type="text" class="form-control" id="objet" required>
-                </div>
-                <div class="form-group">
-                    <label>Texte</label>
-                    <textarea class="form-control"></textarea>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> Checkbox
-                    </label>
-                </div>
+
                 <!-- Bouton envoyer -->
                 <div class="form-group btn-center">
                     <button type="submit" class="btn btn-primary">Envoyer</button>

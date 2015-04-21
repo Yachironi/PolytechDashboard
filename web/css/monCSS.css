@@ -187,3 +187,10 @@ a:hover > .fa-trash{
 .task_urgent{
     background-color: rgba(255, 0, 0, 0.5);
 }
+
+.warning_convention > i{
+    color: #F39C12;
+    font-size: large;
+    margin-right: 8px;
+
+}
