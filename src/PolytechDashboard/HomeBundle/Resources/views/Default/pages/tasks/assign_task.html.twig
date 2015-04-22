@@ -246,13 +246,13 @@
                 <!-- Listes des inscriptions -->
                 <div class="form-group" style="padding-bottom: 20px;">
                     <label for="type">Type d'inscription</label>
-                    <select class="form-control" id="list_form" onchange="updateInscription('')">
+                    <select class="form-control" id="list_inscription" onchange="updateInscription('list_inscription', 'destinataire_form5', 'objet_form5')">
                         <option value="" selected="selected"></option>
-                        <option value="">TOEIC</option>
-                        <option value="">Bourse</option>
-                        <option value="">M2R</option>
-                        <option value="">Sport</option>
-                        <option value="">Réinscription à Polytech</option>
+                        <option value="TOEIC">TOEIC</option>
+                        <option value="Bourse">Bourse</option>
+                        <option value="M2R">M2R</option>
+                        <option value="Sport">Sport</option>
+                        <option value="Polytech">Réinscription à Polytech</option>
                     </select>
                 </div>
 
@@ -270,7 +270,7 @@
                 <!-- Objet -->
                 <div class="form-group">
                     <label for="objet_form5">Objet</label>
-                    <input type="text" class="form-control" id="objet_form5" value="Demande d'inscription" required>
+                    <input type="text" class="form-control" id="objet_form5" value="" required>
                 </div>
 
                 <div class="form-group">
