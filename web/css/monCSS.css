@@ -81,32 +81,65 @@ a:hover > .fa-trash{
     background-color: #009FFA;
 }
 
-/* Sidebar personnalisé */
+/* Sidebar du programme */
 
-.sidebar-perso > .sidebar-menu > li.header {
+.sidebar-program > .sidebar-menu > li.header {
     background: #ffffff;
 }
 
-.sidebar-perso > .sidebar-menu > li{
+.sidebar-program > .sidebar-menu > li{
 }
-.sidebar-perso > .sidebar-menu > li > a {
+.sidebar-program > .sidebar-menu > li > a {
     border-left-width: 0px;
     margin-right: 1px;
     background-color: #009FFA;
     border: 1px solid #003B59;
 }
 
-.sidebar-perso > .sidebar-menu > li > a:hover,
-.sidebar-perso > .sidebar-menu > li.active > a {
+.sidebar-program > .sidebar-menu > li > a:hover,
+.sidebar-program > .sidebar-menu > li.active > a {
     color: #fff;
     background: #00496E;
 }
 
 
-.sidebar-perso > .sidebar-menu > li > .treeview-menu {
+.sidebar-program > .sidebar-menu > li > .treeview-menu {
     background: transparent;
     margin: 0px;
     padding: 0px;
+}
+
+/* Sidebar de l'espace cours */
+
+.sidebar-space{
+    margin-top: 20px;
+}
+
+.sidebar-space > .sidebar-menu > li > a{
+    text-decoration:none;
+    color: #333333;
+
+}
+
+.sidebar-space > .sidebar-menu > li > a:hover,
+.sidebar-space > .sidebar-menu > li.active > a {
+    background-color: #FFF;
+    color: #009FFA;
+}
+
+.sidebar-space > .sidebar-menu > li > .treeview-menu {
+    background: transparent;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 30px;
+}
+.sidebar-space > .sidebar-menu > li > .treeview-menu > a{
+    display: block;
+    color: #333333;
+    margin-bottom: 7px;
+}
+.sidebar-space > .sidebar-menu > li > .treeview-menu > a >  i{
+    margin-right: 10px;
 }
 
 /* Datepicker */
@@ -193,4 +226,9 @@ a:hover > .fa-trash{
     font-size: large;
     margin-right: 8px;
 
+}
+
+/* Onglet mon espace */
+.nav-tabs-custom > .nav-tabs > li.active {
+    border-top-color: #009FFA;
 }

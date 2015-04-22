@@ -16,5 +16,159 @@
 
 <!-- Content -->
 <section class="content">
+    <!-- Custom Tabs -->
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            <!-- TODO : a charger dans la BDD + attribuer grace a la BDD la valeur de href pour
+                l'anglais est "anglais" par exemple, pareil pr tous les autres -->
+            <li class="active"><a href="#Anglais" data-toggle="tab">Anglais</a></li>
+            <li><a href="#Espagnol" data-toggle="tab">Espagnol</a></li>
+            <li><a href="#tab_3" data-toggle="tab">GP</a></li>
+            <li><a href="#tab_4" data-toggle="tab">ME</a></li>
+            <li><a href="#tab_5" data-toggle="tab">Droit</a></li>
+            <li><a href="#tab_6" data-toggle="tab">Gestion d'entreprise</a></li>
+            <li><a href="#tab_7" data-toggle="tab">PPP1</a></li>
+            <li><a href="#tab_8" data-toggle="tab">CO</a></li>
+            <li><a href="#tab_9" data-toggle="tab">C++</a></li>
+            <li><a href="#tab_10" data-toggle="tab">Langages formels et automates</a></li>
+            <li><a href="#tab_11" data-toggle="tab">Projet compilation</a></li>
+            <li><a href="#tab_12" data-toggle="tab">Compilation</a></li>
+            <li><a href="#tab_13" data-toggle="tab">P.N.E.</a></li>
+            <li><a href="#tab_14" data-toggle="tab">P.S.</a></li>
+            <li><a href="#tab_15" data-toggle="tab">Base de données</a></li>
+            <li><a href="#tab_16" data-toggle="tab">Réseaux avancés</a></li>
 
-</section>
+            <!-- Dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Dropdown <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">S'inscrire à un espace</a></li>
+                </ul>
+            </li>
+
+        </ul>
+        <div class="tab-content">
+            <!-- Contenu anglais -->
+            <div class="tab-pane active" id="Anglais">
+                <h4 style="margin-left:10px;">
+                    Anglais
+                    <button type="button" class="btn btn-primary pull-right" href="#modal_desinscription" data-toggle="modal" onclick="changeModal('Anglais', 'nomEspace', 'button_oui_modal')">
+                        Se désinscrire
+                    </button>
+                </h4>
+
+                <section class="sidebar sidebar-space">
+                    <ul class="sidebar-menu">
+                        <!-- Cours -->
+                        <li class="treeview">
+                            <a href="#" id="">
+                                <span>Cours</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <!-- Contenu -->
+                            <ul class="treeview-menu">
+                                <a href="#"><i class="fa fa-paperclip"></i> Cours1.pdf</a>
+                                <a href="#"><i class="fa fa-paperclip"></i> Cours2.pdf</a>
+                            </ul>
+                        </li>
+                        <!-- Exercices TOEIC -->
+                        <li class="treeview">
+                            <a href="#" id="">
+                                <span>Exercices TOEIC</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <!-- Contenu -->
+                            <ul class="treeview-menu">
+                                <a href="#"><i class="fa fa-paperclip"></i> TOEIC1.pdf</a>
+                                <a href="#"><i class="fa fa-paperclip"></i> TOEIC2.pdf</a>
+                                <a href="#"><i class="fa fa-paperclip"></i> TOEIC3.pdf</a>
+                                <a href="#"><i class="fa fa-paperclip"></i> TOEIC4.pdf</a>
+                            </ul>
+                        </li>
+                        <!-- Homework -->
+                        <li class="treeview">
+                            <a href="#" id="">
+                                <span>Homework</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <!-- Contenu -->
+                            <ul class="treeview-menu">
+                                <a href="#"><i class="fa fa-paperclip"></i> Exercise_ethics.pdf</a>
+                                <a href="#"><i class="fa fa-paperclip"></i> Exercise_negotiation.pdf</a>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Contenu espagnol -->
+            <div class="tab-pane" id="Espagnol">
+                <h4 style="margin-left:10px;">
+                    Espagnol
+                    <button type="button" class="btn btn-primary pull-right" href="#modal_desinscription" data-toggle="modal" onclick="changeModal('Espagnol', 'nomEspace', 'button_oui_modal')">
+                        Se désinscrire
+                    </button>
+                </h4>
+
+                <section class="sidebar sidebar-space">
+                    <ul class="sidebar-menu">
+                        <!-- Cours -->
+                        <li class="treeview">
+                            <a href="#" id="">
+                                <span>Cours</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <!-- Contenu -->
+                            <ul class="treeview-menu">
+                                <a href="#"><i class="fa fa-paperclip"></i> Cours1.pdf</a>
+                                <a href="#"><i class="fa fa-paperclip"></i> Cours2.pdf</a>
+                            </ul>
+                        </li>
+                        <!-- Exercices TOEIC -->
+                        <li class="treeview">
+                            <a href="#" id="">
+                                <span>Exercices</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <!-- Contenu -->
+                            <ul class="treeview-menu">
+                                <a href="#"><i class="fa fa-paperclip"></i> Exercice1.pdf</a>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </div><!-- /.tab-pane -->
+        </div><!-- /.tab-content -->
+    </div><!-- nav-tabs-custom -->
+
+    <!-- Debut modal view -->
+    <div class="modal fade" id="modal_desinscription">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- En tete -->
+                <div class="modal-header modal-header-task">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <div class="modal-title">Confirmation de désinscription</div>
+                </div>
+
+                <!-- Corps -->
+                <div class="modal-body">
+                    <p>Voulez-vous vraiment vous désinscrire de l'espace <b id="nomEspace"></b> ?</p>
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <!-- onclick a appeler par js -->
+                    <button class="btn btn-success" data-dismiss="modal" id="button_oui_modal" onclick="">Oui</button>
+                    <button class="btn btn-primary" data-dismiss="modal">Non</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</secbion>

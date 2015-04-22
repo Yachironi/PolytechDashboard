@@ -180,3 +180,16 @@ function updateInscription(inscription, destinataire, objet){
         }
     }
 }
+
+/* Mon espace */
+function changeModal(id_espace, id_nom_espace_modal, id_button_modal){
+    document.getElementById(id_nom_espace_modal).innerHTML = id_espace;
+    document.getElementById(id_button_modal).onclick = function(){
+        suppressionEspace(id_espace);
+    }
+}
+
+/* TODO : modifier l'espace en question dans la BDD */
+function suppressionEspace(ID){
+    alert(ID);
+}
