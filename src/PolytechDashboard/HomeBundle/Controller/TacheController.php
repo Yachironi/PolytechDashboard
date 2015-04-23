@@ -8,31 +8,41 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TacheController extends Controller {
 	public static function indexAction($id, $controller) {
-		$myTasks = [ ];
+		$myTasksAdmin = [ ];
 		$admins = [ ];
+		$myTasksAuto = [ ];
+		
 		/* liste de taches de l'etudiant */
 		$tabTasks = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tacheetudiant' )->findByIdetudiant ( $id );
-		if (! $tabTasks) {
-			return $myTasks;
-		}
-		/* nombre de taches de l'etudiant */
-		$max = sizeof ( $tabTasks );		
-		
-		for($i = 0; $i < $max; $i ++) {			
-			$task = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tache' )->findOneById ( $tabTasks [$i]->getIdtache () );
-			$admin = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $task->getIdgestionnaire () );
-				
-			/* ajout de la tache a l'array */
-			array_push ( $myTasks, $task );
-			array_push ( $admins, $admin );
+		if ($tabTasks) {
+			/* nombre de taches de l'etudiant */
+			$max = sizeof ( $tabTasks );
 			
-			/* suppression des variables temporaires */
-			unset ( $task );
-			unset ( $admin );
+			for($i = 0; $i < $max; $i ++) {
+				$task = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tache' )->findOneById ( $tabTasks [$i]->getIdtache () );
+				$admin = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $task->getIdgestionnaire () );
+				
+				if ($admin == null && $task->getIdetudiant () == $id) {
+					/* tache auto attribuée */
+					array_push ( $myTasksAuto, $task );
+					// print_r("Tache auto_attribuée");
+				} else {
+					/* tache affectée par un gestionnaire */
+					array_push ( $myTasksAdmin, $task );
+					array_push ( $admins, $admin );
+					// print_r("Tache Attribuée par un gestionnaire");
+				}
+				
+				/* suppression des variables temporaires */
+				unset ( $task );
+				unset ( $admin );
+			}
 		}
-		$result = array();
-		$result['tasks'] = $myTasks;
-		$result['admins'] = $admins;
+		
+		$result = array ();
+		$result ['tasksAdmin'] = $myTasksAdmin;
+		$result ['admins'] = $admins;
+		$result ['tasksAuto'] = $myTasksAuto;
 		return $result;
 	}
 }
