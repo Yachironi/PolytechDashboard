@@ -8,11 +8,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TacheController extends Controller {
 	public static function indexAction($id, $controller) {
-		$myTasksAdmin = [ ];
+		$myTasksReceived = [ ];
+		$myTasksSend = [ ];
 		$admins = [ ];
-		$myTasksAuto = [ ];
+		$adminsTaskSend = [];
 		
-		/* liste de taches de l'etudiant */
+		/* liste de taches affectées a l'etudiant */
 		$tabTasks = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tacheetudiant' )->findByIdetudiant ( $id );
 		if ($tabTasks) {
 			/* nombre de taches de l'etudiant */
@@ -22,27 +23,44 @@ class TacheController extends Controller {
 				$task = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tache' )->findOneById ( $tabTasks [$i]->getIdtache () );
 				$admin = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $task->getIdgestionnaire () );
 				
-				if ($admin == null) {
-					/* tache auto attribuée */
-					array_push ( $myTasksAuto, $task );
-					// print_r("Tache auto_attribuée");
-				} else {
+				if ($admin != null) {
 					/* tache affectée par un gestionnaire */
-					array_push ( $myTasksAdmin, $task );
 					array_push ( $admins, $admin );
-					// print_r("Tache Attribuée par un gestionnaire");
-				}
+				}				
+				array_push ( $myTasksReceived, $task );
 				
 				/* suppression des variables temporaires */
 				unset ( $task );
 				unset ( $admin );
 			}
 		}
+							
+		/* liste des taches envoyées par l'étudiant*/
+		$tabTasksSend = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tachegestionnaire' )->findByIdetudiant ( $id );
+		if ($tabTasksSend) {
+			/* nombre de taches que l'etudiant a envoyé */
+			$max = sizeof ( $tabTasksSend );
+							
+			for($i = 0; $i < $max; $i ++) {
+				$task = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tache' )->findOneById ( $tabTasksSend [$i]->getIdtache () );
+				$admin = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $tabTasksSend [$i]->getIdgestionnaire () );
+		
+				/* tache affectée a un gestionnaire */
+				array_push ( $adminsTaskSend, $admin );
+				
+				array_push ( $myTasksSend, $task );
+		
+				/* suppression des variables temporaires */
+				unset ( $task );
+				unset ( $admin );
+			}
+		}		
 		
 		$result = array ();
-		$result ['tasksAdmin'] = $myTasksAdmin;
+		$result ['tasksReceived'] = $myTasksReceived;
 		$result ['admins'] = $admins;
-		$result ['tasksAuto'] = $myTasksAuto;
+		$result ['tasksSend'] = $myTasksSend;
+		$result ['adminsTaskSend'] = $adminsTaskSend;
 		return $result;
 	}
 	public static function createTask($param) {

@@ -19,6 +19,18 @@ INSERT INTO `UE` VALUES (8,'Projet',41,7,4,8);
 INSERT INTO `UE` VALUES (9,'Architecture matérielle et logicielle',41,9,5,8);
 INSERT INTO `UE` VALUES (10,'Sécurité, tests et preuves de programmes',41,10,6,8);
 INSERT INTO `UE` VALUES (11,'Stage',41,14,9,8);
+CREATE TABLE "TacheGestionnaire" (
+	`idTache`	INTEGER,
+	`idGestionnaire`	INTEGER,
+	`idEtudiant`	INTEGER,
+	`status`	TEXT,
+	PRIMARY KEY(idTache,idGestionnaire,idEtudiant),
+	FOREIGN KEY(`idTache`) REFERENCES Tache ( id ),
+	FOREIGN KEY(`idGestionnaire`) REFERENCES Gestionnaire ( id ),
+	FOREIGN KEY(`idEtudiant`) REFERENCES Etudiant(id)
+);
+INSERT INTO `TacheGestionnaire` VALUES (5,2,21303181,'NONLU');
+INSERT INTO `TacheGestionnaire` VALUES (6,3,21303181,'NONLU');
 CREATE TABLE `TacheEtudiant` (
 	`idEtudiant`	INTEGER,
 	`idTache`	INTEGER,
@@ -65,6 +77,8 @@ Votre rendu doit ètr ecomposé d''une archive contenant un rapport et vos codes
 Ces derniers doivent compiler sans aucun warnings.',2);
 INSERT INTO `Tache` VALUES (3,'Rendu Dossier VISA','Visa for china',NULL,21303181,'2015-04-01','2015-04-17','penser a bien préparer tous les papiers, y compris l''original de l''attestation d''accueil de l''université chinoise',1);
 INSERT INTO `Tache` VALUES (4,'Candidature M2R','candidature au Master recherche',NULL,21303181,'2015-04-01','2015-05-12','LM a Mme frenoux + choix des UE',2);
+INSERT INTO `Tache` VALUES (5,NULL,'[Compilation - TP]',2,21303181,'2015-04-23','2015-05-30',NULL,1);
+INSERT INTO `Tache` VALUES (6,NULL,'[Convention de stage]',3,21303181,'2015-04-23','2015-05-30',NULL,1);
 CREATE TABLE "ReponseTache" (
 	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`donnee`	TEXT,
