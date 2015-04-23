@@ -34,7 +34,7 @@
 						<td>{{ task.getDatefin() }}</td>
 						{% if task.getIdgestionnaire() is empty %}						
 							<!-- Tache attribue par un etudiant lui meme -->
-							<td>{{ nom }} {{ prenom }}</td>
+							<td> Moi </td>
 						{% else %}
 							<!-- Tache attribue par un gestionnaire -->						
 							<td>{{ myTasks.admins[loop.index0].getNom() }} {{ myTasks.admins[loop.index0].getPrenom() }}</td>							
@@ -65,7 +65,7 @@
 									
 										{% if task.getIdgestionnaire() is empty %}						
 											<!-- Tache attribue par un etudiant lui meme -->
-											De : {{ nom }} {{ prenom }}											
+											De : Moi
 										{% else %}
 											<!-- Tache attribue par un gestionnaire -->						
 											De : {{ myTasks.admins[loop.index0].getNom() }} {{	myTasks.admins[loop.index0].getPrenom() }}
@@ -100,7 +100,7 @@
 						<td></td>
 						<td></td>
 						<td style="text-align: left; padding-left: 20px;">Aucune tache
-							trouvee</td>
+							re&ccedilue</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -117,7 +117,7 @@
 	<div class="box box-task">
 		<!-- Titre du tableau -->
 		<div class="box-header">
-			<h3 class="box-title">Tâches envoy&eacutees</h3>
+			<h3 class="box-title">T&acircches envoy&eacutees</h3>
 		</div>
 		<!-- Corps du tableau -->
 		<div class="box-body">
@@ -194,7 +194,7 @@
 						<td></td>
 						<td></td>
 						<td style="text-align: left; padding-left: 20px;">Aucune tache
-							trouvee</td>
+							envoy&eacutee</td>
 						<td></td>
 						<td></td>
 					</tr>

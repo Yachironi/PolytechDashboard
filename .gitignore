@@ -44,3 +44,4 @@
 
 #BuildPath
 .buildpath
+/vendor/
