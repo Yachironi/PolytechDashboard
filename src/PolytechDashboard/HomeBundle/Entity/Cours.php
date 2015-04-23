@@ -50,7 +50,48 @@ class Cours
     private $idue;
 
 
-
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="CoursH", type="float", nullable=true)
+     */
+    private $coursH;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="CTDH", type="float", nullable=true)
+     */
+    private $cTdH;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="TDH", type="float", nullable=true)
+     */
+    private $tdH;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="TPH", type="float", nullable=true)
+     */
+    private $tpH;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="ProjetH", type="float", nullable=true)
+     */
+    private $projetH;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="StageH", type="float", nullable=true)
+     */
+    private $stageH;
+    
     /**
      * Get id
      *
@@ -62,17 +103,75 @@ class Cours
     }
 
     /**
-     * Set nomcours
+     * Get coursH
      *
-     * @param string $nomcours
+     * @return float
+     */
+    public function getCoursH()
+    {
+    	return $this->coursH;
+    }
+    
+    /**
+     * Get cTdH
+     *
+     * @return float
+     */
+    public function getCTDH()
+    {
+    	return $this->cTdH;
+    }
+    
+    /**
+     * Get tdH
+     *
+     * @return float
+     */
+    public function getTDH()
+    {
+    	return $this->tdH;
+    }
+    /**
+     * Get tpH
+     *
+     * @return float
+     */
+    public function getTPH()
+    {
+    	return $this->tpH;
+    }
+    /**
+     * Get projetH
+     *
+     * @return float
+     */
+    public function getProjetH()
+    {
+    	return $this->projetH;
+    }
+    /**
+     * Get stageH
+     *
+     * @return float
+     */
+    public function getStageH()
+    {
+    	return $this->stageH;
+    }
+    
+    /**
+     * Set coursH
+     *
+     * @param string $coursh
      * @return Cours
      */
-    public function setNomcours($nomcours)
+    public function setNomcours($coursh)
     {
-        $this->nomcours = $nomcours;
-
-        return $this;
+    	$this->coursH = $coursh;
+    
+    	return $this;
     }
+    
 
     /**
      * Get nomcours

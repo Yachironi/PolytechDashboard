@@ -9,23 +9,28 @@
 <section class="content">
     <section class="sidebar sidebar-perso" style="width:90%;margin:auto;text-align:center;">
         <ul class="sidebar-menu">
+            {% for numSemestre in 1..10 %}
+              {% set semestreOk = 0 %}
+              {% for prog in myUE %}
+                 {% if prog.ue.getSemestre() == numSemestre %}
+                    {% set semestreOk = 1 %}
+                 {% endif%}
+              {%endfor%}
+              {% if semestreOk == 1 %}
             <!-- Onglet S7 -->
             <li class="treeview">
                 <a href="#" id="semestre1" onclick="activeSemestre('semestre1')">
-                    <span><B>Semestre 7</B></span>
+                    <span><B>Semestre {{numSemestre}}</B></span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
-                <!-- Programme du S7 -->
                 <ul class="treeview-menu">
                     <!-- Semestre 1 -->
                     <table class="table table-program">
                         <thead>
                         <tr class="entete">
-                            <th>Code</th>
                             <th>Titre</th>
                             <th>ECTS</th>
                             <th>Coeff</th>
-                            <th>Seuil</th>
                             <th>Cours</th>
                             <th>C-TD</th>
                             <th>TD</th>
@@ -36,263 +41,92 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <!-- 1ère UE -->
+                        <!-- boucle sur toutes les UE de l'etudiant -->
+                        {% for prog in myUE %}
+                        {% if prog.ue.getSemestre() == numSemestre %}
                         <tr class="UE">
-                            <th style="text-align: left;">UE : d1c1</th>
-                            <th style="text-align: left;">Langues et Communication I</th>
-                            <th>3</th>
-                            <th>5</th>
-                            <th>10</th>
-                            <th></th>
-                            <th></th>
-                            <th>58</th>
-                            <th></th>
-                            <th></th>
-                            <th>58</th>
-                            <th></th>
+                            <th style="text-align: left;"> {{prog.ue.getNom()}} </th>
+                            <th>{{ prog.ue.getECTS() }}</th>
+                            <th>{{ prog.ue.getCoeff()}}</th>
+                            
+                            {% set coursHTot = 0 %}
+                            {% set cTdHTot = 0 %}
+                            {% set tdHTot = 0 %}
+                            {% set tpHTot = 0 %}
+                            {% set projetHTot = 0 %}
+                            {% set stageHTot = 0 %}
+                            {% set hTot = 0 %}
+                            {% for cours in prog.cours %}
+                            	{% set coursHTot = coursHTot + cours.getCoursH() %}
+                                {% set cTdHTot = cTdHTot + cours.getCTdH() %}
+                                {% set tdHTot = tdHTot + cours.getTdH() %}
+                                {% set tpHTot = tpHTot + cours.getTpH() %}
+                                {% set projetHTot = projetHTot + cours.getProjetH() %}
+                                {% set stageHTot = stageHTot + cours.getStageH() %}
+                            {%endfor%}  
+                            {% set hTot = coursHTot + cTdHTot +  tdHTot + tpHTot +  projetHTot %}
+                            
+                            <th> {% if coursHTot != 0 %}
+							{{ coursHTot }}
+							{% endif %} </th>
+                            <th>{% if cTdHTot != 0 %}
+							{{ cTdHTot }}
+							{% endif %}</th>
+                            <th>{% if tdHTot != 0 %}
+							{{ tdHTot }}
+							{% endif %}</th>
+                            <th>{% if tpHTot != 0 %}
+							{{ tpHTot }}
+							{% endif %}</th>
+                            <th>{% if projetHTot != 0 %}
+							{{ projetHTot }}
+							{% endif %}</th>
+                            <th>{% if hTot != 0 %}
+							{{ hTot }}
+							{% endif %}</th>
+                            <th>{% if stageHTot != 0 %}
+							{{ stageHTot }}
+							{% endif %}</th>
                         </tr>
 
                         <!-- 1ère matière -->
+                        {% for cours in prog.cours %}
                         <tr class="contenu_matiere">
-                            <td style="text-align: left; padding-left: 15px;">d1c1-1</td>
-                            <td style="text-align: left;">Anglais</td>
+                            <td style="text-align: left;">{{cours.getNomcours()}}</td>
                             <td></td>
-                            <td>3</td>
+                            <td>{% if cours.getCoefficient() != 0 %}
+                            {{cours.getCoefficient()}}
+                            {% endif %}</td>
+                            <td>
+                            {% if cours.getCoursH() != 0 %}
+                            {{cours.getCoursH()}}
+                            {% endif %}</td>
+                            <td>{% if cours.getCTdH() != 0 %}
+                            {{cours.getCTdH()}}
+                            {% endif %}</td>
+                            <td>{% if cours.getTdH() != 0 %}
+                            {{cours.getTdH()}}
+                            {% endif %}</td>
+                            <td>{% if cours.getTpH() != 0 %}
+                            {{cours.getTpH()}}
+                            {% endif %}</td>
+                            <td>{% if cours.getProjetH() != 0 %}
+                            {{cours.getProjetH()}}
+                            {% endif %}</td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>32</td>
-                            <td></td>
-                            <td></td>
-                            <td>32</td>
-                            <td></td>
-                        </tr>
-
-                        <!-- 2ère matière -->
-                        <tr class="contenu_matiere">
-                            <td style="text-align: left;padding-left: 15px;">d1c1-2</td>
-                            <td style="text-align: left;">Option langue (Esp., All., anglais soutien, FLE,...)</td>
-                            <td></td>
-                            <td>2</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>10,5</td>
-                            <td></td>
-                            <td></td>
-                            <td>10,5</td>
-                            <td></td>
-                        </tr>
-
-                        <!-- 3ère matière -->
-                        <tr class="contenu_matiere">
-                            <td style="text-align: left;padding-left: 15px;">d1c1-3f</td>
-                            <td style="text-align: left;">Français langue étrangère FLE (parcours 3+3)</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>15,5</td>
-                            <td></td>
-                            <td></td>
-                            <td>15,5</td>
-                            <td></td>
-                        </tr>
-
-                        <!-- 2ère UE -->
-                        <tr class="UE">
-                            <th style="text-align: left;">UE : d1c2</th>
-                            <th style="text-align: left;">L'entreprise et son environnement</th>
-                            <th>6</th>
-                            <th>11</th>
-                            <th>10</th>
-                            <th>27,5</th>
-                            <th>43</th>
-                            <th></th>
-                            <th>20</th>
-                            <th>4</th>
-                            <th>94,5</th>
-                            <th></th>
-                        </tr>
-
-                        <!-- 1ère matière -->
-                        <tr class="contenu_matiere">
-                            <td style="text-align: left; padding-left: 15px;">d1c2-1</td>
-                            <td style="text-align: left;">Gestion de projet</td>
-                            <td></td>
-                            <td>4</td>
-                            <td></td>
-                            <td>1,5</td>
-                            <td>15</td>
-                            <td></td>
-                            <td>12</td>
-                            <td>4</td>
-                            <td>32,5</td>
-                            <td></td>
-                        </tr>
-
-                        <!-- 2ère matière -->
-                        <tr class="contenu_matiere">
-                            <td style="text-align: left;padding-left: 15px;">d1c2-2</td>
-                            <td style="text-align: left;">Management d'équipe</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td>2</td>
-                            <td>10</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>12</td>
-                            <td></td>
-                        </tr>
+                            <td>{% if cours.getStageH() != 0 %}
+                            {{cours.getStageH()}}
+                            {% endif %}</td>
+                        </tr> 
+                        {%endfor%}    
+                        {%endif%}   
+                        {%endfor%}     
                         </tbody>
                     </table>
                 </ul>
             </li>
-            <!-- Onglet S8 -->
-            <li class="treeview">
-                <a href="#" style="border-top-color: transparent;" id="semestre2" onclick="activeSemestre('semestre2')">
-                    <span><B>Semestre 8</B></span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <!-- Programme du S8 -->
-                <ul class="treeview-menu">
-                    <!-- Semestre 2 -->
-                    <table class="table table-program">
-                        <thead>
-                        <tr class="entete">
-                            <th>Code</th>
-                            <th>Titre</th>
-                            <th>ECTS</th>
-                            <th>Coeff</th>
-                            <th>Seuil</th>
-                            <th>Cours</th>
-                            <th>C-TD</th>
-                            <th>TD</th>
-                            <th>TP</th>
-                            <th>Projet</th>
-                            <th>Total</th>
-                            <th>Stage</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!-- 1ère UE -->
-                        <tr class="UE">
-                            <th style="text-align: left;">UE : d1c1</th>
-                            <th style="text-align: left;">Langues et Communication I</th>
-                            <th>3</th>
-                            <th>5</th>
-                            <th>10</th>
-                            <th></th>
-                            <th></th>
-                            <th>58</th>
-                            <th></th>
-                            <th></th>
-                            <th>58</th>
-                            <th></th>
-                        </tr>
-
-                        <!-- 1ère matière -->
-                        <tr class="contenu_matiere">
-                            <td style="text-align: left; padding-left: 15px;">d1c1-1</td>
-                            <td style="text-align: left;">Anglais</td>
-                            <td></td>
-                            <td>3</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>32</td>
-                            <td></td>
-                            <td></td>
-                            <td>32</td>
-                            <td></td>
-                        </tr>
-
-                        <!-- 2ère matière -->
-                        <tr class="contenu_matiere">
-                            <td style="text-align: left;padding-left: 15px;">d1c1-2</td>
-                            <td style="text-align: left;">Option langue (Esp., All., anglais soutien, FLE,...)</td>
-                            <td></td>
-                            <td>2</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>10,5</td>
-                            <td></td>
-                            <td></td>
-                            <td>10,5</td>
-                            <td></td>
-                        </tr>
-
-                        <!-- 3ère matière -->
-                        <tr class="contenu_matiere">
-                            <td style="text-align: left;padding-left: 15px;">d1c1-3f</td>
-                            <td style="text-align: left;">Français langue étrangère FLE (parcours 3+3)</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>15,5</td>
-                            <td></td>
-                            <td></td>
-                            <td>15,5</td>
-                            <td></td>
-                        </tr>
-
-                        <!-- 2ère UE -->
-                        <tr class="UE">
-                            <th style="text-align: left;">UE : d1c2</th>
-                            <th style="text-align: left;">L'entreprise et son environnement</th>
-                            <th>6</th>
-                            <th>11</th>
-                            <th>10</th>
-                            <th>27,5</th>
-                            <th>43</th>
-                            <th></th>
-                            <th>20</th>
-                            <th>4</th>
-                            <th>94,5</th>
-                            <th></th>
-                        </tr>
-
-                        <!-- 1ère matière -->
-                        <tr class="contenu_matiere">
-                            <td style="text-align: left; padding-left: 15px;">d1c2-1</td>
-                            <td style="text-align: left;">Gestion de projet</td>
-                            <td></td>
-                            <td>4</td>
-                            <td></td>
-                            <td>1,5</td>
-                            <td>15</td>
-                            <td></td>
-                            <td>12</td>
-                            <td>4</td>
-                            <td>32,5</td>
-                            <td></td>
-                        </tr>
-
-                        <!-- 2ère matière -->
-                        <tr class="contenu_matiere">
-                            <td style="text-align: left;padding-left: 15px;">d1c2-2</td>
-                            <td style="text-align: left;">Management d'équipe</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td>2</td>
-                            <td>10</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>12</td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </ul>
-            </li>
+            {% endif %}
+            {% endfor %}
         </ul>
     </section>
 </section>

@@ -10,29 +10,33 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class CoursController extends Controller {
+	
 	public function indexAction($id, $controller) {
 		
 		/* Formation l'etudiant */
-		$formation = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Etudiantformation' )->findByIdetudiant ( $id );
-
+		$formation = $controller->getDoctrine()->getRepository ( 'PolytechDashboardHomeBundle:Etudiantformation' )->findByIdetudiant ( $id );
 		$myUE = [ ];
 		/* liste de notes de l'etudiant */
-		$tabUE = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:UE' )->findByIdetudiant ($formation);
+		$tabUE = $controller->getDoctrine()->getRepository ( 'PolytechDashboardHomeBundle:UE' )->findByIdformation($formation[0]->getIdformation());
 		if (! $tabUE) {
 			throw $this->createNotFoundException ( 'Aucun cours trouvé pour cet étudiant' );
 		}
 		/* nombre de UE pour l'etudiant */
 		$maxUE = sizeof ( $tabUE );
 		
+		/* Boucle pour récupérer les cours */
 		for($i = 0; $i < $maxUE; $i ++) {
 			$tmp = array ();
-			$detailNote = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Detailnote' )->findById ( $tabNote [$i]->getIddetailnote() );
-		}
 			
+			$cours = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Cours' )->findByIdue ( $tabUE [$i]->getId() );
+			
+			$tmp[ 'ue' ] = $tabUE[$i];
+			$tmp[ 'cours' ] = $cours;
+			
+			array_push ( $myUE, $tmp );
+			unset ( $tmp );
+		}
 		
-		// return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig');
-		// return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig', array('name' => $name));
-		return $this->render ( 'PolytechDashboardHomeBundle:Default:index.html.twig', array (
-				'cours' => $cours ) );
+		return $myUE;
 	}
 }

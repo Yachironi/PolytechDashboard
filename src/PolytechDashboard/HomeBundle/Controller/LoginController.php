@@ -28,7 +28,8 @@ class LoginController extends Controller {
             $myGrades = $noteController->indexAction ( $user, $this );
             $tacheController = $this->get ( 'tacheController' );
             $myTasks = $tacheController->indexAction ( $user, $this );
-            
+            $programmeController = $this->get ( 'coursController');
+            $myUE = $programmeController->indexAction ($user, $this);
             if ($user) {
                 if ($remember == 'remember-me') {
                     $login = new Login();
@@ -36,27 +37,28 @@ class LoginController extends Controller {
                     $login->setPassword($password);
                     $session->set('login', $login);
                 }
-                return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig', array('prenom' => $user->getPrenom(),'nom' => $user->getNom(),'id' => $user, 'myGrades' => $myGrades, 'myTasks' => $myTasks ));
+                return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig', array('prenom' => $user->getPrenom(),'nom' => $user->getNom(),'id' => $user, 'myGrades' => $myGrades, 'myTasks' => $myTasks, 'myUE' => $myUE ));
             } else {
                 return $this->render('PolytechDashboardHomeBundle:Default:login.html.twig', array('name' => 'Login Error'));
             }
         
-        } else {
+        } /*else {
         	if ($session->has('login')) {
         		$login = $session->get('login');
         		$username = $login->getUsername();
         		$password = $login->getPassword();
         		$user = $repository->findOneBy(array('email' => $username, 'password' => $password));
         		
-        		/* appel du generateur de note du controlleur */
+        		/* appel du generateur de note du controlleur 
         		$noteController = $this->get ( 'noteController' );
         		$myGrades = $noteController->indexAction ( $user, $this );
         		if ($user) {
-        			return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig', array('prenom' => $user->getPrenom(),'nom' => $user->getNom(),'id' => $user, 'myGrades' => $myGrades, 'myTasks' => $myTasks ));
+        			return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig', array('prenom' => $user->getPrenom(),'nom' => $user->getNom(),'id' => $user, 'myGrades' => $myGrades, 'myTasks' => $myTasks, 'myUE' => $myUE ));
         		}
         	}
             return $this->render('PolytechDashboardHomeBundle:Default:login.html.twig');
-        }
+        }*/
+        return $this->render('PolytechDashboardHomeBundle:Default:login.html.twig');
     }
 
     public function logoutAction(Request $request) {

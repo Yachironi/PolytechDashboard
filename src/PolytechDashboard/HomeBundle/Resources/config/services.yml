@@ -8,3 +8,6 @@ services:
         
     tacheController:
         class: PolytechDashboard\HomeBundle\Controller\TacheController
+        
+    coursController:
+        class: PolytechDashboard\HomeBundle\Controller\CoursController

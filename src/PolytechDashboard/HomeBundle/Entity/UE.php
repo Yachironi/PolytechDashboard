@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="UE")
  * @ORM\Entity
  */
-class Ue
+class UE
 {
     /**
      * @var integer
@@ -41,8 +41,20 @@ class Ue
      * @ORM\Column(name="Coeff", type="integer", nullable=true)
      */
     private $coeff;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ECTS", type="integer", nullable=true)
+     */
+    private $ects;
 
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="Semestre", type="integer", nullable=true)
+     */
+    private $semestre;
 
     /**
      * Get id
@@ -54,6 +66,26 @@ class Ue
         return $this->id;
     }
 
+    /**
+     * Get ects
+     *
+     * @return integer
+     */
+    public function getEcts()
+    {
+    	return $this->ects;
+    }
+    
+    /**
+     * Get semestre
+     *
+     * @return integer
+     */
+    public function getSemestre()
+    {
+    	return $this->semestre;
+    }
+    
     /**
      * Set nom
      *
