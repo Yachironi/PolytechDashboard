@@ -28,72 +28,116 @@
 				<tbody>
 					<!-- Exemple d'une tâche -->
 					{% for task in myTasks.tasksReceived %}
-					<tr>
-						<td>{{ task.getId()}}</td>
-						<td>{{ task.getDatecreation() }}</td>
-						<td>{{ task.getDatefin() }}</td>
-						{% if task.getIdgestionnaire() is empty %}						
-							<!-- Tache attribue par un etudiant lui meme -->
-							<td>{{ nom }} {{ prenom }}</td>
-						{% else %}
-							<!-- Tache attribue par un gestionnaire -->						
-							<td>{{ myTasks.admins[loop.index0].getNom() }} {{ myTasks.admins[loop.index0].getPrenom() }}</td>							
-						{% endif %}						
-						<td>{{ task.getNom() }}</td>
-						<!-- Icone "importance" -->
-						<td style="text-align: center;"><i
-							class="fa fa-exclamation-triangle importance{{ task.getImportance() }}">
-								<div style="display: none;">{{ task.getImportance() }}</div>
-						</i></td>
+                        <tr>
+                            <td>{{ task.getId()}}</td>
+                            <td>{{ task.getDatecreation() }}</td>
+                            <td>{{ task.getDatefin() }}</td>
 
-						<!-- Icone "voir détail" -->
-						<td style="text-align: center;"><a
-							href="#infos_task_{{ task.getId()}}" data-toggle="modal"><i
-								class="fa fa-search"></i></a></td>
-						<!-- Debut modal view -->
-						<div class="modal fade" id="infos_task_{{ task.getId()}}">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<!-- En tete -->
-									<div class="modal-header modal-header-task">
-										<button type="button" class="close" data-dismiss="modal">x</button>
-										<div class="modal-title">Tache n°{{ task.getId()}} - {{ task.getNom() }}</div>
+                            <!-- Tache attribue par un etudiant lui meme -->
+                            {% if task.getIdgestionnaire() is empty %}
+                                <td>{{ nom }} {{ prenom }}</td>
+                                <td>{{ task.getNom() }}</td>
+                                <!-- Icone "importance" -->
+                                <td style="text-align: center;">
+                                    <i class="fa fa-exclamation-triangle importance{{ task.getImportance() }}">
+                                        <div style="display: none;">{{ task.getImportance() }}</div>
+                                    </i>
+                                </td>
 
-									</div>
-									<!-- En tete présentant le body -->
-									<div class="modal-header modal-before-body">
-									
-										{% if task.getIdgestionnaire() is empty %}						
-											<!-- Tache attribue par un etudiant lui meme -->
-											De : {{ nom }} {{ prenom }}											
-										{% else %}
-											<!-- Tache attribue par un gestionnaire -->						
-											De : {{ myTasks.admins[loop.index0].getNom() }} {{	myTasks.admins[loop.index0].getPrenom() }}
-										{% endif %}									
-										
-										<div class="date_modal">
-											<div class="date_debut">Date d'attribution : {{	task.getDatecreation() }}</div>
-											<div class="date_fin">Échéance : {{ task.getDatefin() }}</div>
-										</div>
-									</div>
-									<!-- Corps -->
-									<div class="modal-body">
-										<h4>Contenu :</h4>
-										<p>{{ task.getStructure() }}</p>
-									</div>
-									<!-- Footer -->
-									<div class="modal-footer">
-										<button class="btn btn-success pull-left" data-dismiss="modal">Editer</button>
-										<button class="btn btn-danger pull-left" data-dismiss="modal">Supprimer</button>
-										<button class="btn btn-primary" data-dismiss="modal">Fermer</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- Fin modal view -->
-					</tr>
+                                <!-- Icone "voir détail" -->
+                                <td style="text-align: center;">
+                                    <a href="#infos_task_{{ task.getId()}}" data-toggle="modal">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </td>
+                                <!-- Debut modal view -->
+                                <div class="modal fade" id="infos_task_{{ task.getId()}}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <!-- En tete -->
+                                            <div class="modal-header modal-header-task">
+                                                <button type="button" class="close" data-dismiss="modal">x</button>
+                                                <div class="modal-title">Tache n°{{ task.getId()}} - {{ task.getNom() }}</div>
+
+                                            </div>
+                                            <!-- En tete présentant le body -->
+                                            <div class="modal-header modal-before-body">
+                                                De : {{ nom }} {{ prenom }}
+                                                <div class="date_modal">
+                                                    <div class="date_debut">Date d'attribution : {{	task.getDatecreation() }}</div>
+                                                    <div class="date_fin">Échéance : {{ task.getDatefin() }}</div>
+                                                </div>
+                                            </div>
+                                            <!-- Corps -->
+                                            <div class="modal-body">
+                                                <h4>Contenu :</h4>
+                                                <p>{{ task.getStructure() }}</p>
+                                            </div>
+                                            <!-- Footer -->
+                                            <div class="modal-footer">
+                                                <button class="btn btn-success pull-left" data-dismiss="modal">Editer</button>
+                                                <button class="btn btn-danger pull-left" data-dismiss="modal">Supprimer</button>
+                                                <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Fin modal view -->
+
+                            <!-- Tache attribue par un gestionnaire -->
+                            {% else %}
+                                <td>{{ myTasks.admins[loop.index0].getNom() }} {{ myTasks.admins[loop.index0].getPrenom() }}</td>
+                                <td>{{ task.getNom() }}</td>
+                                <!-- Icone "importance" -->
+                                <td style="text-align: center;">
+                                    <i class="fa fa-exclamation-triangle importance{{ task.getImportance() }}">
+                                        <div style="display: none;">{{ task.getImportance() }}</div>
+                                    </i>
+                                </td>
+
+                                <!-- Icone "voir détail" -->
+                                <td style="text-align: center;">
+                                    <a href="#infos_task_{{ task.getId()}}" data-toggle="modal">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </td>
+                                <!-- Debut modal view -->
+                                <div class="modal fade" id="infos_task_{{ task.getId()}}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <!-- En tete -->
+                                            <div class="modal-header modal-header-task">
+                                                <button type="button" class="close" data-dismiss="modal">x</button>
+                                                <div class="modal-title">Tache n°{{ task.getId()}} - {{ task.getNom() }}</div>
+
+                                            </div>
+                                            <!-- En tete présentant le body -->
+                                            <div class="modal-header modal-before-body">
+                                                De : {{ myTasks.admins[loop.index0].getNom() }} {{	myTasks.admins[loop.index0].getPrenom() }}
+                                                <div class="date_modal">
+                                                    <div class="date_debut">Date d'attribution : {{	task.getDatecreation() }}</div>
+                                                    <div class="date_fin">Échéance : {{ task.getDatefin() }}</div>
+                                                </div>
+                                            </div>
+                                            <!-- Corps -->
+                                            <div class="modal-body">
+                                                <h4>Contenu :</h4>
+                                                <p>{{ task.getStructure() }}</p>
+                                            </div>
+                                            <!-- Footer -->
+                                            <div class="modal-footer">
+                                                <button class="btn btn-success pull-left" data-dismiss="modal">Editer</button>
+                                                <button class="btn btn-danger pull-left" data-dismiss="modal">Supprimer</button>
+                                                <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Fin modal view -->
+                            {% endif %}
+                        </tr>
 					{% else %}
-					<!-- besoin d'avoir le m�me nombre de cellules, sinon erreur javascript -->
+					<!-- besoin d'avoir le m�me nombre de cellules, sinon erreur javascript -->
 					<tr class="sous_ensemble">
 						<td></td>
 						<td></td>
@@ -172,7 +216,7 @@
 									<!-- Corps -->
 									<div class="modal-body">
 										<h4>Contenu :</h4>
-										<!-- TODO, ajouter le contenu de la tache envoy�e -->
+										<!-- TODO, ajouter le contenu de la tache envoy�e -->
 										<p>{{ task.getStructure() }}</p>
 									</div>
 									<!-- Footer -->
@@ -187,7 +231,7 @@
 						<!-- Fin modal view -->
 					</tr>
 					{% else %}
-					<!-- besoin d'avoir le m�me nombre de cellules, sinon erreur javascript -->
+					<!-- besoin d'avoir le m�me nombre de cellules, sinon erreur javascript -->
 					<tr class="sous_ensemble">
 						<td></td>
 						<td></td>
