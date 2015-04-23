@@ -29,10 +29,9 @@
                 <!-- Exemple d'une tâche -->
                 {% for task in myTasks.tasksReceived %}
                     {% set today = "now"|date("Y-m-d-H-i") %}
-                    {% set today_5days = "now-5days"|date("Y-m-d-H-i") %}
-                    <!-- Taches importantes - deadline qui approche -->
+                    {% set today_5days = "now+18days"|date("Y-m-d-H-i") %}
+                    <!-- Taches importantes - deadline qui approche (sous 5 jours) -->
                     {% if (task.getDatefin()|date("Y-m-d-H-i") <= today_5days ) and (task.getDatefin()|date("Y-m-d-H-i") >= today)%}
-
                         <tr style="background-color: rgba(255, 0, 0, 0.5);">
                     <!-- Echeance depassee -->
                     {% elseif task.getDatefin()|date("Y-m-d-H-i")  < today %}
@@ -40,10 +39,9 @@
                     {% else %}
                         <tr>
                     {% endif %}
-                    {{ "now-5days"|date("Y-m-d-H-i") }}
                         <td>{{ task.getId()}}</td>
-                        <td>{{ task.getDatecreation() }}</td>
-                        <td>{{ task.getDatefin() }}</td>
+                        <td>{{ task.getDatecreation()|date("Y/m/d") }}</td>
+                        <td>{{ task.getDatefin()|date("Y/m/d") }}</td>
 
                         {% if task.getIdgestionnaire() is empty %}
                             <!-- Tache attribue par un etudiant lui meme -->
@@ -52,7 +50,16 @@
                             <!-- Tache attribue par un gestionnaire -->
                             <td>{{ myTasks.admins[loop.index0].getNom() }} {{ myTasks.admins[loop.index0].getPrenom() }}</td>
                         {% endif %}
-                        <td>{{ task.getNom() }}</td>
+                        <td>
+                            {{ task.getNom() }}
+                            <small class="label label-danger pull-right">
+                                {% if today > task.getDatefin() %}
+                                    Échéance dépassée !
+                                {% elseif (task.getDatefin()|date("Y-m-d-H-i") <= today_5days ) and (task.getDatefin()|date("Y-m-d-H-i") >= today)%}
+                                    <i class="fa fa-clock-o"></i> Important
+                                {% endif %}
+                            </small>
+                        </td>
                         <!-- Icone "importance" -->
                         <td style="text-align: center;">
                             <i class="fa fa-exclamation-triangle importance{{ task.getImportance() }}">
@@ -87,8 +94,8 @@
                                         {% endif %}
 
                                         <div class="date_modal">
-                                            <div class="date_debut">Date d'attribution : {{	task.getDatecreation() }}</div>
-                                            <div class="date_fin">Échéance : {{ task.getDatefin() }}</div>
+                                            <div class="date_debut">Date d'attribution : {{	task.getDatecreation()|date("d/m/Y") }}</div>
+                                            <div class="date_fin">Échéance : {{ task.getDatefin()|date("d/m/Y") }}</div>
                                         </div>
                                     </div>
                                     <!-- Corps -->
@@ -155,7 +162,7 @@
                     <th style="width: 5%;">N°</th>
                     <th style="width: 12%;">Envoy&eacutee le</th>
                     <th style="width: 12%;">&Eacutech&eacuteance</th>
-                    <th>Pour</th>
+                    <th>À</th>
                     <th>Objet</th>
                     <th style="width: 11%;">Importance</th>
                     <th></th>
@@ -165,8 +172,8 @@
                 {% for task in myTasks.tasksSend %}
                     <tr>
                         <td>{{ task.getId()}}</td>
-                        <td>{{ task.getDatecreation() }}</td>
-                        <td>{{ task.getDatefin() }}</td>
+                        <td>{{ task.getDatecreation()|date("Y/m/d") }}</td>
+                        <td>{{ task.getDatefin()|date("Y/m/d") }}</td>
                         <td>{{ myTasks.adminsTaskSend[loop.index0].getNom() }} {{	myTasks.adminsTaskSend[loop.index0].getPrenom() }}</td>
                         <td>{{ task.getNom() }}</td>
                         <!-- Icone "importance" -->
@@ -195,8 +202,8 @@
                                     <div class="modal-header modal-before-body">
                                         Pour : {{ nom }} {{ prenom }}
                                         <div class="date_modal">
-                                            <div class="date_debut">Date envoi : {{ task.getDatecreation() }}</div>
-                                            <div class="date_fin">Échéance : {{ task.getDatefin() }}</div>
+                                            <div class="date_debut">Date d'envoi : {{ task.getDatecreation()|date("d/m/Y") }}</div>
+                                            <div class="date_fin">Échéance : {{ task.getDatefin()|date("d/m/Y") }}</div>
                                         </div>
                                     </div>
                                     <!-- Corps -->
