@@ -5,8 +5,7 @@
 
 <section class="content">
 
-
-	<!-- 2ème tableau : les taches que l'étudiant a envoyé -->
+	<!-- 1er tableau : les taches que l'etudiant a recues -->
 	<div class="box box-task">
 		<!-- Titre du tableau -->
 		<div class="box-header">
@@ -114,7 +113,7 @@
 	</div>
 	<!-- /.box -->
 
-	<!-- 2ème tableau : les taches que l'étudiant a envoyé -->
+	<!-- 2eme tableau : les taches que l'etudiant a envoyees -->
 	<div class="box box-task">
 		<!-- Titre du tableau -->
 		<div class="box-header">
@@ -139,8 +138,8 @@
 					<tr>
 						<td>{{ task.getId()}}</td>
 						<td>{{ task.getDatecreation() }}</td>
-						<td>{{ task.getDatefin() }}</td>
-						<td>{{ nom }} {{ prenom }}</td>
+						<td>{{ task.getDatefin() }}</td>						
+						<td>{{ myTasks.adminsTaskSend[loop.index0].getNom() }} {{	myTasks.adminsTaskSend[loop.index0].getPrenom() }}</td>										
 						<td>{{ task.getNom() }}</td>
 						<!-- Icone "importance" -->
 						<td style="text-align: center;"><i
@@ -164,7 +163,7 @@
 									</div>
 									<!-- En tete présentant le body -->
 									<div class="modal-header modal-before-body">
-										De : {{ nom }} {{ prenom }}
+										Pour : {{ nom }} {{ prenom }}
 										<div class="date_modal">
 											<div class="date_debut">Date envoi : {{ task.getDatecreation() }}</div>
 											<div class="date_fin">Échéance : {{ task.getDatefin() }}</div>
@@ -173,6 +172,7 @@
 									<!-- Corps -->
 									<div class="modal-body">
 										<h4>Contenu :</h4>
+										<!-- TODO, ajouter le contenu de la tache envoy�e -->
 										<p>{{ task.getStructure() }}</p>
 									</div>
 									<!-- Footer -->
@@ -208,86 +208,4 @@
 	<!-- /.box -->
 
 
-	<!-- 3eme tableau : les taches que urgentes -->
-	<div class="box box-task">
-		<!-- Titre du tableau -->
-		<div class="box-header">
-			<h3 class="box-title">Tâches urgentes</h3>
-		</div>
-		<!-- Corps du tableau -->
-		<div class="box-body">
-			<table class="table table-bordered table-striped table-task">
-				<thead>
-					<tr>
-						<th style="width: 5%;">N°</th>
-						<th style="width: 12%;">Reçu le</th>
-						<th style="width: 12%;">&Eacutech&eacuteance</th>
-						<th>De</th>
-						<th>Objet</th>
-						<th style="width: 11%;">Importance</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- Exemple de tache urgente, dont la deadline est tres proche -->
-					<tr class="task_urgent">
-						<td>6</td>
-						<td>2015-05-20</td>
-						<td>2015-05-22</td>
-						<td>Zinedine Zidane</td>
-						<td>Affichage d'une tache urgente dont la deadline est tres proche</td>
-						<!-- Icone "importance" -->
-						<td style="text-align: center;"><i
-							class="fa fa-exclamation-triangle importance1">
-								<div style="display: none;">1</div>
-						</i></td>
-
-						<!-- Icone "voir détail" -->
-						<td style="text-align: center;"><a href="#infos_task_6"
-							data-toggle="modal"><i class="fa fa-search"></i></a></td>
-					</tr>
-					<tr>
-						<!-- Debut modal view -->
-						<div class="modal fade" id="infos_task_6">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<!-- En tete -->
-									<div class="modal-header modal-header-task">
-										<button type="button" class="close" data-dismiss="modal">x</button>
-										<div class="modal-title">Tache n°6 - Affichage d'une tache
-											urgente dont la deadline est tres proche</div>
-									</div>
-									<!-- En tete présentant le body -->
-									<div class="modal-header modal-before-body">
-										De : Zinedine Zidane
-										<div class="date_modal">
-											<div class="date_debut">Date d'attribution : 2015-05-20</div>
-											<div class="date_fin">Échéance : 2015-05-22</div>
-										</div>
-									</div>
-									<!-- Corps -->
-									<div class="modal-body">
-										<h4>Contenu :</h4>
-										<p>Ceci est une tache urgente dont la deadline est tres proche</p>
-									</div>
-									<!-- Footer -->
-									<div class="modal-footer">
-										<button class="btn btn-primary pull-left"
-											onclick="replyTask()">
-											<span class="fa fa-reply"></span> Répondre
-										</button>
-										<button class="btn btn-primary" data-dismiss="modal">Fermer</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- Fin modal view -->
-					</tr>
-				</tbody>
-
-			</table>
-		</div>
-		<!-- /.box-body -->
-	</div>
-	<!-- /.box -->
 </section>
