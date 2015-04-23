@@ -41,3 +41,6 @@
 
 #Session
 /app/sessions
+
+#BuildPath
+.buildpath
