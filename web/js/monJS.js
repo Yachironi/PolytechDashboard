@@ -51,7 +51,7 @@ function activeSemestre(ID){
 
 /* Permet de faire un affichage dynamique des formulaires lorsqu'on veut attribuer une tache */
 function afficheForm(ID){
-    list_form = new Array('1', '2', '3', '4', '5');
+    list_form = new Array('form1', 'form2', 'form3', 'form4', 'form5', 'form6', 'form7', 'form8', 'form9');
 
     var indice_form_a_affiche = document.getElementById(ID).selectedIndex;
     var i;
@@ -71,6 +71,11 @@ function afficheForm(ID){
     document.getElementById(list_form[indice_form_a_affiche]).style.display = "block";
 }
 
+/* TODO */
+function specifyNameHomework(cours, devoir){
+    return "[" + document.getElementById(cours).selectedIndex + "] " + document.getElementById(devoir).selectedIndex;
+}
+
 function openPopup(nom, width, height){
     if(window.innerWidth) {
         var left = (window.innerWidth-width)/2;
@@ -83,7 +88,108 @@ function openPopup(nom, width, height){
     window.open(nom,'Sélectionner un destinataire','menubar=no, top='+top+', left='+left+', width='+width+', height='+height+'');
 }
 
-function removeTask(ID){
-    //document.getElementById(ID).collapse('hide');
-    document.getElementById(ID).style.display = "none";
+/**
+ * Lorsque l'etudiant clique sur le bouton editer sur une tache qu'il s'est lui meme attribue
+ */
+function editTask(){
+
+}
+
+/**
+ * Lorsque l'etudiant clique sur le bouton supprimer sur une tache qu'il s'est lui meme attribue
+ */
+// Il faut faire passer la tache en parametre
+function removeTask(){
+    // Trouve sur internet :
+    //$em->remove($product);
+    //$em->flush();
+}
+
+/**
+ * Lorsque l'etudiant clique sur le bouton Fait sur une tache qu'il s'est lui meme attribue
+ */
+function doneTask(){
+
+}
+
+
+/**
+ * Lorsque l'etudiant clique sur le bouton repondre sur une tache qu'un gestionnaire lui a attribue
+ */
+function replyTask(){
+
+}
+
+/* Affiche ou cache le champ "echeance" */
+function showEcheance(checkbox, ID){
+    var echeance = document.getElementById(ID);
+    if(document.getElementById(checkbox).checked == true){
+        echeance.disabled = false;
+    }
+    else{
+        echeance.disabled = true;
+        echeance.value = "";
+
+    }
+}
+
+function updateObjetRDV(list_cours, list_devoirs, objet){
+    var select_cours = document.getElementById(list_cours);
+    var value_cours = select_cours.options[select_cours.selectedIndex].value;
+    var select_devoir = document.getElementById(list_devoirs);
+    var value_devoir = select_devoir.options[select_devoir.selectedIndex].value;
+    if(value_cours == "" && value_devoir == ""){
+        document.getElementById(objet).value = "";
+    }
+    else if(value_cours != "" && value_devoir == ""){
+        document.getElementById(objet).value = "[" + value_cours + "]";
+    }
+    else if(value_cours == "" && value_devoir != ""){
+        document.getElementById(objet).value = "[" + value_devoir + "]";
+
+    }
+    else{
+        document.getElementById(objet).value = "[" + value_cours + " - " + value_devoir + "]";
+    }
+
+}
+
+/* TODO : chercher les destinataires dans la BD */
+function updateInscription(inscription, destinataire, objet){
+    var select_inscription = document.getElementById(inscription);
+    var value_inscription = select_inscription.options[select_inscription.selectedIndex].value;
+    if(value_inscription != ""){
+        if(value_inscription == "Polytech"){
+            document.getElementById(destinataire).value = "Dominique Beau - dominique.beau@u-psud.fr";
+            document.getElementById(objet).value = "[" + value_inscription + "] Demande de réinscription";
+        }
+        else{
+            if(value_inscription == "TOEIC"){
+                document.getElementById(destinataire).value = "Chantal Escudie - chantal.escudie@u-psud.fr";
+            }
+            else if(value_inscription == "M2R"){
+                document.getElementById(destinataire).value = "Emmanuelle Frenoux - emmanuelle.frenoux@u-psud.fr";
+            }
+            else if(value_inscription == "Sport"){
+                document.getElementById(destinataire).value = "Marcelo Bielsa - marcelo.bielsa@u-psud.fr";
+            }
+            else if(value_inscription == "Bourse"){
+                document.getElementById(destinataire).value = "Nadia Chapiteau - nadia.chapiteau@u-psud.fr";
+            }
+            document.getElementById(objet).value = "[" + value_inscription + "] Demande d'inscription";
+        }
+    }
+}
+
+/* Mon espace */
+function changeModal(id_espace, id_nom_espace_modal, id_button_modal){
+    document.getElementById(id_nom_espace_modal).innerHTML = id_espace;
+    document.getElementById(id_button_modal).onclick = function(){
+        suppressionEspace(id_espace);
+    }
+}
+
+/* TODO : modifier l'espace en question dans la BDD */
+function suppressionEspace(ID){
+    alert(ID);
 }

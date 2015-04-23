@@ -43,6 +43,13 @@ class Tache
     private $idgestionnaire;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="idEtudiant", type="integer", nullable=true)
+     */
+    private $idetudiant;
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="dateCreation", type="text", nullable=true)
@@ -62,7 +69,13 @@ class Tache
      * @ORM\Column(name="structure", type="text", nullable=true)
      */
     private $structure;
-
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="importance", type="integer", nullable=true)
+     */
+    private $importance;
 
 
     /**
@@ -145,6 +158,29 @@ class Tache
     }
 
     /**
+     * Set idetudiant
+     *
+     * @param integer $idetudiant
+     * @return Tache
+     */
+    public function setIdetudiant($idetudiant)
+    {
+    	$this->idetudiant = $idetudiant;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get idetudiant
+     *
+     * @return integer
+     */
+    public function getIdetudiant()
+    {
+    	return $this->idetudiant;
+    }
+    
+    /**
      * Set datecreation
      *
      * @param string $datecreation
@@ -211,5 +247,28 @@ class Tache
     public function getStructure()
     {
         return $this->structure;
+    }
+    
+    /**
+     * Set importance
+     *
+     * @param integer $importance
+     * @return Tache
+     */
+    public function setImportance($importance)
+    {
+    	$this->importance = $importance;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get importance
+     *
+     * @return integer
+     */
+    public function getImportance()
+    {
+    	return $this->importance;
     }
 }
