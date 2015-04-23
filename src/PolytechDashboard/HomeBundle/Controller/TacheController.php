@@ -22,7 +22,7 @@ class TacheController extends Controller {
 				$task = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tache' )->findOneById ( $tabTasks [$i]->getIdtache () );
 				$admin = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $task->getIdgestionnaire () );
 				
-				if ($admin == null && $task->getIdetudiant () == $id) {
+				if ($admin == null) {
 					/* tache auto attribuée */
 					array_push ( $myTasksAuto, $task );
 					// print_r("Tache auto_attribuée");
@@ -44,5 +44,30 @@ class TacheController extends Controller {
 		$result ['admins'] = $admins;
 		$result ['tasksAuto'] = $myTasksAuto;
 		return $result;
+	}
+	public static function createTask($param) {
+		$formType = isset ( $_POST ['gender'] ) ? mysql_real_escape_string ( $_POST ['gender'] ) : '';
+		
+		switch ($formType) {
+			case "form1" :
+				break;
+			case "form2" :
+				break;
+			case "form3" :
+				break;
+			case "form4" :
+				break;
+			case "form5" :
+				break;
+			case "form6" :
+				break;
+			case "form7" :
+				break;
+			case "form8" :
+				break;
+			case "form9" :
+				break;
+		}
+		return true;
 	}
 }
