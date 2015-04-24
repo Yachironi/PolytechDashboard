@@ -183,7 +183,11 @@ a:hover > .fa-trash{
 .date_fin{
     display: inline;
     text-align: right;
-    margin-left: 220px;
+}
+
+.heure_fin{
+    display: block;
+    text-align: right;
 }
 
 .modal-body{
@@ -231,4 +235,44 @@ a:hover > .fa-trash{
 /* Onglet mon espace */
 .nav-tabs-custom > .nav-tabs > li.active {
     border-top-color: #009FFA;
+}
+
+/* champ 'importance' dans l'attribution d'une tache */
+.select_importance{
+    text-align: center;
+}
+.select_importance > a{
+    margin-right:10px;
+    cursor: pointer;
+}
+
+.select_importance > a  .importance1{
+    display: inline;
+}
+
+.select_importance > a .importance1-selected,
+.select_importance > a:hover  .importance1{
+    color: rgb(205, 205, 205);
+}
+
+.select_importance > a .importance2-selected,
+.select_importance > a:hover  .importance2{
+    color: #f1c40f;
+}
+
+.select_importance > a .importance3-selected,
+.select_importance > a:hover  .importance3{
+    color: red
+}
+
+.select_importance > a  .importance1{
+    color: rgba(205, 205, 205, 0.4);
+}
+
+.select_importance > a  .importance2{
+    color: rgba(241, 196, 15, 0.4);
+}
+
+.select_importance > a  .importance3{
+    color: rgba(255, 0, 0, 0.4);
 }

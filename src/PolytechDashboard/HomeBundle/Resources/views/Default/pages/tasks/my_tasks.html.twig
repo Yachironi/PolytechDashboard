@@ -29,16 +29,19 @@
                 <!-- Exemple d'une tâche -->
                 {% for task in myTasks.tasksReceived %}
                     {% set today = "now"|date("Y-m-d-H-i") %}
-                    {% set today_5days = "now+18days"|date("Y-m-d-H-i") %}
+                    {% set today_5days = "now+5days"|date("Y-m-d-H-i") %}
                     <!-- Taches importantes - deadline qui approche (sous 5 jours) -->
+
                     {% if (task.getDatefin()|date("Y-m-d-H-i") <= today_5days ) and (task.getDatefin()|date("Y-m-d-H-i") >= today)%}
-                        <tr style="background-color: rgba(255, 0, 0, 0.5);">
+                        <!-- <tr style="background-color: rgba(255, 0, 0, 0.5);">
+                        -->
                     <!-- Echeance depassee -->
                     {% elseif task.getDatefin()|date("Y-m-d-H-i")  < today %}
-                        <tr style="background-color: rgba(255, 255, 0, 0.5);">
+                      <!--  <tr style="background-color: rgba(255, 255, 0, 0.5);">-->
                     {% else %}
-                        <tr>
+                        <!--<tr>-->
                     {% endif %}
+                    <tr>
                         <td>{{ task.getId()}}</td>
                         <td>{{ task.getDatecreation()|date("Y/m/d") }}</td>
                         <td>{{ task.getDatefin()|date("Y/m/d") }}</td>
@@ -52,13 +55,21 @@
                         {% endif %}
                         <td>
                             {{ task.getNom() }}
-                            <small class="label label-danger pull-right">
-                                {% if today > task.getDatefin() %}
-                                    Échéance dépassée !
-                                {% elseif (task.getDatefin()|date("Y-m-d-H-i") <= today_5days ) and (task.getDatefin()|date("Y-m-d-H-i") >= today)%}
-                                    <i class="fa fa-clock-o"></i> Important
-                                {% endif %}
-                            </small>
+
+                            {% if today > task.getDatefin() %}
+                                {% set difference = date(today).diff(date(task.getDatefin())) %}
+                                {% set differenceInDays = difference.days %}
+                                <small class="label label-warning pull-right">
+                                    <i class="fa fa-clock-o"></i> J+{{ differenceInDays }}
+                                </small>
+                            {% elseif (task.getDatefin()|date("Y-m-d-H-i") <= today_5days ) and (task.getDatefin()|date("Y-m-d-H-i") >= today)%}
+                                {% set difference = date(task.getDatefin()).diff(date(today)) %}
+                                {% set differenceInDays = difference.days %}
+                                <small class="label label-danger pull-right">
+                                    <i class="fa fa-clock-o"></i> J-{{ differenceInDays }}
+                                </small>
+                            {% endif %}
+
                         </td>
                         <!-- Icone "importance" -->
                         <td style="text-align: center;">
@@ -95,7 +106,7 @@
 
                                         <div class="date_modal">
                                             <div class="date_debut">Date d'attribution : {{	task.getDatecreation()|date("d/m/Y") }}</div>
-                                            <div class="date_fin">Échéance : {{ task.getDatefin()|date("d/m/Y") }}</div>
+                                            <div class="date_fin pull-right">Échéance : {{ task.getDatefin()|date("d/m/Y") }} à {{ task.getDatefin()|date("H:i") }}</div>
                                         </div>
                                     </div>
                                     <!-- Corps -->
@@ -177,10 +188,11 @@
                         <td>{{ myTasks.adminsTaskSend[loop.index0].getNom() }} {{	myTasks.adminsTaskSend[loop.index0].getPrenom() }}</td>
                         <td>{{ task.getNom() }}</td>
                         <!-- Icone "importance" -->
-                        <td style="text-align: center;"><i
-                                    class="fa fa-exclamation-triangle importance{{ task.getImportance() }}">
+                        <td style="text-align: center;">
+                            <i class="fa fa-exclamation-triangle importance{{ task.getImportance() }}">
                                 <div style="display: none;">{{ task.getImportance() }}</div>
-                            </i></td>
+                            </i>
+                        </td>
 
                         <!-- Icone "voir détail" -->
                         <td style="text-align: center;">
@@ -200,10 +212,10 @@
                                     </div>
                                     <!-- En tete présentant le body -->
                                     <div class="modal-header modal-before-body">
-                                        Pour : {{ nom }} {{ prenom }}
+                                        À : {{ myTasks.adminsTaskSend[loop.index0].getNom() }} {{	myTasks.adminsTaskSend[loop.index0].getPrenom() }}
                                         <div class="date_modal">
                                             <div class="date_debut">Date d'envoi : {{ task.getDatecreation()|date("d/m/Y") }}</div>
-                                            <div class="date_fin">Échéance : {{ task.getDatefin()|date("d/m/Y") }}</div>
+                                            <div class="date_fin pull-right">Échéance : {{ task.getDatefin()|date("d/m/Y") }} à {{ task.getDatefin()|date("H:i") }}</div>
                                         </div>
                                     </div>
                                     <!-- Corps -->
@@ -214,8 +226,9 @@
                                     </div>
                                     <!-- Footer -->
                                     <div class="modal-footer">
-                                        <button class="btn btn-success pull-left" data-dismiss="modal">Editer</button>
-                                        <button class="btn btn-danger pull-left" data-dismiss="modal">Supprimer</button>
+                                        <button class="btn btn-primary pull-left" onclick="requestReply()">
+                                            <span class="fa fa-reply"></span> Relancer
+                                        </button>
                                         <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
                                     </div>
                                 </div>

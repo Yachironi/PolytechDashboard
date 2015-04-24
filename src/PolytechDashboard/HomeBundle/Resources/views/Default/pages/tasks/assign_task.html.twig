@@ -46,10 +46,28 @@
                         </div>
                     </div>
                 </div>
-                <!-- Objet -->
+                <!-- Objet & importance -->
                 <div class="form-group">
-                    <label for="objet_form2">Objet</label>
-                    <input type="text" class="form-control" id="objet_form2" value="Justification d'absence" required>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form2">Objet</label>
+                            <input type="text" class="form-control" id="objet_form2" value="Justification d'absence" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label id="importance_form2">Importance</label>
+                            <div class="select_importance form-control">
+                                <a onclick="clickOnImportance('id_importance1_form2', 'id_importance2_form2', 'id_importance3_form2')" style="text-decoration: none;">
+                                    <i id="id_importance1_form2" class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a>
+                                <a onclick="clickOnImportance('id_importance2_form2', 'id_importance1_form2', 'id_importance3_form2')" style="text-decoration: none;">
+                                    <i id="id_importance2_form2" class="fa fa-exclamation-triangle importance2"></i>
+                                </a>
+                                <a onclick="clickOnImportance('id_importance3_form2', 'id_importance1_form2', 'id_importance2_form2')" style="text-decoration: none;">
+                                    <i id="id_importance3_form2" class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- Date and time range - date dÃ©but absence -->
                 <div class="form-group">
@@ -105,10 +123,28 @@
                         </div>
                     </div>
                 </div>
-                <!-- Objet -->
+                <!-- Objet & importance -->
                 <div class="form-group">
-                    <label for="objet_form3">Objet</label>
-                    <input type="text" class="form-control" id="objet_form3" value="Demande de RDV" required>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form3">Objet</label>
+                            <input type="text" class="form-control" id="objet_form3" value="Demande de RDV" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label id="importance_form3">Importance</label>
+                            <div class="select_importance form-control">
+                                <a onclick="clickOnImportance('id_importance1_form3', 'id_importance2_form3', 'id_importance3_form3')" style="text-decoration: none;">
+                                    <i id="id_importance1_form3" class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a>
+                                <a onclick="clickOnImportance('id_importance2_form3', 'id_importance1_form3', 'id_importance3_form3')" style="text-decoration: none;">
+                                    <i id="id_importance2_form3" class="fa fa-exclamation-triangle importance2"></i>
+                                </a>
+                                <a onclick="clickOnImportance('id_importance3_form3', 'id_importance1_form3', 'id_importance2_form3')" style="text-decoration: none;">
+                                    <i id="id_importance3_form3" class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- Date et heure du RDV -->
                 <div class="form-group">
@@ -187,7 +223,7 @@
                             <label for="type">Cours</label>
                             <select class="form-control" id="list_cours" onchange="updateObjetRDV('list_cours', 'list_devoirs', 'objet_form4')">
                                 <option value="" selected></option>
-                                <!-- Affichage dynamique de la liste de tous les cours auquel l'étudiant est inscrit-->
+                                <!-- Affichage dynamique de la liste de tous les cours auquel l'ï¿½tudiant est inscrit-->
 								{% for UE in myUE %}
 									{% for cours in UE.cours %}
 										<option value="{{ cours.getNomcours() }}">{{ cours.getNomcours() }}</option>		
@@ -271,10 +307,28 @@
                         </div>
                     </div>
                 </div>
-                <!-- Objet -->
+                <!-- Objet & importance -->
                 <div class="form-group">
-                    <label for="objet_form5">Objet</label>
-                    <input type="text" class="form-control" id="objet_form5" value="" required>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form5">Objet</label>
+                            <input type="text" class="form-control" id="objet_form5" value="" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label id="importance_form5">Importance</label>
+                            <div class="select_importance form-control">
+                                <a onclick="clickOnImportance('id_importance1_form5', 'id_importance2_form5', 'id_importance3_form5')" style="text-decoration: none;">
+                                    <i id="id_importance1_form5" class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a>
+                                <a onclick="clickOnImportance('id_importance2_form5', 'id_importance1_form5', 'id_importance3_form5')" style="text-decoration: none;">
+                                    <i id="id_importance2_form5" class="fa fa-exclamation-triangle importance2"></i>
+                                </a>
+                                <a onclick="clickOnImportance('id_importance3_form5', 'id_importance1_form5', 'id_importance2_form5')" style="text-decoration: none;">
+                                    <i id="id_importance3_form5" class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -320,10 +374,28 @@
                         </div>
                     </div>
                 </div>
-                <!-- Objet -->
+                <!-- Objet & importance -->
                 <div class="form-group">
-                    <label for="objet_form6">Objet</label>
-                    <input type="text" class="form-control" id="objet_form6" value="Validation du sujet de stage" required>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form6">Objet</label>
+                            <input type="text" class="form-control" id="objet_form6" value="Validation du sujet de stage" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label id="importance_form6">Importance</label>
+                            <div class="select_importance form-control">
+                                <a onclick="clickOnImportance('id_importance1_form6', 'id_importance2_form6', 'id_importance3_form6')" style="text-decoration: none;">
+                                    <i id="id_importance1_form6" class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a>
+                                <a onclick="clickOnImportance('id_importance2_form6', 'id_importance1_form6', 'id_importance3_form6')" style="text-decoration: none;">
+                                    <i id="id_importance2_form6" class="fa fa-exclamation-triangle importance2"></i>
+                                </a>
+                                <a onclick="clickOnImportance('id_importance3_form6', 'id_importance1_form6', 'id_importance2_form6')" style="text-decoration: none;">
+                                    <i id="id_importance3_form6" class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- Date stage -->
                 <div class="form-group">
@@ -380,10 +452,28 @@
                         </div>
                     </div>
                 </div>
-                <!-- Objet -->
+                <!-- Objet & importance -->
                 <div class="form-group">
-                    <label for="objet_form7">Objet</label>
-                    <input type="text" class="form-control" id="objet_form7" value="Convention de stage" required>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form7">Objet</label>
+                            <input type="text" class="form-control" id="objet_form7" value="Convention de stage" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label id="importance_form7">Importance</label>
+                            <div class="select_importance form-control">
+                                <a onclick="clickOnImportance('id_importance1_form7', 'id_importance2_form7', 'id_importance3_form7')" style="text-decoration: none;">
+                                    <i id="id_importance1_form7" class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a>
+                                <a onclick="clickOnImportance('id_importance2_form7', 'id_importance1_form7', 'id_importance3_form7')" style="text-decoration: none;">
+                                    <i id="id_importance2_form7" class="fa fa-exclamation-triangle importance2"></i>
+                                </a>
+                                <a onclick="clickOnImportance('id_importance3_form7', 'id_importance1_form7', 'id_importance2_form7')" style="text-decoration: none;">
+                                    <i id="id_importance3_form7" class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <p class="warning_convention">
@@ -436,10 +526,28 @@
                         </div>
                     </div>
                 </div>
-                <!-- Objet -->
+                <!-- Objet & importance -->
                 <div class="form-group">
-                    <label for="objet_form8">Objet</label>
-                    <input type="text" class="form-control" id="objet_form8" required>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form8">Objet</label>
+                            <input type="text" class="form-control" id="objet_form8" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label id="importance_form8">Importance</label>
+                            <div class="select_importance form-control">
+                                <a onclick="clickOnImportance('id_importance1_form8', 'id_importance2_form8', 'id_importance3_form8')" style="text-decoration: none;">
+                                    <i id="id_importance1_form8" class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a>
+                                <a onclick="clickOnImportance('id_importance2_form8', 'id_importance1_form8', 'id_importance3_form8')" style="text-decoration: none;">
+                                    <i id="id_importance2_form8" class="fa fa-exclamation-triangle importance2"></i>
+                                </a>
+                                <a onclick="clickOnImportance('id_importance3_form8', 'id_importance1_form8', 'id_importance2_form8')" style="text-decoration: none;">
+                                    <i id="id_importance3_form8" class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -486,9 +594,28 @@
                     </div>
                 </div>
                 <!-- Objet -->
+                <!-- Objet & importance -->
                 <div class="form-group">
-                    <label for="objet_form9">Objet</label>
-                    <input type="text" class="form-control" id="objet_form9" required>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form9">Objet</label>
+                            <input type="text" class="form-control" id="objet_form9" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label id="importance_form9">Importance</label>
+                            <div class="select_importance form-control">
+                                <a onclick="clickOnImportance('id_importance1_form9', 'id_importance2_form9', 'id_importance3_form9')" style="text-decoration: none;">
+                                    <i id="id_importance1_form9" class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a>
+                                <a nclick="clickOnImportance('id_importance2_form9', 'id_importance1_form9', 'id_importance3_form9')" style="text-decoration: none;">
+                                    <i id="id_importance2_form9" class="fa fa-exclamation-triangle importance2"></i>
+                                </a>
+                                <a onclick="clickOnImportance('id_importance3_form9', 'id_importance1_form9', 'id_importance2_form9')" style="text-decoration: none;">
+                                    <i id="id_importance3_form9" class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Texte</label>
