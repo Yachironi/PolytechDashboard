@@ -45,3 +45,4 @@
 #BuildPath
 .buildpath
 /vendor/
+/.settings/

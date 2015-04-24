@@ -40,7 +40,9 @@
                     <label for="destinataire">Destinataire</label>
                     <div class="input-group">
                         <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
-                        <input type="text" class="form-control" id="destinataire_form2" value="Nadia Chapiteau - nadia.chapiteau@u-psud.fr" required>
+                        <input type="text" class="form-control" id="destinataire_form2" 
+						value="{{ myAdmins.Admin.getPrenom() }} {{ myAdmins.Admin.getNom() }} - {{ myAdmins.Admin.getEmail() }}" 
+                        required>
                         <div class="input-group-addon">
                             <i class="fa fa-sort-alpha-asc"></i>
                         </div>
@@ -334,7 +336,9 @@
                     <label for="destinataire">Destinataire</label>
                     <div class="input-group">
                         <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
-                        <input type="text" class="form-control" id="destinataire_form6" value="Aurélien Max - aurelien.max@u-psud.fr" required>
+                        <input type="text" class="form-control" id="destinataire_form6" 
+                        value="{{ myAdmins.Stage.getPrenom() }} {{ myAdmins.Stage.getNom() }} - {{ myAdmins.Stage.getEmail() }}" 
+                        required>
                         <div class="input-group-addon">
                             <i class="fa fa-sort-alpha-asc"></i>
                         </div>
@@ -412,7 +416,9 @@
                     <label for="destinataire">Destinataire</label>
                     <div class="input-group">
                         <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
-                        <input type="text" class="form-control" id="destinataire_form7" value="Nadia Chapiteau - nadia.chapiteau@u-psud.fr" required>
+                        <input type="text" class="form-control" id="destinataire_form7" 
+						value="{{ myAdmins.Admin.getPrenom() }} {{ myAdmins.Admin.getNom() }} - {{ myAdmins.Admin.getEmail() }}" 
+                        required>
                         <div class="input-group-addon">
                             <i class="fa fa-sort-alpha-asc"></i>
                         </div>

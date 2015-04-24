@@ -32,6 +32,9 @@ class LoginController extends Controller {
 			$myTasks = $tacheController->indexAction ( $user, $this );
 			$programmeController = $this->get ( 'coursController' );
 			$myUE = $programmeController->indexAction ( $user, $this );
+			$gestionnaireController = $this->get ( 'gestionnaireController' );
+			$myAdmins = $gestionnaireController->indexAction ( 21303181, $this );
+			
 			if ($user) {
 				if ($remember == 'remember-me') {
 					$login = new Login ();
@@ -45,7 +48,8 @@ class LoginController extends Controller {
 						'id' => $user,
 						'myGrades' => $myGrades,
 						'myTasks' => $myTasks,
-						'myUE' => $myUE 
+						'myUE' => $myUE,
+						'myAdmins' => $myAdmins 
 				) );
 			} else {
 				return $this->render ( 'PolytechDashboardHomeBundle:Default:login.html.twig', array (

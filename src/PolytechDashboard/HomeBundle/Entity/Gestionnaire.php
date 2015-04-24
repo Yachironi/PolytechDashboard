@@ -24,13 +24,6 @@ class Gestionnaire
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="text", nullable=true)
-     */
-    private $type;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="nom", type="text", nullable=true)
      */
     private $nom;
@@ -59,29 +52,6 @@ class Gestionnaire
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     * @return Gestionnaire
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string 
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /**

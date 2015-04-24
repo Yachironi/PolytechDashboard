@@ -11,3 +11,6 @@ services:
         
     coursController:
         class: PolytechDashboard\HomeBundle\Controller\CoursController
+        
+    gestionnaireController:
+        class: PolytechDashboard\HomeBundle\Controller\GestionnaireController
