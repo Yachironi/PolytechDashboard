@@ -88,6 +88,7 @@
 <script src="{{ asset('plugins/knob/jquery.knob.js')}}" type="text/javascript"></script>
 <!-- daterangepicker -->
 <script src="{{ asset('plugins/daterangepicker/daterangepicker.js')}}" type="text/javascript"></script>
+<script src="{{ asset('plugins/daterangepicker/daterangepicker2.js')}}" type="text/javascript"></script>
 <!-- datepicker -->
 <script src="{{ asset('plugins/datepicker/bootstrap-datepicker.js')}}" type="text/javascript"></script>
 <!-- Bootstrap time Picker -->
@@ -144,16 +145,63 @@
         });
 
 
-        $('#date_rdv').datepicker({format : 'dd/mm/yyyy'});
 
-        $('#echeance_form2').datepicker({format : 'dd/mm/yyyy'});
-        $('#echeance_form3').datepicker({format : 'dd/mm/yyyy'});
-        $('#echeance_form4').datepicker({format : 'dd/mm/yyyy'});
-        $('#echeance_form5').datepicker({format : 'dd/mm/yyyy'});
-        $('#echeance_form6').datepicker({format : 'dd/mm/yyyy'});
-        $('#echeance_form7').datepicker({format : 'dd/mm/yyyy'});
-        $('#echeance_form8').datepicker({format : 'dd/mm/yyyy'});
-        $('#echeance_form9').datepicker({format : 'dd/mm/yyyy'});
+
+        $('#date_rdv').daterangepicker2({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
+
+        $('#echeance_form2').daterangepicker2({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
+        $('#echeance_form3').daterangepicker2({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
+        $('#echeance_form4').daterangepicker2({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
+        $('#echeance_form5').daterangepicker2({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
+        $('#echeance_form6').daterangepicker2({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
+        $('#echeance_form7').daterangepicker2({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
+        $('#echeance_form8').daterangepicker2({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
+        $('#echeance_form9').daterangepicker2({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
 
     });
 </script>
