@@ -193,3 +193,34 @@ function changeModal(id_espace, id_nom_espace_modal, id_button_modal){
 function suppressionEspace(ID){
     alert(ID);
 }
+
+/* Lorsque l'étudiant attribue une tache a qqn et qu'il selectionne l'importance */
+function clickOnImportance(id_importance_selected, other_id_importance_1, other_id_importance_2){
+    var importance_selected = document.getElementById(id_importance_selected);
+    var name_importance_selected = id_importance_selected.substring(3, 14);
+    // il faut le passer en selected
+    if(importance_selected.classList.contains(name_importance_selected)){
+        importance_selected.classList.remove(name_importance_selected);
+        importance_selected.classList.add(name_importance_selected + "-selected");
+
+        // On enleve le selected des autres si y'a
+        var importance_other1 = document.getElementById(other_id_importance_1);
+        var importance_other2 = document.getElementById(other_id_importance_2);
+        var name_importance_other1 = other_id_importance_1.substring(3, 14);
+        var name_importance_other2 = other_id_importance_2.substring(3, 14);
+        if(importance_other1.classList.contains(name_importance_other1 + "-selected")){
+            importance_other1.classList.remove(name_importance_other1 + "-selected");
+            importance_other1.classList.add(name_importance_other1);
+        }
+        else if(importance_other2.classList.contains(name_importance_other2 + "-selected")){
+            importance_other2.classList.remove(name_importance_other2 + "-selected");
+            importance_other2.classList.add(name_importance_other2);
+        }
+    }
+    // il faut enlever le selected
+    else{
+        importance_selected.classList.remove(name_importance_selected + "-selected");
+        importance_selected.classList.add(name_importance_selected);
+    }
+
+}
