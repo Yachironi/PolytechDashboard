@@ -14,10 +14,10 @@ class CoursController extends Controller {
 	public function indexAction($id, $controller) {
 		
 		/* Formation l'etudiant */
-		$formation = $controller->getDoctrine()->getRepository ( 'PolytechDashboardHomeBundle:Etudiantformation' )->findByIdetudiant ( $id );
+		$formation = $controller->getDoctrine()->getRepository ( 'PolytechDashboardHomeBundle:Etudiantformation' )->findOneByIdetudiant ( $id );
 		$myUE = [ ];
 		/* liste de notes de l'etudiant */
-		$tabUE = $controller->getDoctrine()->getRepository ( 'PolytechDashboardHomeBundle:UE' )->findByIdformation($formation[0]->getIdformation());
+		$tabUE = $controller->getDoctrine()->getRepository ( 'PolytechDashboardHomeBundle:UE' )->findByIdformation($formation->getIdformation());
 		if (! $tabUE) {
 			throw $this->createNotFoundException ( 'Aucun cours trouvé pour cet étudiant' );
 		}

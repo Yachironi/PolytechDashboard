@@ -5,12 +5,12 @@ namespace PolytechDashboard\HomeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Gestionnaireformation
+ * Gestionnairestage
  *
- * @ORM\Table(name="GestionnaireFormation")
+ * @ORM\Table(name="GestionnaireStage")
  * @ORM\Entity
  */
-class GestionnaireFormation
+class GestionnaireStage
 {
     /**
      * @var integer

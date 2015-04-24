@@ -13,6 +13,8 @@ class DefaultController extends Controller {
 		$myTasks = $tacheController->indexAction ( 21303181, $this );
 		$programmeController = $this->get ( 'coursController' );
 		$myUE = $programmeController->indexAction ( 21303181, $this );
+		$gestionnaireController = $this->get ( 'gestionnaireController' );
+		$myAdmins = $gestionnaireController->indexAction ( 21303181, $this );
 		
 		return $this->render ( 'PolytechDashboardHomeBundle:Default:index.html.twig', array (
 				'prenom' => 'Guillaume',
@@ -20,7 +22,8 @@ class DefaultController extends Controller {
 				'id' => '21303181',
 				'myGrades' => $myGrades,
 				'myTasks' => $myTasks,
-				'myUE' => $myUE 
+				'myUE' => $myUE,
+				'myAdmins' => $myAdmins 
 		) );
 		
 		// return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig', array('name' => $name));
