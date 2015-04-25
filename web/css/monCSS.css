@@ -276,3 +276,35 @@ a:hover > .fa-trash{
 .select_importance > a  .importance3{
     color: rgba(255, 0, 0, 0.4);
 }
+
+/* navbar "mon espace" */
+.navbar-perso {
+    background-color: #FFF;
+}
+
+.navbar-toggle > span{
+    background-color: #009FFA;
+}
+
+.dropdown-menu > ul > li > a,
+.navbar-perso > ul > li > a{
+    color:#337AB7;
+}
+.dropdown-menu > ul > li > a:hover,
+.navbar-perso > ul > li > a:hover,
+#id_navbar_onglets > li.active > a:hover{
+    color:#00496E;
+}
+
+#id_navbar_onglets > li.active{
+    background-color: #009FFA;
+    /*
+    background-color: #ffffff;
+    border-top: 3px solid #009FFA;
+    */
+}
+#id_navbar_onglets > li.active > a {
+    color: #ffffff;
+}
+
+

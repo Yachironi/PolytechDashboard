@@ -5,6 +5,7 @@
     <h1>
         Mon espace
     </h1>
+    <!--
     <ul>
         <li>{{ cours.id }}</li>
         <li>{{ cours.nomCours }}</li>
@@ -12,6 +13,7 @@
         <li>{{ cours.coefficient }}</li>
         <li>{{ cours.idUE }}</li>
     </ul>
+    -->
 </section>
 
 <!-- Content -->
@@ -20,10 +22,10 @@
     <div class="nav-tabs-custom">
         <!-- TODO : a charger dans la BDD + attribuer grace a la BDD la valeur de href pour
             l'anglais est "anglais" par exemple, pareil pr tous les autres -->
-        <nav class="navbar navbar-default nav-tabs-custom">
+        <nav class="navbar navbar-perso" style="border-top: 2px solid #009FFA;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;border-left: none;border-right: none;border-bottom: 1px solid #EEEEEE;">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" style="border-color: #009FFA;">
                         <span class="sr-only">Toggle navigation</span>  <!-- Pas necessaire j'ai l'impression -->
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -33,7 +35,7 @@
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse navbar-perso" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav" id="id_navbar_onglets">
                         <li class="active">
                             <a href="#Anglais" data-toggle="tab">Anglais
@@ -63,9 +65,10 @@
                                 <li><a href="#tab_14" data-toggle="tab">P.S.</a></li>
                                 <li><a href="#tab_15" data-toggle="tab">Base de données</a></li>
                                 <li><a href="#tab_16" data-toggle="tab">Réseaux avancés</a></li>
+                                <!-- Bouton pour s'inscrire a un espace
                                 <li class="divider"></li>
-                                <!-- Bouton pour s'inscrire a un espace -->
                                 <li><a href="#">S'inscrire à un espace</a></li>
+                                -->
                             </ul>
                         </li>
                     </ul>
@@ -206,24 +209,3 @@
         </div>
     </div>
 </section>
-
-<button onclick="f('id_navbar_onglets')">Get Hauteur</button>
-<script type="text/javascript">
-    function getHauteur(ID){
-        var div_navbar = document.getElementById(ID);
-        var hauteur = -1;
-        if(div_navbar.offsetHeight){
-            hauteur=div_navbar.offsetHeight;
-        }
-        else if(div_navbar.style.pixelHeight){
-            hauteur=div_navbar.style.pixelHeight;
-        }
-        return hauteur;
-    }
-
-    function f(ID){
-        var hauteur = getHauteur(ID);
-        alert(hauteur);
-    }
-
-</script>

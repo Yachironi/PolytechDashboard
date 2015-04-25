@@ -42,7 +42,7 @@
                                 <!-- MENU FOOTER -->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Mon profil</a>
+                                        <a class="btn btn-default btn-flat" href="#modal_profil" data-toggle="modal">Mon profil</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="{{path('polytech_dashboard_home_logout')}}" class="btn btn-default btn-flat">Déconnexion</a>
@@ -54,6 +54,29 @@
                 </div>
             </nav>
         </header>
+
+        <!-- Debut modal view -->
+        <div class="modal fade" id="modal_profil">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- En tete -->
+                    <div class="modal-header modal-header-task">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <div class="modal-title">Mon profil</div>
+                    </div>
+
+                    <!-- Corps -->
+                    <div class="modal-body">
+                        Formulaire
+                    </div>
+                    <!-- Footer -->
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-dismiss="modal">Enregistrer</button>
+                        <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
