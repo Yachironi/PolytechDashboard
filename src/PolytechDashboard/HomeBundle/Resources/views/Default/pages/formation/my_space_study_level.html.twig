@@ -18,41 +18,64 @@
 <section class="content">
     <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
-        <ul class="nav nav-tabs">
-            <!-- TODO : a charger dans la BDD + attribuer grace a la BDD la valeur de href pour
-                l'anglais est "anglais" par exemple, pareil pr tous les autres -->
-            <li class="active"><a href="#Anglais" data-toggle="tab">Anglais</a></li>
-            <li><a href="#Espagnol" data-toggle="tab">Espagnol</a></li>
-            <li><a href="#tab_3" data-toggle="tab">GP</a></li>
-            <li><a href="#tab_4" data-toggle="tab">ME</a></li>
-            <li><a href="#tab_5" data-toggle="tab">Droit</a></li>
-            <li><a href="#tab_6" data-toggle="tab">Gestion d'entreprise</a></li>
-            <li><a href="#tab_7" data-toggle="tab">PPP1</a></li>
-            <li><a href="#tab_8" data-toggle="tab">CO</a></li>
-            <li><a href="#tab_9" data-toggle="tab">C++</a></li>
-            <li><a href="#tab_10" data-toggle="tab">Langages formels et automates</a></li>
-            <li><a href="#tab_11" data-toggle="tab">Projet compilation</a></li>
-            <li><a href="#tab_12" data-toggle="tab">Compilation</a></li>
-            <li><a href="#tab_13" data-toggle="tab">P.N.E.</a></li>
-            <li><a href="#tab_14" data-toggle="tab">P.S.</a></li>
-            <li><a href="#tab_15" data-toggle="tab">Base de données</a></li>
-            <li><a href="#tab_16" data-toggle="tab">Réseaux avancés</a></li>
+        <!-- TODO : a charger dans la BDD + attribuer grace a la BDD la valeur de href pour
+            l'anglais est "anglais" par exemple, pareil pr tous les autres -->
+        <nav class="navbar navbar-default nav-tabs-custom">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>  <!-- Pas necessaire j'ai l'impression -->
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Mon espace</a>
+                </div>
 
-            <!-- Dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    Dropdown <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                    <li role="presentation" class="divider"></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">S'inscrire à un espace</a></li>
-                </ul>
-            </li>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav" id="id_navbar_onglets">
+                        <li class="active">
+                            <a href="#Anglais" data-toggle="tab">Anglais
+                                <span class="sr-only">(current)</span> <!-- Pas necessaire j'ai l'impression -->
+                            </a>
+                        </li>
+                        <li><a href="#Espagnol" data-toggle="tab">Espagnol</a></li>
+                        <li><a href="#tab_3" data-toggle="tab">GP</a></li>
+                        <li><a href="#tab_4" data-toggle="tab">ME</a></li>
+                        <li><a href="#tab_5" data-toggle="tab">Droit</a></li>
+                        <li><a href="#tab_6" data-toggle="tab">Gestion d'entreprise</a></li>
+                        <li><a href="#tab_7" data-toggle="tab">PPP1</a></li>
+                        <li><a href="#tab_8" data-toggle="tab">CO</a></li>
+                        <li><a href="#tab_9" data-toggle="tab">C++</a></li>
 
-        </ul>
+                        <!-- Dropdown -->
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Autres <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- Le reste des espaces -->
+                                <li><a href="#tab_10" data-toggle="tab">Langages formels et automates</a></li>
+                                <li><a href="#tab_11" data-toggle="tab">Projet compilation</a></li>
+                                <li><a href="#tab_12" data-toggle="tab">Compilation</a></li>
+                                <li><a href="#tab_13" data-toggle="tab">P.N.E.</a></li>
+                                <li><a href="#tab_14" data-toggle="tab">P.S.</a></li>
+                                <li><a href="#tab_15" data-toggle="tab">Base de données</a></li>
+                                <li><a href="#tab_16" data-toggle="tab">Réseaux avancés</a></li>
+                                <li class="divider"></li>
+                                <!-- Bouton pour s'inscrire a un espace -->
+                                <li><a href="#">S'inscrire à un espace</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">S'inscrire à un espace</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
         <div class="tab-content">
             <!-- Contenu anglais -->
             <div class="tab-pane active" id="Anglais">
@@ -101,6 +124,17 @@
                             <ul class="treeview-menu">
                                 <a href="#"><i class="fa fa-paperclip"></i> Exercise_ethics.pdf</a>
                                 <a href="#"><i class="fa fa-paperclip"></i> Exercise_negotiation.pdf</a>
+                            </ul>
+                        </li>
+                        <!-- Divers -->
+                        <li class="treeview">
+                            <a href="#" id="">
+                                <span>Divers</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <!-- Contenu -->
+                            <ul class="treeview-menu">
+                                <a href="#"><i class="fa fa-paperclip"></i> Planning_salle.pdf</a>
                             </ul>
                         </li>
                     </ul>
@@ -171,4 +205,25 @@
             </div>
         </div>
     </div>
-</secbion>
+</section>
+
+<button onclick="f('id_navbar_onglets')">Get Hauteur</button>
+<script type="text/javascript">
+    function getHauteur(ID){
+        var div_navbar = document.getElementById(ID);
+        var hauteur = -1;
+        if(div_navbar.offsetHeight){
+            hauteur=div_navbar.offsetHeight;
+        }
+        else if(div_navbar.style.pixelHeight){
+            hauteur=div_navbar.style.pixelHeight;
+        }
+        return hauteur;
+    }
+
+    function f(ID){
+        var hauteur = getHauteur(ID);
+        alert(hauteur);
+    }
+
+</script>
