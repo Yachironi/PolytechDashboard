@@ -15,24 +15,24 @@ class GestionnaireController extends Controller {
 		
 		/* Gestionnaires associés a l'etudiant */
 		$GestionnaireAdmin = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireAdmin' )->findOneByIdformation ( $formation->getIdformation () );
-		if($GestionnaireAdmin != null){
+		if ($GestionnaireAdmin != null) {
 			$admin = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $GestionnaireAdmin->getIdgestionnaire () );
-		}else{
-			print_r("GestionnaireAdmin manquant en BDD pour la formation suivante : "+$formation);
+		} else {
+			print_r ( "GestionnaireAdmin manquant en BDD pour la formation suivante : " + $formation );
 		}
 		
 		$GestionnaireStage = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireStage' )->findOneByIdformation ( $formation->getIdformation () );
-		if($GestionnaireStage != null){		
+		if ($GestionnaireStage != null) {
 			$stage = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $GestionnaireStage->getIdgestionnaire () );
-		}else{
-			print_r("GestionnaireStage manquant en BDD pour la formation suivante : "+$formation);
+		} else {
+			print_r ( "GestionnaireStage manquant en BDD pour la formation suivante : " + $formation );
 		}
 		
 		$GestionnaireFormation = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireFormation' )->findOneByIdformation ( $formation->getIdformation () );
-		if($GestionnaireFormation != null){		
+		if ($GestionnaireFormation != null) {
 			$Gestionnairef = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $GestionnaireFormation->getIdgestionnaire () );
-		}else{
-			print_r("GestionnaireFormation manquant en BDD pour la formation suivante : "+$formation);
+		} else {
+			print_r ( "GestionnaireFormation manquant en BDD pour la formation suivante : " + $formation );
 		}
 		$cours = [ ];
 		
@@ -43,20 +43,18 @@ class GestionnaireController extends Controller {
 		}
 		/* nombre de cours pour l'etudiant */
 		$maxCours = sizeof ( $tabCours );
-
-		//print_r("Nombre de cours : ".$maxCours."\n");
+		
+		// print_r("Nombre de cours : ".$maxCours."\n");
 		/* Boucle pour récupérer les gestionnaires */
 		for($i = 0; $i < $maxCours; $i ++) {
-
-			$tmp = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireCours' )->findOneByIdcours ( $tabCours [$i]->getId () );
-			$gestionnaireC = new Gestionnaire();
-				
-			if($tmp != null){
-				/* gestionnaire de cours trouvé*/
-				$gestionnaireC = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $tmp->getIdgestionnaire () );
-
-			}
 			
+			$tmp = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireCours' )->findOneByIdcours ( $tabCours [$i]->getId () );
+			$gestionnaireC = new Gestionnaire ();
+			
+			if ($tmp != null) {
+				/* gestionnaire de cours trouvé */
+				$gestionnaireC = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $tmp->getIdgestionnaire () );
+			}
 			
 			array_push ( $cours, $gestionnaireC );
 			unset ( $gestionnaireC );
