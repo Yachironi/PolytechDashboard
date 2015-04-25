@@ -13,7 +13,7 @@ class GestionnaireController extends Controller {
 		$formation = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Etudiantformation' )->findOneByIdetudiant ( $id );
 		$myGestionnaires = [ ];
 		
-		/* Gestionnaires associés a l'etudiant */
+		/* Gestionnaires associï¿½s a l'etudiant */
 		$GestionnaireAdmin = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireAdmin' )->findOneByIdformation ( $formation->getIdformation () );
 		if ($GestionnaireAdmin != null) {
 			$admin = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $GestionnaireAdmin->getIdgestionnaire () );
@@ -36,23 +36,23 @@ class GestionnaireController extends Controller {
 		}
 		$cours = [ ];
 		
-		/* Liste des Gestionnaires de cours associés a l'etudiant */
+		/* Liste des Gestionnaires de cours associï¿½s a l'etudiant */
 		$tabCours = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Cours' )->findByIdformation ( $formation->getIdformation () );
 		if (! $tabCours) {
-			throw $this->createNotFoundException ( 'Aucun cours trouvé pour cet étudiant' );
+			throw $this->createNotFoundException ( 'Aucun cours trouvï¿½ pour cet ï¿½tudiant' );
 		}
 		/* nombre de cours pour l'etudiant */
 		$maxCours = sizeof ( $tabCours );
 		
 		// print_r("Nombre de cours : ".$maxCours."\n");
-		/* Boucle pour récupérer les gestionnaires */
+		/* Boucle pour rï¿½cupï¿½rer les gestionnaires */
 		for($i = 0; $i < $maxCours; $i ++) {
 			
 			$tmp = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireCours' )->findOneByIdcours ( $tabCours [$i]->getId () );
 			$gestionnaireC = new Gestionnaire ();
 			
 			if ($tmp != null) {
-				/* gestionnaire de cours trouvé */
+				/* gestionnaire de cours trouvï¿½ */
 				$gestionnaireC = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $tmp->getIdgestionnaire () );
 			}
 			
