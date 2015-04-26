@@ -51,6 +51,8 @@ function activeSemestre(ID){
 
 /* Permet de faire un affichage dynamique des formulaires lorsqu'on veut attribuer une tache */
 function afficheForm(ID){
+    $(".token-input-dropdown-facebook").css("width", $('#list_form').width()-13);
+
     list_form = new Array('form1', 'form2', 'form3', 'form4', 'form5', 'form6', 'form7', 'form8', 'form9');
 
     var indice_form_a_affiche = document.getElementById(ID).selectedIndex;
