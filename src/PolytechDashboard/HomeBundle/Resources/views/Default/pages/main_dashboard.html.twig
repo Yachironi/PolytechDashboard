@@ -23,11 +23,38 @@
                   Plus d'info <i class="fa fa-arrow-circle-right"></i>
                 </a>
               </div>
-              <!-- small box -->
+              
+              <!--  Taches a venir-->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>4</h3>
-                  <p>Taches a venir</p>
+                  <h3>
+                   <!-- Calcul du nombre de taches a venir -->
+                   {% set today = "now"|date("Y-m-d-H-i") %}
+				   {% set today_5days = "now+5days"|date("Y-m-d-H-i") %}
+				   {% set nbTacheAVenir = 0  %}
+				   {% for task in myTasks.tasksReceived %}
+			
+					  {% if (task.getDatefin()|date("Y-m-d-H-i") <= today_5days ) and (task.getDatefin()|date("Y-m-d-H-i") >= today)%}
+						{% set nbTacheAVenir = nbTacheAVenir + 1  %}
+					  {% endif %}
+					  
+				   {%endfor%}
+				   
+				   {% for task in myTasks.tasksSend %}
+			
+					  {% if (task.getDatefin()|date("Y-m-d-H-i") <= today_5days ) and (task.getDatefin()|date("Y-m-d-H-i") >= today)%}
+						{% set nbTacheAVenir = nbTacheAVenir + 1  %}
+					  {% endif %}
+					  
+				   {%endfor%}
+                   {{ nbTacheAVenir }}
+                  </h3>
+                  <p>{% if nbTacheAVenir < 2 %}
+                  		Tache a venir
+                  	 {% else %}
+                  	    Taches a venir
+                  	 {%endif%}
+                  </p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-clock-o"></i>
@@ -36,11 +63,36 @@
                   Plus d'info <i class="fa fa-arrow-circle-right"></i>
                 </a>
               </div>
-              <!-- small box -->
+              
+              <!-- Taches importantes -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3>5</h3>
-                  <p>Taches importantes</p>
+                   <h3>
+                   <!-- Calcul du nombre de taches importantes -->
+				   {% set nbTacheImportante = 0  %}
+				   {% for task in myTasks.tasksReceived %}
+			
+					  {% if (task.getImportance() == 3)%}
+						{% set nbTacheImportante = nbTacheImportante + 1  %}
+					  {% endif %}
+					  
+				   {%endfor%}
+				   
+				   {% for task in myTasks.tasksSend %}
+			
+					  {% if (task.getImportance() == 3)%}
+						{% set nbTacheImportante = nbTacheImportante + 1  %}
+					  {% endif %}
+					  
+				   {%endfor%}
+                   {{ nbTacheImportante }}
+                  </h3>
+                  <p>{% if nbTacheImportante < 2 %}
+                  		Tache importante
+                  	 {% else %}
+                  	    Taches importantes
+                  	 {%endif%}
+                  </p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-exclamation-circle"></i>
