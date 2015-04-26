@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller {
 	public function indexAction() {
-		/* appel du generateur de données du controlleur */
+		/* appel du generateur de donnï¿½es du controlleur */
 		$noteController = $this->get ( 'noteController' );
 		$myGrades = $noteController->indexAction ( 21303181, $this );
 		$tacheController = $this->get ( 'tacheController' );

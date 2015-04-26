@@ -1,4 +1,19 @@
 <!-- La partie JavaScript de cette partie se situe dans monJS.js (fonction afficheForm) -->
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+        $(document).ready(function() {
+            $("#destinataire_form2,#destinataire_form3,#destinataire_form4,#destinataire_form5,#destinataire_form6,#destinataire_form7,#destinataire_form8,#destinataire_form9").tokenInput("/contactList", {
+                theme: "facebook",
+                propertyToSearch: "nom",
+                resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
+                tokenFormatter: function(item) { return "<li><p>" + item.email+ "</p></li>" },
+                preventDuplicates: true,
+                tokenValue: "email"
+            });
+        });
+
+    });
+</script>
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -40,9 +55,10 @@
                     <label for="destinataire">Destinataire</label>
                     <div class="input-group">
                         <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
-                        <input type="text" class="form-control" id="destinataire_form2" 
-						value="{{ myAdmins.Admin.getPrenom() }} {{ myAdmins.Admin.getNom() }} - {{ myAdmins.Admin.getEmail() }}" 
-                        required>
+                        <!--<input type="text" class="form-control" id="destinataire_form2"
+                               value="{{ myAdmins.Admin.getPrenom() }} {{ myAdmins.Admin.getNom() }} - {{ myAdmins.Admin.getEmail() }}"
+                               required>-->
+                        <input type="text" class="form-control" id="destinataire_form2" required>
                         <div class="input-group-addon">
                             <i class="fa fa-sort-alpha-asc"></i>
                         </div>
