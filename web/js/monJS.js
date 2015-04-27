@@ -162,21 +162,21 @@ function updateInscription(inscription, destinataire, objet){
     var value_inscription = select_inscription.options[select_inscription.selectedIndex].value;
     if(value_inscription != ""){
         if(value_inscription == "Polytech"){
-            document.getElementById(destinataire).value = "Dominique Beau - dominique.beau@u-psud.fr";
+            document.getElementById(destinataire).value = "Dominique Beau - dominique.beau@u-psud.fr (a chercher dans BD)";
             document.getElementById(objet).value = "[" + value_inscription + "] Demande de réinscription";
         }
         else{
             if(value_inscription == "TOEIC"){
-                document.getElementById(destinataire).value = "Chantal Escudie - chantal.escudie@u-psud.fr";
+                document.getElementById(destinataire).value = "Chantal Escudie - chantal.escudie@u-psud.fr (a chercher dans BD)";
             }
             else if(value_inscription == "M2R"){
-                document.getElementById(destinataire).value = "Emmanuelle Frenoux - emmanuelle.frenoux@u-psud.fr";
+                document.getElementById(destinataire).value = "Emmanuelle Frenoux - emmanuelle.frenoux@u-psud.fr (a chercher dans BD)";
             }
             else if(value_inscription == "Sport"){
-                document.getElementById(destinataire).value = "Marcelo Bielsa - marcelo.bielsa@u-psud.fr";
+                document.getElementById(destinataire).value = "Marcelo Bielsa - marcelo.bielsa@u-psud.fr (a chercher dans BD)";
             }
             else if(value_inscription == "Bourse"){
-                document.getElementById(destinataire).value = "Nadia Chapiteau - nadia.chapiteau@u-psud.fr";
+                document.getElementById(destinataire).value = "Nadia Chapiteau - nadia.chapiteau@u-psud.fr (a chercher dans BD)";
             }
             document.getElementById(objet).value = "[" + value_inscription + "] Demande d'inscription";
         }
