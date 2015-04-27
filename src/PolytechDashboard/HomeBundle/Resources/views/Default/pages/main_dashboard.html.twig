@@ -211,37 +211,81 @@
 <!-- Content -->
 <section class="content">
     <p>
-       <ul class="timeline">
-
-    <!-- timeline time label -->
-    <li class="time-label">
+    <ul class="timeline">
+    {% set taskDone = [] %}
+    {% for task in myTasks.tasksReceived%}
+      {% if task in taskDone %}
+      {% else %}
+      <!-- timeline time label -->
+      <li class="time-label">
         <span class="bg-red">
-            10 Feb. 2014
-        </span>
-    </li>
-    <!-- /.timeline-label -->
+            {{ task.getDateFin()|date("d") }}
+            	{% if task.getDateFin()|date("m") == "01" %}
+            		Janvier
+            	{% elseif task.getDateFin()|date("m") == "02" %}
+            		Fevrier
+            	{% elseif task.getDateFin()|date("m") ==  "03" %}
+            		Mars
+            	{% elseif task.getDateFin()|date("m") ==  "04" %}
+            		Avril
+            	{% elseif task.getDateFin()|date("m") ==  "05" %}
+            		Mai
+            	{% elseif task.getDateFin()|date("m") ==  "06" %}
+            		Juin
+            	{% elseif task.getDateFin()|date("m") ==  "07" %}
+            		Juillet
+            	{% elseif task.getDateFin()|date("m") ==  "08" %}
+            		Aout
+            	{% elseif task.getDateFin()|date("m") ==  "09" %}
+            		Septembre
+            	{% elseif task.getDateFin()|date("m") ==  "10" %}
+            		Octobre
+            	{% elseif task.getDateFin()|date("m") ==  "11" %}
+            		Novembre
+            	{% elseif task.getDateFin()|date("m") ==  "12" %}
+            		Decembre
+				{%endif%}
+             {{ task.getDateFin()|date("Y") }}
+          </span>
+       </li>
+       <!-- /.timeline-label -->
+       {% for task2 in myTasks.tasksReceived if task.getDateFin()|date("Y-m-d") == task2.getDateFin()|date("Y-m-d") %}
+         <!-- timeline item -->
+         <li>
+         <!-- timeline icon -->
+         <i class="fa fa-file-text bg-green"></i>
+         <div class="timeline-item">
+            <span class="time"><i class="fa fa-clock-o"></i> jusqu'a {{ task2.getDateFin()|date("H-i") }} h</span>
 
-    <!-- timeline item -->
-    <li>
-        <!-- timeline icon -->
-        <i class="fa fa-envelope bg-blue"></i>
-        <div class="timeline-item">
-            <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-
-            <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>
+            <h3 class="timeline-header"><a href="#">{{ task2.getNom() }} </a> 
+            
+            de {% if task2.getIdgestionnaire() == NULL %} 
+                  Moi-meme 
+               {% else %}
+                 {% for admin in myTasks.admins %}
+                 	{% if admin.id == task2.getIdgestionnaire() %}
+                 		{{ admin.prenom}} {{ admin.nom }}
+                 	{% endif %}
+                 {% endfor %}
+               {% endif %}
+            </h3>
 
             <div class="timeline-body">
-                ...
-                Content goes here
+                {{ task2.getStructure() }} 
             </div>
 
             <div class='timeline-footer'>
-                <a class="btn btn-primary btn-xs">...</a>
+                <a class="btn btn-primary btn-xs"> Plus d'info </a>
             </div>
-        </div>
-    </li>
-    <!-- END timeline item -->
+          </div>
+         </li>
+         <!-- END timeline item -->
+         {% set taskDone = taskDone|merge([task2]) %}
+       
+         {% endfor %}
+       {%endif%}
+	{% endfor %}
 
-</ul>
+    </ul>
     </p>
 </section>
