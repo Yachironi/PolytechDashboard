@@ -226,3 +226,32 @@ function clickOnImportance(id_importance_selected, other_id_importance_1, other_
     }
 
 }
+
+/* Permet de faire un changement d'onglet lorsque l'etudiant clique sur un onglet qui est dans le dropdown */
+function changeOnglet(onglet, last_onglet){
+    // echange contenu html
+    var contenu_onglet = document.getElementById(onglet).innerHTML;
+    var contenu_lastOnglet = document.getElementById(last_onglet).innerHTML;
+    document.getElementById(onglet).innerHTML = contenu_lastOnglet;
+    document.getElementById(last_onglet).innerHTML = contenu_onglet;
+
+    // ajout/suppression des onclick
+    document.getElementById(last_onglet).getElementsByTagName("a")[0].setAttribute('onclick', '');
+    var var_onglet = "'" + onglet + "'";
+    var var_lastOnglet = "'" + last_onglet + "'";
+    document.getElementById(onglet).getElementsByTagName("a")[0].setAttribute('onclick', 'changeOnglet(' + var_onglet + ',' + var_lastOnglet + ')');
+
+    // ajout/suppresion de la classe active
+    var ul = document.getElementById('ul_navbar_onglets').getElementsByTagName("li");
+    var i=0;
+    var size = ul.length;
+    while(i<size){
+        if(ul.item(i).classList.contains("active")){
+            ul.item(i).classList.remove("active");
+            i=size;
+        }
+        i++;
+    }
+    document.getElementById(last_onglet).classList.add("active");
+
+}

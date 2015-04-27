@@ -279,7 +279,7 @@ a:hover > .fa-trash{
 
 /* navbar "mon espace" */
 .navbar-perso {
-    background-color: #FFF;
+    background-color: #ffffff;
 }
 
 .navbar-toggle > span{
@@ -296,14 +296,10 @@ a:hover > .fa-trash{
     color:#00496E;
 }
 
-#id_navbar_onglets > li.active{
+.navbar-nav > li.active{
     background-color: #009FFA;
-    /*
-    background-color: #ffffff;
-    border-top: 3px solid #009FFA;
-    */
 }
-#id_navbar_onglets > li.active > a {
+.navbar-nav > li.active > a {
     color: #ffffff;
 }
 

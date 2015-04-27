@@ -36,35 +36,62 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-perso" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav" id="id_navbar_onglets">
+                    <ul class="nav navbar-nav" id="ul_navbar_onglets">
                         <li class="active">
-                            <a href="#Anglais" data-toggle="tab">Anglais
-                                <span class="sr-only">(current)</span> <!-- Pas necessaire j'ai l'impression -->
+                            <a id="navbar_onglet1" href="#Anglais" data-toggle="tab">Anglais
+                                <!-- <span class="sr-only">(current)</span>  Pas necessaire j'ai l'impression -->
                             </a>
                         </li>
-                        <li><a href="#Espagnol" data-toggle="tab">Espagnol</a></li>
-                        <li><a href="#tab_3" data-toggle="tab">GP</a></li>
-                        <li><a href="#tab_4" data-toggle="tab">ME</a></li>
-                        <li><a href="#tab_5" data-toggle="tab">Droit</a></li>
-                        <li><a href="#tab_6" data-toggle="tab">Gestion d'entreprise</a></li>
-                        <li><a href="#tab_7" data-toggle="tab">PPP1</a></li>
-                        <li><a href="#tab_8" data-toggle="tab">CO</a></li>
-                        <li><a href="#tab_9" data-toggle="tab">C++</a></li>
+                        <li><a id="navbar_onglet2" href="#Espagnol" data-toggle="tab">Espagnol</a></li>
+                        <li><a id="navbar_onglet3" href="#tab_3" data-toggle="tab">GP</a></li>
+                        <li><a id="navbar_onglet4" href="#tab_4" data-toggle="tab">ME</a></li>
+                        <li><a id="navbar_onglet5" href="#tab_5" data-toggle="tab">Droit</a></li>
+                        <li><a id="navbar_onglet6" href="#tab_6" data-toggle="tab">Gestion d'entreprise</a></li>
+                        <li><a id="navbar_onglet7" href="#tab_7" data-toggle="tab">PPP1</a></li>
+                        <li><a id="navbar_onglet8" href="#tab_8" data-toggle="tab">CO</a></li>
+                        <li id="last_onglet"><a id="navbar_onglet9" href="#tab_9" data-toggle="tab">C++</a></li>
 
-                        <!-- Dropdown -->
+                        <!-- Dropdown ==> a afficher si il y a plus de 9 onglets -->
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 Autres <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- Le reste des espaces -->
-                                <li><a href="#tab_10" data-toggle="tab">Langages formels et automates</a></li>
-                                <li><a href="#tab_11" data-toggle="tab">Projet compilation</a></li>
-                                <li><a href="#tab_12" data-toggle="tab">Compilation</a></li>
-                                <li><a href="#tab_13" data-toggle="tab">P.N.E.</a></li>
-                                <li><a href="#tab_14" data-toggle="tab">P.S.</a></li>
-                                <li><a href="#tab_15" data-toggle="tab">Base de données</a></li>
-                                <li><a href="#tab_16" data-toggle="tab">Réseaux avancés</a></li>
+                                <li id="onglet_dropdown_1">
+                                    <a id="navbar_onglet10" href="#tab_10" data-toggle="tab" onclick="changeOnglet('onglet_dropdown_1', 'last_onglet')">
+                                        Langages formels et automates
+                                    </a>
+                                </li>
+                                <li id="onglet_dropdown_2">
+                                    <a id="navbar_onglet11" href="#tab_11" data-toggle="tab" onclick="changeOnglet('onglet_dropdown_2', 'last_onglet')">
+                                        Projet compilation
+                                    </a>
+                                </li>
+                                <li id="onglet_dropdown_3">
+                                    <a id="navbar_onglet12" href="#tab_12" data-toggle="tab" onclick="changeOnglet('onglet_dropdown_3', 'last_onglet')">
+                                        Compilation
+                                    </a>
+                                </li>
+                                <li id="onglet_dropdown_4">
+                                    <a id="navbar_onglet13" href="#tab_13" data-toggle="tab" onclick="changeOnglet('onglet_dropdown_4', 'last_onglet')">
+                                        P.N.E.</a>
+                                </li>
+                                <li id="onglet_dropdown_5">
+                                    <a id="navbar_onglet14" href="#tab_14" data-toggle="tab" onclick="changeOnglet('onglet_dropdown_5', 'last_onglet')">
+                                        P.S.
+                                    </a>
+                                </li>
+                                <li id="onglet_dropdown_6">
+                                    <a id="navbar_onglet15" href="#tab_15" data-toggle="tab" onclick="changeOnglet('onglet_dropdown_6', 'last_onglet')">
+                                        Base de données
+                                    </a>
+                                </li>
+                                <li id="onglet_dropdown_7">
+                                    <a id="navbar_onglet16" href="#tab_16" data-toggle="tab" onclick="changeOnglet('onglet_dropdown_7', 'last_onglet')">
+                                        Réseaux avancés
+                                    </a>
+                                </li>
                                 <!-- Bouton pour s'inscrire a un espace
                                 <li class="divider"></li>
                                 <li><a href="#">S'inscrire à un espace</a></li>
@@ -74,7 +101,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">S'inscrire à un espace</a></li>
+                        <li><a href="#modal_inscription" data-toggle="modal">S'inscrire à un espace</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -184,7 +211,31 @@
         </div><!-- /.tab-content -->
     </div><!-- nav-tabs-custom -->
 
-    <!-- Debut modal view -->
+    <!-- Debut modal view - inscription -->
+    <div class="modal fade" id="modal_inscription">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- En tete -->
+                <div class="modal-header modal-header-task">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <div class="modal-title">Inscription à un espace</div>
+                </div>
+
+                <!-- Corps -->
+                <div class="modal-body">
+                    Choisir un espace
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal">Valider</button>
+                    <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Debut modal view - desinscription -->
     <div class="modal fade" id="modal_desinscription">
         <div class="modal-dialog">
             <div class="modal-content">

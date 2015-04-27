@@ -60,7 +60,7 @@
                                required>-->
                         <input type="text" class="form-control" id="destinataire_form2" required>
                         <div class="input-group-addon">
-                            <i class="fa fa-sort-alpha-asc"></i>
+                            <a href="#modal_dest_form2" data-toggle="modal"><i class="fa fa-sort-alpha-asc"></i></a>
                         </div>
                     </div>
                 </div>
@@ -224,10 +224,10 @@
                             <select class="form-control" id="list_cours" onchange="updateObjetRDV('list_cours', 'list_devoirs', 'objet_form4')">
                                 <option value="" selected></option>
                                 <!-- Affichage dynamique de la liste de tous les cours auquel l'�tudiant est inscrit-->
-								{% for UE in myUE %}
-									{% for cours in UE.cours %}
-										<option value="{{ cours.getNomcours() }}">{{ cours.getNomcours() }}</option>		
-	                                {% endfor %}                   
+                                {% for UE in myUE %}
+                                    {% for cours in UE.cours %}
+                                        <option value="{{ cours.getNomcours() }}">{{ cours.getNomcours() }}</option>
+                                    {% endfor %}
                                 {% endfor %}
                             </select>
                         </div>
@@ -352,9 +352,9 @@
                     <label for="destinataire">Destinataire</label>
                     <div class="input-group">
                         <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
-                        <input type="text" class="form-control" id="destinataire_form6" 
-                        value="{{ myAdmins.Stage.getPrenom() }} {{ myAdmins.Stage.getNom() }} - {{ myAdmins.Stage.getEmail() }}" 
-                        required>
+                        <input type="text" class="form-control" id="destinataire_form6"
+                               value="{{ myAdmins.Stage.getPrenom() }} {{ myAdmins.Stage.getNom() }} - {{ myAdmins.Stage.getEmail() }}"
+                               required>
                         <div class="input-group-addon">
                             <i class="fa fa-sort-alpha-asc"></i>
                         </div>
@@ -432,9 +432,9 @@
                     <label for="destinataire">Destinataire</label>
                     <div class="input-group">
                         <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
-                        <input type="text" class="form-control" id="destinataire_form7" 
-						value="{{ myAdmins.Admin.getPrenom() }} {{ myAdmins.Admin.getNom() }} - {{ myAdmins.Admin.getEmail() }}" 
-                        required>
+                        <input type="text" class="form-control" id="destinataire_form7"
+                               value="{{ myAdmins.Admin.getPrenom() }} {{ myAdmins.Admin.getNom() }} - {{ myAdmins.Admin.getEmail() }}"
+                               required>
                         <div class="input-group-addon">
                             <i class="fa fa-sort-alpha-asc"></i>
                         </div>
@@ -595,7 +595,7 @@
                                 <a onclick="clickOnImportance('id_importance1_form9', 'id_importance2_form9', 'id_importance3_form9')" style="text-decoration: none;">
                                     <i id="id_importance1_form9" class="fa fa-exclamation-triangle importance1-selected"></i>
                                 </a>
-                                <a nclick="clickOnImportance('id_importance2_form9', 'id_importance1_form9', 'id_importance3_form9')" style="text-decoration: none;">
+                                <a onclick="clickOnImportance('id_importance2_form9', 'id_importance1_form9', 'id_importance3_form9')" style="text-decoration: none;">
                                     <i id="id_importance2_form9" class="fa fa-exclamation-triangle importance2"></i>
                                 </a>
                                 <a onclick="clickOnImportance('id_importance3_form9', 'id_importance1_form9', 'id_importance2_form9')" style="text-decoration: none;">
@@ -637,5 +637,28 @@
                 </div>
             </div>
         </form>
+    </div>
+
+    <!-- Debut modal view - destinataire - form2 -->
+    <div class="modal fade" id="modal_dest_form2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- En tete -->
+                <div class="modal-header modal-header-task">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <div class="modal-title">Liste des destinataires</div>
+                </div>
+
+                <!-- Corps -->
+                <div class="modal-body">
+                    Arborescence des destinataires
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal">Ajouter</button>
+                    <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
