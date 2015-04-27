@@ -16,7 +16,7 @@ class AjaxHandlerController extends Controller
     public function contactListAction(Request $request)
     {
         $criteria = Criteria::create()
-            ->where(Criteria::expr()->contains("nom", $request->get('q')))
+            ->where(Criteria::expr()->contains("nom", $request->get('q')))->orWhere(Criteria::expr()->contains("prenom", $request->get('q')))
             ->orderBy(array("nom" => Criteria::ASC))
             ->setFirstResult(0)
             ->setMaxResults(20);
@@ -26,10 +26,10 @@ class AjaxHandlerController extends Controller
         );
 
         if (!$Gestionnaires) {
-            throw $this->createNotFoundException('Aucun Gestionnaire trouvé pour cet nom : '.$request->get('nom'));
+            throw $this->createNotFoundException('Aucun Gestionnaire trouvé pour cet nom : '.$request->get('q'));
         }
 
-        $myarray=array();
+        $myArray=array();
         foreach ($Gestionnaires as $Gestionnaire) {
             $myArray[]=$Gestionnaire;
         }
