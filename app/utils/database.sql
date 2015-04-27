@@ -70,15 +70,15 @@ CREATE TABLE "Tache" (
 	FOREIGN KEY(`idGestionnaire`) REFERENCES Gestionnaire ( id ),
 	FOREIGN KEY(`idEtudiant`) REFERENCES Etudiant ( id )
 );
-INSERT INTO `Tache` VALUES (1,'Rendu Rapport','Rendu tp CO',2,NULL,'2015-03-12','2015-03-15','Veuillez rendre votre projet de complément Objet, ce travail comprends des diagrammes explicatifs de votre modélisation, ainsi que le code commenté.
+INSERT INTO `Tache` VALUES (1,'Rendu Rapport','Rendu tp CO',2,NULL,'2015-03-12','2015-04-30 18:00','Veuillez rendre votre projet de complément Objet, ce travail comprends des diagrammes explicatifs de votre modélisation, ainsi que le code commenté.
  Veuillez a bien inclure les patrons de conception utilisés',3);
-INSERT INTO `Tache` VALUES (2,'Rendu Projet','Rendu projet C++',2,NULL,'2015-03-12','2015-04-11','Vous devez rendre le Projet de C++ a vos gestionnaires,
+INSERT INTO `Tache` VALUES (2,'Rendu Projet','Rendu projet C++',5,NULL,'2015-03-12','2015-04-30 23:59','Vous devez rendre le Projet de C++ a vos gestionnaires,
 Votre rendu doit ètr ecomposé d''une archive contenant un rapport et vos codes sources.
-Ces derniers doivent compiler sans aucun warnings.',2);
-INSERT INTO `Tache` VALUES (3,'Rendu Dossier VISA','Visa for china',NULL,21303181,'2015-04-01','2015-04-17','penser a bien préparer tous les papiers, y compris l''original de l''attestation d''accueil de l''université chinoise',1);
-INSERT INTO `Tache` VALUES (4,'Candidature M2R','candidature au Master recherche',NULL,21303181,'2015-04-01','2015-05-12','LM a Mme frenoux + choix des UE',2);
-INSERT INTO `Tache` VALUES (5,NULL,'[Compilation - TP]',2,21303181,'2015-04-23','2015-05-30',NULL,1);
-INSERT INTO `Tache` VALUES (6,NULL,'[Convention de stage]',3,21303181,'2015-04-23','2015-05-30',NULL,1);
+Ces derniers doivent compiler sans aucun warnings.',3);
+INSERT INTO `Tache` VALUES (3,'Rendu Dossier VISA','Visa for china',NULL,21303181,'2015-04-01','2015-04-17 23:59','penser a bien préparer tous les papiers, y compris l''original de l''attestation d''accueil de l''université chinoise',1);
+INSERT INTO `Tache` VALUES (4,'Candidature M2R','candidature au Master recherche',NULL,21303181,'2015-04-01','2015-05-12 23:59','LM a Mme frenoux + choix des UE',2);
+INSERT INTO `Tache` VALUES (5,NULL,'[Compilation - TP]',2,21303181,'2015-04-23','2015-05-30 23:59',NULL,1);
+INSERT INTO `Tache` VALUES (6,NULL,'[Convention de stage]',3,21303181,'2015-04-23','2015-05-30 23:59',NULL,1);
 CREATE TABLE "ReponseTache" (
 	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`donnee`	TEXT,
@@ -91,6 +91,17 @@ CREATE TABLE "ReponseTache" (
 );
 INSERT INTO `ReponseTache` VALUES (1,'RENDU',8,1,2);
 INSERT INTO `ReponseTache` VALUES (2,'RENDU',7,2,2);
+CREATE TABLE `Notification` (
+	`id`	INTEGER,
+	`valeur`	TEXT,
+	`idEtudiant`	INTEGER,
+	`categorie`	TEXT,
+	`status`	TEXT,
+	PRIMARY KEY(id),
+	FOREIGN KEY(`idEtudiant`) REFERENCES Etudiant(id)
+);
+INSERT INTO `Notification` VALUES (1,'Veuillez envoyer votre candidature M2R avant le 04/05/15',1,'Tache','NONLU');
+INSERT INTO `Notification` VALUES (2,'Changement dans l''Emploi du temps',2,'Planning','LU');
 CREATE TABLE "Note" (
 	`idEtudiant`	INTEGER,
 	`idDetailNote`	INTEGER,
@@ -108,6 +119,14 @@ INSERT INTO `Note` VALUES (23456989,2,14);
 INSERT INTO `Note` VALUES (23456989,1,11);
 INSERT INTO `Note` VALUES (23456988,1,19);
 INSERT INTO `Note` VALUES (21303181,1,12);
+CREATE TABLE `GestionnaireStage` (
+	`idGestionnaire`	INTEGER,
+	`idFormation`	INTEGER,
+	PRIMARY KEY(idGestionnaire,idFormation),
+	FOREIGN KEY(`idGestionnaire`) REFERENCES Gestionnaire(id),
+	FOREIGN KEY(`idFormation`) REFERENCES Formation(id)
+);
+INSERT INTO `GestionnaireStage` VALUES (1,41);
 CREATE TABLE `GestionnaireFormation` (
 	`idGestionnaire`	INTEGER,
 	`idFormation`	INTEGER,
@@ -115,9 +134,9 @@ CREATE TABLE `GestionnaireFormation` (
 	FOREIGN KEY(`idGestionnaire`) REFERENCES Gestionnaire(id),
 	FOREIGN KEY(`idFormation`) REFERENCES Formation(id)
 );
-INSERT INTO `GestionnaireFormation` VALUES (3,41);
-INSERT INTO `GestionnaireFormation` VALUES (4,41);
 INSERT INTO `GestionnaireFormation` VALUES (5,41);
+INSERT INTO `GestionnaireFormation` VALUES (8,31);
+INSERT INTO `GestionnaireFormation` VALUES (10,34);
 CREATE TABLE `GestionnaireCours` (
 	`idGestionnaire`	INTEGER,
 	`idCours`	INTEGER,
@@ -125,25 +144,62 @@ CREATE TABLE `GestionnaireCours` (
 	FOREIGN KEY(`idGestionnaire`) REFERENCES Gestionnaire(id),
 	FOREIGN KEY(`idCours`) REFERENCES Cours(id)
 );
-INSERT INTO `GestionnaireCours` VALUES (1,5);
-INSERT INTO `GestionnaireCours` VALUES (2,1);
-INSERT INTO `GestionnaireCours` VALUES (2,2);
-INSERT INTO `GestionnaireCours` VALUES (6,4);
-INSERT INTO `GestionnaireCours` VALUES (7,6);
+INSERT INTO `GestionnaireCours` VALUES (1,24);
+INSERT INTO `GestionnaireCours` VALUES (2,9);
+INSERT INTO `GestionnaireCours` VALUES (2,12);
+INSERT INTO `GestionnaireCours` VALUES (2,13);
+INSERT INTO `GestionnaireCours` VALUES (5,10);
+INSERT INTO `GestionnaireCours` VALUES (7,28);
+INSERT INTO `GestionnaireCours` VALUES (8,29);
+INSERT INTO `GestionnaireCours` VALUES (9,14);
+INSERT INTO `GestionnaireCours` VALUES (9,15);
+CREATE TABLE `GestionnaireAdmin` (
+	`idGestionnaire`	INTEGER,
+	`idFormation`	INTEGER,
+	PRIMARY KEY(idGestionnaire,idFormation),
+	FOREIGN KEY(`idGestionnaire`) REFERENCES Gestionnaire(id),
+	FOREIGN KEY(`idFormation`) REFERENCES Formation(id)
+);
+INSERT INTO `GestionnaireAdmin` VALUES (3,41);
+INSERT INTO `GestionnaireAdmin` VALUES (3,42);
+INSERT INTO `GestionnaireAdmin` VALUES (3,43);
+INSERT INTO `GestionnaireAdmin` VALUES (3,44);
+INSERT INTO `GestionnaireAdmin` VALUES (3,61);
+INSERT INTO `GestionnaireAdmin` VALUES (3,62);
+INSERT INTO `GestionnaireAdmin` VALUES (3,63);
+INSERT INTO `GestionnaireAdmin` VALUES (3,64);
+INSERT INTO `GestionnaireAdmin` VALUES (3,71);
+INSERT INTO `GestionnaireAdmin` VALUES (3,72);
+INSERT INTO `GestionnaireAdmin` VALUES (3,73);
+INSERT INTO `GestionnaireAdmin` VALUES (3,74);
+INSERT INTO `GestionnaireAdmin` VALUES (3,81);
+INSERT INTO `GestionnaireAdmin` VALUES (3,82);
+INSERT INTO `GestionnaireAdmin` VALUES (3,83);
+INSERT INTO `GestionnaireAdmin` VALUES (3,84);
 CREATE TABLE "Gestionnaire" (
 	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`type`	TEXT,
 	`nom`	TEXT,
 	`prenom`	TEXT,
 	`email`	TEXT
 );
-INSERT INTO `Gestionnaire` VALUES (1,'Enseignant','Max','Aurélien','aurelien.max@limsi.fr');
-INSERT INTO `Gestionnaire` VALUES (2,'Enseignant','Voisin','Frédéric','fv@lri.fr');
-INSERT INTO `Gestionnaire` VALUES (3,'Secrétariat','Chapiteau','Nadia','nadia.chapiteau@u-psud.fr');
-INSERT INTO `Gestionnaire` VALUES (4,'Relations internationales','Zouhdi','Said','said.zouhdi@u-psud.fr');
-INSERT INTO `Gestionnaire` VALUES (5,'Responsable ET4','Frenoux','Emmanuelle','emanuelle.frenoux@lri.fr');
-INSERT INTO `Gestionnaire` VALUES (6,'Enseignant','Marie','Benjamin','benjamin.marie@limsi.fr');
-INSERT INTO `Gestionnaire` VALUES (7,'Enseignant','Soufflet','Gilles','gilles.souflet@u-psud.fr');
+INSERT INTO `Gestionnaire` VALUES (1,'Max','Aurélien','aurelien.max@limsi.fr');
+INSERT INTO `Gestionnaire` VALUES (2,'Voisin','Frédéric','fv@lri.fr');
+INSERT INTO `Gestionnaire` VALUES (3,'Chapiteau','Nadia','nadia.chapiteau@u-psud.fr');
+INSERT INTO `Gestionnaire` VALUES (4,'Zouhdi','Said','said.zouhdi@u-psud.fr');
+INSERT INTO `Gestionnaire` VALUES (5,'Frenoux','Emmanuelle','emanuelle.frenoux@lri.fr');
+INSERT INTO `Gestionnaire` VALUES (6,'Marie','Benjamin','benjamin.marie@limsi.fr');
+INSERT INTO `Gestionnaire` VALUES (7,'Soufflet','Gilles','gilles.souflet@u-psud.fr');
+INSERT INTO `Gestionnaire` VALUES (8,'Longuet','Delphine','longuet@lri.fr');
+INSERT INTO `Gestionnaire` VALUES (9,'Lisser','Abdel','lisser@limsi.fr');
+INSERT INTO `Gestionnaire` VALUES (10,'Koeniguer','Cedric','cedric.koeniguer@u-psud.fr');
+INSERT INTO `Gestionnaire` VALUES (11,'Poulard','Christophe','christophe.poulard@u-psud.fr');
+INSERT INTO `Gestionnaire` VALUES (12,'Bernez','Cedric','cedric.bernez@u-psud.fr');
+INSERT INTO `Gestionnaire` VALUES (13,'Le Hegarat','Sylvie','sylvie.le-hegarat@u-psud.fr');
+INSERT INTO `Gestionnaire` VALUES (14,'Marsi','Marino','marino.marsi@u-psud.fr');
+INSERT INTO `Gestionnaire` VALUES (15,'Zomer','Fabian','fabian.zomer@u-psud.fr');
+INSERT INTO `Gestionnaire` VALUES (16,'Mounier','Hugues','hugues.mounier@u-psud.fr');
+INSERT INTO `Gestionnaire` VALUES (17,'Legros','Corinne','corinne.legros@u-psud.fr');
+INSERT INTO `Gestionnaire` VALUES (18,'Farcy','Rene','Rene.Farcy@u-psud.fr');
 CREATE TABLE "Formation" (
 	`id`	INTEGER,
 	`specialite`	TEXT,
@@ -163,18 +219,18 @@ INSERT INTO `Formation` VALUES (51,'Informatique',5,'Etudiant');
 INSERT INTO `Formation` VALUES (52,'Matériaux',5,'Etudiant');
 INSERT INTO `Formation` VALUES (53,'Optronique',5,'Etudiant');
 INSERT INTO `Formation` VALUES (54,'Electronique',5,'Etudiant');
-INSERT INTO `Formation` VALUES (55,'Informatique',3,'Apprenti');
-INSERT INTO `Formation` VALUES (61,'Matériaux',3,'Apprenti');
-INSERT INTO `Formation` VALUES (62,'Optronique',3,'Apprenti');
-INSERT INTO `Formation` VALUES (63,'Electronique',3,'Apprenti');
-INSERT INTO `Formation` VALUES (64,'Informatique',4,'Apprenti');
-INSERT INTO `Formation` VALUES (72,'Matériaux',4,'Apprenti');
-INSERT INTO `Formation` VALUES (73,'Optronique',4,'Apprenti');
-INSERT INTO `Formation` VALUES (74,'Electronique',4,'Apprenti');
-INSERT INTO `Formation` VALUES (81,'Informatique',5,'Apprenti');
-INSERT INTO `Formation` VALUES (82,'Matériaux',5,'Apprenti');
-INSERT INTO `Formation` VALUES (83,'Optronique',5,'Apprenti');
-INSERT INTO `Formation` VALUES (84,'Electronique',5,'Apprenti');
+INSERT INTO `Formation` VALUES (71,'Informatique',3,'Apprenti');
+INSERT INTO `Formation` VALUES (72,'Matériaux',3,'Apprenti');
+INSERT INTO `Formation` VALUES (73,'Optronique',3,'Apprenti');
+INSERT INTO `Formation` VALUES (74,'Electronique',3,'Apprenti');
+INSERT INTO `Formation` VALUES (81,'Informatique',4,'Apprenti');
+INSERT INTO `Formation` VALUES (82,'Matériaux',4,'Apprenti');
+INSERT INTO `Formation` VALUES (83,'Optronique',4,'Apprenti');
+INSERT INTO `Formation` VALUES (84,'Electronique',4,'Apprenti');
+INSERT INTO `Formation` VALUES (91,'Informatique',5,'Apprenti');
+INSERT INTO `Formation` VALUES (92,'Matériaux',5,'Apprenti');
+INSERT INTO `Formation` VALUES (93,'Optronique',5,'Apprenti');
+INSERT INTO `Formation` VALUES (94,'Electronique',5,'Apprenti');
 CREATE TABLE "EtudiantFormation" (
 	`idEtudiant`	INTEGER,
 	`idFormation`	INTEGER,

@@ -4,6 +4,9 @@
 
         $(document).ready(function() {
             $("#destinataire_form2,#destinataire_form3,#destinataire_form4,#destinataire_form5,#destinataire_form6,#destinataire_form7,#destinataire_form8,#destinataire_form9").tokenInput("/contactList", {
+                prePopulate: [
+                    {"id":3,"nom":"{{ myAdmins.Admin.getNom() }}","prenom":"{{ myAdmins.Admin.getPrenom() }}","email":"{{ myAdmins.Admin.getEmail() }}"},
+                ],
                 theme: "facebook",
                 propertyToSearch: "nom",
                 resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
