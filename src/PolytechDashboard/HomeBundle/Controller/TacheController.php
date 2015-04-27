@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class TacheController extends Controller {
+	
+
+	
 	public static function indexAction($id, $controller) {
 		$myTasksReceived = [ ];
 		$myTasksSend = [ ];
@@ -33,6 +36,10 @@ class TacheController extends Controller {
 				unset ( $task );
 				unset ( $admin );
 			}
+			usort( $myTasksReceived, function($a, $b) {
+				return ($a->getDatefin() < $b->getDatefin()) ? -1 : 1;
+			});
+			
 		}
 							
 		/* liste des taches envoyées par l'étudiant*/
@@ -63,6 +70,8 @@ class TacheController extends Controller {
 		$result ['adminsTaskSend'] = $adminsTaskSend;
 		return $result;
 	}
+	
+
 	public static function createTask($param) {
 		$formType = isset ( $_POST ['gender'] ) ? mysql_real_escape_string ( $_POST ['gender'] ) : '';
 		

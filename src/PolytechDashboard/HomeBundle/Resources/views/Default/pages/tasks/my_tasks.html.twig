@@ -48,10 +48,16 @@
 
                         {% if task.getIdgestionnaire() is empty %}
                             <!-- Tache attribue par un etudiant lui meme -->
-                            <td> Moi </td>
+                            <td> Moi-meme </td>
                         {% else %}
                             <!-- Tache attribue par un gestionnaire -->
-                            <td>{{ myTasks.admins[loop.index0].getNom() }} {{ myTasks.admins[loop.index0].getPrenom() }}</td>
+                            <td>
+                            {% for admin in myTasks.admins %}
+                 					{% if admin.id == task.getIdgestionnaire() %}
+                 						{{ admin.prenom}} {{ admin.nom }}
+                 					{% endif %}
+                			{% endfor %}
+                            </td>
                         {% endif %}
                         <td>
                             {{ task.getNom() }}
@@ -98,10 +104,15 @@
 
                                         {% if task.getIdgestionnaire() is empty %}
                                             <!-- Tache attribue par un etudiant lui meme -->
-                                            De : Moi
+                                            De : Moi-meme
                                         {% else %}
                                             <!-- Tache attribue par un gestionnaire -->
-                                            De : {{ myTasks.admins[loop.index0].getNom() }} {{	myTasks.admins[loop.index0].getPrenom() }}
+                                            De : 
+                                             {% for admin in myTasks.admins %}
+                 								{% if admin.id == task.getIdgestionnaire() %}
+                 									{{ admin.prenom}} {{ admin.nom }}
+                 								{% endif %}
+                							{% endfor %}
                                         {% endif %}
 
                                         <div class="date_modal">
