@@ -4,6 +4,7 @@
 
         $(document).ready(function() {
             $("#destinataire_form2,#destinataire_form3,#destinataire_form4,#destinataire_form5,#destinataire_form6,#destinataire_form7,#destinataire_form8,#destinataire_form9").tokenInput("/contactList", {
+               /* Valuers par défaut */
                 prePopulate: [
                     {"id":3,"nom":"{{ myAdmins.Admin.getNom() }}","prenom":"{{ myAdmins.Admin.getPrenom() }}","email":"{{ myAdmins.Admin.getEmail() }}"},
                 ],
