@@ -279,6 +279,7 @@ a:hover > .fa-trash{
 
 /* navbar "mon espace" */
 .navbar-perso {
+    margin-bottom: 0px;
     background-color: #ffffff;
 }
 

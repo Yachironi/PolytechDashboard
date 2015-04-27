@@ -191,9 +191,16 @@ function changeModal(id_espace, id_nom_espace_modal, id_button_modal){
     }
 }
 
-/* TODO : modifier l'espace en question dans la BDD */
+/* TODO : modifier l'espace en question dans la BDD et recharger (sans rechargement de page) */
 function suppressionEspace(ID){
     alert(ID);
+}
+
+/* TODO : Ajouter l'espace dans la BD et recharger (sans rechargement de page) */
+function addEspace(ID){
+    var select = document.getElementById(ID);
+    var value_select = select.options[select.selectedIndex].value;
+    alert(value_select);
 }
 
 /* Lorsque l'étudiant attribue une tache a qqn et qu'il selectionne l'importance */

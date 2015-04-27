@@ -19,10 +19,10 @@
 <!-- Content -->
 <section class="content">
     <!-- Custom Tabs -->
-    <div class="nav-tabs-custom">
+    <div class="nav-tabs-custom" style="min-height: 400px;">    <!-- A MODIFIER ? -->
         <!-- TODO : a charger dans la BDD + attribuer grace a la BDD la valeur de href pour
             l'anglais est "anglais" par exemple, pareil pr tous les autres -->
-        <nav class="navbar navbar-perso" style="border-top: 2px solid #009FFA;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;border-left: none;border-right: none;border-bottom: 1px solid #EEEEEE;">
+        <nav class="navbar navbar-perso" style="margin-bottom:0;border-top: 2px solid #009FFA;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;border-left: none;border-right: none;border-bottom: 1px solid #EEEEEE;">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" style="border-color: #009FFA;">
@@ -223,11 +223,20 @@
 
                 <!-- Corps -->
                 <div class="modal-body">
-                    Choisir un espace
+                    <p>Veuillez sélectionner un espace :</p>
+                    <!-- Listes des espaces disponibles et ou l'etudiant peut s'inscrire -->
+                    <div class="form-group" style="margin-top: 10px;">
+                        <select class="form-control" id="list_espaces">
+                            <option selected="selected"></option>
+                            <option value="Projet Web">Projet Web</option>
+                            <option value="P.D.I.">P.D.I.</option>
+                            <option value="PPP2">PPP2</option>
+                        </select>
+                    </div>
                 </div>
                 <!-- Footer -->
                 <div class="modal-footer">
-                    <button class="btn btn-primary" data-dismiss="modal">Valider</button>
+                    <button class="btn btn-primary" data-dismiss="modal" onclick="addEspace('list_espaces')">Valider</button>
                     <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
 
                 </div>
@@ -252,7 +261,7 @@
                 <!-- Footer -->
                 <div class="modal-footer">
                     <!-- onclick a appeler par js -->
-                    <button class="btn btn-success" data-dismiss="modal" id="button_oui_modal" onclick="">Oui</button>
+                    <button class="btn btn-success" data-dismiss="modal" id="button_oui_modal">Oui</button>
                     <button class="btn btn-primary" data-dismiss="modal">Non</button>
 
                 </div>
