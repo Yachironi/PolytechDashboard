@@ -23,3 +23,7 @@ polytech_dashboard_GetNotificationList:
     path:     /notificationList
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:notificationList"}
 
+
+polytech_dashboard_SetNotificationAsRead:
+    path:     /setNotificationAsRead
+    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:setNotificationAsRead"}

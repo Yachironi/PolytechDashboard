@@ -6,16 +6,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use PolytechDashboard\HomeBundle\Entity\Etudiant;
 use PolytechDashboard\HomeBundle\Modals\Login;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class LoginController extends Controller {
 	public function indexAction(Request $request) {
-		$session = $this->getRequest ()->getSession ();
+        $session = new Session();
+        $session->start();
+		//$session = $this->getRequest ()->getSession ();
 		$em = $this->getDoctrine ()->getEntityManager ();
 		$repository = $em->getRepository ( 'PolytechDashboardHomeBundle:Etudiant' );
 		
 		if ($request->getMethod () == 'POST') {
-			
-			$session->clear ();
+
+			$session->clear();
 			$username = $request->get ( 'username' );
 			$passwordBeforeHash = $request->get ( 'password' );
 			$password = sha1 ( $passwordBeforeHash );
@@ -25,7 +28,7 @@ class LoginController extends Controller {
 					'password' => $password 
 			) );
 			
-			/* appel du generateur de données du controlleur */
+			/* appel du generateur de donnï¿½es du controlleur */
 			$noteController = $this->get ( 'noteController' );
 			$myGrades = $noteController->indexAction ( $user, $this );
 			$tacheController = $this->get ( 'tacheController' );
@@ -40,7 +43,9 @@ class LoginController extends Controller {
 					$login = new Login ();
 					$login->setUsername ( $username );
 					$login->setPassword ( $password );
+                    $login->setId($user->getId());
 					$session->set ( 'login', $login );
+
 				}
 				return $this->render ( 'PolytechDashboardHomeBundle:Default:index.html.twig', array (
 						'prenom' => $user->getPrenom (),

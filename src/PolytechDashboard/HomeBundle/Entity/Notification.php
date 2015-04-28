@@ -116,4 +116,17 @@ class Notification
     	return $this->status;
     }
 
+    /**
+     * Set status
+     *
+     * @param integer $status
+     * @return Notification
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
 }

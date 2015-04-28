@@ -186,47 +186,124 @@
 {% endblock %}
 
 {% block CustomFooterScript %}
+    <style>
+        .mark-read-btn:hover{
+            color:blue
+        }
+        .mark-read-btn{
+            height: ;
+            background: transparent;
+            color: #F2F2F2;
+
+            /* CSS Transition */
+            -webkit-transition: background .2s ease-in-out, border .2s ease-in-out;
+            -moz-transition: background .2s ease-in-out, border .2s ease-in-out;
+            -ms-transition: background .2s ease-in-out, border .2s ease-in-out;
+            -o-transition: background .2s ease-in-out, border .2s ease-in-out;
+            transition: background .2s ease-in-out, border .2s ease-in-out;
+
+        }
+
+        .btn-custom {
+
+            background-color: #FFFFFF;
+            border-color: #CCCCCC;
+            color: #333333;
+        }
+        .btn-custom:hover {
+            background-color: #009FFA;
+            border-color: #fff;
+            color: #fff;
+        }
+    </style>
     <script>
-        var timer, delay = 10000;
+        $( document ).ready(function() {
+            var timer, delay = 5000;
 
-        timer = setInterval(function(){
-            $.ajax({
-                type    : 'POST',
-                url     : '/notificationList',
-                dataType: 'json',
-                data    : $('.ajaxform').serialize(),
-                success : function(data){
-                    if(data.length<=0){
-                        //$("#nbNotification").css("display","none");
-                        $("#nbNotification").html();
-                        $("#textNbNotification").html("Vous n'avez pas de nouveaux notifications");
-                    }else{
-                        $("#nbNotification").html(data.length);
-                        $("#textNbNotification").html("Vous avez "+data.length+" notifications");
-
-                       // $("#nbNotification").css("display","block");
-
-                    }
-                    $("#NotificationContainer").html("<ul id=\"subNotificationContainer\" class=\"menu\"></ul>");
-                    $.each(data, function(i, item) {
-                        console.log(item.valeur);
-                        console.log(item.categorie);
-
-
+           function updateFunction(data)
+            {
+                $("#NotificationContainer").html("<ul id=\"subNotificationContainer\" class=\"menu\"></ul>");
+                var nbNotificationNONLU = 0;
+                $.each(data, function (i, item) {
+                    if (item.status == "NONLU") {
+                        nbNotificationNONLU++;
                         $("#subNotificationContainer").append(
-
-                        "<li>"+
-                        "<a href=\"#\">"+
-                        "<i class=\"fa fa-warning text-yellow\"></i> " +
-                        item.valeur+
-                        "</a>" +
-                        "</li>"
+                                "<li id=\"notification" + item.id + "\" value='5ra'>" +
+                                "<a >" +
+                                "<i class=\"fa fa-warning text-yellow\"></i><button btnID=\""+item.id+"\" id=\"mark-as-read\" value=\"" + item.id + "\" class=\"btn btn-xs btn-custom\" ><span class=\"glyphicon glyphicon-ok\"></span></button> " +
+                                item.valeur +
+                                "</a>" +
+                                "" +
+                                "</li>"
                         );
+                    }
+                });
 
 
-                    });
+                if (nbNotificationNONLU == 0) {
+                    //$("#nbNotification").css("display","none");
+                    $("#nbNotification").html("");
+                    $("#textNbNotification").html("Vous n'avez pas de nouveaux notifications");
+                } else if (nbNotificationNONLU == 1) {
+                    $("#nbNotification").html(nbNotificationNONLU);
+                    $("#textNbNotification").html("Vous avez une notification");
+                } else {
+                    $("#nbNotification").html(nbNotificationNONLU);
+                    $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
                 }
-            });
-        }, delay);
+                $("#mark-as-read").click({'nbNotificationNONLU' : nbNotificationNONLU},function (event) {
+
+                    var nbNotificationNONLU = event.data.nbNotificationNONLU;
+                    //console.log("id ="+$(this).attr("btnID"));
+
+
+                    //console.log($("#notification"+$(this).attr("btnID")).attr('value'));
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/setNotificationAsRead',
+                        dataType: 'json',
+                        data: {'id': $("#mark-as-read").attr("value")},
+                        success: function(data){
+
+                        }
+                    });
+                    $("#notification"+$(this).attr("btnID")).html();
+                    $("#notification"+$(this).attr("btnID")).remove();
+                    nbNotificationNONLU--;
+                    if (nbNotificationNONLU == 0) {
+                        //$("#nbNotification").css("display","none");
+                        $("#nbNotification").html("");
+                        $("#textNbNotification").html("Vous n'avez pas de nouveaux notifications");
+                    } else if (nbNotificationNONLU == 1) {
+                        $("#nbNotification").html(nbNotificationNONLU);
+                        $("#textNbNotification").html("Vous avez une notification");
+                    } else {
+                        $("#nbNotification").html(nbNotificationNONLU);
+                        $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
+                    }
+
+                });
+            }
+
+
+            timer = setInterval(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/notificationList',
+                    dataType: 'json',
+                    data: $('.ajaxform').serialize(),
+                    success: function (data) {
+
+                        updateFunction(data);
+                    }
+                });
+
+            }, delay);
+
+
+        });
+
     </script>
 {% endblock %}

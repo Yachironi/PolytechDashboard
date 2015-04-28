@@ -10,7 +10,9 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
+/*use Symfony\Component\HttpFoundation\Session\Session;
 
+*/
 class AjaxHandlerController extends Controller
 {
     public function contactListAction(Request $request)
@@ -42,18 +44,20 @@ class AjaxHandlerController extends Controller
         return new Response($jsonContent);
 
     }
-    public function notificationListAction()
+    public function notificationListAction(Request $request)
     {
         $criteria = Criteria::create()
-            ->where(Criteria::expr()->eq("idetudiant", 1))
+            ->where(Criteria::expr()->eq("idetudiant", $this->getRequest()->getSession()->get('login')->getId()))
+            ->orderBy(array("id" => Criteria::ASC))
             ->setFirstResult(0)
             ->setMaxResults(20);
 
         $Notifications = $this->getDoctrine()->getRepository('PolytechDashboardHomeBundle:Notification')->matching(
-            $criteria);
+            $criteria
+        );
 
         if (!$Notifications) {
-            throw $this->createNotFoundException('Aucun Notification trouvé pour cet utilisateur ');
+            throw $this->createNotFoundException('Aucun Gestionnaire trouvé pour cet id : '.$this->getRequest()->getSession()->get('login')->getId());
         }
 
         $myArray=array();
@@ -67,6 +71,18 @@ class AjaxHandlerController extends Controller
         $jsonContent = $serializer->serialize($myArray, 'json');
 
         return new Response($jsonContent);
+    }
+    public function setNotificationAsReadAction(Request $request)
+    {
 
+        $Notification = $this->getDoctrine()->getRepository('PolytechDashboardHomeBundle:Notification')
+            ->findOneBy(array('id' => $request->get("id")));
+
+        $Notification->setStatus("LU");
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($Notification);
+        $em->flush();
+
+        return new Response();
     }
 }
