@@ -31,7 +31,7 @@
                                 <span id="nbNotification" class="label label-warning"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li id="textNbNotification" class="header">Vous n'avez pas de nouveaux notifications</li>
+                                <li id="textNbNotification" class="header">Vous n'avez pas de nouvelles notifications</li>
                                 <li>
                                     <!-- inner menu: contains the actual data -->
                                     <div id="NotificationContainer">
@@ -88,45 +88,50 @@
 
                     <!-- Corps -->
                     <div class="modal-body">
-                    <!--
-                        <div style="margin: auto; text-align: center; max-height: 50px; max-width: 50px;">
-                            <div class="row">
-                                <div class="col-lg-6"></div>
-                                     <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image"/>
+                        <div class="form-group" style="vertical-align: middle;">
+                            <div class="row"  style="margin: auto; vertical-align: middle;">
+                                <div id="profil_img" class="col-lg-6" style="text-align: right; margin:auto;vertical-align: middle;">
+                                    <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image" style="max-width: 100px; max-height: 100px;"/>
                                 </div>
-                                <div class="col-lg-6">
-                                    <span> {{prenom}} {{nom}}</span>
-                                    <span>ET4 - Informatique</span>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-                        <div class="form-group">
-                            <!-- Adresse mail -->
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <label>Adresse e-mail : </label>
-                                </div>
-                                <div class="col-lg-8">
-                                    <input type="text" class="form-control" value="mettre_adresse_mail@u-psud.fr" required>
-                                </div>
-                            </div>
-                            <!-- Numero de telephone-->
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <label>Numéro de téléphone : </label>
-                                </div>
-                                <div class="col-lg-8">
-                                    <input type="text" class="form-control" value="" required>
+                                <div class="col-lg-6" style="margin: auto; height: 100%; vertical-align: middle;" >
+                                    <p> {{prenom}} {{nom}}</p>
+                                    <p>ET4 - Informatique</p>
+                                    <p>N° étudiant : {{ id }}</p>
                                 </div>
                             </div>
                         </div>
-                        Formulaire
-                    </div>
-                    <!-- Footer -->
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" data-dismiss="modal">Enregistrer</button>
-                        <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+
+                        <form>
+                            <div class="row">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-10">
+                                    <!-- TODO : Faire verifier le mot de passe et la confirmation -->
+                                    <div id="id_div_password1" class="form-group">
+                                        <label for="profil_InputPassword1">Nouveau mot de passe</label>
+                                        <input type="password" class="form-control" id="profil_InputPassword1" onchange="verifyPassword('profil_InputPassword1','profil_InputPassword2', 'id_div_password1', 'id_div_password2')">
+                                    </div>
+                                    <div id="id_div_password2" class="form-group">
+                                        <label for="profil_InputPassword2">Confirmation du mot de passe</label>
+                                        <input type="password" class="form-control" id="profil_InputPassword2" onchange="verifyPassword('profil_InputPassword1','profil_InputPassword2')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profil_InputEmail">Email</label>
+                                        <input type="email" class="form-control" id="profil_InputEmail" value="mail@u-psud.fr">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profil_InputTel">Téléphone</label>
+                                        <input type="tel" class="form-control" id="profil_InputTel">
+                                    </div>
+
+
+                                    <div class="modal-footer" style="border-top: none;">
+                                        <button class="btn btn-primary">Enregistrer</button>
+                                        <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1"></div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -199,13 +204,17 @@
                     if(data.length<=0){
                         //$("#nbNotification").css("display","none");
                         $("#nbNotification").html();
-                        $("#textNbNotification").html("Vous n'avez pas de nouveaux notifications");
+                        $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
                     }else{
                         $("#nbNotification").html(data.length);
-                        $("#textNbNotification").html("Vous avez "+data.length+" notifications");
+                        if(data.length == 1){
+                            $("#textNbNotification").html("Vous avez "+data.length+" notification");
+                        }
+                        else{
+                            $("#textNbNotification").html("Vous avez "+data.length+" notifications");
+                        }
 
                        // $("#nbNotification").css("display","block");
-
                     }
                     $("#NotificationContainer").html("<ul id=\"subNotificationContainer\" class=\"menu\"></ul>");
                     $.each(data, function(i, item) {
