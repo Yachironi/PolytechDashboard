@@ -262,3 +262,219 @@ function changeOnglet(onglet, last_onglet){
     document.getElementById(last_onglet).classList.add("active");
 
 }
+
+/* Verifie si les mots de passe sont identiques*/
+function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
+    var longueur_min = 8;
+    var longueur_max = 20;
+
+    var value_mdp1 = document.getElementById(mdp1).value;
+    var value_mdp2 = document.getElementById(mdp2).value;
+
+    var id_mdp1 = "'" + mdp1 + "'";
+    var id_mdp2 = "'" + mdp2 + "'";
+    var id_div_mdp1 = "'" + div_mdp1 + "'";
+    var id_div_mdp2 = "'" + div_mdp2 + "'";
+
+    if(value_mdp1 != ""){
+        // correct
+        if(value_mdp1.length >= longueur_min && value_mdp1.length <= longueur_max){
+            if(!document.getElementById(div_mdp1).classList.contains('has-success')){
+                document.getElementById(div_mdp1).classList.add('has-success');
+            }
+            if(!document.getElementById(div_mdp1).classList.contains('has-feedback')){
+                document.getElementById(div_mdp1).classList.add('has-feedback');
+            }
+            if(document.getElementById(div_mdp1).classList.contains('has-error')){
+                document.getElementById(div_mdp1).classList.remove('has-error');
+            }
+
+            document.getElementById(div_mdp1).innerHTML = "<label class='control-label' for='" + mdp1 + "'>Nouveau mot de passe</label>"
+            + "<input type='password' class='form-control' id='"+ mdp1 +"' value='" + value_mdp1 + "'>"
+            + "<span class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>";
+            document.getElementById(mdp1).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
+
+            // afficher mdp2 normalement
+            if(value_mdp2 == ""){
+                if(document.getElementById(div_mdp2).classList.contains('has-success')){
+                    document.getElementById(div_mdp2).classList.remove('has-success');
+                }
+                if(document.getElementById(div_mdp2).classList.contains('has-feedback')) {
+                    document.getElementById(div_mdp2).classList.remove('has-feedback');
+                }
+                if(document.getElementById(div_mdp2).classList.contains('has-error')) {
+                    document.getElementById(div_mdp2).classList.remove('has-error');
+                }
+
+                document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+                + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
+                + "</div>";
+                document.getElementById(mdp2).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
+            }
+            else{
+                // correct
+                if(value_mdp1 == value_mdp2){
+                    if(!document.getElementById(div_mdp2).classList.contains('has-success')){
+                        document.getElementById(div_mdp2).classList.add('has-success');
+                    }
+                    if(!document.getElementById(div_mdp2).classList.contains('has-feedback')) {
+                        document.getElementById(div_mdp2).classList.add('has-feedback');
+                    }
+                    if(document.getElementById(div_mdp2).classList.contains('has-error')) {
+                        document.getElementById(div_mdp2).classList.remove('has-error');
+                    }
+
+                    document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+                    + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
+                    + "<span class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>";
+
+                    document.getElementById(mdp2).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
+                }
+                // erreur au niveau de la confirmation
+                else{
+                    if(!document.getElementById(div_mdp2).classList.contains('has-error')){
+                        document.getElementById(div_mdp2).classList.add('has-error');
+                    }
+                    if(!document.getElementById(div_mdp2).classList.contains('has-feedback')) {
+                        document.getElementById(div_mdp2).classList.add('has-feedback');
+                    }
+                    if(document.getElementById(div_mdp2).classList.contains('has-success')) {
+                        document.getElementById(div_mdp2).classList.remove('has-success');
+                    }
+
+                    document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+                    + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
+                    + "<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>"
+                    + "<span style='color:red;'>Les mots de passe sont différents</span>";
+
+                    document.getElementById(mdp2).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
+                }
+            }
+
+        }
+        // erreur
+        else{
+            if(!document.getElementById(div_mdp1).classList.contains('has-error')){
+                document.getElementById(div_mdp1).classList.add('has-error');
+            }
+            if(!document.getElementById(div_mdp1).classList.contains('has-feedback')) {
+                document.getElementById(div_mdp1).classList.add('has-feedback');
+            }
+            if(document.getElementById(div_mdp1).classList.contains('has-success')) {
+                document.getElementById(div_mdp1).classList.remove('has-success');
+            }
+
+            document.getElementById(div_mdp1).innerHTML = "<label class='control-label' for='" + mdp1 + "'>Nouveau mot de passe</label>"
+            + "<input type='password' class='form-control' id='"+ mdp1 +"' value='" + value_mdp1 + "'>"
+            + "<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>"
+            + "<span style='color:red;'>Le mot de passe doit avoir entre " + longueur_min + " et " + longueur_max + " caractères</span>";
+
+            document.getElementById(mdp1).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
+
+            // afficher mdp2 normal
+            if(value_mdp2 == ""){
+                if(document.getElementById(div_mdp2).classList.contains('has-success')){
+                    document.getElementById(div_mdp2).classList.remove('has-success');
+                }
+                if(document.getElementById(div_mdp2).classList.contains('has-feedback')) {
+                    document.getElementById(div_mdp2).classList.remove('has-feedback');
+                }
+                if(document.getElementById(div_mdp2).classList.contains('has-error')) {
+                    document.getElementById(div_mdp2).classList.remove('has-error');
+                }
+
+                document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+                + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
+                + "</div>";
+                document.getElementById(mdp2).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
+            }
+            // erreur
+            else{
+                if(!document.getElementById(div_mdp2).classList.contains('has-error')){
+                    document.getElementById(div_mdp2).classList.add('has-error');
+                }
+                if(!document.getElementById(div_mdp2).classList.contains('has-feedback')) {
+                    document.getElementById(div_mdp2).classList.add('has-feedback');
+                }
+                if(document.getElementById(div_mdp2).classList.contains('has-success')) {
+                    document.getElementById(div_mdp2).classList.remove('has-success');
+                }
+
+                document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+                + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
+                + "<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>"
+                + "<span style='color:red;'>Mot de passe incorrect</span>";
+                document.getElementById(mdp2).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
+            }
+        }
+    }
+    else{
+        // afficher mdp1 et mdp2 normal
+        if(value_mdp2 == ""){
+            if(document.getElementById(div_mdp1).classList.contains('has-success')){
+                document.getElementById(div_mdp1).classList.remove('has-success');
+            }
+            if(document.getElementById(div_mdp1).classList.contains('has-feedback')) {
+                document.getElementById(div_mdp1).classList.remove('has-feedback');
+            }
+            if(document.getElementById(div_mdp1).classList.contains('has-error')) {
+                document.getElementById(div_mdp1).classList.remove('has-error');
+            }
+            if(document.getElementById(div_mdp2).classList.contains('has-success')){
+                document.getElementById(div_mdp2).classList.remove('has-success');
+            }
+            if(document.getElementById(div_mdp2).classList.contains('has-feedback')) {
+                document.getElementById(div_mdp2).classList.remove('has-feedback');
+            }
+            if(document.getElementById(div_mdp2).classList.contains('has-error')) {
+                document.getElementById(div_mdp2).classList.remove('has-error');
+            }
+
+            document.getElementById(div_mdp1).innerHTML = "<label class='control-label' for='" + mdp1 + "'>Nouveau mot de passe</label>"
+            + "<input type='password' class='form-control' id='"+ mdp1 +"' value='" + value_mdp1 + "'>"
+            + "</div>";
+            document.getElementById(mdp1).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
+
+            document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+            + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
+            + "</div>";
+            document.getElementById(mdp2).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
+        }
+        // Probleme pour les 2
+        else{
+            if(!document.getElementById(div_mdp1).classList.contains('has-error')){
+                document.getElementById(div_mdp1).classList.add('has-error');
+            }
+            if(!document.getElementById(div_mdp1).classList.contains('has-feedback')) {
+                document.getElementById(div_mdp1).classList.add('has-feedback');
+            }
+            if(document.getElementById(div_mdp1).classList.contains('has-success')) {
+                document.getElementById(div_mdp1).classList.remove('has-success');
+            }
+
+            if(!document.getElementById(div_mdp2).classList.contains('has-error')){
+                document.getElementById(div_mdp2).classList.add('has-error');
+            }
+            if(!document.getElementById(div_mdp2).classList.contains('has-feedback')) {
+                document.getElementById(div_mdp2).classList.add('has-feedback');
+            }
+            if(document.getElementById(div_mdp2).classList.contains('has-success')) {
+                document.getElementById(div_mdp2).classList.remove('has-success');
+            }
+
+
+            document.getElementById(div_mdp1).innerHTML = "<label class='control-label' for='" + mdp1 + "'>Nouveau mot de passe</label>"
+            + "<input type='password' class='form-control' id='"+ mdp1 +"' value='" + value_mdp1 + "'>"
+            + "<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>"
+            + "<span style='color:red;'>Veuillez entrer un mot de passe valide</span>";
+            document.getElementById(mdp1).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
+
+            document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+            + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
+            + "<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>"
+            + "<span style='color:red;'>Mot de passe incorrect</span>";
+
+            document.getElementById(mdp2).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
+        }
+    }
+}
