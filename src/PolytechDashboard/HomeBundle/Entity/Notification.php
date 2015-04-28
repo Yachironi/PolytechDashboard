@@ -17,14 +17,15 @@ class Notification
      * @var integer
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=true)
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="valeur", type="integer", nullable=true)
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="valeur", type="text", nullable=true)
+     *
      */
     private $valeur;
 
@@ -40,16 +41,16 @@ class Notification
     /**
      * @var string
      *
-     * @ORM\Column(name="categorie", type="integer", nullable=true)
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="categorie", type="text", nullable=true)
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $categorie;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="integer", nullable=true)
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="status", type="text", nullable=true)
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $status;
     

@@ -14,8 +14,12 @@ polytech_dashboard_home_homepage:
 test:
     path:     /ajax_handler
     defaults: { _controller: "PolytechDashboardHomeBundle:TestAjax:handler"}
+
 polytech_dashboard_GetContact:
     path:     /contactList
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:contactList"}
 
-    
+polytech_dashboard_GetNotificationList:
+    path:     /notificationList
+    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:notificationList"}
+

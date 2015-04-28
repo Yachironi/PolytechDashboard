@@ -2,7 +2,7 @@
 
 
 {%  block title %}
-    Hello Page
+    Dashboard Polytech'Paris-Sud
 {% endblock %}
 
 {% block body %}
@@ -22,6 +22,27 @@
                 <!-- BARRE DE NAVIGATION EN HAUT -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
+
+
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        <li class="dropdown notifications-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell-o"></i>
+                                <span id="nbNotification" class="label label-warning"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li id="textNbNotification" class="header">Vous n'avez pas de nouveaux notifications</li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <div id="NotificationContainer">
+
+
+                                    </div>
+
+                                </li>
+                                <!--<li class="footer"><a href="#">View all</a></li>-->
+                            </ul>
+                        </li>
                         <!-- COMPTE DE L'UTILISATEUR -->
                         <li class="dropdown user user-menu">
                             <!-- APERCU DE L'UTILISATEUR -->
@@ -164,3 +185,48 @@
 
 {% endblock %}
 
+{% block CustomFooterScript %}
+    <script>
+        var timer, delay = 10000;
+
+        timer = setInterval(function(){
+            $.ajax({
+                type    : 'POST',
+                url     : '/notificationList',
+                dataType: 'json',
+                data    : $('.ajaxform').serialize(),
+                success : function(data){
+                    if(data.length<=0){
+                        //$("#nbNotification").css("display","none");
+                        $("#nbNotification").html();
+                        $("#textNbNotification").html("Vous n'avez pas de nouveaux notifications");
+                    }else{
+                        $("#nbNotification").html(data.length);
+                        $("#textNbNotification").html("Vous avez "+data.length+" notifications");
+
+                       // $("#nbNotification").css("display","block");
+
+                    }
+                    $("#NotificationContainer").html("<ul id=\"subNotificationContainer\" class=\"menu\"></ul>");
+                    $.each(data, function(i, item) {
+                        console.log(item.valeur);
+                        console.log(item.categorie);
+
+
+                        $("#subNotificationContainer").append(
+
+                        "<li>"+
+                        "<a href=\"#\">"+
+                        "<i class=\"fa fa-warning text-yellow\"></i> " +
+                        item.valeur+
+                        "</a>" +
+                        "</li>"
+                        );
+
+
+                    });
+                }
+            });
+        }, delay);
+    </script>
+{% endblock %}

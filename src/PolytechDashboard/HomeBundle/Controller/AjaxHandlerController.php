@@ -42,4 +42,31 @@ class AjaxHandlerController extends Controller
         return new Response($jsonContent);
 
     }
+    public function notificationListAction()
+    {
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq("idetudiant", 1))
+            ->setFirstResult(0)
+            ->setMaxResults(20);
+
+        $Notifications = $this->getDoctrine()->getRepository('PolytechDashboardHomeBundle:Notification')->matching(
+            $criteria);
+
+        if (!$Notifications) {
+            throw $this->createNotFoundException('Aucun Notification trouvé pour cet utilisateur ');
+        }
+
+        $myArray=array();
+        foreach ($Notifications as $Notification) {
+            $myArray[]=$Notification;
+        }
+
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+        $jsonContent = $serializer->serialize($myArray, 'json');
+
+        return new Response($jsonContent);
+
+    }
 }
