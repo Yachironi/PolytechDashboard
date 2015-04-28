@@ -50,7 +50,7 @@ class LoginController extends Controller {
 				return $this->render ( 'PolytechDashboardHomeBundle:Default:index.html.twig', array (
 						'prenom' => $user->getPrenom (),
 						'nom' => $user->getNom (),
-						'id' => $user,
+						'id' => $user->getId(),
 						'myGrades' => $myGrades,
 						'myTasks' => $myTasks,
 						'myUE' => $myUE,

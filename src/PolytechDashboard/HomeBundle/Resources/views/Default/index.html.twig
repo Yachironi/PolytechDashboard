@@ -225,8 +225,9 @@
         $( document ).ready(function() {
             var timer, delay = 5000;
 
-           function updateFunction(data)
+            function updateFunction(data)
             {
+
                 $("#NotificationContainer").html("<ul id=\"subNotificationContainer\" class=\"menu\"></ul>");
                 var nbNotificationNONLU = 0;
                 $.each(data, function (i, item) {
@@ -248,7 +249,7 @@
                 if (nbNotificationNONLU == 0) {
                     //$("#nbNotification").css("display","none");
                     $("#nbNotification").html("");
-                    $("#textNbNotification").html("Vous n'avez pas de nouveaux notifications");
+                    $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
                 } else if (nbNotificationNONLU == 1) {
                     $("#nbNotification").html(nbNotificationNONLU);
                     $("#textNbNotification").html("Vous avez une notification");
@@ -279,19 +280,19 @@
                     nbNotificationNONLU--;
                     if (nbNotificationNONLU == 0) {
                         //$("#nbNotification").css("display","none");
-                        $("#nbNotification").html();
-                        $("#textNbNotification").html("Vous n'avez pas de nouveaux notifications");
-                    }else{
-                        $("#nbNotification").html(data.length);
-                        $("#textNbNotification").html("Vous avez "+data.length+" notifications");
-
-                       // $("#nbNotification").css("display","block");
-
+                        $("#nbNotification").html("");
+                        $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
+                    } else if (nbNotificationNONLU == 1) {
+                        $("#nbNotification").html(nbNotificationNONLU);
+                        $("#textNbNotification").html("Vous avez une notification");
+                    } else {
+                        $("#nbNotification").html(nbNotificationNONLU);
+                        $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
                     }
-                    $("#NotificationContainer").html("<ul id=\"subNotificationContainer\" class=\"menu\"></ul>");
-                    $.each(data, function(i, item) {
-                        console.log(item.valeur);
-                        console.log(item.categorie);
+
+                });
+            }
+
 
             timer = setInterval(function () {
                 $.ajax({
@@ -312,3 +313,4 @@
 
     </script>
 {% endblock %}
+
