@@ -85,7 +85,7 @@
                                required>-->
                         <input type="text" class="form-control" id="destinataire_form2" required>
                         <div class="input-group-addon">
-                            <a href="#modal_dest_form2" data-toggle="modal"><i class="fa fa-sort-alpha-asc"></i></a>
+                            <a href="#"><i class="fa fa-sort-alpha-asc"></i></a>
                         </div>
                     </div>
                 </div>
@@ -162,7 +162,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" id="destinataire_form3" value="" required>
                         <div class="input-group-addon">
-                            <i class="fa fa-sort-alpha-asc"></i>
+                            <a href="#modal_dest_form3" data-toggle="modal"><i class="fa fa-sort-alpha-asc"></i></a>
                         </div>
                     </div>
                 </div>
@@ -236,7 +236,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" id="destinataire_form4" value="" required>
                         <div class="input-group-addon">
-                            <i class="fa fa-sort-alpha-asc"></i>
+                            <a href="#modal_dest_form4" data-toggle="modal"><i class="fa fa-sort-alpha-asc"></i></a>
                         </div>
                     </div>
                 </div>
@@ -601,7 +601,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" id="destinataire_form9" required>
                         <div class="input-group-addon">
-                            <i class="fa fa-sort-alpha-asc"></i>
+                            <a href="#modal_dest_form9" data-toggle="modal"><i class="fa fa-sort-alpha-asc"></i></a>
                         </div>
                     </div>
                 </div>
@@ -663,8 +663,8 @@
         </form>
     </div>
 
-    <!-- Debut modal view - destinataire - form2 -->
-    <div class="modal fade" id="modal_dest_form2">
+    <!-- Debut modal view - destinataire - form3 -->
+    <div class="modal fade" id="modal_dest_form3">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- En tete -->
@@ -675,7 +675,53 @@
 
                 <!-- Corps -->
                 <div class="modal-body">
-                    Arborescence des destinataires
+                    <div id="arbre_form3"></div>
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal">Ajouter</button>
+                    <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Debut modal view - destinataire - form4 -->
+    <div class="modal fade" id="modal_dest_form4">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- En tete -->
+                <div class="modal-header modal-header-task">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <div class="modal-title">Liste des destinataires</div>
+                </div>
+
+                <!-- Corps -->
+                <div class="modal-body">
+                    <div id="arbre_form4"></div>
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal">Ajouter</button>
+                    <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Debut modal view - destinataire - for9 -->
+    <div class="modal fade" id="modal_dest_form9">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- En tete -->
+                <div class="modal-header modal-header-task">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <div class="modal-title">Liste des destinataires</div>
+                </div>
+
+                <!-- Corps -->
+                <div class="modal-body">
+                    <div id="arbre_form9"></div>
                 </div>
                 <!-- Footer -->
                 <div class="modal-footer">
