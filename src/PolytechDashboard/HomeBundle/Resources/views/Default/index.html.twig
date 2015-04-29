@@ -238,11 +238,15 @@
             function updateFunction(data)
             {
 
+
                 $("#NotificationContainer").html("<ul id=\"subNotificationContainer\" class=\"menu\"></ul>");
                 var nbNotificationNONLU = 0;
+                console.log(data);
                 $.each(data, function (i, item) {
+                    console.log("==>HERE<==");
                     if (item.status == "NONLU") {
                         nbNotificationNONLU++;
+
                         $("#subNotificationContainer").append(
                                 "<li id=\"notification" + item.id + "\" value='5ra'>" +
                                 "<a >" +

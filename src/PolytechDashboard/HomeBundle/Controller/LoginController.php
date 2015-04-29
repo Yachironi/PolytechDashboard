@@ -25,7 +25,7 @@ class LoginController extends Controller {
 					'password' => $password 
 			) );
 			
-			/* appel du generateur de données du controlleur */
+			/* appel du generateur de donnï¿½es du controlleur */
 			$noteController = $this->get ( 'noteController' );
 			$myGrades = $noteController->indexAction ( $user, $this );
 			$tacheController = $this->get ( 'tacheController' );
@@ -40,6 +40,7 @@ class LoginController extends Controller {
 					$login = new Login ();
 					$login->setUsername ( $username );
 					$login->setPassword ( $password );
+                    $login->setId($user->getId());
 					$session->set ( 'login', $login );
 				}
 				return $this->render ( 'PolytechDashboardHomeBundle:Default:index.html.twig', array (

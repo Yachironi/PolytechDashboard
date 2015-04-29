@@ -44,7 +44,7 @@ class AjaxHandlerController extends Controller
         return new Response($jsonContent);
 
     }
-    public function notificationListAction(Request $request)
+    public function notificationListAction()
     {
         $criteria = Criteria::create()
             ->where(Criteria::expr()->eq("idetudiant", $this->getRequest()->getSession()->get('login')->getId()))
