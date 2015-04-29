@@ -85,4 +85,36 @@ class AjaxHandlerController extends Controller
 
         return new Response();
     }
+    public function setNotificationCategoryAsReadAction(Request $request)
+    {
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq("idetudiant", $this->getRequest()->getSession()->get('loginTMP')->getId()))
+            ->andWhere(Criteria::expr()->eq("categorie", $request->get('categorie')))
+            ->andWhere(Criteria::expr()->eq("status", "NONLU"))
+            ->orderBy(array("id" => Criteria::ASC))
+            ->setFirstResult(0)
+            ->setMaxResults(20);
+
+        $Notifications = $this->getDoctrine()->getRepository('PolytechDashboardHomeBundle:Notification')->matching(
+            $criteria
+        );
+
+        $myArray=array();
+        foreach ($Notifications as $Notification) {
+            $myArray[]=$Notification;
+            $Notification->setStatus("LU");
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($Notification);
+            $em->flush();
+        }
+
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+        $jsonContent = $serializer->serialize($myArray, 'json');
+
+        return new Response($jsonContent);
+    }
+
+
 }

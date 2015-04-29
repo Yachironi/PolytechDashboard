@@ -30,7 +30,7 @@
                                 <i class="fa fa-bell-o"></i>
                                 <span id="nbNotification" class="label label-warning"></span>
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" style=" width: 310px !important;font-size: 12px;">
                                 <li id="textNbNotification" class="header">Vous n'avez pas de nouvelles notifications</li>
                                 <li>
                                     <!-- inner menu: contains the actual data -->
@@ -230,10 +230,95 @@
             border-color: #fff;
             color: #fff;
         }
+        .notification-style{
+            display: block  !important; /* Fallback for non-webkit */
+            display: -webkit-box !important;
+            max-width: 400px !important;
+            height: 12*1.4*5 !important; /* Fallback for non-webkit */
+            margin: 0 auto !important;
+            font-size: 12px !important;
+            line-height: 1.4 !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
     </style>
     <script>
         $( document ).ready(function() {
-            var timer, delay = 30000;
+            var timer, delay = 50000;
+
+            $.ajax({
+                type: 'POST',
+                url: '/notificationList',
+                dataType: 'json',
+                data: $('.ajaxform').serialize(),
+                success: function (data) {
+
+                    updateFunction(data);
+                }
+            });
+            updateNotificationByCategory('Tache');
+
+            function updateNotificationById(idNotification){
+                $.ajax({
+                    type: 'POST',
+                    url: '/setNotificationAsRead',
+                    dataType: 'json',
+                    data: {'id': idNotification},
+                    success: function(data){
+
+                    }
+                });
+                $("#notification"+idNotification).html();
+                $("#notification"+idNotification).remove();
+
+                var nbNotificationNONLU = parseInt($("#nbNotification").text(), 10);
+                nbNotificationNONLU--;
+                // console.log("nbNotificationNONLU = "+nbNotificationNONLU);
+                if (nbNotificationNONLU <=0) {
+                    //$("#nbNotification").css("display","none");
+                    $("#nbNotification").html("");
+                    $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
+                } else if (nbNotificationNONLU == 1) {
+                    $("#nbNotification").html(nbNotificationNONLU);
+                    $("#textNbNotification").html("Vous avez une notification");
+                } else {
+                    $("#nbNotification").html(nbNotificationNONLU);
+                    $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
+                }
+            }
+
+            function updateNotificationByCategory(notificationCategory){
+                $.ajax({
+                    type: 'POST',
+                    url: '/setNotificationCategoryAsRead',
+                    dataType: 'json',
+                    data: {'categorie': notificationCategory},
+                    success: function(data){
+                        $.each(data, function (i, item) {
+                            //updateNotificationById(item.id);
+                            $("#notification"+item.id).html();
+                            $("#notification"+item.id).remove();
+
+                            var nbNotificationNONLU = parseInt($("#nbNotification").text(), 10);
+                            nbNotificationNONLU--;
+                            // console.log("nbNotificationNONLU = "+nbNotificationNONLU);
+                            if (nbNotificationNONLU <=0) {
+                                //$("#nbNotification").css("display","none");
+                                $("#nbNotification").html("");
+                                $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
+                            } else if (nbNotificationNONLU == 1) {
+                                $("#nbNotification").html(nbNotificationNONLU);
+                                $("#textNbNotification").html("Vous avez une notification");
+                            } else {
+                                $("#nbNotification").html(nbNotificationNONLU);
+                                $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
+                            }
+                        });
+                    }
+                });
+            }
 
             function updateFunction(data)
             {
@@ -247,9 +332,9 @@
 
                         $("#subNotificationContainer").append(
                                 "<li id=\"notification" + item.id + "\" value='5ra'>" +
-                                "<a >" +
+                                "<a class='notification-style'>" +
                                 "<i class=\"fa fa-warning text-yellow\"></i><button btnID=\""+item.id+"\" id=\"mark-as-read\" value=\"" + item.id + "\" class=\"btn btn-xs btn-custom\" ><span class=\"glyphicon glyphicon-ok\"></span></button> " +
-                                item.valeur +
+                                ""+item.valeur+"" +
                                 "</a>" +
                                 "" +
                                 "</li>"
@@ -284,19 +369,21 @@
                     return regex.test(jQuery(elem)[attr.method](attr.property));
                 }
 
-                $(":regex(id,mark-as-read.*)").click({'nbNotificationNONLU' : nbNotificationNONLU},function (event) {
+                $(":regex(id,mark-as-read.*)").click({'nbNotificationNONLU' : nbNotificationNONLU,'data':data},function (event) {
 
-                    var nbNotificationNONLU = event.data.nbNotificationNONLU;
+                    updateNotificationById($(this).attr("btnID"));
+
+                    //var nbNotificationNONLU = event.data.nbNotificationNONLU;
                     //console.log("id ="+$(this).attr("btnID"));
 
 
                     //console.log($("#notification"+$(this).attr("btnID")).attr('value'));
 
-                    $.ajax({
+                   /* $.ajax({
                         type: 'POST',
                         url: '/setNotificationAsRead',
                         dataType: 'json',
-                        data: {'id': $("#mark-as-read").attr("value")},
+                        data: {'id': $(this).attr("btnID")},
                         success: function(data){
 
                         }
@@ -318,7 +405,7 @@
                         $("#nbNotification").html(nbNotificationNONLU);
                         $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
                     }
-
+                    */
                 });
             }
 
