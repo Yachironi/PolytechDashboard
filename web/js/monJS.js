@@ -306,7 +306,7 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
                     document.getElementById(div_mdp2).classList.remove('has-error');
                 }
 
-                document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+                document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Confirmation du mot de passe</label>"
                 + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
                 + "</div>";
                 document.getElementById(mdp2).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
@@ -324,7 +324,7 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
                         document.getElementById(div_mdp2).classList.remove('has-error');
                     }
 
-                    document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+                    document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Confirmation du mot de passe</label>"
                     + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
                     + "<span class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>";
 
@@ -342,7 +342,7 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
                         document.getElementById(div_mdp2).classList.remove('has-success');
                     }
 
-                    document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+                    document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Confirmation du mot de passe</label>"
                     + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
                     + "<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>"
                     + "<span style='color:red;'>Les mots de passe sont différents</span>";
@@ -383,7 +383,7 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
                     document.getElementById(div_mdp2).classList.remove('has-error');
                 }
 
-                document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+                document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Confirmation du mot de passe</label>"
                 + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
                 + "</div>";
                 document.getElementById(mdp2).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
@@ -400,7 +400,7 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
                     document.getElementById(div_mdp2).classList.remove('has-success');
                 }
 
-                document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+                document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Confirmation du mot de passe</label>"
                 + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
                 + "<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>"
                 + "<span style='color:red;'>Mot de passe incorrect</span>";
@@ -435,7 +435,7 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
             + "</div>";
             document.getElementById(mdp1).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
 
-            document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+            document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Confirmation du mot de passe</label>"
             + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
             + "</div>";
             document.getElementById(mdp2).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
@@ -469,7 +469,7 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
             + "<span style='color:red;'>Veuillez entrer un mot de passe valide</span>";
             document.getElementById(mdp1).setAttribute("onchange", "verifyPassword('" + mdp1 + "', '" + mdp2 + "', '" + div_mdp1 + "', '" + div_mdp2 + "')");
 
-            document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Nouveau mot de passe</label>"
+            document.getElementById(div_mdp2).innerHTML = "<label class='control-label' for='" + mdp2 + "'>Confirmation du mot de passe</label>"
             + "<input type='password' class='form-control' id='"+ mdp2 +"' value='" + value_mdp2 + "'>"
             + "<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>"
             + "<span style='color:red;'>Mot de passe incorrect</span>";

@@ -90,15 +90,25 @@
                     <div class="modal-body">
                         <div class="form-group" style="vertical-align: middle;">
                             <div class="row"  style="margin: auto; vertical-align: middle;">
-                                <div id="profil_img" class="col-lg-6" style="text-align: right; margin:auto;vertical-align: middle;">
+                                <div class="col-lg-3"></div>
+                                <div id="profil_img" class="col-lg-3" style="margin:none;vertical-align: middle;">
                                     <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image" style="max-width: 100px; max-height: 100px;"/>
+                                    <div class="fileUpload btn btn-default btn-flat btn-sm" style="display:block; width:100px;margin:0;">
+                                        <span class="fa fa-camera"></span> Modifier
+                                        <input type="file" class="upload" />
+                                    </div>
                                 </div>
                                 <div class="col-lg-6" style="margin: auto; height: 100%; vertical-align: middle;" >
                                     <p> {{prenom}} {{nom}}</p>
                                     <p>ET4 - Informatique</p>
                                     <p>N° étudiant : {{ id }}</p>
+                                    <p class="warning_profil_photo">
+                                        <i class="icon fa fa-warning"></i>
+                                        <label>Taille minimum de la photo : 100x100</label>
+                                    </p>
                                 </div>
                             </div>
+
                         </div>
 
                         <form>
