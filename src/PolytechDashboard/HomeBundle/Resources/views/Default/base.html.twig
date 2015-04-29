@@ -36,6 +36,8 @@
     <link href="{{ asset('plugins/daterangepicker/daterangepicker-bs3.css')}}" rel="stylesheet" type="text/css" />
     <!-- Timepicker -->
     <link href="{{ asset('plugins/timepicker/bootstrap-timepicker.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Treeview -->
+    <link href="{{ asset('plugins/treeview/bootstrap-treeview.css')}}" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- DATA TABLES -->
@@ -91,6 +93,8 @@
 <script src="{{ asset('plugins/daterangepicker/daterangepicker2.js')}}" type="text/javascript"></script>
 <!-- datepicker -->
 <script src="{{ asset('plugins/datepicker/bootstrap-datepicker.js')}}" type="text/javascript"></script>
+<!-- treeview -->
+<script src="{{ asset('plugins/treeview/bootstrap-treeview.js')}}" type="text/javascript"></script>
 <!-- Bootstrap time Picker -->
 <script src="{{ asset('plugins/timepicker/bootstrap-timepicker.min.js')}}" type="text/javascript"></script>
 <!-- Bootstrap WYSIHTML5 -->
@@ -206,9 +210,406 @@
 
     });
 </script>
-
-
 <!-- Fin script rajouté -->
+
+<script type="text/javascript">
+    $(function () {
+        var tree_form3 = [
+            {
+                text: "Présidence",
+                state: {
+                    expanded: false
+                },
+                nodes: [
+                    {
+                        text: "Directeur",
+                        nodes: [
+                            {
+                                text: "Alain Sarfati",
+                                icon: "fa fa-user"
+                            }
+
+                        ]
+                    },
+                    {
+                        text: "Directeur adjoint",
+                        nodes: [
+                            {
+                                text: "Marie-Christine Henriot",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                text: "Personnels administratifs",
+                state: {
+                    expanded: false
+                },
+                nodes: [
+                    {
+                        text: "Secretariat",
+                        nodes: [
+                            {
+                                text: "Nadia Chapiteau",
+                                icon: "fa fa-user"
+                            },
+                            {
+                                text: "Angélique Perrin",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Relations internationales",
+                        nodes: [
+                            {
+                                text: "Chantal Escudié",
+                                icon: "fa fa-user"
+                            }
+                            ,
+                            {
+                                text: "Josianne Dervieu",
+                                icon: "fa fa-user"
+                            }
+                            ,
+                            {
+                                text: "Said JeSaisPlus",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Service de scolarité",
+                        nodes: [
+                            {
+                                text: "Dominique Beau",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Relations entreprises",
+                        nodes: [
+                            {
+                                text: "Marie-Christine Henriot",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                text: "Professeurs",
+                state: {
+                    expanded: false
+                },
+                nodes: [
+                    {
+                        text: "Informatique",
+                        nodes: [
+                            {
+                                text: "Aurélien Max",
+                                icon: "fa fa-user"
+                            },
+                            {
+                                text: "Benjamin Marie",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "PSO",
+                        nodes: [
+                            {
+                                text: "Marcelo Bielsa",
+                                icon: "fa fa-user"
+                            }
+                            ,
+                            {
+                                text: "André Ayew",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "E2S",
+                        nodes: [
+                            {
+                                text: "OGCN Nice",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Matériaux",
+                        nodes: [
+                            {
+                                text: "Tours Football Club",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Tronc Commun",
+                        nodes: [
+                            {
+                                text: "Daro PresidentDeLaTunisie",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        var tree_form4 = [
+            {
+                text: "Professeurs",
+                state: {
+                    expanded: true
+                },
+                nodes: [
+                    {
+                        text: "Informatique",
+                        nodes: [
+                            {
+                                text: "Projet Web",
+                                nodes: [
+                                    {
+                                        text: "Aurélien Max",
+                                        icon: "fa fa-user"
+                                    },
+                                    {
+                                        text: "Benjamin Marie",
+                                        icon: "fa fa-user"
+                                    }
+                                ]
+                            },
+                            {
+                                text: "Découverte",
+                                nodes: [
+                                    {
+                                        text: "Aurélien Max",
+                                        icon: "fa fa-user"
+                                    },
+                                    {
+                                        text: "Benjamin Marie",
+                                        icon: "fa fa-user"
+                                    }
+                                ]
+                            },
+                            {
+                                text: "Verification et Validation",
+                                nodes: [
+                                    {
+                                        text: "Burkhart Wolff",
+                                        icon: "fa fa-user"
+                                    },
+                                    {
+                                        text: "Delphine Longuet",
+                                        icon: "fa fa-user"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        text: "Tronc Commun",
+                        nodes: [
+                            {
+                                text: "Informatique",
+                                nodes: [
+                                    {
+                                        text: "PDI",
+                                        nodes: [
+                                            {
+                                                text: "Djamel",
+                                                icon: "fa fa-user"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        text: "PPP2",
+                                        nodes: [
+                                            {
+                                                text: "Patrick Delamaire",
+                                                icon: "fa fa-user"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        var tree_form9 = [
+            {
+                text: "Présidence",
+                state: {
+                    expanded: false
+                },
+                nodes: [
+                    {
+                        text: "Directeur",
+                        nodes: [
+                            {
+                                text: "Alain Sarfati",
+                                icon: "fa fa-user"
+                            }
+
+                        ]
+                    },
+                    {
+                        text: "Directeur adjoint",
+                        nodes: [
+                            {
+                                text: "Marie-Christine Henriot",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                text: "Personnels administratifs",
+                state: {
+                    expanded: false
+                },
+                nodes: [
+                    {
+                        text: "Secretariat",
+                        nodes: [
+                            {
+                                text: "Nadia Chapiteau",
+                                icon: "fa fa-user"
+                            },
+                            {
+                                text: "Angélique Perrin",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Relations internationales",
+                        nodes: [
+                            {
+                                text: "Chantal Escudié",
+                                icon: "fa fa-user"
+                            }
+                            ,
+                            {
+                                text: "Josianne Dervieu",
+                                icon: "fa fa-user"
+                            }
+                            ,
+                            {
+                                text: "Said JeSaisPlus",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Service de scolarité",
+                        nodes: [
+                            {
+                                text: "Dominique Beau",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Relations entreprises",
+                        nodes: [
+                            {
+                                text: "Marie-Christine Henriot",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                text: "Professeurs",
+                state: {
+                    expanded: false
+                },
+                nodes: [
+                    {
+                        text: "Informatique",
+                        nodes: [
+                            {
+                                text: "Aurélien Max",
+                                icon: "fa fa-user"
+                            },
+                            {
+                                text: "Benjamin Marie",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "PSO",
+                        nodes: [
+                            {
+                                text: "Marcelo Bielsa",
+                                icon: "fa fa-user"
+                            }
+                            ,
+                            {
+                                text: "André Ayew",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "E2S",
+                        nodes: [
+                            {
+                                text: "OGCN Nice",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Matériaux",
+                        nodes: [
+                            {
+                                text: "Tours Football Club",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Tronc Commun",
+                        nodes: [
+                            {
+                                text: "Daro PresidentDeLaTunisie",
+                                icon: "fa fa-user"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        $('#arbre_form3').treeview({
+            data: tree_form3
+        });
+        $('#arbre_form4').treeview({
+            data: tree_form4
+        });
+        $('#arbre_form9').treeview({
+            data: tree_form9
+        });
+
+    });
+</script>
+
 
 <!-- fullCalendar 2.2.5 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
