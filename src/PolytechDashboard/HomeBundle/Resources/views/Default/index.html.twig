@@ -233,7 +233,7 @@
     </style>
     <script>
         $( document ).ready(function() {
-            var timer, delay = 5000;
+            var timer, delay = 30000;
 
             function updateFunction(data)
             {
@@ -269,14 +269,28 @@
                     $("#nbNotification").html(nbNotificationNONLU);
                     $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
                 }
-                $("#mark-as-read").click({'nbNotificationNONLU' : nbNotificationNONLU},function (event) {
+
+
+                jQuery.expr[':'].regex = function(elem, index, match) {
+                    var matchParams = match[3].split(','),
+                            validLabels = /^(data|css):/,
+                            attr = {
+                                method: matchParams[0].match(validLabels) ?
+                                        matchParams[0].split(':')[0] : 'attr',
+                                property: matchParams.shift().replace(validLabels,'')
+                            },
+                            regexFlags = 'ig',
+                            regex = new RegExp(matchParams.join('').replace(/^s+|s+$/g,''), regexFlags);
+                    return regex.test(jQuery(elem)[attr.method](attr.property));
+                }
+
+                $(":regex(id,mark-as-read.*)").click({'nbNotificationNONLU' : nbNotificationNONLU},function (event) {
 
                     var nbNotificationNONLU = event.data.nbNotificationNONLU;
                     //console.log("id ="+$(this).attr("btnID"));
 
 
                     //console.log($("#notification"+$(this).attr("btnID")).attr('value'));
-
 
                     $.ajax({
                         type: 'POST',
@@ -287,9 +301,12 @@
 
                         }
                     });
-                    $("#notification"+$(this).attr("btnID")).html();
-                    $("#notification"+$(this).attr("btnID")).remove();
+                    var btnid=$(this).attr("btnID");
+                    $("#notification"+btnid).html();
+                    $("#notification"+btnid).remove();
                     nbNotificationNONLU--;
+                    event.data.nbNotificationNONLU--;
+                   // console.log("nbNotificationNONLU = "+nbNotificationNONLU);
                     if (nbNotificationNONLU == 0) {
                         //$("#nbNotification").css("display","none");
                         $("#nbNotification").html("");
