@@ -5,12 +5,12 @@ namespace PolytechDashboard\HomeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Gestionnairestage
+ * Gestionnaireautre
  *
- * @ORM\Table(name="GestionnaireStage")
+ * @ORM\Table(name="GestionnaireAutre")
  * @ORM\Entity
  */
-class GestionnaireStage
+class GestionnaireAutre
 {
     /**
      * @var integer
@@ -24,7 +24,7 @@ class GestionnaireStage
     /**
      * @var string
      *
-     * @ORM\Column(name="autre", type="integer", nullable=true)
+     * @ORM\Column(name="autre", type="text", nullable=true)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
@@ -58,7 +58,7 @@ class GestionnaireStage
     /**
      * Set autre
      *
-     * @param integer $autre
+     * @param string $autre
      * @return Gestionnaireautre
      */
     public function setAutre($autre)
@@ -71,7 +71,7 @@ class GestionnaireStage
     /**
      * Get autre
      *
-     * @return integer 
+     * @return string 
      */
     public function getAutre()
     {
