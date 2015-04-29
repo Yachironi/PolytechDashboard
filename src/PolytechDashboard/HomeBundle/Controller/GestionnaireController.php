@@ -54,9 +54,9 @@ class GestionnaireController extends Controller {
 			if ($tmp != null) {
 				/* gestionnaire de cours trouv� */
 				$gestionnaireC = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $tmp->getIdgestionnaire () );
+				array_push ( $cours, $gestionnaireC );
 			}
 			
-			array_push ( $cours, $gestionnaireC );
 			unset ( $gestionnaireC );
 			unset ( $tmp );
 		}
@@ -78,8 +78,8 @@ class GestionnaireController extends Controller {
 		$myGestionnaires ['Formation'] = $Gestionnairef;
 		$myGestionnaires ['Cours'] = $cours;
 		
-		$myGestionnaires ['RI-Europe'] = $riEurope;
-		$myGestionnaires ['RI-Monde'] = $riMonde;
+		$myGestionnaires ['RIEurope'] = $riEurope;
+		$myGestionnaires ['RIMonde'] = $riMonde;
 		$myGestionnaires ['Sport'] = $sport;
 		$myGestionnaires ['Scolarite'] = $scolarite;
 		

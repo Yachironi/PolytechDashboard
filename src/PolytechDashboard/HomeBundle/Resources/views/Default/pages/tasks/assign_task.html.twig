@@ -4,9 +4,9 @@
 
         $(document).ready(function() {
             $("#destinataire_form2,#destinataire_form7").tokenInput("/contactList", {
-               /* Valuers par défaut */
+               /* Gestionnaire de la formation de l'etudiant */
                 prePopulate: [
-                    {"id":3,"nom":"{{ myAdmins.Admin.getNom() }}","prenom":"{{ myAdmins.Admin.getPrenom() }}","email":"{{ myAdmins.Admin.getEmail() }}"},
+                    {"id":"{{ myAdmins.Admin.getId() }}","nom":"{{ myAdmins.Admin.getNom() }}","prenom":"{{ myAdmins.Admin.getPrenom() }}","email":"{{ myAdmins.Admin.getEmail() }}"},
                 ],
                 theme: "facebook",
                 propertyToSearch: "nom",
@@ -16,9 +16,9 @@
                 tokenValue: "email"
             });
             $("#destinataire_form6").tokenInput("/contactList", {
-                /* Valuers par défaut */
+                /* Gestionnaire de stage de l'etudiant */
                 prePopulate: [
-                    {"id":3,"nom":"{{ myAdmins.Stage.getNom() }}","prenom":"{{ myAdmins.Stage.getPrenom() }}","email":"{{ myAdmins.Stage.getEmail() }}"},
+                    {"id":"{{ myAdmins.Stage.getId() }}","nom":"{{ myAdmins.Stage.getNom() }}","prenom":"{{ myAdmins.Stage.getPrenom() }}","email":"{{ myAdmins.Stage.getEmail() }}"},
                 ],
                 theme: "facebook",
                 propertyToSearch: "nom",
@@ -27,8 +27,64 @@
                 preventDuplicates: true,
                 tokenValue: "email"
             });
-            $("#destinataire_form3,#destinataire_form4,#destinataire_form5,#destinataire_form8,#destinataire_form9").tokenInput("/contactList", {
-                /* Valuers par défaut */
+            $("#destinataire_form8").tokenInput("/contactList", {
+                /* l'etudiant lui m�me */
+                prePopulate: [
+                    {"id":"{{ id }}","nom":"{{ nom }}","prenom":"{{ prenom }}","email": "{{ email }}"},
+                ],
+                theme: "facebook",
+                propertyToSearch: "nom",
+                resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
+                tokenFormatter: function(item) { return "<li><p>" + item.email+ "</p></li>" },
+                preventDuplicates: true,
+                tokenValue: "email"
+            });
+            $("#destinataire_form4").tokenInput("/contactList", {
+                /* Les gestionnaires de cours de l'etudiant */
+                prePopulate: [
+                {% for profs in myAdmins.Cours %}
+                	{%  if profs.getEmail() != '' %}            
+						{"id":"{{profs.getId()}}","nom":"{{ profs.getNom() }}","prenom":"{{ profs.getPrenom() }}","email":"{{ profs.getEmail() }}"},                              
+					{% endif %}
+                {% endfor %}
+				],
+                theme: "facebook",
+                propertyToSearch: "nom",
+                resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
+                tokenFormatter: function(item) { return "<li><p>" + item.email+ "</p></li>" },
+                preventDuplicates: true,
+                tokenValue: "email"
+            });
+            $("#destinataire_form5").tokenInput("/contactList", {
+                /* Les gestionnaires internationaux, sport et scolarite */
+                prePopulate: [
+                    {"id":"{{myAdmins.RIEurope.getId()}}","nom":"{{ myAdmins.RIEurope.getNom() }}","prenom":"{{ myAdmins.RIEurope.getPrenom() }}","email":"{{ myAdmins.RIEurope.getEmail() }}"},                              
+                    {"id":"{{myAdmins.RIMonde.getId()}}","nom":"{{ myAdmins.RIMonde.getNom() }}","prenom":"{{ myAdmins.RIMonde.getPrenom() }}","email":"{{ myAdmins.RIMonde.getEmail() }}"},                              
+                    {"id":"{{myAdmins.Sport.getId()}}","nom":"{{ myAdmins.Sport.getNom() }}","prenom":"{{ myAdmins.Sport.getPrenom() }}","email":"{{ myAdmins.Sport.getEmail() }}"},                              
+        			{"id":"{{myAdmins.Scolarite.getId()}}","nom":"{{ myAdmins.Scolarite.getNom() }}","prenom":"{{ myAdmins.Scolarite.getPrenom() }}","email":"{{ myAdmins.Scolarite.getEmail() }}"},                              
+        	    ],
+                theme: "facebook",
+                propertyToSearch: "nom",
+                resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
+                tokenFormatter: function(item) { return "<li><p>" + item.email+ "</p></li>" },
+                preventDuplicates: true,
+                tokenValue: "email"
+            });
+            $("#destinataire_form3,#destinataire_form9").tokenInput("/contactList", {
+                /* tous les gestionnaires */
+                prePopulate: [
+                    {"id":"{{ myAdmins.Admin.getId() }}","nom":"{{ myAdmins.Admin.getNom() }}","prenom":"{{ myAdmins.Admin.getPrenom() }}","email":"{{ myAdmins.Admin.getEmail() }}"},            
+                    {"id":"{{ myAdmins.Stage.getId() }}","nom":"{{ myAdmins.Stage.getNom() }}","prenom":"{{ myAdmins.Stage.getPrenom() }}","email":"{{ myAdmins.Stage.getEmail() }}"},                
+                    {"id":"{{ myAdmins.Formation.getId() }}","nom":"{{ myAdmins.Formation.getNom() }}","prenom":"{{ myAdmins.Formation.getPrenom() }}","email":"{{ myAdmins.Formation.getEmail() }}"},                
+                    {"id":"{{myAdmins.RIEurope.getId()}}","nom":"{{ myAdmins.RIEurope.getNom() }}","prenom":"{{ myAdmins.RIEurope.getPrenom() }}","email":"{{ myAdmins.RIEurope.getEmail() }}"},                              
+                    {"id":"{{myAdmins.RIMonde.getId()}}","nom":"{{ myAdmins.RIMonde.getNom() }}","prenom":"{{ myAdmins.RIMonde.getPrenom() }}","email":"{{ myAdmins.RIMonde.getEmail() }}"},                              
+                    {"id":"{{myAdmins.Sport.getId()}}","nom":"{{ myAdmins.Sport.getNom() }}","prenom":"{{ myAdmins.Sport.getPrenom() }}","email":"{{ myAdmins.Sport.getEmail() }}"},                              
+        			{"id":"{{myAdmins.Scolarite.getId()}}","nom":"{{ myAdmins.Scolarite.getNom() }}","prenom":"{{ myAdmins.Scolarite.getPrenom() }}","email":"{{ myAdmins.Scolarite.getEmail() }}"},                              
+                    {% for profs in myAdmins.Cours %}                
+						{"id":"{{profs.getId()}}","nom":"{{ profs.getNom() }}","prenom":"{{ profs.getPrenom() }}","email":"{{ profs.getEmail() }}"},                              
+					{% endfor %}
+
+        			],                
                 theme: "facebook",
                 propertyToSearch: "nom",
                 resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
@@ -533,7 +589,7 @@
                     <!-- TODO : griser cette partie -->
                     <div class="input-group">
                         <!-- TODO : lorsque cette tache sera envoye, remplacer "moi" par l'etudiant actuel -->
-                        <input type="text" class="form-control" id="destinataire_form8" value="Moi" disabled>
+                        <input type="text" class="form-control" id="destinataire_form8" >
                         <div class="input-group-addon">
                             <i class="fa fa-sort-alpha-asc"></i>
                         </div>
