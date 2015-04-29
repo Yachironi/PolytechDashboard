@@ -20,6 +20,9 @@ function activateTag(id_tag){
     if(id_tag=='planning')  {
         $('#calendar').fullCalendar('render');
     }
+
+    /* Mise a jour des notification */
+    updateNotificationByCategory(id_tag);
 }
 
 function activeSemestre(ID){

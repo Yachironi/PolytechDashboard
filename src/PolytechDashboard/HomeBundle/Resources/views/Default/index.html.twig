@@ -245,6 +245,69 @@
         }
     </style>
     <script>
+        function categoriefromId(idNotification,dataGroup){
+            $.each(dataGroup, function (i, item) {
+                if (item.id==idNotification){
+                    return item.categorie;
+                }
+            });
+            return null;
+        }
+        function updateNotificationByCategory(notificationCategory){
+            //console.log("updateNotificationByCategory CALL = "+notificationCategory);
+            $.ajax({
+                type: 'POST',
+                url: '/setNotificationCategoryAsRead',
+                dataType: 'json',
+                data: {'categorie': notificationCategory},
+                success: function(data){
+                    $.each(data, function (i, item) {
+                        $("#notification"+item.id).html();
+                        $("#notification"+item.id).remove();
+
+                        var nbNotificationNONLU = parseInt($("#nbNotification").text(), 10);
+                        nbNotificationNONLU--;
+                        // console.log("nbNotificationNONLU = "+nbNotificationNONLU);
+
+                        jQuery.expr[':'].regex = function(elem, index, match) {
+                            var matchParams = match[3].split(','),
+                                    validLabels = /^(data|css):/,
+                                    attr = {
+                                        method: matchParams[0].match(validLabels) ?
+                                                matchParams[0].split(':')[0] : 'attr',
+                                        property: matchParams.shift().replace(validLabels,'')
+                                    },
+                                    regexFlags = 'ig',
+                                    regex = new RegExp(matchParams.join('').replace(/^s+|s+$/g,''), regexFlags);
+                            return regex.test(jQuery(elem)[attr.method](attr.property));
+                        }
+
+
+                        if (nbNotificationNONLU <=0) {
+                            //$("#nbNotification").css("display","none");
+                            $("#nbNotification").html("");
+                            $("#"+item.categorie+"-notification-tag").html("");
+                            $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
+                            $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
+                        } else if (nbNotificationNONLU == 1) {
+                            $("#nbNotification").html(nbNotificationNONLU);
+                            //$("#"+item.categorie+"-notification-tag").html("");
+                            $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
+                            $("#textNbNotification").html("Vous avez une notification");
+                        } else {
+                            $("#nbNotification").html(nbNotificationNONLU);
+                            $("#"+item.categorie+"-notification-tag").html(nbNotificationNONLU);
+                            $("#"+item.categorie+"-notification-tag").html("");
+                            $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
+
+                            //$("#"+item.categorie+"-notification-tag").html(parseInt($("#"+item.categorie+"-notification-tag").text(), 10)-1);
+                            $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
+                        }
+                    });
+                }
+            });
+        }
+
         $( document ).ready(function() {
             var timer, delay = 50000;
 
@@ -258,9 +321,9 @@
                     updateFunction(data);
                 }
             });
-            updateNotificationByCategory('Tache');
 
-            function updateNotificationById(idNotification){
+
+            function updateNotificationById(idNotification,dataGroup){
                 $.ajax({
                     type: 'POST',
                     url: '/setNotificationAsRead',
@@ -275,7 +338,23 @@
 
                 var nbNotificationNONLU = parseInt($("#nbNotification").text(), 10);
                 nbNotificationNONLU--;
+
                 // console.log("nbNotificationNONLU = "+nbNotificationNONLU);
+                function categoriefromId(idNotification,dataGroup){
+                    $.each(dataGroup, function (i, item) {
+                        if (item.id==idNotification){
+                            return item.categorie;
+                        }
+                    });
+                    return null;
+                }
+
+  /*              $("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").html(
+                        parseInt($("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").text(), 10)-1);
+*/
+                $(":regex(id,"+categoriefromId(idNotification,dataGroup)+"-notification-tag.*)").html(
+                        parseInt($("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").text(), 10)-1);
+
                 if (nbNotificationNONLU <=0) {
                     //$("#nbNotification").css("display","none");
                     $("#nbNotification").html("");
@@ -289,73 +368,9 @@
                 }
             }
 
-            function updateNotificationByCategory(notificationCategory){
-                $.ajax({
-                    type: 'POST',
-                    url: '/setNotificationCategoryAsRead',
-                    dataType: 'json',
-                    data: {'categorie': notificationCategory},
-                    success: function(data){
-                        $.each(data, function (i, item) {
-                            //updateNotificationById(item.id);
-                            $("#notification"+item.id).html();
-                            $("#notification"+item.id).remove();
-
-                            var nbNotificationNONLU = parseInt($("#nbNotification").text(), 10);
-                            nbNotificationNONLU--;
-                            // console.log("nbNotificationNONLU = "+nbNotificationNONLU);
-                            if (nbNotificationNONLU <=0) {
-                                //$("#nbNotification").css("display","none");
-                                $("#nbNotification").html("");
-                                $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
-                            } else if (nbNotificationNONLU == 1) {
-                                $("#nbNotification").html(nbNotificationNONLU);
-                                $("#textNbNotification").html("Vous avez une notification");
-                            } else {
-                                $("#nbNotification").html(nbNotificationNONLU);
-                                $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
-                            }
-                        });
-                    }
-                });
-            }
 
             function updateFunction(data)
             {
-
-
-                $("#NotificationContainer").html("<ul id=\"subNotificationContainer\" class=\"menu\"></ul>");
-                var nbNotificationNONLU = 0;
-                $.each(data, function (i, item) {
-                    if (item.status == "NONLU") {
-                        nbNotificationNONLU++;
-
-                        $("#subNotificationContainer").append(
-                                "<li id=\"notification" + item.id + "\" value='5ra'>" +
-                                "<a class='notification-style'>" +
-                                "<i class=\"fa fa-warning text-yellow\"></i><button btnID=\""+item.id+"\" id=\"mark-as-read\" value=\"" + item.id + "\" class=\"btn btn-xs btn-custom\" ><span class=\"glyphicon glyphicon-ok\"></span></button> " +
-                                ""+item.valeur+"" +
-                                "</a>" +
-                                "" +
-                                "</li>"
-                        );
-                    }
-                });
-
-
-                if (nbNotificationNONLU == 0) {
-                    //$("#nbNotification").css("display","none");
-                    $("#nbNotification").html("");
-                    $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
-                } else if (nbNotificationNONLU == 1) {
-                    $("#nbNotification").html(nbNotificationNONLU);
-                    $("#textNbNotification").html("Vous avez une notification");
-                } else {
-                    $("#nbNotification").html(nbNotificationNONLU);
-                    $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
-                }
-
-
                 jQuery.expr[':'].regex = function(elem, index, match) {
                     var matchParams = match[3].split(','),
                             validLabels = /^(data|css):/,
@@ -369,9 +384,55 @@
                     return regex.test(jQuery(elem)[attr.method](attr.property));
                 }
 
+                $("#NotificationContainer").html("<ul id=\"subNotificationContainer\" class=\"menu\"></ul>");
+                var nbNotificationNONLU = 0;
+                $(":regex(id,.*-notification-tag.*)").html("");
+                $.each(data, function (i, item) {
+                    if (item.status == "NONLU") {
+
+                        nbNotificationNONLU++;
+
+                        //console.log("Before \" "+item.categorie+"-notification-tag \" tag = $"+$("#"+item.categorie+"-notification-tag").text()+"$");
+
+                        if($(":regex(id,"+item.categorie+"-notification-tag.*)").text()==""){
+                            $(":regex(id,"+item.categorie+"-notification-tag.*)").html("0")
+                           //$("#"+item.categorie+"-notification-tag").html("0");
+                        }
+                        $(":regex(id,"+item.categorie+"-notification-tag.*)").html(parseInt($("#"+item.categorie+"-notification-tag").text(), 10)+1);
+
+
+                        //console.log("After \" "+item.categorie+"-notification-tag \" tag = $"+$("#"+item.categorie+"-notification-tag").text()+"$");
+
+                        $("#subNotificationContainer").append(
+                                "<li id=\"notification" + item.id + "\" >" +
+                                "<a class='notification-style' href='#' onclick=\"activateTag('"+item.categorie+"') \">" +
+                                "<i class=\"fa fa-warning text-yellow\"></i><button btnID=\""+item.id+"\" id=\"mark-as-read\" value=\"" + item.id + "\" class=\"btn btn-xs btn-custom\" ><span class=\"glyphicon glyphicon-ok\"></span></button> " +
+                                ""+item.valeur+"" +
+                                "</a>" +
+                                "" +
+                                "</li>"
+                        );
+                    }
+
+                });
+                if (nbNotificationNONLU == 0) {
+                    //$("#nbNotification").css("display","none");
+                    $("#nbNotification").html("");
+                    $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
+                } else if (nbNotificationNONLU == 1) {
+                    $("#nbNotification").html(nbNotificationNONLU);
+                    $("#textNbNotification").html("Vous avez une notification");
+                } else {
+                    $("#nbNotification").html(nbNotificationNONLU);
+                    $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
+                }
+
+
+
+
                 $(":regex(id,mark-as-read.*)").click({'nbNotificationNONLU' : nbNotificationNONLU,'data':data},function (event) {
 
-                    updateNotificationById($(this).attr("btnID"));
+                    updateNotificationById($(this).attr("btnID"),event.data.data);
 
                     //var nbNotificationNONLU = event.data.nbNotificationNONLU;
                     //console.log("id ="+$(this).attr("btnID"));
