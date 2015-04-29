@@ -6,19 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use PolytechDashboard\HomeBundle\Entity\Etudiant;
 use PolytechDashboard\HomeBundle\Modals\Login;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class LoginController extends Controller {
 	public function indexAction(Request $request) {
-        $session = new Session();
-        $session->start();
-		//$session = $this->getRequest ()->getSession ();
+		$session = $this->getRequest ()->getSession ();
 		$em = $this->getDoctrine ()->getEntityManager ();
 		$repository = $em->getRepository ( 'PolytechDashboardHomeBundle:Etudiant' );
 		
 		if ($request->getMethod () == 'POST') {
-
-			$session->clear();
+			
+			$session->clear ();
 			$username = $request->get ( 'username' );
 			$passwordBeforeHash = $request->get ( 'password' );
 			$password = sha1 ( $passwordBeforeHash );
@@ -37,15 +34,21 @@ class LoginController extends Controller {
 			$myUE = $programmeController->indexAction ( $user, $this );
 			$gestionnaireController = $this->get ( 'gestionnaireController' );
 			$myAdmins = $gestionnaireController->indexAction ( 21303181, $this );
-			
+
+
+
 			if ($user) {
+                $loginTMP = new Login ();
+                $loginTMP->setUsername ( $username );
+                $loginTMP->setPassword ( $password );
+                $loginTMP->setId($user->getId());
+                $session->set ( 'loginTMP', $loginTMP );
 				if ($remember == 'remember-me') {
 					$login = new Login ();
 					$login->setUsername ( $username );
 					$login->setPassword ( $password );
                     $login->setId($user->getId());
 					$session->set ( 'login', $login );
-
 				}
 				return $this->render ( 'PolytechDashboardHomeBundle:Default:index.html.twig', array (
 						'prenom' => $user->getPrenom (),

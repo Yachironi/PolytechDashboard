@@ -27,3 +27,8 @@ polytech_dashboard_GetNotificationList:
 polytech_dashboard_SetNotificationAsRead:
     path:     /setNotificationAsRead
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:setNotificationAsRead"}
+
+
+polytech_dashboard_setNotificationCategoryAsRead:
+    path:     /setNotificationCategoryAsRead
+    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:setNotificationCategoryAsRead"}

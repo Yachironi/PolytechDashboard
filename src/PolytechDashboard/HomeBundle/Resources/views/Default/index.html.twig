@@ -30,7 +30,7 @@
                                 <i class="fa fa-bell-o"></i>
                                 <span id="nbNotification" class="label label-warning"></span>
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" style=" width: 310px !important;font-size: 12px;">
                                 <li id="textNbNotification" class="header">Vous n'avez pas de nouvelles notifications</li>
                                 <li>
                                     <!-- inner menu: contains the actual data -->
@@ -90,15 +90,27 @@
                     <div class="modal-body">
                         <div class="form-group" style="vertical-align: middle;">
                             <div class="row"  style="margin: auto; vertical-align: middle;">
-                                <div id="profil_img" class="col-lg-6" style="text-align: right; margin:auto;vertical-align: middle;">
+                                <div class="col-lg-3"></div>
+                                <div id="profil_img" class="col-lg-3" style="margin:none;vertical-align: middle;">
                                     <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image" style="max-width: 100px; max-height: 100px;"/>
+
+                                    <!-- TODO : etablir le changement de photo -->
+                                    <div class="fileUpload btn btn-default btn-flat btn-sm" style="display:block; width:100px;margin:0;">
+                                        <span class="fa fa-camera"></span> Modifier
+                                        <input type="file" class="upload" />
+                                    </div>
                                 </div>
                                 <div class="col-lg-6" style="margin: auto; height: 100%; vertical-align: middle;" >
                                     <p> {{prenom}} {{nom}}</p>
                                     <p>ET4 - Informatique</p>
                                     <p>N° étudiant : {{ id }}</p>
+                                    <p class="warning_profil_photo">
+                                        <i class="icon fa fa-warning"></i>
+                                        <label>Taille minimum de la photo : 100x100</label>
+                                    </p>
                                 </div>
                             </div>
+
                         </div>
 
                         <form>
@@ -220,32 +232,191 @@
             border-color: #fff;
             color: #fff;
         }
+        .notification-style{
+            display: block  !important; /* Fallback for non-webkit */
+            display: -webkit-box !important;
+            max-width: 400px !important;
+            height: 12*1.4*5 !important; /* Fallback for non-webkit */
+            margin: 0 auto !important;
+            font-size: 12px !important;
+            line-height: 1.4 !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
     </style>
     <script>
+        function categoriefromId(idNotification,dataGroup){
+            $.each(dataGroup, function (i, item) {
+                if (item.id==idNotification){
+                    return item.categorie;
+                }
+            });
+            return null;
+        }
+        function updateNotificationByCategory(notificationCategory){
+            //console.log("updateNotificationByCategory CALL = "+notificationCategory);
+            $.ajax({
+                type: 'POST',
+                url: '/setNotificationCategoryAsRead',
+                dataType: 'json',
+                data: {'categorie': notificationCategory},
+                success: function(data){
+                    $.each(data, function (i, item) {
+                        $("#notification"+item.id).html();
+                        $("#notification"+item.id).remove();
+
+                        var nbNotificationNONLU = parseInt($("#nbNotification").text(), 10);
+                        nbNotificationNONLU--;
+                        // console.log("nbNotificationNONLU = "+nbNotificationNONLU);
+
+                        jQuery.expr[':'].regex = function(elem, index, match) {
+                            var matchParams = match[3].split(','),
+                                    validLabels = /^(data|css):/,
+                                    attr = {
+                                        method: matchParams[0].match(validLabels) ?
+                                                matchParams[0].split(':')[0] : 'attr',
+                                        property: matchParams.shift().replace(validLabels,'')
+                                    },
+                                    regexFlags = 'ig',
+                                    regex = new RegExp(matchParams.join('').replace(/^s+|s+$/g,''), regexFlags);
+                            return regex.test(jQuery(elem)[attr.method](attr.property));
+                        }
+
+
+                        if (nbNotificationNONLU <=0) {
+                            //$("#nbNotification").css("display","none");
+                            $("#nbNotification").html("");
+                            $("#"+item.categorie+"-notification-tag").html("");
+                            $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
+                            $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
+                        } else if (nbNotificationNONLU == 1) {
+                            $("#nbNotification").html(nbNotificationNONLU);
+                            //$("#"+item.categorie+"-notification-tag").html("");
+                            $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
+                            $("#textNbNotification").html("Vous avez une notification");
+                        } else {
+                            $("#nbNotification").html(nbNotificationNONLU);
+                            $("#"+item.categorie+"-notification-tag").html(nbNotificationNONLU);
+                            $("#"+item.categorie+"-notification-tag").html("");
+                            $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
+
+                            //$("#"+item.categorie+"-notification-tag").html(parseInt($("#"+item.categorie+"-notification-tag").text(), 10)-1);
+                            $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
+                        }
+                    });
+                }
+            });
+        }
+
         $( document ).ready(function() {
-            var timer, delay = 5000;
+            var timer, delay = 50000;
+
+            $.ajax({
+                type: 'POST',
+                url: '/notificationList',
+                dataType: 'json',
+                data: $('.ajaxform').serialize(),
+                success: function (data) {
+
+                    updateFunction(data);
+                }
+            });
+
+
+            function updateNotificationById(idNotification,dataGroup){
+                $.ajax({
+                    type: 'POST',
+                    url: '/setNotificationAsRead',
+                    dataType: 'json',
+                    data: {'id': idNotification},
+                    success: function(data){
+
+                    }
+                });
+                $("#notification"+idNotification).html();
+                $("#notification"+idNotification).remove();
+
+                var nbNotificationNONLU = parseInt($("#nbNotification").text(), 10);
+                nbNotificationNONLU--;
+
+                // console.log("nbNotificationNONLU = "+nbNotificationNONLU);
+                function categoriefromId(idNotification,dataGroup){
+                    $.each(dataGroup, function (i, item) {
+                        if (item.id==idNotification){
+                            return item.categorie;
+                        }
+                    });
+                    return null;
+                }
+
+  /*              $("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").html(
+                        parseInt($("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").text(), 10)-1);
+*/
+                $(":regex(id,"+categoriefromId(idNotification,dataGroup)+"-notification-tag.*)").html(
+                        parseInt($("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").text(), 10)-1);
+
+                if (nbNotificationNONLU <=0) {
+                    //$("#nbNotification").css("display","none");
+                    $("#nbNotification").html("");
+                    $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
+                } else if (nbNotificationNONLU == 1) {
+                    $("#nbNotification").html(nbNotificationNONLU);
+                    $("#textNbNotification").html("Vous avez une notification");
+                } else {
+                    $("#nbNotification").html(nbNotificationNONLU);
+                    $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
+                }
+            }
+
 
             function updateFunction(data)
             {
+                jQuery.expr[':'].regex = function(elem, index, match) {
+                    var matchParams = match[3].split(','),
+                            validLabels = /^(data|css):/,
+                            attr = {
+                                method: matchParams[0].match(validLabels) ?
+                                        matchParams[0].split(':')[0] : 'attr',
+                                property: matchParams.shift().replace(validLabels,'')
+                            },
+                            regexFlags = 'ig',
+                            regex = new RegExp(matchParams.join('').replace(/^s+|s+$/g,''), regexFlags);
+                    return regex.test(jQuery(elem)[attr.method](attr.property));
+                }
 
                 $("#NotificationContainer").html("<ul id=\"subNotificationContainer\" class=\"menu\"></ul>");
                 var nbNotificationNONLU = 0;
+                $(":regex(id,.*-notification-tag.*)").html("");
                 $.each(data, function (i, item) {
                     if (item.status == "NONLU") {
+
                         nbNotificationNONLU++;
+
+                        //console.log("Before \" "+item.categorie+"-notification-tag \" tag = $"+$("#"+item.categorie+"-notification-tag").text()+"$");
+
+                        if($(":regex(id,"+item.categorie+"-notification-tag.*)").text()==""){
+                            $(":regex(id,"+item.categorie+"-notification-tag.*)").html("0")
+                           //$("#"+item.categorie+"-notification-tag").html("0");
+                        }
+                        $(":regex(id,"+item.categorie+"-notification-tag.*)").html(parseInt($("#"+item.categorie+"-notification-tag").text(), 10)+1);
+
+
+                        //console.log("After \" "+item.categorie+"-notification-tag \" tag = $"+$("#"+item.categorie+"-notification-tag").text()+"$");
+
                         $("#subNotificationContainer").append(
-                                "<li id=\"notification" + item.id + "\" value='5ra'>" +
-                                "<a >" +
+                                "<li id=\"notification" + item.id + "\" >" +
+                                "<a class='notification-style' href='#' onclick=\"activateTag('"+item.categorie+"') \">" +
                                 "<i class=\"fa fa-warning text-yellow\"></i><button btnID=\""+item.id+"\" id=\"mark-as-read\" value=\"" + item.id + "\" class=\"btn btn-xs btn-custom\" ><span class=\"glyphicon glyphicon-ok\"></span></button> " +
-                                item.valeur +
+                                ""+item.valeur+"" +
                                 "</a>" +
                                 "" +
                                 "</li>"
                         );
                     }
+
                 });
-
-
                 if (nbNotificationNONLU == 0) {
                     //$("#nbNotification").css("display","none");
                     $("#nbNotification").html("");
@@ -257,27 +428,35 @@
                     $("#nbNotification").html(nbNotificationNONLU);
                     $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
                 }
-                $("#mark-as-read").click({'nbNotificationNONLU' : nbNotificationNONLU},function (event) {
 
-                    var nbNotificationNONLU = event.data.nbNotificationNONLU;
+
+
+
+                $(":regex(id,mark-as-read.*)").click({'nbNotificationNONLU' : nbNotificationNONLU,'data':data},function (event) {
+
+                    updateNotificationById($(this).attr("btnID"),event.data.data);
+
+                    //var nbNotificationNONLU = event.data.nbNotificationNONLU;
                     //console.log("id ="+$(this).attr("btnID"));
 
 
                     //console.log($("#notification"+$(this).attr("btnID")).attr('value'));
 
-
-                    $.ajax({
+                   /* $.ajax({
                         type: 'POST',
                         url: '/setNotificationAsRead',
                         dataType: 'json',
-                        data: {'id': $("#mark-as-read").attr("value")},
+                        data: {'id': $(this).attr("btnID")},
                         success: function(data){
 
                         }
                     });
-                    $("#notification"+$(this).attr("btnID")).html();
-                    $("#notification"+$(this).attr("btnID")).remove();
+                    var btnid=$(this).attr("btnID");
+                    $("#notification"+btnid).html();
+                    $("#notification"+btnid).remove();
                     nbNotificationNONLU--;
+                    event.data.nbNotificationNONLU--;
+                   // console.log("nbNotificationNONLU = "+nbNotificationNONLU);
                     if (nbNotificationNONLU == 0) {
                         //$("#nbNotification").css("display","none");
                         $("#nbNotification").html("");
@@ -289,7 +468,7 @@
                         $("#nbNotification").html(nbNotificationNONLU);
                         $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
                     }
-
+                    */
                 });
             }
 

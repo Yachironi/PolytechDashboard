@@ -229,7 +229,21 @@ a:hover > .fa-trash{
     color: #F39C12;
     font-size: large;
     margin-right: 8px;
+}
 
+.warning_profil_photo > i{
+    color: #F39C12;
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+.warning_profil_photo{
+    margin-top: 5px;
+}
+
+.warning_profil_photo > label{
+    font-weight: normal;
+    font-size:11px;
 }
 
 /* Onglet mon espace */
@@ -308,4 +322,27 @@ a:hover > .fa-trash{
     height: auto;
     max-height: 200px;
     overflow-x: hidden;
+}
+
+.btn-photo{
+    width: 100px;
+    display: block;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+
 }
