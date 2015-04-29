@@ -61,10 +61,27 @@ class GestionnaireController extends Controller {
 			unset ( $tmp );
 		}
 		
+		$gestionnaireEurope = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireAutre' )->findOneByAutre('Relations Internationales - Europe');
+		$riEurope = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $gestionnaireEurope->getIdgestionnaire () );
+		
+		$gestionnaireMonde = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireAutre' )->findOneByAutre ('Relations Internationales - Monde');
+		$riMonde = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $gestionnaireMonde->getIdgestionnaire () );
+		
+		$gestionnaireSport = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireAutre' )->findOneByAutre ('Sport');
+		$sport = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $gestionnaireSport->getIdgestionnaire () );
+		
+		$gestionnaireScolarite = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireAutre' )->findOneByAutre ('Scolarite');
+		$scolarite = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $gestionnaireScolarite->getIdgestionnaire () );
+
 		$myGestionnaires ['Admin'] = $admin;
 		$myGestionnaires ['Stage'] = $stage;
 		$myGestionnaires ['Formation'] = $Gestionnairef;
 		$myGestionnaires ['Cours'] = $cours;
+		
+		$myGestionnaires ['RI-Europe'] = $riEurope;
+		$myGestionnaires ['RI-Monde'] = $riMonde;
+		$myGestionnaires ['Sport'] = $sport;
+		$myGestionnaires ['Scolarite'] = $scolarite;
 		
 		return $myGestionnaires;
 	}
