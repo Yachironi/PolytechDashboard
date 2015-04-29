@@ -34,8 +34,6 @@ class LoginController extends Controller {
 			$myUE = $programmeController->indexAction ( $user, $this );
 			$gestionnaireController = $this->get ( 'gestionnaireController' );
 			$myAdmins = $gestionnaireController->indexAction ( 21303181, $this );
-			$calendarListEntry = $service->calendarList->get('calendarId');
-		
 			
 			if ($user) {
 				if ($remember == 'remember-me') {
@@ -47,7 +45,7 @@ class LoginController extends Controller {
 				return $this->render ( 'PolytechDashboardHomeBundle:Default:index.html.twig', array (
 						'prenom' => $user->getPrenom (),
 						'nom' => $user->getNom (),
-						'id' => $user,
+						'id' => $user->getId(),
 						'myGrades' => $myGrades,
 						'myTasks' => $myTasks,
 						'myUE' => $myUE,
