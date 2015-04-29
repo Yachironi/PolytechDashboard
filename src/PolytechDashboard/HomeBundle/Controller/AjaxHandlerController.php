@@ -47,7 +47,7 @@ class AjaxHandlerController extends Controller
     public function notificationListAction()
     {
         $criteria = Criteria::create()
-            ->where(Criteria::expr()->eq("idetudiant", $this->getRequest()->getSession()->get('login')->getId()))
+            ->where(Criteria::expr()->eq("idetudiant", $this->getRequest()->getSession()->get('loginTMP')->getId()))
             ->orderBy(array("id" => Criteria::ASC))
             ->setFirstResult(0)
             ->setMaxResults(20);

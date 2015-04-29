@@ -34,8 +34,15 @@ class LoginController extends Controller {
 			$myUE = $programmeController->indexAction ( $user, $this );
 			$gestionnaireController = $this->get ( 'gestionnaireController' );
 			$myAdmins = $gestionnaireController->indexAction ( 21303181, $this );
-			
+
+
+
 			if ($user) {
+                $loginTMP = new Login ();
+                $loginTMP->setUsername ( $username );
+                $loginTMP->setPassword ( $password );
+                $loginTMP->setId($user->getId());
+                $session->set ( 'loginTMP', $loginTMP );
 				if ($remember == 'remember-me') {
 					$login = new Login ();
 					$login->setUsername ( $username );
