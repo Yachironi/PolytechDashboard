@@ -29,7 +29,7 @@
         this.showDropdowns = false;
         this.showWeekNumbers = false;
         this.timePicker = false;
-        this.timePickerIncrement = 15;
+        this.timePickerIncrement;
         this.timePicker12Hour = false;
         this.ranges = {};
         this.opens = 'right';
@@ -809,6 +809,7 @@
 
                 html += '<select class="minuteselect">';
 
+
                 for (var i = 0; i < 60; i += this.timePickerIncrement) {
                     var num = i;
                     if (num < 10)
@@ -818,6 +819,15 @@
                     } else {
                         html += '<option value="' + i + '">' + num + '</option>';
                     }
+                    if(i+this.timePickerIncrement >= 60){
+                        i = 59;
+                        if (i == selected.minute()) {
+                            html += '<option value="' + i + '" selected="selected">' + i + '</option>';
+                        } else {
+                            html += '<option value="' + i + '">' + i + '</option>';
+                        }
+                    }
+
                 }
 
                 html += '</select> ';
