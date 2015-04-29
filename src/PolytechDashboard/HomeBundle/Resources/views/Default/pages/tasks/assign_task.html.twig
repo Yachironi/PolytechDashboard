@@ -107,7 +107,7 @@
 <section class="content">
     <!-- Formulaire -->
     <div class="myform" id="form_task">
-        <form action="{{ path('polytech_dashboard_createTask') }}" method="post">
+        <form action="{{ path('createTask') }}" method="post" {{ form_enctype(form) }}>
 
             <!-- Listes des formulaires -->
             <div class="form-group" style="padding-bottom: 20px;">
@@ -206,7 +206,7 @@
 
                 <!-- Bouton envoyer -->
                 <div class="form-group btn-center">
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button id="form2" type="submit" class="btn btn-primary">Envoyer</button>
                 </div>
             </div>
 
@@ -280,7 +280,7 @@
 
                 <!-- Bouton envoyer -->
                 <div class="form-group btn-center">
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button id="form3" type="submit" class="btn btn-primary">Envoyer</button>
                 </div>
             </div>
 
@@ -342,7 +342,7 @@
 
                 <!-- Bouton envoyer -->
                 <div class="form-group btn-center">
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button id="form4" type="submit" class="btn btn-primary">Envoyer</button>
                 </div>
             </div>
 
@@ -422,7 +422,7 @@
                 </div>
                 <!-- Bouton envoyer -->
                 <div class="form-group btn-center">
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button id="form5" type="submit" class="btn btn-primary">Envoyer</button>
                 </div>
             </div>
 
@@ -502,7 +502,7 @@
                 </div>
                 <!-- Bouton envoyer -->
                 <div class="form-group btn-center">
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button id="form6" type="submit" class="btn btn-primary">Envoyer</button>
                 </div>
             </div>
 
@@ -577,7 +577,7 @@
                 </div>
                 <!-- Bouton envoyer -->
                 <div class="form-group btn-center">
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button id="form7" type="submit" class="btn btn-primary">Envoyer</button>
                 </div>
             </div>
 
@@ -646,7 +646,7 @@
 
                 <!-- Bouton envoyer -->
                 <div class="form-group btn-center">
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button id="form8" type="submit" class="btn btn-primary">Envoyer</button>
                 </div>
             </div>
 
@@ -714,7 +714,7 @@
 
                 <!-- Bouton envoyer -->
                 <div class="form-group btn-center">
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button id="form9" type="submit" class="btn btn-primary">Envoyer</button>
                 </div>
             </div>
         </form>

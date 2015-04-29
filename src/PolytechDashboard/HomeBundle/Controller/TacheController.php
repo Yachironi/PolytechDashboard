@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class TacheController extends Controller {
+	
 	public static function indexAction($id, $controller) {
 		$myTasksReceived = [ ];
 		$myTasksSend = [ ];
@@ -68,7 +69,11 @@ class TacheController extends Controller {
 	}
 	
 	
-	public function createTask(Request $request) {
+	public function createTask() {
+		
+		$request = $this->get('request'); // On récupère l'objet request via le service container
+		print_r($request);
+		
 		$task = new Tache ();
 		
 		$form = $this->createFormBuilder ( $task )->add ( 'task', 'text' )->add ( 'dueDate', 'date' )->add ( 'save', 'submit' )->getForm ();
