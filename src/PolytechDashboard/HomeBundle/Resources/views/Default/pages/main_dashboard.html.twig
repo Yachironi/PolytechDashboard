@@ -213,7 +213,8 @@
     <p>
     <ul class="timeline">
     {% set taskDone = [] %}
-    {% for task in myTasks.tasksReceived%}
+    {% set today = "now"|date("Y-m-d-H-i") %}
+    {% for task in myTasks.tasksReceived if task.getDateFin() > today %}
       {% if task in taskDone %}
       {% else %}
       <!-- timeline time label -->

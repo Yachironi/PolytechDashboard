@@ -6,19 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use PolytechDashboard\HomeBundle\Entity\Etudiant;
 use PolytechDashboard\HomeBundle\Modals\Login;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class LoginController extends Controller {
 	public function indexAction(Request $request) {
-        $session = new Session();
-        $session->start();
-		//$session = $this->getRequest ()->getSession ();
+		$session = $this->getRequest ()->getSession ();
 		$em = $this->getDoctrine ()->getEntityManager ();
 		$repository = $em->getRepository ( 'PolytechDashboardHomeBundle:Etudiant' );
 		
 		if ($request->getMethod () == 'POST') {
-
-			$session->clear();
+			
+			$session->clear ();
 			$username = $request->get ( 'username' );
 			$passwordBeforeHash = $request->get ( 'password' );
 			$password = sha1 ( $passwordBeforeHash );
@@ -28,7 +25,7 @@ class LoginController extends Controller {
 					'password' => $password 
 			) );
 			
-			/* appel du generateur de donnï¿½es du controlleur */
+			/* appel du generateur de données du controlleur */
 			$noteController = $this->get ( 'noteController' );
 			$myGrades = $noteController->indexAction ( $user, $this );
 			$tacheController = $this->get ( 'tacheController' );
@@ -37,20 +34,20 @@ class LoginController extends Controller {
 			$myUE = $programmeController->indexAction ( $user, $this );
 			$gestionnaireController = $this->get ( 'gestionnaireController' );
 			$myAdmins = $gestionnaireController->indexAction ( 21303181, $this );
+			$calendarListEntry = $service->calendarList->get('calendarId');
+		
 			
 			if ($user) {
 				if ($remember == 'remember-me') {
 					$login = new Login ();
 					$login->setUsername ( $username );
 					$login->setPassword ( $password );
-                    $login->setId($user->getId());
 					$session->set ( 'login', $login );
-
 				}
 				return $this->render ( 'PolytechDashboardHomeBundle:Default:index.html.twig', array (
 						'prenom' => $user->getPrenom (),
 						'nom' => $user->getNom (),
-						'id' => $user->getId(),
+						'id' => $user,
 						'myGrades' => $myGrades,
 						'myTasks' => $myTasks,
 						'myUE' => $myUE,
