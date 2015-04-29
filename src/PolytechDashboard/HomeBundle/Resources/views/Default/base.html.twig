@@ -136,7 +136,7 @@
             timePicker: true,
             timePicker12Hour:false,
             timePickerIncrement: 15,
-            format: 'DD/MM/YYYY H:mm'
+            format: 'DD/MM/YYYY H:mm',
         });
 
         $('#dates_stage').daterangepicker({
@@ -145,13 +145,14 @@
         });
 
 
-
+        $('.minuteselect').innerHTML += "<option value='59'>59</option>";
 
         $('#date_rdv').daterangepicker2({
             timePicker: true,
             timePicker12Hour:false,
             timePickerIncrement: 15,
-            format: 'DD/MM/YYYY H:mm'
+            format: 'DD/MM/YYYY H:mm',
+            dateDefault : '01/01/2016'
         });
 
         $('#echeance_form2').daterangepicker2({
@@ -203,15 +204,6 @@
             format: 'DD/MM/YYYY H:mm'
         });
 
-    });
-</script>
-
-<script type="text/javascript">
-    $(function () {
-        //Timepicker
-        $(".timepicker").timepicker({
-            showInputs: false,
-        });
     });
 </script>
 
