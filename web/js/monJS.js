@@ -96,7 +96,40 @@ function openPopup(nom, width, height){
 /**
  * Lorsque l'etudiant clique sur le bouton editer sur une tache qu'il s'est lui meme attribue
  */
-function editTask(){
+function editTask(idTask, dateFin, objet, importance){
+    var id_list_formulaire = 'list_form'
+    activateTag('assign_task');
+
+    // select
+    var select = document.getElementById(id_list_formulaire);
+    select.selectedIndex = 7;
+    afficheForm(id_list_formulaire)
+
+    // objet
+    document.getElementById('objet_form8').value = objet;
+    alert('avant importance');
+
+    // importance
+    var nom_importance = "importance" + importance;
+    var id_importance = "id_" + nom_importance + "_form8";
+    document.getElementById('id_importance1_form8').classList.remove('importance1-selected');
+    document.getElementById('id_importance1_form8').classList.add('importance1');
+    document.getElementById(id_importance).classList.remove(nom_importance);
+    document.getElementById(id_importance).classList.add(nom_importance + "-selected");
+
+    // dateFin
+    // TODO : condition a verifier
+    if(dateFin != null){
+        var echeance = document.getElementById('echeance_form8');
+        echeance.disabled = false;
+        echeance.value = dateFin;
+        // TODO : si possible, changer la date du datepicker
+    }
+
+    // structure
+    //document.getElementById('texte_form8').value = structure;
+
+    // TODO : changer la date de creation et mettre celle d'aujourd'hui
 
 }
 
@@ -104,7 +137,9 @@ function editTask(){
  * Lorsque l'etudiant clique sur le bouton supprimer sur une tache qu'il s'est lui meme attribue
  */
 // Il faut faire passer la tache en parametre
-function removeTask(){
+/* TODO */
+function removeTask(ID){
+    alert("TODO / ID_task = " + ID);
     // Trouve sur internet :
     //$em->remove($product);
     //$em->flush();
@@ -113,8 +148,8 @@ function removeTask(){
 /**
  * Lorsque l'etudiant clique sur le bouton Fait sur une tache qu'il s'est lui meme attribue
  */
-function doneTask(){
-
+function doneTask(ID){
+    alert("TODO / ID_task = " + ID);
 }
 
 
