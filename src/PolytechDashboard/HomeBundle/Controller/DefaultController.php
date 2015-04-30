@@ -23,12 +23,15 @@ class DefaultController extends Controller {
 		usort ( $myNews, function ($a, $b) {
 			return ($a->getDateAjout () < $b->getDateAjout ()) ? - 1 : 1;
 		} );
-		
+		$formation = $this->getDoctrine()->getRepository ( 'PolytechDashboardHomeBundle:Formation' )->findOneById ( 41 );
+			
 		return $this->render ( 'PolytechDashboardHomeBundle:Default:index.html.twig', array (
 				'prenom' => 'Guillaume',
 				'nom' => 'Blanchard',
 				'id' => '21303181',
 				'email' => 'guillaume.blanchard@u-psud.fr',
+
+				'formation' => $formation,
 				'myGrades' => $myGrades,
 				'myTasks' => $myTasks,
 				'myUE' => $myUE,

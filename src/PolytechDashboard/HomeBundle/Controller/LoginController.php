@@ -42,6 +42,8 @@ class LoginController extends Controller {
 			usort ( $myNews, function ($a, $b) {
 				return ($a->getDateAjout () < $b->getDateAjout ()) ? - 1 : 1;
 			} );
+			$idFormation = $this->getDoctrine()->getRepository ( 'PolytechDashboardHomeBundle:Etudiantformation' )->findOneByIdetudiant ( $user->getId() );
+			$formation = $this->getDoctrine()->getRepository ( 'PolytechDashboardHomeBundle:Formation' )->findOneById ( $idFormation->getIdFormation() );
 			
 			if ($user) {
                 $loginTMP = new Login ();
@@ -61,12 +63,14 @@ class LoginController extends Controller {
 						'nom' => $user->getNom (),
 						'email' => $user->getEmail (),
 						'id' => $user->getId(),
+						'formation' => $formation,
 						'myGrades' => $myGrades,
 						'myTasks' => $myTasks,
 						'myUE' => $myUE,
 						'myAdmins' => $myAdmins, 
 						'myNews' => $myNews,
 						'myEvent' => $myEvent
+						
 				) );
 			} else {
 				return $this->render ( 'PolytechDashboardHomeBundle:Default:login.html.twig', array (

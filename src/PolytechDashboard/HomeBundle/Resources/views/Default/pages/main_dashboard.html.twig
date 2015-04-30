@@ -13,15 +13,13 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>3</h3>
+                  <h3><div id="my_tasks-notification-tag1"></div></h3>
                   <p>Nouvelles taches</p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-plus-circle"></i>
                 </div>
-                <a href="#" class="small-box-footer">
-                  Plus d'info <i class="fa fa-arrow-circle-right"></i>
-                </a>
+              
               </div>
               
               <!--  Taches a venir-->
@@ -59,9 +57,7 @@
                 <div class="icon">
                   <i class="fa fa-clock-o"></i>
                 </div>
-                <a href="#" class="small-box-footer">
-                  Plus d'info <i class="fa fa-arrow-circle-right"></i>
-                </a>
+               
               </div>
               
               <!-- Taches importantes -->
@@ -72,7 +68,7 @@
 				   {% set nbTacheImportante = 0  %}
 				   {% for task in myTasks.tasksReceived %}
 			
-					  {% if (task.getImportance() == 3)%}
+					  {% if (task.getImportance() == 3) and (task.getDatefin()|date("Y-m-d-H-i") >= today)%}
 						{% set nbTacheImportante = nbTacheImportante + 1  %}
 					  {% endif %}
 					  
@@ -97,9 +93,7 @@
                 <div class="icon">
                   <i class="fa fa-exclamation-circle"></i>
                 </div>
-                <a href="#" class="small-box-footer">
-                   Plus d'info <i class="fa fa-arrow-circle-right"></i>
-                </a>
+                
               </div>
             </div><!-- ./col -->
             
@@ -126,7 +120,7 @@
                         {% for el in titreArray %}
                         	 {% set rslt = (rslt ~ "+" ~ el) %}
                         {%endfor%}
-                        <img src="http://placehold.it/900x528/39CCCC/ffffff&text={{rslt}}" alt="First slide">
+                        <img src="http://placehold.it/900x510/39CCCC/ffffff&text={{rslt}}" alt="First slide">
                         
                       {%elseif i == 1%}
                       <div class="item">
@@ -135,7 +129,7 @@
                         {% for el in titreArray %}
                         	 {% set rslt = (rslt ~ "+" ~ el) %}
                         {%endfor%}
-                        <img src="http://placehold.it/900x528/3c8dbc/ffffff&text={{rslt}}" alt="Second slide">
+                        <img src="http://placehold.it/900x510/3c8dbc/ffffff&text={{rslt}}" alt="Second slide">
                         
                       {%else%}
                       <div class="item">
@@ -144,7 +138,7 @@
                         {% for el in titreArray %}
                         	 {% set rslt = (rslt ~ "+" ~ el) %}
                         {%endfor%}
-                        <img src="http://placehold.it/900x528/f39c12/ffffff&text={{rslt}}" alt="Third slide">
+                        <img src="http://placehold.it/900x510/f39c12/ffffff&text={{rslt}}" alt="Third slide">
                         
                       
                      {%endif%}
