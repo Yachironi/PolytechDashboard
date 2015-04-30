@@ -96,7 +96,7 @@ function openPopup(nom, width, height){
 /**
  * Lorsque l'etudiant clique sur le bouton editer sur une tache qu'il s'est lui meme attribue
  */
-function editTask(idTask, dateFin, objet, importance){
+function editTask(idTask, dateFin, objet, importance, structure){
     var id_list_formulaire = 'list_form'
     activateTag('assign_task');
 
@@ -107,7 +107,6 @@ function editTask(idTask, dateFin, objet, importance){
 
     // objet
     document.getElementById('objet_form8').value = objet;
-    alert('avant importance');
 
     // importance
     var nom_importance = "importance" + importance;
@@ -127,7 +126,7 @@ function editTask(idTask, dateFin, objet, importance){
     }
 
     // structure
-    //document.getElementById('texte_form8').value = structure;
+    document.getElementById('texte_form8').value = structure;
 
     // TODO : changer la date de creation et mettre celle d'aujourd'hui
 
