@@ -342,21 +342,25 @@
                 nbNotificationNONLU--;
 
                 // console.log("nbNotificationNONLU = "+nbNotificationNONLU);
-                function categoriefromId(idNotification,dataGroup){
+                //function categoriefromId(idNotification,dataGroup){
                     $.each(dataGroup, function (i, item) {
                         if (item.id==idNotification){
-                            return item.categorie;
+                            if(parseInt($("#"+item.categorie+"-notification-tag").text(), 10)>=2){
+                            $(":regex(id,"+item.categorie+"-notification-tag.*)").html(parseInt($("#"+item.categorie+"-notification-tag").text(), 10)-1);
+                            }else{
+                                $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
+                            }
                         }
                     });
-                    return null;
-                }
+                    //return null;
+                //}
 
   /*              $("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").html(
                         parseInt($("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").text(), 10)-1);
 */
-                $(":regex(id,"+categoriefromId(idNotification,dataGroup)+"-notification-tag.*)").html(
+  /*              $(":regex(id,"+categoriefromId(idNotification,dataGroup)+"-notification-tag.*)").html(
                         parseInt($("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").text(), 10)-1);
-
+*/
                 if (nbNotificationNONLU <=0) {
                     //$("#nbNotification").css("display","none");
                     $("#nbNotification").html("");
@@ -407,9 +411,9 @@
 
                         $("#subNotificationContainer").append(
                                 "<li id=\"notification" + item.id + "\" >" +
-                                "<a class='notification-style' href='#' onclick=\"activateTag('"+item.categorie+"') \">" +
+                                "<a class='notification-style' href='#' >" +
                                 "<i class=\"fa fa-warning text-yellow\"></i><button btnID=\""+item.id+"\" id=\"mark-as-read\" value=\"" + item.id + "\" class=\"btn btn-xs btn-custom\" ><span class=\"glyphicon glyphicon-ok\"></span></button> " +
-                                ""+item.valeur+"" +
+                                "<span onclick=\"activateTag('"+item.categorie+"') \">"+item.valeur+"</span>" +
                                 "</a>" +
                                 "" +
                                 "</li>"
