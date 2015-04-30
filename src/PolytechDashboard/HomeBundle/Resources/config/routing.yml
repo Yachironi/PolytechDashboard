@@ -1,3 +1,4 @@
+    
 polytech_dashboard_home_logout:
     path:     /logout
     defaults: { _controller: "PolytechDashboardHomeBundle:Login:logout"}
@@ -31,6 +32,11 @@ polytech_dashboard_SetNotificationAsRead:
 polytech_dashboard_setNotificationCategoryAsRead:
     path:     /setNotificationCategoryAsRead
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:setNotificationCategoryAsRead"}
+
+polytech_dashboard_tachesList:
+    path:     /tachesList
+    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:tachesList"}
+
 
 polytech_dashboard_createTask:
     path:     /createTask

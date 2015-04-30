@@ -116,5 +116,33 @@ class AjaxHandlerController extends Controller
         return new Response($jsonContent);
     }
 
+    public function tachesListAction()
+    {
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq("idetudiant", $this->getRequest()->getSession()->get('loginTMP')->getId()))
+            ->orderBy(array("id" => Criteria::ASC))
+            ->setFirstResult(0)
+            ->setMaxResults(20);
+
+        $Taches = $this->getDoctrine()->getRepository('PolytechDashboardHomeBundle:Tache')->matching(
+            $criteria
+        );
+
+        if (!$Taches) {
+            throw $this->createNotFoundException('Aucun Gestionnaire trouvé pour cet id : '.$this->getRequest()->getSession()->get('login')->getId());
+        }
+
+        $myArray=array();
+        foreach ($Taches as $Tache) {
+            $myArray[]=$Tache;
+        }
+
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+        $jsonContent = $serializer->serialize($myArray, 'json');
+
+        return new Response($jsonContent);
+    }
 
 }
