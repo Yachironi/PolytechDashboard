@@ -37,3 +37,7 @@ polytech_dashboard_tachesList:
     path:     /tachesList
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:tachesList"}
 
+
+polytech_dashboard_createTask:
+    path:     /createTask
+    defaults: { _controller: "PolytechDashboardHomeBundle:TacheController:createTask"}

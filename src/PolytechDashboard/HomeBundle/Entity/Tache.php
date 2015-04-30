@@ -23,9 +23,9 @@ class Tache
     private $id;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="type", type="text", nullable=true)
+     * @ORM\Column(name="type", type="integer", nullable=true)
      */
     private $type;
 

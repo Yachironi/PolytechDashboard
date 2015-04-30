@@ -62,13 +62,13 @@
                         <td>
                             {{ task.getNom() }}
 
-                            {% if today > task.getDatefin() %}
+                            {% if today|date("Y-m-d-H-i") > task.getDatefin()|date("Y-m-d-H-i") %}
                                 {% set difference = date(today).diff(date(task.getDatefin())) %}
                                 {% set differenceInDays = difference.days %}
                                 <small class="label label-warning pull-right">
                                     <i class="fa fa-clock-o"></i> J+{{ differenceInDays }}
                                 </small>
-                            {% elseif (task.getDatefin()|date("Y-m-d-H-i") <= today_5days ) and (task.getDatefin()|date("Y-m-d-H-i") >= today)%}
+                            {% elseif (task.getDatefin()|date("Y-m-d-H-i") <= today_5days|date("Y-m-d-H-i")) and (task.getDatefin()|date("Y-m-d-H-i") >= today|date("Y-m-d-H-i"))%}
                                 {% set difference = date(task.getDatefin()).diff(date(today)) %}
                                 {% set differenceInDays = difference.days %}
                                 <small class="label label-danger pull-right">
@@ -128,13 +128,15 @@
                                     <!-- Footer -->
                                     <div class="modal-footer">
                                         {% if task.getIdgestionnaire() is empty %}
-                                            <button class="btn btn-primary pull-left" onclick="doneTask()">
+                                            <button class="btn btn-primary pull-left" onclick="doneTask('{{ task.getId() }}')">
                                                 <span class="fa fa-check-square-o"></span> Fait
                                             </button>
-                                            <button class="btn btn-primary pull-left" onclick="editTask()">
+                                            <!-- TODO : faire passer getStructure + Faire passer la piece jointe -->
+                                            {% set dateFin = task.getDatefin()|date("d/m/Y H:i") %}
+                                            <button data-dismiss="modal" class="btn btn-primary pull-left" onclick="editTask('{{ task.getId() }}', '{{ dateFin }}','{{ task.getNom() }}','{{ task.getImportance() }}')">
                                                 <span class="fa fa-pencil-square-o"></span> Editer
                                             </button>
-                                            <button class="btn btn-primary pull-left" onclick="removeTask()">
+                                            <button class="btn btn-primary pull-left" onclick="removeTask('{{ task.getId() }}')">
                                                 <span class="fa fa-times"></span> Supprimer
                                             </button>
                                         {% else %}

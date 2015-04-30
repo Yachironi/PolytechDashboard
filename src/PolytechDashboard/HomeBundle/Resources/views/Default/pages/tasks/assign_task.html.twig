@@ -4,9 +4,9 @@
 
         $(document).ready(function() {
             $("#destinataire_form2,#destinataire_form7").tokenInput("/contactList", {
-               /* Valuers par défaut */
+               /* Gestionnaire de la formation de l'etudiant */
                 prePopulate: [
-                    {"id":3,"nom":"{{ myAdmins.Admin.getNom() }}","prenom":"{{ myAdmins.Admin.getPrenom() }}","email":"{{ myAdmins.Admin.getEmail() }}"},
+                    {"id":"{{ myAdmins.Admin.getId() }}","nom":"{{ myAdmins.Admin.getNom() }}","prenom":"{{ myAdmins.Admin.getPrenom() }}","email":"{{ myAdmins.Admin.getEmail() }}"},
                 ],
                 theme: "facebook",
                 propertyToSearch: "nom",
@@ -16,9 +16,9 @@
                 tokenValue: "email"
             });
             $("#destinataire_form6").tokenInput("/contactList", {
-                /* Valuers par défaut */
+                /* Gestionnaire de stage de l'etudiant */
                 prePopulate: [
-                    {"id":3,"nom":"{{ myAdmins.Stage.getNom() }}","prenom":"{{ myAdmins.Stage.getPrenom() }}","email":"{{ myAdmins.Stage.getEmail() }}"},
+                    {"id":"{{ myAdmins.Stage.getId() }}","nom":"{{ myAdmins.Stage.getNom() }}","prenom":"{{ myAdmins.Stage.getPrenom() }}","email":"{{ myAdmins.Stage.getEmail() }}"},
                 ],
                 theme: "facebook",
                 propertyToSearch: "nom",
@@ -27,8 +27,64 @@
                 preventDuplicates: true,
                 tokenValue: "email"
             });
-            $("#destinataire_form3,#destinataire_form4,#destinataire_form5,#destinataire_form8,#destinataire_form9").tokenInput("/contactList", {
-                /* Valuers par défaut */
+            $("#destinataire_form8").tokenInput("/contactList", {
+                /* l'etudiant lui m�me */
+                prePopulate: [
+                    {"id":"{{ id }}","nom":"{{ nom }}","prenom":"{{ prenom }}","email": "{{ email }}"},
+                ],
+                theme: "facebook",
+                propertyToSearch: "nom",
+                resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
+                tokenFormatter: function(item) { return "<li><p>" + item.email+ "</p></li>" },
+                preventDuplicates: true,
+                tokenValue: "email"
+            });
+            $("#destinataire_form4").tokenInput("/contactList", {
+                /* Les gestionnaires de cours de l'etudiant */
+                prePopulate: [
+                {% for profs in myAdmins.Cours %}
+                	{%  if profs.getEmail() != '' %}            
+						{"id":"{{profs.getId()}}","nom":"{{ profs.getNom() }}","prenom":"{{ profs.getPrenom() }}","email":"{{ profs.getEmail() }}"},                              
+					{% endif %}
+                {% endfor %}
+				],
+                theme: "facebook",
+                propertyToSearch: "nom",
+                resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
+                tokenFormatter: function(item) { return "<li><p>" + item.email+ "</p></li>" },
+                preventDuplicates: true,
+                tokenValue: "email"
+            });
+            $("#destinataire_form5").tokenInput("/contactList", {
+                /* Les gestionnaires internationaux, sport et scolarite */
+                prePopulate: [
+                    {"id":"{{myAdmins.RIEurope.getId()}}","nom":"{{ myAdmins.RIEurope.getNom() }}","prenom":"{{ myAdmins.RIEurope.getPrenom() }}","email":"{{ myAdmins.RIEurope.getEmail() }}"},                              
+                    {"id":"{{myAdmins.RIMonde.getId()}}","nom":"{{ myAdmins.RIMonde.getNom() }}","prenom":"{{ myAdmins.RIMonde.getPrenom() }}","email":"{{ myAdmins.RIMonde.getEmail() }}"},                              
+                    {"id":"{{myAdmins.Sport.getId()}}","nom":"{{ myAdmins.Sport.getNom() }}","prenom":"{{ myAdmins.Sport.getPrenom() }}","email":"{{ myAdmins.Sport.getEmail() }}"},                              
+        			{"id":"{{myAdmins.Scolarite.getId()}}","nom":"{{ myAdmins.Scolarite.getNom() }}","prenom":"{{ myAdmins.Scolarite.getPrenom() }}","email":"{{ myAdmins.Scolarite.getEmail() }}"},                              
+        	    ],
+                theme: "facebook",
+                propertyToSearch: "nom",
+                resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
+                tokenFormatter: function(item) { return "<li><p>" + item.email+ "</p></li>" },
+                preventDuplicates: true,
+                tokenValue: "email"
+            });
+            $("#destinataire_form3,#destinataire_form9").tokenInput("/contactList", {
+                /* tous les gestionnaires */
+                prePopulate: [
+                    {"id":"{{ myAdmins.Admin.getId() }}","nom":"{{ myAdmins.Admin.getNom() }}","prenom":"{{ myAdmins.Admin.getPrenom() }}","email":"{{ myAdmins.Admin.getEmail() }}"},            
+                    {"id":"{{ myAdmins.Stage.getId() }}","nom":"{{ myAdmins.Stage.getNom() }}","prenom":"{{ myAdmins.Stage.getPrenom() }}","email":"{{ myAdmins.Stage.getEmail() }}"},                
+                    {"id":"{{ myAdmins.Formation.getId() }}","nom":"{{ myAdmins.Formation.getNom() }}","prenom":"{{ myAdmins.Formation.getPrenom() }}","email":"{{ myAdmins.Formation.getEmail() }}"},                
+                    {"id":"{{myAdmins.RIEurope.getId()}}","nom":"{{ myAdmins.RIEurope.getNom() }}","prenom":"{{ myAdmins.RIEurope.getPrenom() }}","email":"{{ myAdmins.RIEurope.getEmail() }}"},                              
+                    {"id":"{{myAdmins.RIMonde.getId()}}","nom":"{{ myAdmins.RIMonde.getNom() }}","prenom":"{{ myAdmins.RIMonde.getPrenom() }}","email":"{{ myAdmins.RIMonde.getEmail() }}"},                              
+                    {"id":"{{myAdmins.Sport.getId()}}","nom":"{{ myAdmins.Sport.getNom() }}","prenom":"{{ myAdmins.Sport.getPrenom() }}","email":"{{ myAdmins.Sport.getEmail() }}"},                              
+        			{"id":"{{myAdmins.Scolarite.getId()}}","nom":"{{ myAdmins.Scolarite.getNom() }}","prenom":"{{ myAdmins.Scolarite.getPrenom() }}","email":"{{ myAdmins.Scolarite.getEmail() }}"},                              
+                    {% for profs in myAdmins.Cours %}                
+						{"id":"{{profs.getId()}}","nom":"{{ profs.getNom() }}","prenom":"{{ profs.getPrenom() }}","email":"{{ profs.getEmail() }}"},                              
+					{% endfor %}
+
+        			],                
                 theme: "facebook",
                 propertyToSearch: "nom",
                 resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
@@ -51,8 +107,7 @@
 <section class="content">
     <!-- Formulaire -->
     <div class="myform" id="form_task">
-        <form>
-
+        <form action="{{ path('polytech_dashboard_createTask') }}" method="post">
             <!-- Listes des formulaires -->
             <div class="form-group" style="padding-bottom: 20px;">
                 <label for="type">Type de formulaire</label>
@@ -85,7 +140,7 @@
                                required>-->
                         <input type="text" class="form-control" id="destinataire_form2" required>
                         <div class="input-group-addon">
-                            <a href="#modal_dest_form2" data-toggle="modal"><i class="fa fa-sort-alpha-asc"></i></a>
+                            <a href="#"><i class="fa fa-sort-alpha-asc"></i></a>
                         </div>
                     </div>
                 </div>
@@ -124,7 +179,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="motif">Motif de justification</label>
+                    <label>Motif de justification</label>
                     <textarea class="form-control"></textarea>
                 </div>
                 <div class="form-group">
@@ -162,7 +217,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" id="destinataire_form3" value="" required>
                         <div class="input-group-addon">
-                            <i class="fa fa-sort-alpha-asc"></i>
+                            <a href="#modal_dest_form3" data-toggle="modal"><i class="fa fa-sort-alpha-asc"></i></a>
                         </div>
                     </div>
                 </div>
@@ -202,7 +257,7 @@
 
                 <!-- TODO : ajouter d'autres? -->
                 <div class="form-group">
-                    <label for="motif">Motif du rendez-vous</label>
+                    <label>Motif du rendez-vous</label>
                     <textarea class="form-control"></textarea>
                 </div>
 
@@ -236,7 +291,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" id="destinataire_form4" value="" required>
                         <div class="input-group-addon">
-                            <i class="fa fa-sort-alpha-asc"></i>
+                            <a href="#modal_dest_form4" data-toggle="modal"><i class="fa fa-sort-alpha-asc"></i></a>
                         </div>
                     </div>
                 </div>
@@ -341,7 +396,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="motif">Motif d'inscription</label>
+                    <label>Motif d'inscription</label>
                     <textarea class="form-control"></textarea>
                 </div>
                 <div class="form-group">
@@ -420,7 +475,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="motif">Détail</label>
+                    <label>Détail</label>
                     <textarea class="form-control"></textarea>
                 </div>
 
@@ -495,7 +550,7 @@
                 </p>
 
                 <div class="form-group">
-                    <label for="motif">Remarque</label>
+                    <label>Remarque</label>
                     <textarea class="form-control"></textarea>
                 </div>
 
@@ -530,14 +585,15 @@
                 <!-- Destinataire -->
                 <div class="form-group">
                     <label for="destinataire">Destinataire</label>
+                    <!-- TODO : griser cette partie -->
                     <div class="input-group">
-                        <input type="text" class="form-control" id="destinataire_form8" value="Moi" disabled>
+                        <!-- TODO : lorsque cette tache sera envoye, remplacer "moi" par l'etudiant actuel -->
+                        <input type="text" class="form-control" id="destinataire_form8" >
                         <div class="input-group-addon">
                             <i class="fa fa-sort-alpha-asc"></i>
                         </div>
                     </div>
                 </div>
-
                 <!-- Objet & importance -->
                 <div class="form-group">
                     <div class="row">
@@ -563,8 +619,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="motif">Texte</label>
-                    <textarea class="form-control"></textarea>
+                    <label for="texte_form8">Texte</label>
+                    <textarea class="form-control" id="texte_form8"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="taskPerso_InputFile">Sélectionner un fichier</label>
@@ -601,11 +657,10 @@
                     <div class="input-group">
                         <input type="text" class="form-control" id="destinataire_form9" required>
                         <div class="input-group-addon">
-                            <i class="fa fa-sort-alpha-asc"></i>
+                            <a href="#modal_dest_form9" data-toggle="modal"><i class="fa fa-sort-alpha-asc"></i></a>
                         </div>
                     </div>
                 </div>
-                <!-- Objet -->
                 <!-- Objet & importance -->
                 <div class="form-group">
                     <div class="row">
@@ -663,8 +718,8 @@
         </form>
     </div>
 
-    <!-- Debut modal view - destinataire - form2 -->
-    <div class="modal fade" id="modal_dest_form2">
+    <!-- Debut modal view - destinataire - form3 -->
+    <div class="modal fade" id="modal_dest_form3">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- En tete -->
@@ -675,7 +730,53 @@
 
                 <!-- Corps -->
                 <div class="modal-body">
-                    Arborescence des destinataires
+                    <div id="arbre_form3"></div>
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal">Ajouter</button>
+                    <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Debut modal view - destinataire - form4 -->
+    <div class="modal fade" id="modal_dest_form4">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- En tete -->
+                <div class="modal-header modal-header-task">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <div class="modal-title">Liste des destinataires</div>
+                </div>
+
+                <!-- Corps -->
+                <div class="modal-body">
+                    <div id="arbre_form4"></div>
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal">Ajouter</button>
+                    <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Debut modal view - destinataire - for9 -->
+    <div class="modal fade" id="modal_dest_form9">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- En tete -->
+                <div class="modal-header modal-header-task">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <div class="modal-title">Liste des destinataires</div>
+                </div>
+
+                <!-- Corps -->
+                <div class="modal-body">
+                    <div id="arbre_form9"></div>
                 </div>
                 <!-- Footer -->
                 <div class="modal-footer">

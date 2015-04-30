@@ -54,17 +54,34 @@ class GestionnaireController extends Controller {
 			if ($tmp != null) {
 				/* gestionnaire de cours trouv� */
 				$gestionnaireC = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $tmp->getIdgestionnaire () );
+				array_push ( $cours, $gestionnaireC );
 			}
 			
-			array_push ( $cours, $gestionnaireC );
 			unset ( $gestionnaireC );
 			unset ( $tmp );
 		}
 		
+		$gestionnaireEurope = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireAutre' )->findOneByAutre('Relations Internationales - Europe');
+		$riEurope = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $gestionnaireEurope->getIdgestionnaire () );
+		
+		$gestionnaireMonde = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireAutre' )->findOneByAutre ('Relations Internationales - Monde');
+		$riMonde = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $gestionnaireMonde->getIdgestionnaire () );
+		
+		$gestionnaireSport = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireAutre' )->findOneByAutre ('Sport');
+		$sport = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $gestionnaireSport->getIdgestionnaire () );
+		
+		$gestionnaireScolarite = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:GestionnaireAutre' )->findOneByAutre ('Scolarite');
+		$scolarite = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $gestionnaireScolarite->getIdgestionnaire () );
+
 		$myGestionnaires ['Admin'] = $admin;
 		$myGestionnaires ['Stage'] = $stage;
 		$myGestionnaires ['Formation'] = $Gestionnairef;
 		$myGestionnaires ['Cours'] = $cours;
+		
+		$myGestionnaires ['RIEurope'] = $riEurope;
+		$myGestionnaires ['RIMonde'] = $riMonde;
+		$myGestionnaires ['Sport'] = $sport;
+		$myGestionnaires ['Scolarite'] = $scolarite;
 		
 		return $myGestionnaires;
 	}

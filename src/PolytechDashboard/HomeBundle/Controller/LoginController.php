@@ -34,9 +34,15 @@ class LoginController extends Controller {
 			$myUE = $programmeController->indexAction ( $user, $this );
 			$gestionnaireController = $this->get ( 'gestionnaireController' );
 			$myAdmins = $gestionnaireController->indexAction ( 21303181, $this );
-
-
-
+			$myEvent = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Evenement' )->findAll();
+			$myNews = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:News' )->findAll();
+			usort ( $myEvent , function ($a, $b) {
+				return ($a->getDateEvenement() < $b->getDateEvenement()) ? - 1 : 1;
+			} );
+			usort ( $myNews, function ($a, $b) {
+				return ($a->getDateAjout () < $b->getDateAjout ()) ? - 1 : 1;
+			} );
+			
 			if ($user) {
                 $loginTMP = new Login ();
                 $loginTMP->setUsername ( $username );
@@ -53,11 +59,14 @@ class LoginController extends Controller {
 				return $this->render ( 'PolytechDashboardHomeBundle:Default:index.html.twig', array (
 						'prenom' => $user->getPrenom (),
 						'nom' => $user->getNom (),
+						'email' => $user->getEmail (),
 						'id' => $user->getId(),
 						'myGrades' => $myGrades,
 						'myTasks' => $myTasks,
 						'myUE' => $myUE,
-						'myAdmins' => $myAdmins 
+						'myAdmins' => $myAdmins, 
+						'myNews' => $myNews,
+						'myEvent' => $myEvent
 				) );
 			} else {
 				return $this->render ( 'PolytechDashboardHomeBundle:Default:login.html.twig', array (
