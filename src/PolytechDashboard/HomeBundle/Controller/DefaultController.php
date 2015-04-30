@@ -15,6 +15,14 @@ class DefaultController extends Controller {
 		$myUE = $programmeController->indexAction ( 21303181, $this );
 		$gestionnaireController = $this->get ( 'gestionnaireController' );
 		$myAdmins = $gestionnaireController->indexAction ( 21303181, $this );
+		$myEvent = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Evenement' )->findAll();
+		$myNews = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:News' )->findAll();
+		usort ( $myEvent , function ($a, $b) {
+			return ($a->getDateEvenement() < $b->getDateEvenement()) ? - 1 : 1;
+		} );
+		usort ( $myNews, function ($a, $b) {
+			return ($a->getDateAjout () < $b->getDateAjout ()) ? - 1 : 1;
+		} );
 		
 		return $this->render ( 'PolytechDashboardHomeBundle:Default:index.html.twig', array (
 				'prenom' => 'Guillaume',
@@ -24,7 +32,9 @@ class DefaultController extends Controller {
 				'myGrades' => $myGrades,
 				'myTasks' => $myTasks,
 				'myUE' => $myUE,
-				'myAdmins' => $myAdmins 
+				'myAdmins' => $myAdmins,
+				'myNews' => $myNews,
+				'myEvent' => $myEvent
 		) );
 		
 		// return $this->render('PolytechDashboardHomeBundle:Default:index.html.twig', array('name' => $name));

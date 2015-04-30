@@ -116,24 +116,70 @@
                       <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
                     </ol>
                     <div class="carousel-inner">
+                      {% set i = 0 %}
+                      {% set lim = 3 %}
+                      {% for event in myEvent if i < lim %}
+                      {%if i == 0 %}
                       <div class="item active">
-                        <img src="http://placehold.it/900x528/39CCCC/ffffff&text=OGCN+remporte+la+ligue+des+champions" alt="First slide">
-                        <div class="carousel-caption">
-                          Premier Slide
-                        </div>
-                      </div>
+                        {% set titreArray = event.getTitre()|split(" ") %}
+                        {% set rslt = "" %}
+                        {% for el in titreArray %}
+                        	 {% set rslt = (rslt ~ "+" ~ el) %}
+                        {%endfor%}
+                        <img src="http://placehold.it/900x528/39CCCC/ffffff&text={{rslt}}" alt="First slide">
+                        
+                      {%elseif i == 1%}
                       <div class="item">
-                        <img src="http://placehold.it/900x528/3c8dbc/ffffff&text=Daro+Heng+est+le+nouveau+ministre+de+la+langue+francaise" alt="Second slide">
-                        <div class="carousel-caption">
-                          Second Slide
-                        </div>
-                      </div>
+                        {% set titreArray = event.getTitre()|split(" ") %}
+                        {% set rslt = "" %}
+                        {% for el in titreArray %}
+                        	 {% set rslt = (rslt ~ "+" ~ el) %}
+                        {%endfor%}
+                        <img src="http://placehold.it/900x528/3c8dbc/ffffff&text={{rslt}}" alt="Second slide">
+                        
+                      {%else%}
                       <div class="item">
-                        <img src="http://placehold.it/900x528/f39c12/ffffff&text=Paris+de+nouveau+en+CFA" alt="Third slide">
-                        <div class="carousel-caption">
-                          Troisieme Slide
+                        {% set titreArray = event.getTitre()|split(" ") %}
+                        {% set rslt = "" %}
+                        {% for el in titreArray %}
+                        	 {% set rslt = (rslt ~ "+" ~ el) %}
+                        {%endfor%}
+                        <img src="http://placehold.it/900x528/f39c12/ffffff&text={{rslt}}" alt="Third slide">
+                        
+                      
+                     {%endif%}
+                     <div class="carousel-caption"> Le 
+                          {{ event.getDateEvenement()|date("d") }}
+			            	{% if event.getDateEvenement()|date("m") == "01" %}
+			            		Janvier
+			            	{% elseif event.getDateEvenement()|date("m") == "02" %}
+			            		Fevrier
+			            	{% elseif event.getDateEvenement()|date("m") ==  "03" %}
+			            		Mars
+			            	{% elseif event.getDateEvenement()|date("m") ==  "04" %}
+			            		Avril
+			            	{% elseif event.getDateEvenement()|date("m") ==  "05" %}
+			            		Mai
+			            	{% elseif event.getDateEvenement()|date("m") ==  "06" %}
+			            		Juin
+			            	{% elseif event.getDateEvenement()|date("m") ==  "07" %}
+			            		Juillet
+			            	{% elseif event.getDateEvenement()|date("m") ==  "08" %}
+			            		Aout
+			            	{% elseif event.getDateEvenement()|date("m") ==  "09" %}
+			            		Septembre
+			            	{% elseif event.getDateEvenement()|date("m") ==  "10" %}
+			            		Octobre
+			            	{% elseif event.getDateEvenement()|date("m") ==  "11" %}
+			            		Novembre
+			            	{% elseif event.getDateEvenement()|date("m") ==  "12" %}
+			            		Decembre
+							{%endif%}
+			             	{{ event.getDateEvenement()|date("Y") }}
                         </div>
                       </div>
+                     {%set i = i + 1 %}
+                     {%endfor%}
                     </div>
                     <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                       <span class="fa fa-angle-left"></span>
@@ -166,38 +212,45 @@
                 <div class="box-header">
                   <i class="ion ion-clipboard"></i>
                   <h3 class="box-title">Dernieres nouvelles</h3>
-                  <div class="box-tools pull-right">
-                    <ul class="pagination pagination-sm inline">
-                      <li><a href="#">&laquo;</a></li>
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">&raquo;</a></li>
-                    </ul>
-                  </div>
+                  
                 </div><!-- /.box-header -->
                 <div class="box-body">
+                  {% set i = 0 %}
+                  {% set lim = 5 %}
                   <ul class="todo-list">
-                    <li>
-                      <span class="text">Le forum de l'entreprise arrive a grand pas</span>
-                    </li>
-                    <li>
-                      <!-- todo text -->
-                      <span class="text">Mise a jour de la boite mel</span>
-                    </li>
-                    <li>
-                      <!-- todo text -->
-                      <span class="text">Presentation des M2R pour les 4eme annees</span>
-                    </li>        
-                    <li>
-                      <!-- todo text -->
-                      <span class="text">Paris - Marseille : 0 - 8 score finale. Zlatan en pleure</span>
-                      <!-- General tools such as edit or delete-->
-                    </li>
-                    <li>
-                      <!-- todo text -->
-                      <span class="text">Josselin arrete pour traffic de stupefiant au sein de l'ecole.</span>
-                    </li>                                                     
+                    {% for news in myNews if i < lim %}
+                    	<li>
+                      		<span class="text">{{ news.getTitre() }}</span> 
+                      		<small><span class="time">{{ news.getDateAjout()|date("d") }}
+			            	{% if news.getDateAjout()|date("m") == "01" %}
+			            		Janvier
+			            	{% elseif news.getDateAjout()|date("m") == "02" %}
+			            		Fevrier
+			            	{% elseif news.getDateAjout()|date("m") ==  "03" %}
+			            		Mars
+			            	{% elseif news.getDateAjout()|date("m") ==  "04" %}
+			            		Avril
+			            	{% elseif news.getDateAjout()|date("m") ==  "05" %}
+			            		Mai
+			            	{% elseif news.getDateAjout()|date("m") ==  "06" %}
+			            		Juin
+			            	{% elseif news.getDateAjout()|date("m") ==  "07" %}
+			            		Juillet
+			            	{% elseif news.getDateAjout()|date("m") ==  "08" %}
+			            		Aout
+			            	{% elseif news.getDateAjout()|date("m") ==  "09" %}
+			            		Septembre
+			            	{% elseif news.getDateAjout()|date("m") ==  "10" %}
+			            		Octobre
+			            	{% elseif news.getDateAjout()|date("m") ==  "11" %}
+			            		Novembre
+			            	{% elseif news.getDateAjout()|date("m") ==  "12" %}
+			            		Decembre
+							{%endif%}
+			             	{{ news.getDateAjout()|date("Y") }}</span></small>
+                    	</li>
+                    	{% set i = i+1 %}
+                    {%endfor%}                                             
                   </ul>
                 </div><!-- /.box-body -->
                 <br />
