@@ -125,8 +125,23 @@ function editTask(idTask, dateFin, objet, importance, structure){
         // TODO : si possible, changer la date du datepicker
     }
 
+    // TODO YASSER (a voir)
+    $.ajax({
+        type: 'POST',
+        url: '/tachesList',
+        dataType: 'json',
+        data: {'categorie': notificationCategory },
+        success: function (data) {
+            $.each(data, function (i, item) {
+                if (item.id == idTask) {
+                    $("#texte_form8").html(item.structure);
+                }
+            })
+        }
+    });
+
     // structure
-    document.getElementById('texte_form8').value = structure;
+    //document.getElementById('texte_form8').value = structure;
 
     // TODO : changer la date de creation et mettre celle d'aujourd'hui
 
