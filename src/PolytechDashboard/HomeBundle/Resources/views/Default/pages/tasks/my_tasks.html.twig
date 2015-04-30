@@ -140,9 +140,16 @@
                                                 <span class="fa fa-times"></span> Supprimer
                                             </button>
                                         {% else %}
+                                            <a href="#replyTask" data-toggle="modal" data-dismiss="modal" onclick="replyTask('title_replyTask', 'body_replyTask')">
+                                                <div class="btn btn-primary pull-left">
+                                                    <span class="fa fa-reply"></span> Répondre
+                                                </div>
+                                            </a>
+                                            <!--
                                             <button class="btn btn-primary pull-left" onclick="replyTask()">
                                                 <span class="fa fa-reply"></span> Répondre
                                             </button>
+                                            -->
                                         {% endif %}
                                         <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
                                     </div>
@@ -171,6 +178,28 @@
         <!-- /.box-body -->
     </div>
     <!-- /.box -->
+
+
+    <!-- Debut modal view -->
+    <div class="modal fade" id="replyTask">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- En tete -->
+                <div class="modal-header modal-header-task">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <div id="title_replyTask" class="modal-title"></div>
+                </div>
+                <!-- Corps -->
+                <div id="body_replyTask" class="modal-body"></div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal" onclick="sendReply()">Envoyer</button>
+                    <button class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin modal view -->
 
     <!-- 2eme tableau : les taches que l'etudiant a envoyees -->
     <div class="box box-task">

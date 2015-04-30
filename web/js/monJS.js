@@ -155,8 +155,56 @@ function doneTask(ID){
 /**
  * Lorsque l'etudiant clique sur le bouton repondre sur une tache qu'un gestionnaire lui a attribue
  */
-function replyTask(){
+function replyTask(id_title, id_body){
 
+    var type_task = 2;
+    var title = document.getElementById(id_title);
+    var body = document.getElementById(id_body);
+
+    title.innerHTML = "Re: Je suis un test";
+
+    // justification
+    if(type_task == 2){
+        body.innerHTML = "<form>" +
+        "<div class='form-group'>" +
+        "<label>Destinataire : </label> Prénom Nom</div>" +
+        "<div class='form-group'>" +
+        "<label>Date et durée de l'absence</label>" +
+        "<div class='input-group'>" +
+        "<div class='input-group-addon'><i class='fa fa-clock-o'></i></div>" +
+        "<input type='text' class='form-control pull-right' id='duree_absence_reply'/></div></div>" +
+        "<div class='form-group'>" +
+        "<label>Motif de justification</label>" +
+        "<textarea class='form-control'></textarea></div>" +
+        "<div class='form-group'>" +
+        "<label for='absence_InputFile_reply'>Sélectionner votre justificatif</label>" +
+        "<input type='file' id='absence_InputFile_reply'></div>"
+        + "</form>";
+    }
+    // prendre un rdv
+    else if(type_task == 3){
+        body.innerHTML = "<form>"
+        + "</form>";
+    }
+    // rendre un devoir
+    else if(type_task == 4){
+        body.innerHTML = "<form>"
+        + "</form>";
+    }
+    // valider sujet de stage
+    else if(type_task == 6){
+        body.innerHTML = "<form>"
+        + "</form>";
+    }
+    // autre
+    else if(type_task == 9){
+        body.innerHTML = "<form>"
+        + "</form>";
+    }
+}
+
+function sendReply(){
+    alert("TODO : faire le JS lorsqu'on envoie la réponse (BD + modifier HTML)");
 }
 
 /* Affiche ou cache le champ "echeance" */

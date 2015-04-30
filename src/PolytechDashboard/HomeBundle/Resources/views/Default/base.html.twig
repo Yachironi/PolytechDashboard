@@ -140,16 +140,21 @@
             timePicker: true,
             timePicker12Hour:false,
             timePickerIncrement: 15,
-            format: 'DD/MM/YYYY H:mm',
+            format: 'DD/MM/YYYY H:mm'
         });
+        $('#duree_absence_reply').daterangepicker({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
+
 
         $('#dates_stage').daterangepicker({
             timePicker: false,
             format: 'DD/MM/YYYY'
         });
 
-
-        $('.minuteselect').innerHTML += "<option value='59'>59</option>";
 
         $('#date_rdv').daterangepicker2({
             timePicker: true,
