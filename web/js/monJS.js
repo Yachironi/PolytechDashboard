@@ -124,6 +124,7 @@ function editTask(idTask, dateFin, objet, importance){
         echeance.value = dateFin;
         // TODO : si possible, changer la date du datepicker
     }
+    document.getElementById('checkbox_form8').checked = true;
 
     $.ajax({
         type: 'POST',
