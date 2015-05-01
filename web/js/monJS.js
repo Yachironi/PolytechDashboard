@@ -130,11 +130,11 @@ function editTask(idTask, dateFin, objet, importance, structure){
         type: 'POST',
         url: '/tachesList',
         dataType: 'json',
-        data: {'categorie': notificationCategory },
         success: function (data) {
             $.each(data, function (i, item) {
                 if (item.id == idTask) {
                     $("#texte_form8").html(item.structure);
+                    console.log(item.structure);
                 }
             })
         }
