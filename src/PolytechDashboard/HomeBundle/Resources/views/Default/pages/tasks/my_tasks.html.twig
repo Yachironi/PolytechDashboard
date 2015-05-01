@@ -55,7 +55,7 @@
                             {% for admin in myTasks.admins %}
                  					{% if admin.id == task.getIdgestionnaire() %}
                  						{{ admin.prenom}} {{ admin.nom }}
-                 					{% endif %}
+                                    {% endif %}
                 			{% endfor %}
                             </td>
                         {% endif %}
@@ -140,11 +140,16 @@
                                                 <span class="fa fa-times"></span> Supprimer
                                             </button>
                                         {% else %}
-                                            <a href="#replyTask" data-toggle="modal" data-dismiss="modal" onclick="replyTask('title_replyTask', 'body_replyTask')">
-                                                <div class="btn btn-primary pull-left">
-                                                    <span class="fa fa-reply"></span> Répondre
-                                                </div>
-                                            </a>
+                                            {% for admin in myTasks.admins %}
+                                                {% if admin.id == task.getIdgestionnaire() %}
+                                                    <a href="#replyTask" data-toggle="modal" data-dismiss="modal" onclick="replyTask('title_replyTask', 'body_replyTask', '{{ task.getId() }}', '{{ task.getType() }}', '{{ task.getNom() }}', '{{ admin.prenom }}', '{{ admin.nom }}')">
+                                                        <div class="btn btn-primary pull-left">
+                                                            <span class="fa fa-reply"></span> Répondre
+                                                        </div>
+                                                    </a>
+                                                {% endif %}
+                                            {% endfor %}
+
                                             <!--
                                             <button class="btn btn-primary pull-left" onclick="replyTask()">
                                                 <span class="fa fa-reply"></span> Répondre

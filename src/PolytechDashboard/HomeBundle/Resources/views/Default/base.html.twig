@@ -154,9 +154,21 @@
             timePicker: false,
             format: 'DD/MM/YYYY'
         });
+        $('#dates_stage_reply').daterangepicker({
+            timePicker: false,
+            format: 'DD/MM/YYYY'
+        });
 
 
         $('#date_rdv').daterangepicker2({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm',
+            dateDefault : '01/01/2016'
+        });
+
+        $('#date_rdv_reply').daterangepicker2({
             timePicker: true,
             timePicker12Hour:false,
             timePickerIncrement: 15,

@@ -96,7 +96,7 @@ function openPopup(nom, width, height){
 /**
  * Lorsque l'etudiant clique sur le bouton editer sur une tache qu'il s'est lui meme attribue
  */
-function editTask(idTask, dateFin, objet, importance, structure){
+function editTask(idTask, dateFin, objet, importance){
     var id_list_formulaire = 'list_form'
     activateTag('assign_task');
 
@@ -125,7 +125,6 @@ function editTask(idTask, dateFin, objet, importance, structure){
         // TODO : si possible, changer la date du datepicker
     }
 
-    // TODO YASSER (a voir)
     $.ajax({
         type: 'POST',
         url: '/tachesList',
@@ -133,6 +132,7 @@ function editTask(idTask, dateFin, objet, importance, structure){
         success: function (data) {
             $.each(data, function (i, item) {
                 if (item.id == idTask) {
+                    alert(item.id);
                     $("#texte_form8").html(item.structure);
                     console.log(item.structure);
                 }
@@ -140,11 +140,7 @@ function editTask(idTask, dateFin, objet, importance, structure){
         }
     });
 
-    // structure
-    //document.getElementById('texte_form8').value = structure;
-
     // TODO : changer la date de creation et mettre celle d'aujourd'hui
-
 }
 
 /**
@@ -170,19 +166,20 @@ function doneTask(ID){
 /**
  * Lorsque l'etudiant clique sur le bouton repondre sur une tache qu'un gestionnaire lui a attribue
  */
-function replyTask(id_title, id_body){
+function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest, nom_dest){
 
+    //var type_task = type_task;    // TODO dans la BD type_task pas attribue
     var type_task = 2;
     var title = document.getElementById(id_title);
     var body = document.getElementById(id_body);
 
-    title.innerHTML = "Re: Je suis un test";
+    title.innerHTML = "Re: Tâche n°" + id_task + " - " + nom_task;
 
     // justification
     if(type_task == 2){
         body.innerHTML = "<form>" +
         "<div class='form-group'>" +
-        "<label>Destinataire : </label> Prénom Nom</div>" +
+        "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<div class='form-group'>" +
         "<label>Date et durée de l'absence</label>" +
         "<div class='input-group'>" +
@@ -196,24 +193,60 @@ function replyTask(id_title, id_body){
         "<input type='file' id='absence_InputFile_reply'></div>"
         + "</form>";
     }
-    // prendre un rdv
+    // prendre un rdv. TODO : recuperer l'heure et la date de rdv
     else if(type_task == 3){
-        body.innerHTML = "<form>"
+        body.innerHTML = "<form>" +
+        "<div class='form-group'>" +
+        "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
+        "<div class='form-group'><div class='input-group'><span class='input-group-addon'>" +
+        "<input type='radio' name='btn_radio_rdv_reply'></span>" +
+        "<input type='text' class='form-control' value='Je confirme la date du rendez-vous : 12/23/4567 12:34(TODO: recuperer la date du rdv)' disabled='disabled'></div></div>" +
+        "<div class='form-group'><div class='input-group'><span class='input-group-addon'>" +
+        "<input type='radio' name='btn_radio_rdv_reply'></span>" +
+        "<input type='text' class='form-control pull-right' id='date_rdv_reply' placeholder='Je choisi une autre date de rendez-vous...'/>" +
+        "<div class='input-group-addon'><i class='fa fa-clock-o'></i></div>" +
+        "</div></div>"
         + "</form>";
     }
     // rendre un devoir
     else if(type_task == 4){
-        body.innerHTML = "<form>"
+        body.innerHTML = "<form>"+
+        "<div class='form-group'>" +
+        "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
+        "<div class='form-group'>" +
+        "<label for='renduDevoir_InputFile_reply'>Sélectionner votre devoir</label>" +
+        "<input type='file' id='renduDevoir_InputFile_reply'></div>" +
+        "<div class='form-group'>" +
+        "<label>Ajouter un commentaire</label><textarea class='form-control'></textarea></div>"
         + "</form>";
     }
     // valider sujet de stage
     else if(type_task == 6){
-        body.innerHTML = "<form>"
+        body.innerHTML = "<form>"+
+        "<div class='form-group'>" +
+        "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
+        "<div class='form-group'>" +
+        "<label>Dates de début et de fin du stage</label>" +
+        "<div class='input-group'>" +
+        "<div class='input-group-addon'><i class='fa fa-clock-o'></i></div>" +
+        "<input type='text' class='form-control pull-right' id='dates_stage_reply'/></div></div>" +
+        "<div class='form-group'>" +
+        "<label>Détail</label><textarea class='form-control'></textarea></div>"+
+        "<div class='form-group'>" +
+        "<label for='validStage_InputFile_reply'>Sélectionner un fichier</label>" +
+        "<input type='file' id='validStage_InputFile_reply'></div>"
         + "</form>";
     }
     // autre
-    else if(type_task == 9){
-        body.innerHTML = "<form>"
+    else{
+        body.innerHTML = "<form>"+
+        "<div class='form-group'>" +
+        "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
+        "<label>Texte</label>" +
+        "<textarea class='form-control'></textarea></div>" +
+        "<div class='form-group'>" +
+        "<label for='demandeNonRepertoriee_InputFile_reply'>Sélectionner un fichier</label>" +
+        "<input type='file' id='demandeNonRepertoriee_InputFile_reply'></div>"
         + "</form>";
     }
 }
