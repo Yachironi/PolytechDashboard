@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class TacheController extends Controller {
-	
 	public static function indexAction($id, $controller) {
 		$myTasksReceived = [ ];
 		$myTasksSend = [ ];
@@ -68,11 +67,51 @@ class TacheController extends Controller {
 		return $result;
 	}
 	
-	
-	public function submitFormAction() {
-		print_r("TOTO");
-		
-		
-
+	public function submitFormAction(Request $request) {
+		if ($request->getMethod () == 'POST') {
+			$typeForm = substr($request->get ( 'list_form' ),-1);
+			
+			$destinataire = $request->get ( 'destinataire_form'.$typeForm );
+			$objet = $request->get ( 'objet_form'.$typeForm );
+			/* TODO Importance*/				
+			switch ($typeForm){
+				case 2 : case 3 :
+					/* durée */
+					
+					/* échéance */
+					break;
+				case 4:
+					/* type du devoir rendu */
+					
+					/* nom du devoir */
+				
+					/* commentaire */
+				case 5:
+					/* type d'inscritpion*/
+					$typeForm = $request->get ( 'list_inscription' );
+					/* switch/case TOEIC/Bourse/M2R/Sport/Polytech */
+					
+					/* motif */
+					
+					/* pièce jointe */
+				case 6:
+					/* durée du stage */
+					
+					/* échéance optionelle */
+				case 7:	
+					/* remarque*/
+					
+					/* fichier */
+					
+					/* échéance */
+					
+				case 8:
+					/* text */
+					
+					/* fichier */
+					
+					/* échéance */
+			}
+		}
 	}
 }
