@@ -69,23 +69,10 @@ class TacheController extends Controller {
 	}
 	
 	
-	public function createTask() {
+	public function submitFormAction() {
+		print_r("TOTO");
 		
-		$request = $this->get('request'); // On récupère l'objet request via le service container
-		print_r($request);
 		
-		$task = new Tache ();
-		
-		$form = $this->createFormBuilder ( $task )->add ( 'task', 'text' )->add ( 'dueDate', 'date' )->add ( 'save', 'submit' )->getForm ();
-		
-		$form->handleRequest ( $request );
-		
-		if ($form->isValid ()) {
-			// fait quelque chose comme sauvegarder la tâche dans la bdd
-			
-			return $this->redirect ( $this->generateUrl ( 'task_success' ) );
-		}
-		
-		// ...
+
 	}
 }
