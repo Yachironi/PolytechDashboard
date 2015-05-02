@@ -41,6 +41,7 @@
 
         this.format = 'DD/MM/YYYY';
         this.separator = ' - ';
+        this.firstDay = 1;
 
         this.locale = {
             applyLabel: 'Valider',
@@ -51,7 +52,7 @@
             customRangeLabel: 'Custom Range',
             daysOfWeek: moment()._lang._weekdaysMin.slice(),
             monthNames: moment()._lang._monthsShort.slice(),
-            firstDay: 0
+            firstDay: 1
         };
 
         this.cb = function () { };

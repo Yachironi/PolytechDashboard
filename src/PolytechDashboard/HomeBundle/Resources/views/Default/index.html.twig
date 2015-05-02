@@ -97,7 +97,7 @@
                                     <!-- TODO : etablir le changement de photo -->
                                     <div class="fileUpload btn btn-default btn-flat btn-sm" style="display:block; width:100px;margin:0;">
                                         <span class="fa fa-camera"></span> Modifier
-                                        <input type="file" class="upload" />
+                                        <input type="file" class="upload" onchange="alert('TODO')"/>
                                     </div>
                                 </div>
                                 <div class="col-lg-6" style="margin: auto; height: 100%; vertical-align: middle;" >
@@ -137,7 +137,7 @@
 
 
                                     <div class="modal-footer" style="border-top: none;">
-                                        <button class="btn btn-primary">Enregistrer</button>
+                                        <button class="btn btn-primary"data-dismiss="modal" onclick="alert('TODO')">Enregistrer</button>
                                         <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
                                     </div>
                                 </div>
@@ -180,14 +180,6 @@
             </div>
             <div id="planning" style="display:none;">
                 {% include 'PolytechDashboardHomeBundle:Default:pages/planning.html.twig' %}
-
-            </div>
-            <div id="my_notifications" style="display:none;">
-                {% include 'PolytechDashboardHomeBundle:Default:pages/my_notifications.html.twig' %}
-
-            </div>
-            <div id="contact" style="display:none;">
-                {% include 'PolytechDashboardHomeBundle:Default:pages/contact.html.twig' %}
 
             </div>
         </div>

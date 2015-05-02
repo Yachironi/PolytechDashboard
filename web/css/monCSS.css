@@ -53,6 +53,10 @@
     margin: auto;
 }
 
+.table-note{
+    margin-top:20px;
+}
+
 a > .fa-trash{
     color: red;
 }
