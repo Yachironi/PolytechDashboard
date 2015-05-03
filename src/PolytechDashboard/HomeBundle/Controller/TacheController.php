@@ -5,6 +5,9 @@ namespace PolytechDashboard\HomeBundle\Controller;
 use PolytechDashboard\HomeBundle\Entity\Tache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use PolytechDashboard\HomeBundle\Entity\Tacheetudiant;
+use PolytechDashboard\HomeBundle\Entity\Tachegestionnaire;
+
 
 class TacheController extends Controller {
 	public static function indexAction($id, $controller) {
@@ -67,8 +70,13 @@ class TacheController extends Controller {
 		return $result;
 	}
 	
-	public function submitFormAction(Request $request) {
+	public function submitFormAction(Request $request, $idEtudiant) {
 		if ($request->getMethod () == 'POST') {
+			/* EntityManager pour faire les requètes*/
+			$em = $this->getDoctrine()->getManager();	
+
+			$tache = new Tache();
+			
 			$typeForm = substr ( $request->get ( 'list_form' ), - 1 );
 			
 			$destinataire = $request->get ( 'destinataire_form' . $typeForm );
@@ -83,7 +91,7 @@ class TacheController extends Controller {
 					$duree = $request->get ( 'duree_absence' );
 					
 					/* motif */
-					$duree = $request->get ( 'motif_justification_absence' );
+					$motif = $request->get ( 'motif_justification_absence' );
 					
 					/* fichier */
 					$file = $request->get ( 'absence_InputFile' );
@@ -93,17 +101,66 @@ class TacheController extends Controller {
 						$echeance = $request->get ( 'echeance_form2' );
 					}
 					
+					foreach ( $destinataire as $dest ) {
+						$tache->setIdetudiant ( $idEtudiant );
+						$tache->setIdgestionnaire ( $dest );
+						$tache->setDatecreation ( date ( "Y-m-d" ) );
+						$tache->setDatefin ( $echeance );
+						$tache->setType ( $objet );
+						$tache->setNom($motif);
+						/* contenu de la tache */
+						$tmp = [ ];
+						$tmp ['0'] = $file;
+						$tmp ['0'] = $duree;
+						$tache->setStructure ( $tmp );
+							
+						/* pour persister la tache en BDD */
+						$em->persist ( $tache );
+							
+						$tacheGestionnaire = new Tachegestionnaire ();
+						$tacheGestionnaire->setIdetudiant ( $idEtudiant );
+						$tacheGestionnaire->setIdtache ( $tache->getId () );
+						$tacheGestionnaire->setStatus ( "NONLU" );
+							
+						/* pour persister la tacheEtudiant en BDD */
+						$em->persist ( $tacheGestionnaire );
+					}
+					
 					break;
 				case 3 :
 					/* date et heure du RDV */
 					$duree = $request->get ( 'date_rdv' );
 					
 					/* motif */
-					$duree = $request->get ( 'motif_rdv' );
+					$motif = $request->get ( 'motif_rdv' );
 					
 					/* échéance */
 					if ($request->get ( 'checkbox_form3' ) == true) {
 						$echeance = $request->get ( 'echeance_form3' );
+					}
+					
+					foreach ( $destinataire as $dest ) {
+						$tache->setIdetudiant ( $idEtudiant );
+						$tache->setIdgestionnaire ( $dest );
+						$tache->setDatecreation ( date ( "Y-m-d" ) );
+						$tache->setDatefin ( $echeance );
+						$tache->setType ( $objet );
+						$tache->setNom($motif);
+						/* contenu de la tache */
+						$tmp = [ ];
+						$tmp ['0'] = $duree;
+						$tache->setStructure ( $tmp );
+							
+						/* pour persister la tache en BDD */
+						$em->persist ( $tache );
+							
+						$tacheGestionnaire = new Tachegestionnaire ();
+						$tacheGestionnaire->setIdetudiant ( $idEtudiant );
+						$tacheGestionnaire->setIdtache ( $tache->getId () );
+						$tacheGestionnaire->setStatus ( "NONLU" );
+							
+						/* pour persister la tacheEtudiant en BDD */
+						$em->persist ( $tacheGestionnaire );
 					}
 					
 					break;
@@ -120,6 +177,32 @@ class TacheController extends Controller {
 					/* commentaire */
 					$commentaire = $request->get ( 'commentaire_rendu_devoir' );
 					
+					foreach ( $destinataire as $dest ) {
+						$tache->setIdetudiant ( $idEtudiant );
+						$tache->setIdgestionnaire ( $dest );
+						$tache->setDatecreation ( date ( "Y-m-d" ) );
+						$tache->setDatefin ( $echeance );
+						$tache->setType ( $objet );
+						$tache->setNom($type);
+						/* contenu de la tache */
+						$tmp = [ ];
+						$tmp ['0'] = $file;
+						$tmp ['1'] = $nom;
+						$tmp ['2'] = $commentaire;
+						$tache->setStructure ( $tmp );
+							
+						/* pour persister la tache en BDD */
+						$em->persist ( $tache );
+							
+						$tacheGestionnaire = new Tachegestionnaire ();
+						$tacheGestionnaire->setIdetudiant ( $idEtudiant );
+						$tacheGestionnaire->setIdtache ( $tache->getId () );
+						$tacheGestionnaire->setStatus ( "NONLU" );
+							
+						/* pour persister la tacheEtudiant en BDD */
+						$em->persist ( $tacheGestionnaire );
+					}
+					
 					break;				
 				case 5:
 					/* type d'inscritpion*/
@@ -134,6 +217,32 @@ class TacheController extends Controller {
 					/* échéance */
 					if ($request->get ( 'checkbox_form5' ) == true) {
 						$echeance = $request->get ( 'echeance_form5' );
+					}
+					
+					foreach ( $destinataire as $dest ) {
+						$tache->setIdetudiant ( $idEtudiant );
+						$tache->setIdgestionnaire ( $dest );
+						$tache->setDatecreation ( date ( "Y-m-d" ) );
+						$tache->setDatefin ( $echeance );
+						$tache->setType ( $objet );
+						$tache->setNom($typeForm);
+						
+						/* contenu de la tache */
+						$tmp = [ ];
+						$tmp ['0'] = $file;
+						$tmp ['1'] = $duree;
+						$tache->setStructure ( $tmp );
+							
+						/* pour persister la tache en BDD */
+						$em->persist ( $tache );
+							
+						$tacheGestionnaire = new Tachegestionnaire ();
+						$tacheGestionnaire->setIdetudiant ( $idEtudiant );
+						$tacheGestionnaire->setIdtache ( $tache->getId () );
+						$tacheGestionnaire->setStatus ( "NONLU" );
+							
+						/* pour persister la tacheEtudiant en BDD */
+						$em->persist ( $tacheGestionnaire );
 					}
 					
 					break;			
@@ -152,6 +261,31 @@ class TacheController extends Controller {
 						$echeance = $request->get ( 'echeance_form6' );
 					}
 					
+					foreach ( $destinataire as $dest ) {
+						$tache->setIdetudiant ( $idEtudiant );
+						$tache->setIdgestionnaire ( $dest );
+						$tache->setDatecreation ( date ( "Y-m-d" ) );
+						$tache->setDatefin ( $echeance );
+						$tache->setType ( $objet );
+						$tache->setNom($detail);
+						/* contenu de la tache */
+						$tmp = [ ];
+						$tmp ['0'] = $file;
+						$tmp ['2'] = $dates_stage;
+						$tache->setStructure ( $tmp );
+					
+						/* pour persister la tache en BDD */
+						$em->persist ( $tache );
+					
+						$tacheGestionnaire = new Tachegestionnaire ();
+						$tacheGestionnaire->setIdetudiant ( $idEtudiant );
+						$tacheGestionnaire->setIdtache ( $tache->getId () );
+						$tacheGestionnaire->setStatus ( "NONLU" );
+					
+						/* pour persister la tacheEtudiant en BDD */
+						$em->persist ( $tacheGestionnaire );
+					}
+										
 					break;				
 				case 7:	
 					/* remarque*/
@@ -164,6 +298,30 @@ class TacheController extends Controller {
 					if ($request->get ( 'checkbox_form7' ) == true) {
 						$echeance = $request->get ( 'echeance_form7' );
 					}
+					
+					foreach ( $destinataire as $dest ) {
+						$tache->setIdetudiant ( $idEtudiant );
+						$tache->setIdgestionnaire ( $dest );
+						$tache->setDatecreation ( date ( "Y-m-d" ) );
+						$tache->setDatefin ( $echeance );
+						$tache->setType ( $objet );
+						/* contenu de la tache */
+						$tmp = [ ];
+						$tmp ['0'] = $file;
+						$tmp ['1'] = $remarque_stage;
+						$tache->setStructure ( $tmp );
+						
+						/* pour persister la tache en BDD */
+						$em->persist ( $tache );
+						
+						$tacheGestionnaire = new Tachegestionnaire ();
+						$tacheGestionnaire->setIdetudiant ( $idEtudiant );
+						$tacheGestionnaire->setIdtache ( $tache->getId () );
+						$tacheGestionnaire->setStatus ( "NONLU" );
+						
+						/* pour persister la tacheEtudiant en BDD */
+						$em->persist ( $tacheGestionnaire );
+					}					
 					
 					break;
 				case 8 :
@@ -178,6 +336,29 @@ class TacheController extends Controller {
 						$echeance = $request->get ( 'echeance_form8' );
 					}
 					
+					
+					$tache->setIdetudiant($idEtudiant);
+					$tache->setNom($text);
+					$tache->setDatecreation(date("Y-m-d"));
+					$tache->setDatefin($echeance);
+					$tache->setType($objet);
+					/* contenu de la tache */
+					$tmp = [];
+					$tmp['0'] = $file;					
+					$tache->setStructure($tmp);
+						
+					/* pour persister la tache en BDD*/								
+					$em->persist($tache);
+					
+					
+					$tacheEtudiant = new Tacheetudiant();				
+					$tacheEtudiant->setType("NONLU");
+					$tacheEtudiant->setIdetudiant($idEtudiant);
+					$tacheEtudiant->setIdtache($tache->getId());
+					
+					/* pour persister la tacheEtudiant en BDD*/								
+					$em->persist($tacheEtudiant);
+					
 					break;				
 				case 9 :
 					/* text */
@@ -191,9 +372,37 @@ class TacheController extends Controller {
 						$echeance = $request->get ( 'echeance_form6' );
 					}
 
+					foreach ($destinataire as $dest){
+						$tache->setIdetudiant($idEtudiant);
+						$tache->setIdgestionnaire($dest);
+						$tache->setNom($text);
+						$tache->setDatecreation(date("Y-m-d"));
+						$tache->setDatefin($echeance);
+						$tache->setType($objet);
+						/* contenu de la tache */
+						$tmp = [];
+						$tmp['0'] = $file;
+						$tache->setStructure($tmp);
+						
+						/* pour persister la tache en BDD*/
+						$em->persist($tache);
+						
+						
+						$tacheGestionnaire = new Tachegestionnaire();
+						$tacheGestionnaire->setIdetudiant($idEtudiant);
+						$tacheGestionnaire->setIdtache($tache->getId());
+						$tacheGestionnaire->setStatus("NONLU");
+						
+						/* pour persister la tacheEtudiant en BDD*/
+						$em->persist($tacheEtudiant);
+					}
+					
+
 					break;				
 			}
-			
+							
+			/* pour valider les persist effectuées */
+			$em->flush();
 			
 		}
 	}
