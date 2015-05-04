@@ -647,4 +647,47 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	    });
 		
 	});
-	});
+
+    $("#EnvoyerTaskToInsert").click(function() {
+   // $("#result").click(function() {
+       //console.log($('#insertTaskForm').serializeArray());
+
+        var formData = {};
+        $('#insertTaskForm').serializeArray().map(function(item) {
+            if ( formData[item.name] ) {
+                if ( typeof(formData[item.name]) === "string" ) {
+                    formData[item.name] = [formData[item.name]];
+                }
+                formData[item.name].push(item.value);
+            } else {
+                formData[item.name] = item.value;
+            }
+        });
+
+        //console.log(formData);
+        $.ajax({
+            type: 'POST',
+            url: '/insertTask',
+            dataType: 'json',
+            data: formData,
+            success: function(data){
+                console.log("success");
+                console.log(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+                console.log()
+                var w = window.open();
+                var html = xhr.responseText;
+
+                $(w.document.body).html(html);
+            }
+
+        });
+        console.log("fin ajax");
+
+
+    });
+});
+
