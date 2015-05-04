@@ -49,7 +49,12 @@ class Etudiant
      */
     private $password;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telephone", type="text", nullable=true)
+     */
+    private $telephone;
 
     /**
      * Get id
@@ -151,5 +156,28 @@ class Etudiant
     public function getPassword()
     {
         return $this->password;
+    }
+    
+    /**
+     * Set telephone
+     *
+     * @param string $telephone
+     * @return Etudiant
+     */
+    public function setTelephone($telephone)
+    {
+    	$this->telephone = $telephone;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get telephone
+     *
+     * @return string
+     */
+    public function getTelephone()
+    {
+    	return $this->telephone;
     }
 }

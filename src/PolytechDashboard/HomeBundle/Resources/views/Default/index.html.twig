@@ -56,7 +56,12 @@
                                     <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
                                     <p>
                                         {{prenom}} {{nom}}
-                                        <small>ET{{formation.getAnneeetude()}} - {{formation.getSpecialite()}}</small>   <!-- TODO : a modifier -->
+                                        <small>{% if formation.getAnneeetude()<3 %}
+                                    	Peip
+                                    	{%else%}
+                                    	ET
+                                    	{%endif%}
+                                    	{{formation.getAnneeetude()}} - {{formation.getSpecialite()}}</small> 
                                     </p>
                                 </li>
 
@@ -102,7 +107,12 @@
                                 </div>
                                 <div class="col-lg-6" style="margin: auto; height: 100%; vertical-align: middle;" >
                                     <p> {{prenom}} {{nom}}</p>
-                                    <p>ET4 - Informatique</p>
+                                    <p>{% if formation.getAnneeetude()<3 %}
+                                    	Peip
+                                    	{%else%}
+                                    	ET
+                                    	{%endif%}
+                                    	{{formation.getAnneeetude()}} - {{formation.getSpecialite()}}</p>
                                     <p>N° étudiant : {{ id }}</p>
                                     <p class="warning_profil_photo">
                                         <i class="icon fa fa-warning"></i>
@@ -128,11 +138,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="profil_InputEmail">Email</label>
-                                        <input type="email" class="form-control" id="profil_InputEmail" value="mail@u-psud.fr">
+                                        <input type="email" class="form-control" id="profil_InputEmail" value={{email}}>
                                     </div>
                                     <div class="form-group">
                                         <label for="profil_InputTel">Téléphone</label>
-                                        <input type="tel" class="form-control" id="profil_InputTel">
+                                        <input type="email" class="form-control" id="profil_InputTel" value={{telephone}}>
                                     </div>
 
 
