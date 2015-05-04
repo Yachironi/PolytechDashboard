@@ -105,7 +105,7 @@
 <section class="content">
 	<!-- Formulaire -->
 	<div class="myform" id="form_task">
-		<form action="{{ path('submitForm') }}" method="post">
+		<form id="taskForm">
 			<!-- Listes des formulaires -->
 			<div class="form-group" style="padding-bottom: 20px;">
 				<label for="type">Type de formulaire</label> <select
@@ -137,7 +137,7 @@
 						<!--<input type="text" class="form-control" id="destinataire_form2"
                                value="{{ myAdmins.Admin.getPrenom() }} {{ myAdmins.Admin.getNom() }} - {{ myAdmins.Admin.getEmail() }}"
                                required>-->
-						<input type="text" class="form-control" id="destinataire_form2"
+						<input type="text" class="form-control" id="destinataire_form2" name="destinataire_form2"
 							required>
 						<div class="input-group-addon">
 							<a href="#"><i class="fa fa-sort-alpha-asc"></i></a>
@@ -148,12 +148,13 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-lg-9">
-							<label for="objet_form2">Objet</label> <input type="text"
+							<label for="objet_form2">Objet</label> <input type="text" name="objet_form2"
 								class="form-control" id="objet_form2"
 								value="Justification d'absence" required>
 						</div>
 						<div class="col-lg-3">
 							<label id="importance_form2">Importance</label>
+							<input type="hidden" id="importance_form2" name="importance_form2" value="1">
 							<div class="select_importance form-control">
 								<a
 									onclick="clickOnImportance('id_importance1_form2', 'id_importance2_form2', 'id_importance3_form2')"
@@ -179,18 +180,18 @@
 						<div class="input-group-addon">
 							<i class="fa fa-clock-o"></i>
 						</div>
-						<input type="text" class="form-control pull-right"
+						<input type="text" class="form-control pull-right" name="duree_absence"
 							id="duree_absence" />
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label>Motif de justification</label>
-					<textarea class="form-control" id="motif_justification_absence"></textarea>
+					<textarea class="form-control" id="motif_justification_absence" name="motif_justification_absence"></textarea>
 				</div>
 				<div class="form-group">
 					<label for="absence_InputFile">Sélectionner votre justificatif</label>
-					<input type="file" id="absence_InputFile">
+					<input type="file" id="absence_InputFile" name="absence_InputFile">
 				</div>
 
 				<!-- Echeance -->
@@ -198,12 +199,12 @@
 					<label>Échéance</label>
 					<div class="input-group">
 						<!-- Checkbox -->
-						<span class="input-group-addon"> <input type="checkbox"
+						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form2"
 							id="checkbox_form2"
 							onchange="showEcheance('checkbox_form2','echeance_form2')">
 						</span>
 						<!-- Date picker -->
-						<input type="text" class="form-control pull-right"
+						<input type="text" class="form-control pull-right" name="echeance_form2"
 							id="echeance_form2" disabled />
 						<div class="input-group-addon">
 							<i class="fa fa-clock-o"></i>
@@ -219,7 +220,7 @@
 				<div class="form-group">
 					<label for="destinataire">Destinataire</label>
 					<div class="input-group">
-						<input type="text" class="form-control" id="destinataire_form3"
+						<input type="text" class="form-control" id="destinataire_form3" name="destinataire_form3"
 							value="" required>
 						<div class="input-group-addon">
 							<a href="#modal_dest_form3" data-toggle="modal"><i
@@ -231,12 +232,14 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-lg-9">
-							<label for="objet_form3">Objet</label> <input type="text"
+							<label for="objet_form3">Objet</label> <input type="text" name="objet_form3"
 								class="form-control" id="objet_form3" value="Demande de RDV"
 								required>
 						</div>
 						<div class="col-lg-3">
 							<label id="importance_form3">Importance</label>
+							<input type="hidden" id="importance_form3" name="importance_form3" value="1">
+							
 							<div class="select_importance form-control">
 								<a
 									onclick="clickOnImportance('id_importance1_form3', 'id_importance2_form3', 'id_importance3_form3')"
@@ -262,14 +265,14 @@
 						<div class="input-group-addon">
 							<i class="fa fa-clock-o"></i>
 						</div>
-						<input type="text" class="form-control pull-right" id="date_rdv" />
+						<input type="text" class="form-control pull-right" id="date_rdv" name="date_rdv"/>
 					</div>
 				</div>
 
 				<!-- TODO : ajouter d'autres? -->
 				<div class="form-group">
 					<label>Motif du rendez-vous</label>
-					<textarea class="form-control" id="motif_rdv"></textarea>
+					<textarea class="form-control" id="motif_rdv" name="motif_rdv"></textarea>
 				</div>
 
 				<!-- Echeance -->
@@ -277,12 +280,12 @@
 					<label>Échéance</label>
 					<div class="input-group">
 						<!-- Checkbox -->
-						<span class="input-group-addon"> <input type="checkbox"
+						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form3"
 							id="checkbox_form3"
 							onchange="showEcheance('checkbox_form3','echeance_form3')">
 						</span>
 						<!-- Date picker -->
-						<input type="text" class="form-control pull-right"
+						<input type="text" class="form-control pull-right" name="echeance_form3"
 							id="echeance_form3" disabled />
 						<div class="input-group-addon">
 							<i class="fa fa-clock-o"></i>
@@ -290,10 +293,6 @@
 					</div>
 				</div>
 
-				<!-- Bouton envoyer -->
-				<div class="form-group btn-center">
-					<button type="submit" class="btn btn-primary">Envoyer</button>
-				</div>
 			</div>
 
 			<!-- Rendre un devoir -->
@@ -302,7 +301,7 @@
 				<div class="form-group">
 					<label for="destinataire">Destinataire</label>
 					<div class="input-group">
-						<input type="text" class="form-control" id="destinataire_form4"
+						<input type="text" class="form-control" id="destinataire_form4" name="destinataire_form4"
 							value="" required>
 						<div class="input-group-addon">
 							<a href="#modal_dest_form4" data-toggle="modal"><i
@@ -346,17 +345,17 @@
 				<!-- Nom du devoir -->
 				<div class="form-group">
 					<label for="objet_form4">Nom du devoir</label> <input type="text"
-						class="form-control" id="objet_form4" required>
+						class="form-control" id="objet_form4" name="objet_form4" required>
 				</div>
 
 				<div class="form-group">
 					<label for="renduDevoir_InputFile">Sélectionner votre devoir</label>
-					<input type="file" id="renduDevoir_InputFile">
+					<input type="file" id="renduDevoir_InputFile" name="renduDevoir_InputFile">
 				</div>
 
 				<div class="form-group">
 					<label>Ajouter un commentaire</label>
-					<textarea class="form-control" id="commentaire_rendu_devoir"></textarea>
+					<textarea class="form-control" id="commentaire_rendu_devoir" name="commentaire_rendu_devoir"></textarea>
 				</div>
 
 			</div>
@@ -382,7 +381,7 @@
 					<label for="destinataire">Destinataire</label>
 					<div class="input-group">
 						<!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
-						<input type="text" class="form-control" id="destinataire_form5"
+						<input type="text" class="form-control" id="destinataire_form5" name="destinataire_form5"
 							value="" required>
 						<div class="input-group-addon">
 							<i class="fa fa-sort-alpha-asc"></i>
@@ -393,11 +392,13 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-lg-9">
-							<label for="objet_form5">Objet</label> <input type="text"
+							<label for="objet_form5">Objet</label> <input type="text" name="objet_form5"
 								class="form-control" id="objet_form5" value="" required>
 						</div>
 						<div class="col-lg-3">
 							<label id="importance_form5">Importance</label>
+							<input type="hidden" id="importance_form5" name="importance_form5" value="1">
+							
 							<div class="select_importance form-control">
 								<a
 									onclick="clickOnImportance('id_importance1_form5', 'id_importance2_form5', 'id_importance3_form5')"
@@ -419,11 +420,11 @@
 
 				<div class="form-group">
 					<label>Motif d'inscription</label>
-					<textarea class="form-control" id="motif_inscription"></textarea>
+					<textarea class="form-control" id="motif_inscription" name="motif_inscription"></textarea>
 				</div>
 				<div class="form-group">
 					<label for="inscription_InputFile">Sélectionner une pièce jointe</label>
-					<input type="file" id="inscription_InputFile">
+					<input type="file" id="inscription_InputFile" name="inscription_InputFile">
 				</div>
 
 				<!-- Echeance -->
@@ -431,12 +432,12 @@
 					<label>Échéance</label>
 					<div class="input-group">
 						<!-- Checkbox -->
-						<span class="input-group-addon"> <input type="checkbox"
+						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form5"
 							id="checkbox_form5"
 							onchange="showEcheance('checkbox_form5','echeance_form5')">
 						</span>
 						<!-- Date picker -->
-						<input type="text" class="form-control pull-right"
+						<input type="text" class="form-control pull-right" name="echeance_form5"
 							id="echeance_form5" disabled />
 						<div class="input-group-addon">
 							<i class="fa fa-clock-o"></i>
@@ -453,7 +454,7 @@
 					<label for="destinataire">Destinataire</label>
 					<div class="input-group">
 						<!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
-						<input type="text" class="form-control" id="destinataire_form6"
+						<input type="text" class="form-control" id="destinataire_form6" name="destinataire_form6"
 							value="{{ myAdmins.Stage.getPrenom() }} {{ myAdmins.Stage.getNom() }} - {{ myAdmins.Stage.getEmail() }}"
 							required>
 						<div class="input-group-addon">
@@ -465,12 +466,14 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-lg-9">
-							<label for="objet_form6">Objet</label> <input type="text"
+							<label for="objet_form6">Objet</label> <input type="text" name="objet_form6"
 								class="form-control" id="objet_form6"
 								value="Validation du sujet de stage" required>
 						</div>
 						<div class="col-lg-3">
 							<label id="importance_form6">Importance</label>
+							<input type="hidden" id="importance_form6" name="importance_form6" value="1">
+							
 							<div class="select_importance form-control">
 								<a
 									onclick="clickOnImportance('id_importance1_form6', 'id_importance2_form6', 'id_importance3_form6')"
@@ -496,19 +499,19 @@
 						<div class="input-group-addon">
 							<i class="fa fa-clock-o"></i>
 						</div>
-						<input type="text" class="form-control pull-right"
+						<input type="text" class="form-control pull-right" name="dates_stage"
 							id="dates_stage" />
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label>Détail</label>
-					<textarea class="form-control" id="detail_stage"></textarea>
+					<textarea class="form-control" id="detail_stage" name="detail_stage"></textarea>
 				</div>
 
 				<div class="form-group">
 					<label for="validStage_InputFile">Sélectionner un fichier</label>
-					<input type="file" id="validStage_InputFile">
+					<input type="file" id="validStage_InputFile" name="validStage_InputFile">
 				</div>
 
 				<!-- Echeance -->
@@ -516,12 +519,12 @@
 					<label>Échéance</label>
 					<div class="input-group">
 						<!-- Checkbox -->
-						<span class="input-group-addon"> <input type="checkbox"
+						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form6"
 							id="checkbox_form6"
 							onchange="showEcheance('checkbox_form6','echeance_form6')">
 						</span>
 						<!-- Date picker -->
-						<input type="text" class="form-control pull-right"
+						<input type="text" class="form-control pull-right" name="echeance_form6"
 							id="echeance_form6" disabled />
 						<div class="input-group-addon">
 							<i class="fa fa-clock-o"></i>
@@ -538,7 +541,7 @@
 					<label for="destinataire">Destinataire</label>
 					<div class="input-group">
 						<!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
-						<input type="text" class="form-control" id="destinataire_form7"
+						<input type="text" class="form-control" id="destinataire_form7" name="destinataire_form7"
 							value="{{ myAdmins.Admin.getPrenom() }} {{ myAdmins.Admin.getNom() }} - {{ myAdmins.Admin.getEmail() }}"
 							required>
 						<div class="input-group-addon">
@@ -550,12 +553,14 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-lg-9">
-							<label for="objet_form7">Objet</label> <input type="text"
+							<label for="objet_form7">Objet</label> <input type="text" name="objet_form7"
 								class="form-control" id="objet_form7"
 								value="Convention de stage" required>
 						</div>
 						<div class="col-lg-3">
 							<label id="importance_form7">Importance</label>
+							<input type="hidden" id="importance_form7" name="importance_form7" value="1">
+							
 							<div class="select_importance form-control">
 								<a
 									onclick="clickOnImportance('id_importance1_form7', 'id_importance2_form7', 'id_importance3_form7')"
@@ -582,12 +587,12 @@
 
 				<div class="form-group">
 					<label>Remarque</label>
-					<textarea class="form-control" id="remarque_stage"></textarea>
+					<textarea class="form-control" id="remarque_stage" name="remarque_stage"></textarea>
 				</div>
 
 				<div class="form-group">
 					<label for="stage_InputFile">Sélectionner votre convention de
-						stage</label> <input type="file" id="pdf_convention_InputFile">
+						stage</label> <input type="file" id="pdf_convention_InputFile" name="pdf_convention_InputFile">
 				</div>
 
 				<!-- Echeance -->
@@ -595,12 +600,12 @@
 					<label>Échéance</label>
 					<div class="input-group">
 						<!-- Checkbox -->
-						<span class="input-group-addon"> <input type="checkbox"
+						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form7"
 							id="checkbox_form7"
 							onchange="showEcheance('checkbox_form7','echeance_form7')">
 						</span>
 						<!-- Date picker -->
-						<input type="text" class="form-control pull-right"
+						<input type="text" class="form-control pull-right" name="echeance_form7"
 							id="echeance_form7" disabled />
 						<div class="input-group-addon">
 							<i class="fa fa-clock-o"></i>
@@ -618,7 +623,7 @@
 					<!-- TODO : griser cette partie -->
 					<div class="input-group">
 						<!-- TODO : lorsque cette tache sera envoye, remplacer "moi" par l'etudiant actuel -->
-						<input type="text" class="form-control" id="destinataire_form8">
+						<input type="text" class="form-control" id="destinataire_form8" name="destinataire_form8">
 						<div class="input-group-addon">
 							<i class="fa fa-sort-alpha-asc"></i>
 						</div>
@@ -628,11 +633,13 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-lg-9">
-							<label for="objet_form8">Objet</label> <input type="text"
+							<label for="objet_form8">Objet</label> <input type="text" name="objet_form8"
 								class="form-control" id="objet_form8" required>
 						</div>
 						<div class="col-lg-3">
 							<label id="importance_form8">Importance</label>
+							<input type="hidden" id="importance_form8" name="importance_form8" value="1">
+							
 							<div class="select_importance form-control">
 								<a
 									onclick="clickOnImportance('id_importance1_form8', 'id_importance2_form8', 'id_importance3_form8')"
@@ -654,11 +661,11 @@
 
 				<div class="form-group">
 					<label for="texte_form8">Texte</label>
-					<textarea class="form-control" id="texte_form8"></textarea>
+					<textarea class="form-control" id="texte_form8" name="texte_form8"></textarea>
 				</div>
 				<div class="form-group">
 					<label for="taskPerso_InputFile">Sélectionner un fichier</label> <input
-						type="file" id="taskPerso_InputFile">
+						type="file" id="taskPerso_InputFile" name="taskPerso_InputFile">
 				</div>
 
 				<!-- Echeance -->
@@ -666,12 +673,12 @@
 					<label>Échéance</label>
 					<div class="input-group">
 						<!-- Checkbox -->
-						<span class="input-group-addon"> <input type="checkbox"
+						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form8"
 							id="checkbox_form8"
 							onchange="showEcheance('checkbox_form8','echeance_form8')">
 						</span>
 						<!-- Date picker -->
-						<input type="text" class="form-control pull-right"
+						<input type="text" class="form-control pull-right" name="echeance_form8"
 							id="echeance_form8" disabled />
 						<div class="input-group-addon">
 							<i class="fa fa-clock-o"></i>
@@ -687,7 +694,7 @@
 				<div class="form-group">
 					<label for="destinataire">Destinataire</label>
 					<div class="input-group">
-						<input type="text" class="form-control" id="destinataire_form9"
+						<input type="text" class="form-control" id="destinataire_form9" name="destinataire_form9"
 							required>
 						<div class="input-group-addon">
 							<a href="#modal_dest_form9" data-toggle="modal"><i
@@ -699,11 +706,13 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-lg-9">
-							<label for="objet_form9">Objet</label> <input type="text"
+							<label for="objet_form9">Objet</label> <input type="text" name="objet_form9"
 								class="form-control" id="objet_form9" required>
 						</div>
 						<div class="col-lg-3">
 							<label id="importance_form9">Importance</label>
+							<input type="hidden" id="importance_form9" name="importance_form9" value="1">
+							
 							<div class="select_importance form-control">
 								<a
 									onclick="clickOnImportance('id_importance1_form9', 'id_importance2_form9', 'id_importance3_form9')"
@@ -724,12 +733,12 @@
 				</div>
 				<div class="form-group">
 					<label>Texte</label>
-					<textarea class="form-control" id="text_autre_demande"></textarea>
+					<textarea class="form-control" id="text_autre_demande" name="text_autre_demande"></textarea>
 				</div>
 
 				<div class="form-group">
 					<label for="demandeNonRepertoriee_InputFile">Sélectionner un
-						fichier</label> <input type="file"
+						fichier</label> <input type="file" name="demandeNonRepertoriee_InputFile"
 						id="demandeNonRepertoriee_InputFile">
 				</div>
 
@@ -738,12 +747,12 @@
 					<label>Échéance</label>
 					<div class="input-group">
 						<!-- Checkbox -->
-						<span class="input-group-addon"> <input type="checkbox"
+						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form9"
 							id="checkbox_form9"
 							onchange="showEcheance('checkbox_form9','echeance_form9')">
 						</span>
 						<!-- Date picker -->
-						<input type="text" class="form-control pull-right"
+						<input type="text" class="form-control pull-right" name="echeance_form9"
 							id="echeance_form9" disabled />
 						<div class="input-group-addon">
 							<i class="fa fa-clock-o"></i>

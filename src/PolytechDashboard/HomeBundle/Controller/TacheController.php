@@ -83,7 +83,8 @@ class TacheController extends Controller {
 			$objet = $request->get ( 'objet_form' . $typeForm );
 			
 			/* TODO Importance */
-			// $importance =
+			// $importance =			
+			$importance = $request->get( );
 			
 			switch ($typeForm) {
 				case 2 :
