@@ -11,6 +11,8 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use PolytechDashboard\HomeBundle\Entity\Tachegestionnaire;
+use PolytechDashboard\HomeBundle\Entity\Tacheetudiant;
 /*use Symfony\Component\HttpFoundation\Session\Session;
 
 */
@@ -163,7 +165,6 @@ class AjaxHandlerController extends Controller
     }
 
     public function insertTaskAction(Request $request) {
-
         $idEtudiant = $this->getRequest()->getSession()->get('loginTMP')->getId();
 
         if ($request->getMethod () == 'POST') {
@@ -212,7 +213,7 @@ class AjaxHandlerController extends Controller
                         /* pour persister la tache en BDD */
                         $em->persist ( $tache );
 
-                        $tacheGestionnaire = new Tachegestionnaire ();
+                        $tacheGestionnaire = new Tachegestionnaire();
                         $tacheGestionnaire->setIdetudiant ( $idEtudiant );
                         $tacheGestionnaire->setIdtache ( $tache->getId () );
                         $tacheGestionnaire->setStatus ( "NONLU" );

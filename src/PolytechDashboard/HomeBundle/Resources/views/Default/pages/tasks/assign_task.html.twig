@@ -346,7 +346,7 @@
 				<!-- Nom du devoir -->
 				<div class="form-group">
 					<label for="objet_form4">Nom du devoir</label> <input type="text"
-						class="form-control" id="objet_form4" name="objet_form4" required>
+						class="form-control" id="objet_form4" name="objet_form4" value="" required>
 				</div>
 
 				<div class="form-group">
@@ -394,7 +394,7 @@
 					<div class="row">
 						<div class="col-lg-9">
 							<label for="objet_form5">Objet</label> <input type="text" name="objet_form5"
-								class="form-control" id="objet_form5" value="" required>
+								class="form-control" id="objet_form5" value=" " required>
 						</div>
 						<div class="col-lg-3">
 							<label id="importance_form5">Importance</label>
@@ -624,7 +624,7 @@
 					<!-- TODO : griser cette partie -->
 					<div class="input-group">
 						<!-- TODO : lorsque cette tache sera envoye, remplacer "moi" par l'etudiant actuel -->
-						<input type="text" class="form-control" id="destinataire_form8" name="destinataire_form8">
+						<input type="text" class="form-control" id="destinataire_form8" name="destinataire_form8" value="Moi">
 						<div class="input-group-addon">
 							<i class="fa fa-sort-alpha-asc"></i>
 						</div>
@@ -635,7 +635,7 @@
 					<div class="row">
 						<div class="col-lg-9">
 							<label for="objet_form8">Objet</label> <input type="text" name="objet_form8"
-								class="form-control" id="objet_form8" required>
+								class="form-control" id="objet_form8" value=" " required>
 						</div>
 						<div class="col-lg-3">
 							<label id="importance_form8">Importance</label>
@@ -708,7 +708,7 @@
 					<div class="row">
 						<div class="col-lg-9">
 							<label for="objet_form9">Objet</label> <input type="text" name="objet_form9"
-								class="form-control" id="objet_form9" required>
+								class="form-control" id="objet_form9" value=" " required>
 						</div>
 						<div class="col-lg-3">
 							<label id="importance_form9">Importance</label>
@@ -762,10 +762,10 @@
 				</div>
 
 			</div>
-			<!-- Bouton envoyer -->
-			<div class="form-group btn-center">
-				<button type="submit" class="btn btn-primary">Envoyer</button>
-			</div>
+            <!-- Bouton envoyer -->
+            <div class="form-group btn-center">
+                <button id="EnvoyerTaskToInsert" type="submit" class="btn btn-primary">Envoyer</button>
+            </div>
 		</form>
 	</div>
 
