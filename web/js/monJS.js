@@ -365,7 +365,16 @@ function clickOnImportance(id_importance_selected, other_id_importance_1, other_
         importance_selected.classList.remove(name_importance_selected + "-selected");
         importance_selected.classList.add(name_importance_selected);
     }
-
+    
+    var tmp = 'importance'+id_importance_selected.substring(14);
+    
+    oFormObject = document.forms['taskForm'];
+    
+    oFormObject.elements[tmp].value = id_importance_selected.substring(13,14);
+    
+//    document.getElementById(tmp).value = id_importance_selected.substring(13,14);
+//    var value = document.getElementById(tmp).value;
+    console.log("nom de l'input : "+tmp+" id : "+id_importance_selected.substring(13,14));
 }
 
 /* Permet de faire un changement d'onglet lorsque l'etudiant clique sur un onglet qui est dans le dropdown */
