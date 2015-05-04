@@ -633,6 +633,7 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
 }
 
 document.addEventListener("DOMContentLoaded", function(event) { 
+
 	$("#buttonEnregistrerEtudiant").click(function() {
 		 
 
@@ -648,3 +649,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		
 	});
 	});
+
+

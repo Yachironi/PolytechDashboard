@@ -290,16 +290,29 @@
                         if (nbNotificationNONLU <=0) {
                             //$("#nbNotification").css("display","none");
                             $("#nbNotification").html("");
+                            $("#new_notif").html("0");
                             $("#"+item.categorie+"-notification-tag").html("");
                             $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
                             $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
                         } else if (nbNotificationNONLU == 1) {
                             $("#nbNotification").html(nbNotificationNONLU);
+                           if ($( "#my_tasks-notification-tag1" ).html() == "") {
+                        	$("#new_notif").html("0");
+                        }
+                        else {
+                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                        }
                             //$("#"+item.categorie+"-notification-tag").html("");
                             $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
                             $("#textNbNotification").html("Vous avez une notification");
                         } else {
                             $("#nbNotification").html(nbNotificationNONLU);
+                            if ($( "#my_tasks-notification-tag1" ).html() == "") {
+                        	$("#new_notif").html("0");
+                        }
+                        else {
+                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                        }
                             $("#"+item.categorie+"-notification-tag").html(nbNotificationNONLU);
                             $("#"+item.categorie+"-notification-tag").html("");
                             $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
@@ -366,12 +379,25 @@
                 if (nbNotificationNONLU <=0) {
                     //$("#nbNotification").css("display","none");
                     $("#nbNotification").html("");
+                    $("#new_notif").html("0");
                     $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
                 } else if (nbNotificationNONLU == 1) {
                     $("#nbNotification").html(nbNotificationNONLU);
+                    if ($( "#my_tasks-notification-tag1" ).html() == "") {
+                        	$("#new_notif").html("0");
+                        }
+                        else {
+                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                        }
                     $("#textNbNotification").html("Vous avez une notification");
                 } else {
                     $("#nbNotification").html(nbNotificationNONLU);
+                   if ($( "#my_tasks-notification-tag1" ).html() == "") {
+                        	$("#new_notif").html("0");
+                        }
+                        else {
+                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                        }
                     $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
                 }
             }
@@ -426,12 +452,25 @@
                 if (nbNotificationNONLU == 0) {
                     //$("#nbNotification").css("display","none");
                     $("#nbNotification").html("");
+                    $("#new_notif").html("0");
                     $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
                 } else if (nbNotificationNONLU == 1) {
                     $("#nbNotification").html(nbNotificationNONLU);
+                    if ($( "#my_tasks-notification-tag1" ).html() == "") {
+                        	$("#new_notif").html("0");
+                        }
+                        else {
+                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                        }
                     $("#textNbNotification").html("Vous avez une notification");
                 } else {
                     $("#nbNotification").html(nbNotificationNONLU);
+                    if ($( "#my_tasks-notification-tag1" ).html() == "") {
+                        	$("#new_notif").html("0");
+                        }
+                        else {
+                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                        }
                     $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
                 }
 
@@ -466,12 +505,26 @@
                     if (nbNotificationNONLU == 0) {
                         //$("#nbNotification").css("display","none");
                         $("#nbNotification").html("");
+                        $("#new_notif").html("0");
                         $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
                     } else if (nbNotificationNONLU == 1) {
                         $("#nbNotification").html(nbNotificationNONLU);
+                        if ($( "#my_tasks-notification-tag1" ).html() == "") {
+                        	$("#new_notif").html("0");
+                        }
+                        else {
+                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                        }
+                        
                         $("#textNbNotification").html("Vous avez une notification");
                     } else {
                         $("#nbNotification").html(nbNotificationNONLU);
+                        if ($( "#my_tasks-notification-tag1" ).html() == "") {
+                        	$("#new_notif").html("0");
+                        }
+                        else {
+                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                        }
                         $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
                     }
                     */
