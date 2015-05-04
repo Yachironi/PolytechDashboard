@@ -1,5 +1,5 @@
 function activateTag(id_tag){
-    var list_tag = new Array('main_dashboard', 'my_space_study_level', 'my_program', 'my_tasks', 'assign_task', 'my_grades', 'planning', 'my_notifications', 'contact');
+    var list_tag = new Array('main_dashboard', 'my_space_study_level', 'my_program', 'my_tasks', 'assign_task', 'my_grades', 'planning');
 
     var i;
     var size = list_tag.length;
@@ -124,6 +124,7 @@ function editTask(idTask, dateFin, objet, importance){
         echeance.value = dateFin;
         // TODO : si possible, changer la date du datepicker
     }
+    document.getElementById('checkbox_form8').checked = true;
 
     $.ajax({
         type: 'POST',

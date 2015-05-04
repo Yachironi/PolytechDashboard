@@ -38,6 +38,6 @@ polytech_dashboard_tachesList:
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:tachesList"}
 
 
-polytech_dashboard_createTask:
-    path:     /createTask
-    defaults: { _controller: "PolytechDashboardHomeBundle:TacheController:createTask"}
+submitForm:
+    path:     /submitForm
+    defaults: { _controller: "PolytechDashboardHomeBundle:Tache:submitForm"}
