@@ -29,6 +29,7 @@ class LoginController extends Controller {
 			$myGrades = $noteController->indexAction ( $user, $this );
 			$tacheController = $this->get ( 'tacheController' );
 			$myTasks = $tacheController->indexAction ( $user, $this );
+			$myStatueTask = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tacheetudiant' )->findByIdetudiant ( $user->getId() );
 			$programmeController = $this->get ( 'coursController' );
 			$myUE = $programmeController->indexAction ( $user, $this );
 			$gestionnaireController = $this->get ( 'gestionnaireController' );
@@ -69,8 +70,8 @@ class LoginController extends Controller {
 						'myUE' => $myUE,
 						'myAdmins' => $myAdmins, 
 						'myNews' => $myNews,
-						'myEvent' => $myEvent
-						
+						'myEvent' => $myEvent,
+						'myStatueTask' => $myStatueTask
 				) );
 			} else {
 				return $this->render ( 'PolytechDashboardHomeBundle:Default:login.html.twig', array (

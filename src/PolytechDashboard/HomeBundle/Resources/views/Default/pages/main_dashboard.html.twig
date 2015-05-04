@@ -190,13 +190,22 @@
               <div class="info-box bg-green">
                 <span class="info-box-icon"><i class="fa fa-book"></i></span>
                 <div class="info-box-content">
+                {% set nbTacheFait = 0 %}
+                {% set nbTache = 0 %}
+                {% for task in myStatueTask %} 
+                	{% if task.getStatus() == "VALIDE" %}
+                		{% set nbTacheFait = nbTacheFait+1 %}
+                	{% endif %}
+                	{% set nbTache = nbTache+1 %}
+                {% endfor %}
                   <span class="info-box-text">Taches realisees</span>
-                  <span class="info-box-number">16</span>
+                  <span class="info-box-number">{{nbTacheFait}}</span>
+                  {% set pourcentage = (nbTacheFait*100)/nbTache %}
                   <div class="progress">
-                    <div class="progress-bar" style="width: 70%"></div>
+                    <div class="progress-bar" style="width: {{pourcentage|number_format(0, '.', ',')}}%"></div>
                   </div>
                   <span class="progress-description">
-                    70% du nombre de taches totales
+                    {{pourcentage|number_format(0, '.', ',')}}% du nombre de taches totales
                   </span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
