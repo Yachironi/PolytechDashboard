@@ -12,7 +12,6 @@ class LoginController extends Controller {
 		$session = $this->getRequest ()->getSession ();
 		$em = $this->getDoctrine ()->getEntityManager ();
 		$repository = $em->getRepository ( 'PolytechDashboardHomeBundle:Etudiant' );
-		
 		if ($request->getMethod () == 'POST') {
 			
 			$session->clear ();

@@ -85,6 +85,7 @@ class AjaxHandlerController extends Controller
 
         return new Response();
     }
+    
     public function setNotificationCategoryAsReadAction(Request $request)
     {
         $criteria = Criteria::create()
@@ -145,4 +146,19 @@ class AjaxHandlerController extends Controller
         return new Response($jsonContent);
     }
 
+    public function updateEtudiantAction(Request $request)
+    {
+    
+    	$Etudiant = $this->getDoctrine()->getRepository('PolytechDashboardHomeBundle:Etudiant')
+    	->findOneBy(array('id' => $this->getRequest()->getSession()->get('loginTMP')->getId()));
+    	$Etudiant->setTelephone($request->get('telephone'));
+    	$Etudiant->setEmail($request->get('email'));
+    	$Etudiant->setPassword(sha1($request->get('password')));
+    	$em = $this->getDoctrine()->getManager();
+    	$em->persist($Etudiant);
+    	$em->flush();
+    
+    	return new Response();
+    }
+    
 }

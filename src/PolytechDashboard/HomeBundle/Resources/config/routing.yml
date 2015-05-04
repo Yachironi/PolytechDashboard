@@ -37,7 +37,10 @@ polytech_dashboard_tachesList:
     path:     /tachesList
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:tachesList"}
 
-
 submitForm:
     path:     /submitForm
     defaults: { _controller: "PolytechDashboardHomeBundle:Tache:submitForm"}
+    
+polytech_dashboard_updateEtudiant:
+    path:     /updateEtudiant
+    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:updateEtudiant"}
