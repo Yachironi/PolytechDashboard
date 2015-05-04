@@ -37,6 +37,14 @@ polytech_dashboard_tachesList:
     path:     /tachesList
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:tachesList"}
 
+polytech_dashboard_setNotificationCategoryAsRead:
+    path:     /setNotificationCategoryAsRead
+    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:setNotificationCategoryAsRead"}
+
+polytech_dashboard_insertTask:
+    path:     /insertTask
+    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:insertTask"}
+
 submitForm:
     path:     /submitForm
     defaults: { _controller: "PolytechDashboardHomeBundle:Tache:submitForm"}
