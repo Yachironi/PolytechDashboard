@@ -30,7 +30,7 @@ class DefaultController extends Controller {
 				'nom' => 'Blanchard',
 				'id' => '21303181',
 				'email' => 'guillaume.blanchard@u-psud.fr',
-
+				'telephone' => '0601020304',
 				'formation' => $formation,
 				'myGrades' => $myGrades,
 				'myTasks' => $myTasks,

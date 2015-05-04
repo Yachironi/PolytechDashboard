@@ -64,6 +64,7 @@ class LoginController extends Controller {
 						'email' => $user->getEmail (),
 						'id' => $user->getId(),
 						'formation' => $formation,
+						'telephone' => $user->getTelephone(),
 						'myGrades' => $myGrades,
 						'myTasks' => $myTasks,
 						'myUE' => $myUE,
