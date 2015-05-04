@@ -169,8 +169,7 @@ function doneTask(ID){
  */
 function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest, nom_dest){
 
-    //var type_task = type_task;    // TODO dans la BD type_task pas attribue
-    var type_task = 2;
+    var type_task = type_task;    // TODO dans la BD type_task pas attribue
     var title = document.getElementById(id_title);
     var body = document.getElementById(id_body);
 
@@ -193,6 +192,13 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
         "<label for='absence_InputFile_reply'>Sélectionner votre justificatif</label>" +
         "<input type='file' id='absence_InputFile_reply'></div>"
         + "</form>";
+
+        $('#duree_absence_reply').daterangepicker_reply({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
     }
     // prendre un rdv. TODO : recuperer l'heure et la date de rdv
     else if(type_task == 3){
@@ -208,6 +214,14 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
         "<div class='input-group-addon'><i class='fa fa-clock-o'></i></div>" +
         "</div></div>"
         + "</form>";
+
+        $('#date_rdv_reply').daterangepicker2_reply({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
+
     }
     // rendre un devoir
     else if(type_task == 4){
@@ -237,6 +251,11 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
         "<label for='validStage_InputFile_reply'>Sélectionner un fichier</label>" +
         "<input type='file' id='validStage_InputFile_reply'></div>"
         + "</form>";
+
+        $('#dates_stage_reply').daterangepicker_reply({
+            timePicker: false,
+            format: 'DD/MM/YYYY'
+        });
     }
     // autre
     else{
