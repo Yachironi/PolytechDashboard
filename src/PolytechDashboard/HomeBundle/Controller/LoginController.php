@@ -12,7 +12,6 @@ class LoginController extends Controller {
 		$session = $this->getRequest ()->getSession ();
 		$em = $this->getDoctrine ()->getEntityManager ();
 		$repository = $em->getRepository ( 'PolytechDashboardHomeBundle:Etudiant' );
-		
 		if ($request->getMethod () == 'POST') {
 			
 			$session->clear ();
@@ -64,6 +63,7 @@ class LoginController extends Controller {
 						'email' => $user->getEmail (),
 						'id' => $user->getId(),
 						'formation' => $formation,
+						'telephone' => $user->getTelephone(),
 						'myGrades' => $myGrades,
 						'myTasks' => $myTasks,
 						'myUE' => $myUE,

@@ -169,8 +169,7 @@ function doneTask(ID){
  */
 function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest, nom_dest){
 
-    //var type_task = type_task;    // TODO dans la BD type_task pas attribue
-    var type_task = 2;
+    var type_task = type_task;    // TODO dans la BD type_task pas attribue
     var title = document.getElementById(id_title);
     var body = document.getElementById(id_body);
 
@@ -193,6 +192,13 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
         "<label for='absence_InputFile_reply'>Sélectionner votre justificatif</label>" +
         "<input type='file' id='absence_InputFile_reply'></div>"
         + "</form>";
+
+        $('#duree_absence_reply').daterangepicker_reply({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
     }
     // prendre un rdv. TODO : recuperer l'heure et la date de rdv
     else if(type_task == 3){
@@ -208,6 +214,14 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
         "<div class='input-group-addon'><i class='fa fa-clock-o'></i></div>" +
         "</div></div>"
         + "</form>";
+
+        $('#date_rdv_reply').daterangepicker2_reply({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
+
     }
     // rendre un devoir
     else if(type_task == 4){
@@ -237,6 +251,11 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
         "<label for='validStage_InputFile_reply'>Sélectionner un fichier</label>" +
         "<input type='file' id='validStage_InputFile_reply'></div>"
         + "</form>";
+
+        $('#dates_stage_reply').daterangepicker_reply({
+            timePicker: false,
+            format: 'DD/MM/YYYY'
+        });
     }
     // autre
     else{
@@ -368,7 +387,7 @@ function clickOnImportance(id_importance_selected, other_id_importance_1, other_
     
     var tmp = 'importance'+id_importance_selected.substring(14);
     
-    oFormObject = document.forms['taskForm'];
+    oFormObject = document.forms['insertTaskForm'];
     
     oFormObject.elements[tmp].value = id_importance_selected.substring(13,14);
     
@@ -621,3 +640,63 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
         }
     }
 }
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+	$("#buttonEnregistrerEtudiant").click(function() {
+		 
+
+		$.ajax({
+	        type: 'POST',
+	        url: '/updateEtudiant',
+	        dataType: 'json',
+	        data: {'email': $('#profil_InputEmail').val(),'password': $('#profil_InputPassword2').val(),'telephone': $('#profil_InputTel').val()},
+	        success: function(data){
+	        	
+	        }
+	    });
+		
+	});
+
+    $("#EnvoyerTaskToInsert").click(function() {
+   // $("#result").click(function() {
+       //console.log($('#insertTaskForm').serializeArray());
+
+        var formData = {};
+        $('#insertTaskForm').serializeArray().map(function(item) {
+            if ( formData[item.name] ) {
+                if ( typeof(formData[item.name]) === "string" ) {
+                    formData[item.name] = [formData[item.name]];
+                }
+                formData[item.name].push(item.value);
+            } else {
+                formData[item.name] = item.value;
+            }
+        });
+
+        //console.log(formData);
+        $.ajax({
+            type: 'POST',
+            url: '/insertTask',
+            dataType: 'json',
+            data: formData,
+            success: function(data){
+                console.log("success");
+                console.log(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+                console.log()
+                var w = window.open();
+                var html = xhr.responseText;
+
+                $(w.document.body).html(html);
+            }
+
+        });
+        console.log("fin ajax");
+
+
+    });
+});
+
