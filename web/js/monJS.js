@@ -660,6 +660,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     $("#EnvoyerTaskToInsert").click(function() {
    // $("#result").click(function() {
        //console.log($('#insertTaskForm').serializeArray());
+    	  event.preventDefault();
+
 
         var formData = {};
         $('#insertTaskForm').serializeArray().map(function(item) {
@@ -673,7 +675,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             }
         });
 
-        //console.log(formData);
+        console.log(formData);
         $.ajax({
             type: 'POST',
             url: '/insertTask',

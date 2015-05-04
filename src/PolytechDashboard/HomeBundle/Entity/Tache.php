@@ -78,7 +78,19 @@ class Tache
      */
     private $importance;
 
-
+    /**
+     * Set id
+     *
+     * @param int $id
+     * @return Tache
+     */
+    public function setId($id)
+    {
+    	$this->id = $id;
+    
+    	return $this;
+    }
+    
     /**
      * Get id
      *
