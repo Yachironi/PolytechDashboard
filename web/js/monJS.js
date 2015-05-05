@@ -428,7 +428,16 @@ function clickOnImportance(id_importance_selected, other_id_importance_1, other_
         importance_selected.classList.remove(name_importance_selected + "-selected");
         importance_selected.classList.add(name_importance_selected);
     }
-
+    
+    var tmp = 'importance'+id_importance_selected.substring(14);
+    
+    oFormObject = document.forms['insertTaskForm'];
+    
+    oFormObject.elements[tmp].value = id_importance_selected.substring(13,14);
+    
+//    document.getElementById(tmp).value = id_importance_selected.substring(13,14);
+//    var value = document.getElementById(tmp).value;
+    console.log("nom de l'input : "+tmp+" id : "+id_importance_selected.substring(13,14));
 }
 
 function clickOnImportanceEditTask(id){
@@ -759,6 +768,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     $("#EnvoyerTaskToInsert").click(function() {
    // $("#result").click(function() {
        //console.log($('#insertTaskForm').serializeArray());
+    	  event.preventDefault();
+
 
         var formData = {};
         $('#insertTaskForm').serializeArray().map(function(item) {
@@ -772,7 +783,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             }
         });
 
-        //console.log(formData);
+        console.log(formData);
         $.ajax({
             type: 'POST',
             url: '/insertTask',

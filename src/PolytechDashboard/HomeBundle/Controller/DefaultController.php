@@ -17,7 +17,7 @@ class DefaultController extends Controller {
 		$myAdmins = $gestionnaireController->indexAction ( 21303181, $this );
 		$myEvent = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Evenement' )->findAll();
 		$myNews = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:News' )->findAll();
-		$myStatueTask = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tacheetudiant' )->findByIdetudiant ( $user->getId() );
+		$myStatueTask = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tacheetudiant' )->findByIdetudiant ( 21303181 );
 		
 		usort ( $myEvent , function ($a, $b) {
 			return ($a->getDateEvenement() < $b->getDateEvenement()) ? - 1 : 1;
