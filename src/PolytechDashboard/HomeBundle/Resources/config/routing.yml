@@ -52,3 +52,11 @@ submitForm:
 polytech_dashboard_updateEtudiant:
     path:     /updateEtudiant
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:updateEtudiant"}
+
+polytech_dashboard_removeTask:
+    path:     /removeTask
+    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:removeTask"}
+
+polytech_dashboard_updateTask:
+    path:     /updateTask
+    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:updateTask"}

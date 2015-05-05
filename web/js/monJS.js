@@ -96,14 +96,37 @@ function openPopup(nom, width, height){
 /**
  * Lorsque l'etudiant clique sur le bouton editer sur une tache qu'il s'est lui meme attribue
  */
-function editTask(idTask, dateFin, objet, importance){
-    var id_list_formulaire = 'list_form'
+
+function editTask(idTask, dateFin,objet, importance, texte) {
+
+    $("#modal_editTask").modal();
+    console.log("importance =====> "+importance);
+    clickOnImportanceEditTask(parseInt(importance));
+
+    $("#TaskForm_objet_form8").val(objet);
+    $("#TaskForm_texte_form8").val(texte);
+    $("#TaskForm_idTask_form8").val(idTask);
+    if(dateFin!=null){
+        $("#TaskForm_checkbox_form8").prop( "checked", true );
+        $("#TaskForm_echeance_form8").prop('disabled', false);
+        $("#TaskForm_echeance_form8").val(dateFin);
+    }else{
+        $("#TaskForm_checkbox_form8").prop( "checked", false );
+        $("#TaskForm_echeance_form8").prop('disabled', true);
+    }
+    $("#TaskForm_echeance_form8").daterangepicker2({
+            timePicker: true,
+            timePicker12Hour:false,
+            timePickerIncrement: 15,
+            format: 'DD/MM/YYYY H:mm'
+        });
+  /*  var id_list_formulaire = 'list_form'
     activateTag('assign_task');
 
     // select
     var select = document.getElementById(id_list_formulaire);
     select.selectedIndex = 7;
-    afficheForm(id_list_formulaire)
+    afficheForm(id_list_formulaire);
 
     // objet
     document.getElementById('objet_form8').value = objet;
@@ -125,8 +148,8 @@ function editTask(idTask, dateFin, objet, importance){
         // TODO : si possible, changer la date du datepicker
     }
     document.getElementById('checkbox_form8').checked = true;
-
-    $.ajax({
+*/
+  /*  $.ajax({
         type: 'POST',
         url: '/tachesList',
         dataType: 'json',
@@ -140,7 +163,7 @@ function editTask(idTask, dateFin, objet, importance){
             })
         }
     });
-
+*/
     // TODO : changer la date de creation et mettre celle d'aujourd'hui
 }
 
@@ -150,10 +173,31 @@ function editTask(idTask, dateFin, objet, importance){
 // Il faut faire passer la tache en parametre
 /* TODO */
 function removeTask(ID){
-    alert("TODO / ID_task = " + ID);
+    //alert("TODO / ID_task = " + ID);
+
     // Trouve sur internet :
     //$em->remove($product);
     //$em->flush();
+
+    $.ajax({
+        type: 'POST',
+        url: '/removeTask',
+        dataType: 'json',
+        data: {'id':ID},
+        success: function(data){
+            console.log("success");
+            console.log(data);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+            console.log()
+            var w = window.open();
+            var html = xhr.responseText;
+
+            $(w.document.body).html(html);
+        }
+    });
 }
 
 /**
@@ -387,6 +431,43 @@ function clickOnImportance(id_importance_selected, other_id_importance_1, other_
 
 }
 
+function clickOnImportanceEditTask(id){
+
+    console.log(id);
+    switch(id) {
+        case 1:
+            $("#TaskForm_id_importance1_form8").removeClass('importance1');
+            $("#TaskForm_id_importance1_form8").addClass('importance1-selected');
+            $("#TaskForm_id_importance2_form8").removeClass('importance2-selected');
+            $("#TaskForm_id_importance2_form8").addClass('importance2')
+            $("#TaskForm_id_importance3_form8").removeClass('importance3-selected');
+            $("#TaskForm_id_importance3_form8").addClass('importance3');
+            $("#TaskForm_importance_form8").val(1);
+            break;
+        case 2:
+            console.log("set imortance => "+id);
+            $("#TaskForm_id_importance1_form8").removeClass('importance1-selected');
+            $("#TaskForm_id_importance1_form8").addClass('importance1');
+            $("#TaskForm_id_importance2_form8").removeClass('importance2');
+            $("#TaskForm_id_importance2_form8").addClass('importance2-selected')
+            $("#TaskForm_id_importance3_form8").removeClass('importance3-selected');
+            $("#TaskForm_id_importance3_form8").addClass('importance3');
+            $("#TaskForm_importance_form8").val(2);
+            break;
+        case 3:
+            console.log(id);
+            $("#TaskForm_id_importance1_form8").removeClass('importance1-selected');
+            $("#TaskForm_id_importance1_form8").addClass('importance1');
+            $("#TaskForm_id_importance2_form8").removeClass('importance2-selected');
+            $("#TaskForm_id_importance2_form8").addClass('importance2')
+            $("#TaskForm_id_importance3_form8").removeClass('importance3');
+            $("#TaskForm_id_importance3_form8").addClass('importance3-selected');
+            $("#TaskForm_importance_form8").val(3);
+            break;
+        default:
+    }
+}
+
 /* Permet de faire un changement d'onglet lorsque l'etudiant clique sur un onglet qui est dans le dropdown */
 function changeOnglet(onglet, last_onglet){
     // echange contenu html
@@ -415,6 +496,33 @@ function changeOnglet(onglet, last_onglet){
     document.getElementById(last_onglet).classList.add("active");
 
 }
+
+/* Permet de faire un affichage dynamique des formulaires lorsqu'on veut attribuer une tache */
+function afficheFormEditTask(ID){
+    $(".token-input-dropdown-facebook").css("width", $('#list_form').width()-13);
+
+    list_form = new Array('TaskForm1', 'TaskForm2', 'TaskForm3', 'TaskForm4', 'TaskForm5', 'TaskForm6',
+        'TaskForm7', 'TaskForm8', 'TaskForm9');
+
+    var indice_form_a_affiche = document.getElementById(ID).selectedIndex;
+   // var indice_form_a_affiche = ID;
+    var i;
+    var size = list_form.length;
+
+    /* On cache les div qu'il faut caché */
+    for(i=0; i<size; i++){
+        var form = document.getElementById(list_form[i]);
+        if(form == null){
+            alert(i);
+        }
+        if(form.style.display == "block" && i != indice_form_a_affiche){
+            form.style.display = "none";
+        }
+    }
+    /* On affiche le formulaire passé en paramètre */
+    document.getElementById(list_form[indice_form_a_affiche]).style.display = "block";
+}
+
 
 /* Verifie si les mots de passe sont identiques*/
 function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
@@ -642,7 +750,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	        dataType: 'json',
 	        data: {'email': $('#profil_InputEmail').val(),'password': $('#profil_InputPassword2').val(),'telephone': $('#profil_InputTel').val()},
 	        success: function(data){
-	        	
+
 	        }
 	    });
 		
@@ -691,3 +799,45 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 });
 
+
+
+
+function updateTask(id){
+
+    var formData = {};
+    $('#'+id).serializeArray().map(function(item) {
+        if ( formData[item.name] ) {
+            if ( typeof(formData[item.name]) === "string" ) {
+                formData[item.name] = [formData[item.name]];
+            }
+            formData[item.name].push(item.value);
+        } else {
+            formData[item.name] = item.value;
+        }
+    });
+    console.log(formData);
+    formData.TaskForm_echeance_form8 = formData.TaskForm_echeance_form8.replace(/\//g,"-");
+    console.log(formData.TaskForm_echeance_form8);
+        $.ajax({
+                type: 'POST',
+                url: '/updateTask',
+                dataType: 'json',
+                data: formData,
+            success: function(data){
+                console.log("success");
+                console.log("le php a retourné => "+data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+                console.log()
+                var w = window.open();
+                var html = xhr.responseText;
+
+                $(w.document.body).html(html);
+            }
+            });
+
+    $('#insertTaskForm').trigger("reset");
+
+}

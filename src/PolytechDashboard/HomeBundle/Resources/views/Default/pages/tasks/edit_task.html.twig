@@ -1,0 +1,66 @@
+<!-- La partie JavaScript de cette partie se situe dans monJS.js (fonction afficheForm) -->
+
+<form  id="insertTaskForm">
+    <input type="hidden" id="TaskForm_idTask_form8" name="TaskForm_idTask_form8" value="">
+
+    <!-- S'attribuer une tâche personnelle -->
+    <div id="TaskForm8"  >
+        <!-- Objet & importance -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-9">
+                    <label for="objet_form8">Objet</label>
+                    <input type="text" class="form-control" id="TaskForm_objet_form8"  name="TaskForm_objet_form8" required>
+                </div>
+                <div class="col-lg-3">
+                    <label >Importance</label>
+                    <input type="hidden" id="TaskForm_importance_form8" name="TaskForm_importance_form8" value="">
+                    <div class="select_importance form-control">
+                        <a
+                                onclick="clickOnImportanceEditTask(1)"
+                                style="text-decoration: none;">
+                            <i id="TaskForm_id_importance1_form8"
+                               class="fa fa-exclamation-triangle importance1-selected"></i>
+                        </a> <a
+                                onclick="clickOnImportanceEditTask(2)"
+                                style="text-decoration: none;"> <i id="TaskForm_id_importance2_form8"
+                                                                   class="fa fa-exclamation-triangle importance2"></i>
+                        </a> <a
+                                onclick="clickOnImportanceEditTask(3)"
+                                style="text-decoration: none;"> <i id="TaskForm_id_importance3_form8"
+                                                                   class="fa fa-exclamation-triangle importance3"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="texte_form8">Texte</label>
+            <textarea class="form-control" id="TaskForm_texte_form8" name="TaskForm_texte_form8"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="taskPerso_InputFile">Sélectionner un fichier</label>
+            <input type="file" id="TaskForm_taskPerso_InputFile" name="taskPerso_InputFile">
+        </div>
+
+        <!-- Echeance -->
+        <div class="form-group">
+            <label>Échéance</label>
+            <div class="input-group">
+                <!-- Checkbox -->
+                <span class="input-group-addon">
+                    <input type="checkbox" id="TaskForm_checkbox_form8" onchange="showEcheance('TaskForm_checkbox_form8','TaskForm_echeance_form8')">
+                </span>
+                <!-- Date picker -->
+                <input type="text" class="form-control pull-right" name="TaskForm_echeance_form8"
+                       id="TaskForm_echeance_form8" disabled />
+                <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</form>

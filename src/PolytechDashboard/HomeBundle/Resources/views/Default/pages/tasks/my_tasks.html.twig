@@ -134,7 +134,7 @@
                                             </button>
                                             <!-- TODO : faire passer getStructure + Faire passer la piece jointe -->
                                             {% set dateFin = task.getDatefin()|date("d/m/Y H:i") %}
-                                            <button data-dismiss="modal" class="btn btn-primary pull-left" onclick="editTask('{{ task.getId() }}', '{{ dateFin }}','{{ task.getNom() }}','{{ task.getImportance() }}')">
+                                            <button data-dismiss="modal" class="btn btn-primary pull-left" onclick="editTask('{{ task.getId() }}', '{{ dateFin }}','{{ task.getNom() }}','{{ task.getImportance() }}','{{ task.getStructure() }}')">
                                                 <span class="fa fa-pencil-square-o"></span> Editer
                                             </button>
                                             <button class="btn btn-primary pull-left" onclick="removeTask('{{ task.getId() }}')">
@@ -323,6 +323,33 @@
                 <div class="modal-footer">
                     <button class="btn btn-primary" data-dismiss="modal" onclick="alert('TODO')"><span class="fa fa-check"></span>Oui</button>
                     <button class="btn btn-primary" data-dismiss="modal"><span class="fa fa-times"></span>Non</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin modal view -->
+
+    <!-- Debut modal view -->
+    <div class="modal fade" id="modal_editTask">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- En tete -->
+                <div class="modal-header modal-header-task">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <div class="modal-title">Modification de tache</div>
+                </div>
+                <!-- Corps -->
+                <div id="body_replyTask" class="modal-body">
+                    {% include '@PolytechDashboardHome/Default/pages/tasks/edit_task.html.twig' %}
+
+                </div>
+                <!-- BEG Form -->
+
+                <!-- END Form -->
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal" onclick="$('#insertTaskForm').trigger("reset")"><span class="fa fa-times"></span>Annuler</button>
+                    <button class="btn btn-primary" data-dismiss="modal" onclick="updateTask('insertTaskForm')"><span class="fa fa-check"></span>Mettre à jour</button>
                 </div>
             </div>
         </div>
