@@ -97,11 +97,7 @@ class AjaxHandlerController extends Controller
 
     public function setNotificationAsReadAction(Request $request)
     {
-        $Notification = $this->getDoctrine()->getRepository('PolytechDashboardHomeBundle:Notification')->findOneBy(
-            array(
-                'id' => $request->get("id")
-            )
-        );
+
 
         $Notification->setStatus("LU");
         $em = $this->getDoctrine()->getManager();
@@ -1089,5 +1085,49 @@ class AjaxHandlerController extends Controller
             );
     }
 
+    public function removeValidTaskAction(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        //echo "id=".$request->get('id')."<br>";
+
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq("idetudiant", $this->getRequest()->getSession()->get('loginTMP')->getId()))
+            ->andWhere( Criteria::expr()->eq("status","VALIDE"));
+
+        $taches = $this->getDoctrine()->getRepository('PolytechDashboardHomeBundle:Tacheetudiant')->matching(
+            $criteria
+        );
+        $idetudiant=$this->getRequest()->getSession()->get('loginTMP')->getId();
+        $query = $em->createQuery("DELETE PolytechDashboardHomeBundle:Tacheetudiant t WHERE t.idetudiant = $idetudiant AND t.status = 'VALIDE' ");
+        $query->execute();
+
+        $myArray = array();
+        foreach ($taches as $tache) {
+            $myArray [] = $tache;
+            $idtache=$tache->getIdtache();
+            $query = $em->createQuery("DELETE PolytechDashboardHomeBundle:Tache t WHERE t.id = $idtache ");
+            $query->execute();
+        }
+        $em->flush();
+
+        /*  $query = $em->createQuery("DELETE PolytechDashboardHomeBundle:Tacheetudiant t WHERE t.idtache = $idtache AND t.status = 'VALIDE' ");
+          $query->execute();
+          $query = $em->createQuery("DELETE PolytechDashboardHomeBundle:Tache t WHERE t.id = $idtache");
+          $query->execute();
+          $criteria = Criteria::create()
+              ->where(Criteria::expr()->eq("idtache", $request->get('id')))
+              ->setFirstResult(0)
+              ->setMaxResults(20);
+          $em->flush();
+  */
+
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+        $jsonContent = $serializer->serialize($myArray, 'json');
+
+        return new Response($jsonContent);
+    }
 
 }

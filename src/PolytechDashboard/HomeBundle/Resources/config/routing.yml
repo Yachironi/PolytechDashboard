@@ -65,3 +65,6 @@ polytech_dashboard_getMytasksRendred:
     path:     /getMytasksRendred
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:getMytasksRendred"}
 
+polytech_dashboard_removeValidTask:
+    path:     /removeValidTask
+    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:removeValidTask"}
