@@ -129,9 +129,9 @@
                                     <!-- Footer -->
                                     <div class="modal-footer">
                                         {% if task.getIdgestionnaire() is empty %}
-                                            <button class="btn btn-primary pull-left" onclick="doneTask('{{ task.getId() }}')">
+                                          <!--  <button class="btn btn-primary pull-left" onclick="doneTask('{{ task.getId() }}')">
                                                 <span class="fa fa-check-square-o"></span> Fait
-                                            </button>
+                                            </button> -->
                                             <!-- TODO : faire passer getStructure + Faire passer la piece jointe -->
                                             {% set dateFin = task.getDatefin()|date("d/m/Y H:i") %}
                                             <button data-dismiss="modal" class="btn btn-primary pull-left" onclick="editTask('{{ task.getId() }}', '{{ dateFin }}','{{ task.getNom() }}','{{ task.getImportance() }}','{{ task.getStructure() }}')">
