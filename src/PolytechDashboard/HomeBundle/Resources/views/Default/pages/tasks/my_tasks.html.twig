@@ -137,7 +137,7 @@
                                             <button data-dismiss="modal" class="btn btn-primary pull-left" onclick="editTask('{{ task.getId() }}', '{{ dateFin }}','{{ task.getNom() }}','{{ task.getImportance() }}','{{ task.getStructure() }}')">
                                                 <span class="fa fa-pencil-square-o"></span> Editer
                                             </button>
-                                            <button class="btn btn-primary pull-left" onclick="removeTask('{{ task.getId() }}')">
+                                            <button class="btn btn-primary pull-left" onclick="removeTask('{{ task.getId() }}')" data-dismiss="modal">
                                                 <span class="fa fa-times"></span> Supprimer
                                             </button>
                                         {% else %}

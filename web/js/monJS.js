@@ -187,6 +187,43 @@ function removeTask(ID){
         success: function(data){
             console.log("success");
             console.log(data);
+
+            $.ajax({
+                type: 'POST',
+                url: '/getMytasksRendred',
+                success: function(data){
+                    console.log("success================> getMytasksRendred");
+                    //  $("my_tasks").append("#####################################");
+                    $("#my_tasks").html(data);
+                    $(function () {
+                        $(".table-task").dataTable({
+                            "bAutoWidth": false,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                {"bSortable": false, "bSearchable": false},
+                            ]
+                        });
+                    });
+                    /*var w = window.open();
+                     var html = data;
+
+                     $(w.document.body).html(html);*/
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                    console.log()
+                    var w = window.open();
+                    var html = xhr.responseText;
+
+                    $(w.document.body).html(html);
+                }
+            });
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
@@ -198,6 +235,7 @@ function removeTask(ID){
             $(w.document.body).html(html);
         }
     });
+
 }
 
 /**
@@ -826,17 +864,55 @@ function updateTask(id){
             formData[item.name] = item.value;
         }
     });
-    console.log(formData);
+    //console.log(formData);
     formData.TaskForm_echeance_form8 = formData.TaskForm_echeance_form8.replace(/\//g,"-");
-    console.log(formData.TaskForm_echeance_form8);
+   // console.log(formData.TaskForm_echeance_form8);
         $.ajax({
                 type: 'POST',
                 url: '/updateTask',
                 dataType: 'json',
                 data: formData,
             success: function(data){
-                console.log("success");
-                console.log("le php a retourné => "+data);
+              //  console.log("success");
+               // console.log("le php a retourné => "+data);
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/getMytasksRendred',
+                    success: function(data){
+                        console.log("success================> getMytasksRendred");
+                      //  $("my_tasks").append("#####################################");
+                       $("#my_tasks").html(data);
+
+                        $(function () {
+                            $(".table-task").dataTable({
+                                "bAutoWidth": false,
+                                "aoColumns": [
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    {"bSortable": false, "bSearchable": false},
+                                ]
+                            });
+                        });
+                        /*var w = window.open();
+                        var html = data;
+
+                        $(w.document.body).html(html);*/
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(xhr.status);
+                        console.log(thrownError);
+                        console.log()
+                        var w = window.open();
+                        var html = xhr.responseText;
+
+                        $(w.document.body).html(html);
+                    }
+                });
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 console.log(xhr.status);

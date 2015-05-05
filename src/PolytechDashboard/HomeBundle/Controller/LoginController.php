@@ -51,6 +51,7 @@ class LoginController extends Controller {
                 $loginTMP->setPassword ( $password );
                 $loginTMP->setId($user->getId());
                 $session->set ( 'loginTMP', $loginTMP );
+                $session->set('user',$user);
 				if ($remember == 'remember-me') {
 					$login = new Login ();
 					$login->setUsername ( $username );
