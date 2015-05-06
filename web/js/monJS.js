@@ -65,15 +65,18 @@ function afficheForm(ID){
     /* On cache les div qu'il faut caché */
     for(i=0; i<size; i++){
         var form = document.getElementById(list_form[i]);
-        if(form == null){
-            alert(i);
-        }
         if(form.style.display == "block" && i != indice_form_a_affiche){
             form.style.display = "none";
         }
     }
     /* On affiche le formulaire passé en paramètre */
     document.getElementById(list_form[indice_form_a_affiche]).style.display = "block";
+    if(indice_form_a_affiche == 0){
+        document.getElementById('div_btn_envoyerTaskToInsert').style.display = "none";
+    }
+    else{
+        document.getElementById('div_btn_envoyerTaskToInsert').style.display = "block";
+    }
 }
 
 /* TODO */

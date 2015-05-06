@@ -315,7 +315,7 @@
          <div class="timeline-item">
             <span class="time"><i class="fa fa-clock-o"></i> jusqu'a {{ task2.getDateFin()|date("H:i") }}</span>
 
-            <h3 class="timeline-header"><a href="#">{{ task2.getNom() }} </a> 
+            <h3 class="timeline-header"><a href="#infos_task_{{ task2.getId()}}" onclick="activateTag('my_tasks')" data-toggle="modal">{{ task2.getNom() }} </a>
             
             de {% if task2.getIdgestionnaire() == NULL %} 
                   Moi-meme 
