@@ -21,8 +21,7 @@ class PolytechDashboardHomeExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-		
-//         $container->setParameter('polytech_dashboard_home.picture_directory', $config['picture_directory']);
+        $container->setParameter('polytech_dashboard_home.file_directory', $config['file_directory']);
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }

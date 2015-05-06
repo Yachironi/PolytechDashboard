@@ -15,6 +15,6 @@ services:
     gestionnaireController:
         class: PolytechDashboard\HomeBundle\Controller\GestionnaireController
         
-#   polytech_dashboard_home.picture_uploader:
-#       class:      PolytechDashboard\HomeBundle\Uploader\PictureUploader
-#       arguments:  [%polytech_dashboard_home.picture_directory%]
+    polytech_dashboard_home.file_uploader:
+        class:      PolytechDashboard\HomeBundle\DependencyInjection\FileUploader
+        arguments:  [%polytech_dashboard_home.file_directory%]
