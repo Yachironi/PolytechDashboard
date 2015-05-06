@@ -24,6 +24,7 @@ class TacheController extends Controller {
 			
 			for($i = 0; $i < $max; $i ++) {
 				$task = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tache' )->findOneById ( $tabTasks [$i]->getIdtache () );
+				
 				$admin = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $task->getIdgestionnaire () );
 				
 				if ($admin != null) {
@@ -73,7 +74,8 @@ class TacheController extends Controller {
         if ($request->getMethod () == 'POST') {
             /* EntityManager pour faire les requ�tes*/
             $em = $this->getDoctrine()->getManager();
-
+            $logger = $this->get('logger');
+            $logger->info('LOG');
             $tache = new Tache();
 
             $typeForm = substr ( $request->get ( 'list_form' ), - 1 );
@@ -386,7 +388,7 @@ class TacheController extends Controller {
                         /* pour persister la tache en BDD*/
                         $em->persist($tache);
 
-
+	
                         $tacheGestionnaire = new Tachegestionnaire();
                         $tacheGestionnaire->setIdetudiant($idEtudiant);
                         $tacheGestionnaire->setIdtache($tache->getId());
