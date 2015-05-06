@@ -26,12 +26,8 @@ class LoginController extends Controller {
 			
 			/* appel du generateur de donn�es du controlleur */
 			$noteController = $this->get ( 'noteController' );
-			$myGrades = $noteController->indexAction ( $user, $this );
 			$tacheController = $this->get ( 'tacheController' );
-			$myTasks = $tacheController->indexAction ( $user, $this );
-			$myStatueTask = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tacheetudiant' )->findByIdetudiant ( $user->getId() );
 			$programmeController = $this->get ( 'coursController' );
-			$myUE = $programmeController->indexAction ( $user, $this );
 			$gestionnaireController = $this->get ( 'gestionnaireController' );
 			$myAdmins = $gestionnaireController->indexAction ( 21303181, $this );
 			$myEvent = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Evenement' )->findAll();
@@ -42,10 +38,15 @@ class LoginController extends Controller {
 			usort ( $myNews, function ($a, $b) {
 				return ($a->getDateAjout () < $b->getDateAjout ()) ? - 1 : 1;
 			} );
-			$idFormation = $this->getDoctrine()->getRepository ( 'PolytechDashboardHomeBundle:Etudiantformation' )->findOneByIdetudiant ( $user->getId() );
-			$formation = $this->getDoctrine()->getRepository ( 'PolytechDashboardHomeBundle:Formation' )->findOneById ( $idFormation->getIdFormation() );
+
 			
 			if ($user) {
+				$myGrades = $noteController->indexAction ( $user, $this );
+				$idFormation = $this->getDoctrine()->getRepository ( 'PolytechDashboardHomeBundle:Etudiantformation' )->findOneByIdetudiant ( $user->getId() );
+				$formation = $this->getDoctrine()->getRepository ( 'PolytechDashboardHomeBundle:Formation' )->findOneById ( $idFormation->getIdFormation() );
+				$myUE = $programmeController->indexAction ( $user, $this );
+				$myStatueTask = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tacheetudiant' )->findByIdetudiant ( $user->getId() );
+				$myTasks = $tacheController->indexAction ( $user, $this );
                 $loginTMP = new Login ();
                 $loginTMP->setUsername ( $username );
                 $loginTMP->setPassword ( $password );

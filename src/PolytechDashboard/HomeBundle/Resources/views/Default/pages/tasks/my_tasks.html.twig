@@ -27,8 +27,10 @@
                 </tr>
                 </thead>
                 <tbody>
+                {% set numTache = 0 %}
                 <!-- Exemple d'une tâche -->
                 {% for task in myTasks.tasksReceived %}
+                    {% set numTache = numTache+1 %}
                     {% set today = "now"|date("Y-m-d-H-i") %}
                     {% set today_5days = "now+5days"|date("Y-m-d-H-i") %}
                     <!-- Taches importantes - deadline qui approche (sous 5 jours) -->
@@ -43,7 +45,7 @@
                         <!--<tr>-->
                     {% endif %}
                     <tr>
-                        <td>{{ task.getId()}}</td>
+                        <td>{{ numTache }}</td>
                         <td>{{ task.getDatecreation()|date("Y/m/d") }}</td>
                         <td>{{ task.getDatefin()|date("Y/m/d") }}</td>
 
@@ -87,18 +89,18 @@
 
                         <!-- Icone "voir détail" -->
                         <td style="text-align: center;">
-                            <a href="#infos_task_{{ task.getId()}}" data-toggle="modal">
+                            <a href="#infos_task_{{ numTache }}" data-toggle="modal">
                                 <i class="fa fa-search"></i>
                             </a>
                         </td>
                         <!-- Debut modal view -->
-                        <div class="modal fade" id="infos_task_{{ task.getId()}}">
+                        <div class="modal fade" id="infos_task_{{ numTache }}">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <!-- En tete -->
                                     <div class="modal-header modal-header-task">
                                         <button type="button" class="close" data-dismiss="modal">x</button>
-                                        <div class="modal-title">Tache n°{{ task.getId()}} - {{ task.getNom() }}</div>
+                                        <div class="modal-title">Tache n°{{ numTache }} - {{ task.getNom() }}</div>
                                     </div>
                                     <!-- En tete présentant le body -->
                                     <div class="modal-header modal-before-body">
@@ -230,8 +232,9 @@
                 </thead>
                 <tbody>
                 {% for task in myTasks.tasksSend %}
+                    {% set numTache = numTache+1 %}
                     <tr>
-                        <td>{{ task.getId()}}</td>
+                        <td>{{ numTache }}</td>
                         <td>{{ task.getDatecreation()|date("Y/m/d") }}</td>
                         <td>{{ task.getDatefin()|date("Y/m/d") }}</td>
                         <td>{{ myTasks.adminsTaskSend[loop.index0].getNom() }} {{	myTasks.adminsTaskSend[loop.index0].getPrenom() }}</td>
@@ -245,18 +248,18 @@
 
                         <!-- Icone "voir détail" -->
                         <td style="text-align: center;">
-                            <a href="#infos_task_{{ task.getId()}}" data-toggle="modal">
+                            <a href="#infos_task_{{ numTache }}" data-toggle="modal">
                                 <i class="fa fa-search"></i>
                             </a>
                         </td>
                         <!-- Debut modal view -->
-                        <div class="modal fade" id="infos_task_{{ task.getId()}}">
+                        <div class="modal fade" id="infos_task_{{ numTache }}">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <!-- En tete -->
                                     <div class="modal-header modal-header-task">
                                         <button type="button" class="close" data-dismiss="modal">x</button>
-                                        <div class="modal-title">Tache n°{{ task.getId()}} - {{ task.getNom() }}</div>
+                                        <div class="modal-title">Tache n°{{ numTache }} - {{ task.getNom() }}</div>
 
                                     </div>
                                     <!-- En tete présentant le body -->
