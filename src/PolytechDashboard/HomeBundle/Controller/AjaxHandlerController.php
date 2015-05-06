@@ -266,15 +266,15 @@ class AjaxHandlerController extends Controller
                         $tache->setImportance($importance);
                         $tache->setNom($objet);                        
                         $tache->setType($typeForm);
-                                                
+                        if ($file != null) {
+                        	$tache->setIdresource($file);
+                        }                                                
                         /* contenu de la tache */
                         $tmp = [];
 
                         $tmp ['0'] = $duree;
                         $tmp ['1'] = $motif;
-                        if ($file != null) {
-                            $tmp ['2'] = $file;
-                        }
+
                         $tache->setStructure(json_encode($tmp));
 
                         /* pour persister la tache en BDD */
@@ -299,7 +299,7 @@ class AjaxHandlerController extends Controller
                     break;
                 case 3 :
                     /* date et heure du RDV */
-                    $duree = $request->get('date_rdv');
+                    $dateRdv = $request->get('date_rdv');
 
                     /* motif */
                     $motif = $request->get('motif_rdv');
@@ -318,10 +318,10 @@ class AjaxHandlerController extends Controller
                         $tache->setNom($objet);
                         $tache->setImportance($importance);
                         $tache->setType($typeForm);
-                                                
+                                            
                         /* contenu de la tache */
                         $tmp = [];
-                        $tmp ['0'] = $duree;
+                        $tmp ['0'] = $dateRdv;
                         $tmp ['1'] = $motif;
                         $tache->setStructure(json_encode($tmp));
 
@@ -360,14 +360,16 @@ class AjaxHandlerController extends Controller
                         $tache->setDatefin("");
                         $tache->setType($typeForm);
                         $tache->setNom($objet);
+                        if ($file != null) {
+                        	$tache->setIdresource($file);
+                        }
+                        
                         /* contenu de la tache */
                         $tmp = [];
                         $tmp ['0'] = $nom;
                         $tmp ['1'] = $commentaire;
                         $tmp ['2'] = $type;
-                        if ($file != null) {
-                            $tmp ['3'] = $file;
-                        }
+
                         $tache->setStructure(json_encode($tmp));
 
                         /* pour persister la tache en BDD */
@@ -410,13 +412,14 @@ class AjaxHandlerController extends Controller
                         $tache->setType($typeForm);
                         $tache->setNom($objet);
                         $tache->setImportance($importance);
-
+                        if ($file != null) {
+                        	$tache->setIdresource($file);
+                        }
+                        
                         /* contenu de la tache */
                         $tmp = [];
                         $tmp ['0'] = $duree;
-                        if ($file != null) {
-                            $tmp ['1'] = $file;
-                        }
+
                         $tache->setStructure(json_encode($tmp));
 
                         /* pour persister la tache en BDD */
@@ -458,14 +461,14 @@ class AjaxHandlerController extends Controller
                         $tache->setType($typeForm);
                         $tache->setNom($objet);
                         $tache->setImportance($importance);
-
+                        if ($file != null) {
+                        	$tache->setIdresource($file);
+                        }
                         /* contenu de la tache */
                         $tmp = [];
                         $tmp ['0'] = $dates_stage;
                         $tmp ['1'] = $detail;
-                        if ($file != null) {
-                            $tmp ['2'] = $file;
-                        }
+
                         $tache->setStructure(json_encode($tmp));
 
                         /* pour persister la tache en BDD */
@@ -499,14 +502,13 @@ class AjaxHandlerController extends Controller
                         $tache->setType($typeForm);
                         $tache->setNom($objet);
                         $tache->setImportance($importance);
-
+                        if ($file != null) {
+                        	$tache->setIdresource($file);
+                        }
                         /* contenu de la tache */
                         $tmp = [];
                         $tmp ['0'] = $remarque_stage;
-                        $tmp ['1'] =  $nom;
-                        if ($file != null) {
-                            $tmp ['2'] = $file;
-                        }
+
                         $tache->setStructure(json_encode($tmp));
 
                         /* pour persister la tache en BDD */
@@ -543,13 +545,14 @@ class AjaxHandlerController extends Controller
                     $tache->setDatefin($echeance);
                     $tache->setType($typeForm);
                     $tache->setImportance($importance);
-
+                    if ($file != null) {
+                    	$tache->setIdresource($file);
+                    }
+                    
                     /* contenu de la tache */
                     $tmp = [];
                     $tmp['0'] = $text;
-                    if ($file != null) {
-                        $tmp ['1'] = $file;
-                    }
+
                     $tache->setStructure(json_encode($tmp));
 
                     /* pour persister la tache en BDD */
@@ -590,11 +593,13 @@ class AjaxHandlerController extends Controller
                         $tache->setDatefin($echeance);
                         $tache->setType($typeForm);
                         $tache->setImportance($importance);
-
+                        if ($file != null) {
+                        	$tache->setIdresource($file);
+                        }
+                        
                         /* contenu de la tache */
                         $tmp = [];
-                        $tmp ['0'] = $file;
-                        $tmp['1'] = $text;
+                        $tmp['0'] = $text;
                         $tache->setStructure(json_encode($tmp));
 
                         /* pour persister la tache en BDD */
