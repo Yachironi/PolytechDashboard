@@ -877,6 +877,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 /* afficher le formulaire 1*/
                 document.getElementById('list_form').selectedIndex = 0;
                 afficheForm('list_form');
+                generateNotification('success', "Tache ajoutée a la base de donnée")
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 console.log(xhr.status);
