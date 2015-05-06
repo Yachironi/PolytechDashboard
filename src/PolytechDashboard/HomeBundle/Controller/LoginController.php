@@ -26,7 +26,6 @@ class LoginController extends Controller {
 			
 			/* appel du generateur de donn�es du controlleur */
 			$noteController = $this->get ( 'noteController' );
-			
 			$tacheController = $this->get ( 'tacheController' );
 			$programmeController = $this->get ( 'coursController' );
 			$gestionnaireController = $this->get ( 'gestionnaireController' );

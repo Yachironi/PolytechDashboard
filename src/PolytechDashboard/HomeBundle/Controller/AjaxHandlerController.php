@@ -1129,42 +1129,5 @@ class AjaxHandlerController extends Controller
 
         return new Response($jsonContent);
     }
-    
-    /**
-     * Creates a new Portrait entity.
-     *
-     * @Route("/create", name="user_portrait_create")
-     * @Method("post")
-     *
-     */
-    public function createProfileAction()
-    {
-    	$entity = new Portrait();
-    	$request = $this->getRequest();
-    	$form = $this->createForm(new ProfilPicture(), $entity);
-    	$form->bind($request);
-    
-    	if ($form->isValid()) {
-    		try {
-    			$currentUser = $this->get('security.context')->getToken()->getUser();
-    			$entity->setUser($currentUser);
-    			$em = $this->getDoctrine()->getEntityManager();
-    			$this->get('fabfoto_gallery.picture_uploader')->upload($entity);
-    			$em->persist($entity);
-    			$em->flush();
-    			$this->get('session')->setFlash('success', $this->get('translator')->trans("object.saved.success", array(), 'Ad    mingenerator') );
-    
-    			return $this->redirect($this->generateUrl('user_portrait_show',
-    					array('id' => $entity->getId())));
-    		} catch (Exception $e) {
-    			$this->get('session')->setFlash('error',  $this->get('translator')->trans("object.saved.error", array(), 'Admingenerator') );
-    		}
-    	}
-    
-    	return $this->render('PolytechDashboardHomeBundle:new.html.twig', array(
-    			'entity' => $entity,
-    			'form' => $form->createView()
-    	));
-    }
 
 }
