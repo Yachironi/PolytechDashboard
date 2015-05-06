@@ -270,7 +270,8 @@
     <ul class="timeline">
     {% set taskDone = [] %}
     {% set today = "now"|date("Y-m-d-H-i") %}
-    {% for task in myTasks.tasksReceived if task.getDateFin() > today %}
+    {% set nbTacheAffiche = 0 %}
+    {% for task in myTasks.tasksReceived if task.getDateFin() > today and nbTacheAffiche<50%}
       {% if task in taskDone %}
       {% else %}
       <!-- timeline time label -->
@@ -338,7 +339,7 @@
          </li>
          <!-- END timeline item -->
          {% set taskDone = taskDone|merge([task2]) %}
-       
+         {% set nbTacheAffiche = nbTacheAffiche + 1 %}
          {% endfor %}
        {%endif%}
 	{% endfor %}

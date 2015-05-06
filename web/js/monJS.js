@@ -985,7 +985,7 @@ function suprimeVALIDTask(){
         success: function(data){
             //  console.log("success");
             // console.log("le php a retourné => "+data);
-
+            generateNotification('success','opération terminée avec succès');
             $.ajax({
                 type: 'POST',
                 url: '/getMytasksRendred',
@@ -1036,4 +1036,80 @@ function suprimeVALIDTask(){
     });
 
     $('#insertTaskForm').trigger("reset");
+}
+
+
+function suprimeVALIDTaskSended(){
+
+    console.log("appel remove==========>");
+    $.ajax({
+        type: 'POST',
+        url: '/removeSendedValidTask',
+        success: function(data){
+            //  console.log("success");
+            // console.log("le php a retourné => "+data);
+            generateNotification('success','opération terminée avec succès');
+            $.ajax({
+                type: 'POST',
+                url: '/getMytasksRendred',
+                success: function(data){
+                    console.log("success================> getMytasksRendred");
+                    //  $("my_tasks").append("################################# ####");
+                    $("#my_tasks").html(data);
+
+                    $(function () {
+                        $(".table-task").dataTable({
+                            "bAutoWidth": false,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                {"bSortable": false, "bSearchable": false},
+                            ]
+                        });
+                    });
+                    /*var w = window.open();
+                     var html = data;
+
+                     $(w.document.body).html(html);*/
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                    console.log()
+                    var w = window.open();
+                    var html = xhr.responseText;
+
+                    $(w.document.body).html(html);
+                }
+            });
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+            console.log()
+            var w = window.open();
+            var html = xhr.responseText;
+
+            $(w.document.body).html(html);
+        }
+    });
+
+    $('#insertTaskForm').trigger("reset");
+}
+
+function generateNotification(type, text) {
+
+    var n = noty({
+        text        : text,
+        type        : type,
+        layout      : 'topRight', /* bottomRight */
+        theme       : 'relax',
+        maxVisible  : 1,
+        timeout: 1000
+    });
+    console.log('html: ' + n.options.id);
 }
