@@ -221,15 +221,22 @@ class AjaxHandlerController extends Controller
 
     public function insertTaskAction(Request $request)
     {
+    	$logger = $this->get('logger');
+    	$logger->info('##########INSERT TASK#############');
+    	 
         $idEtudiant = $this->getRequest()->getSession()->get('loginTMP')->getId();
         if ($request->getMethod() == 'POST') {
-
+        	$logger->info('Post');
+        	 
             /* EntityManager pour faire les requ�tes */
             $em = $this->getDoctrine()->getManager();
-
+            $logger->info('EntityManager');
+            
             $tache = new Tache ();
             $typeForm = substr($request->get('list_form'), -1);
-
+            $logger->info('##### listform'.$request->get('list_form').' ######');
+            $logger->info('##### typeForm'.$typeForm.' ######');
+            
             $destinataire = explode(',', $request->get('destinataire_form'.$typeForm));
             $objet = $request->get('objet_form'.$typeForm);
 
@@ -238,6 +245,7 @@ class AjaxHandlerController extends Controller
 
             switch ($typeForm) {
                 case 2 :
+                	 
                     /* dur�e */
                     $duree = $request->get('duree_absence');
 
@@ -254,45 +262,40 @@ class AjaxHandlerController extends Controller
                     }
 
                     foreach ($destinataire as $dest) {
-                        $idtache = $this->getIdTaskNotAttribuate();
-                        print_r('.....'.$idtache.'.....');
-                        $tache->setId($idtache);
                         $tache->setIdetudiant($idEtudiant);
                         $tache->setIdgestionnaire($this->getIdGestionnaire($dest));
                         $tache->setDatecreation(date("Y-m-d"));
                         $tache->setDatefin($echeance);
-                        $tache->setType($objet);
                         $tache->setImportance($importance);
-                        $tache->setNom($motif);
+                        $tache->setNom($objet);                        
+                        
                         /* contenu de la tache */
                         $tmp = [];
 
                         $tmp ['0'] = $duree;
+                        $tmp ['1'] = $motif;
                         if ($file != null) {
-                            $tmp ['1'] = $file;
+                            $tmp ['2'] = $file;
                         }
                         $tache->setStructure(json_encode($tmp));
 
-                        $tacheGestionnaire = new Tachegestionnaire ();
-                        $tacheGestionnaire->setIdetudiant($idEtudiant);
-                        $tacheGestionnaire->setIdtache($idtache);
-                        $tacheGestionnaire->setStatus("NONLU");
-                        $tacheGestionnaire->setIdgestionnaire($this->getIdGestionnaire($dest));
-                        print_r('1'.$tacheGestionnaire->getIdetudiant().' ');
-                        print_r('2'.$tacheGestionnaire->getIdgestionnaire().' ');
-                        print_r('3'.$idtache.' ');
-                        print_r('4'.$tacheGestionnaire->getStatus().' ');
-
                         /* pour persister la tache en BDD */
                         $em->persist($tache);
-                        print_r('before flush');
-
+                        
                         $em->flush();
-                        print_r('after flush');
+                        
+                        $tacheGestionnaire = new Tachegestionnaire ();
+                        $tacheGestionnaire->setIdetudiant($idEtudiant);
+                        $tacheGestionnaire->setIdtache($tache->getId());
+                        $tacheGestionnaire->setStatus("NONLU");
+                        $tacheGestionnaire->setIdgestionnaire($this->getIdGestionnaire($dest));
+                        $logger->info('1'.$tacheGestionnaire->getIdetudiant().' ');
+                        $logger->info('2'.$tacheGestionnaire->getIdgestionnaire().' ');
+                        $logger->info('4'.$tacheGestionnaire->getStatus().' ');
 
                         /* pour persister la tacheEtudiant en BDD */
                         $em->persist($tacheGestionnaire);
-                        print_r('after persist');
+                        $logger->info('after persist');
                     }
 
                     break;
@@ -310,22 +313,22 @@ class AjaxHandlerController extends Controller
                     }
 
                     foreach ($destinataire as $dest) {
-                        $tache->setId($this->getIdTaskNotAttribuate());
                         $tache->setIdetudiant($idEtudiant);
                         $tache->setIdgestionnaire($this->getIdGestionnaire($dest));
                         $tache->setDatecreation(date("Y-m-d"));
                         $tache->setDatefin($echeance);
-                        $tache->setType($objet);
-                        $tache->setNom($motif);
+                        $tache->setNom($objet);
                         $tache->setImportance($importance);
 
                         /* contenu de la tache */
                         $tmp = [];
                         $tmp ['0'] = $duree;
+                        $tmp ['1'] = $motif;
                         $tache->setStructure(json_encode($tmp));
 
                         /* pour persister la tache en BDD */
                         $em->persist($tache);
+                        $em->flush();
 
                         $tacheGestionnaire = new Tachegestionnaire ();
                         $tacheGestionnaire->setIdetudiant($idEtudiant);
@@ -352,13 +355,12 @@ class AjaxHandlerController extends Controller
                     $commentaire = $request->get('commentaire_rendu_devoir');
 
                     foreach ($destinataire as $dest) {
-                        $tache->setId($this->getIdTaskNotAttribuate());
                         $tache->setIdetudiant($idEtudiant);
                         $tache->setIdgestionnaire($this->getIdGestionnaire($dest));
                         $tache->setDatecreation(date("Y-m-d"));
                         $tache->setDatefin("");
-                        $tache->setType($objet);
-                        $tache->setNom($type);
+                        $tache->setType($type);
+                        $tache->setNom($objet);
                         /* contenu de la tache */
                         $tmp = [];
                         $tmp ['0'] = $nom;
@@ -370,6 +372,8 @@ class AjaxHandlerController extends Controller
 
                         /* pour persister la tache en BDD */
                         $em->persist($tache);
+                        $em->flush();
+                        
 
                         $tacheGestionnaire = new Tachegestionnaire ();
                         $tacheGestionnaire->setIdetudiant($idEtudiant);
@@ -399,13 +403,12 @@ class AjaxHandlerController extends Controller
                     }
 
                     foreach ($destinataire as $dest) {
-                        $tache->setId($this->getIdTaskNotAttribuate());
                         $tache->setIdetudiant($idEtudiant);
                         $tache->setIdgestionnaire($this->getIdGestionnaire($dest));
                         $tache->setDatecreation(date("Y-m-d"));
                         $tache->setDatefin($echeance);
-                        $tache->setType($objet);
-                        $tache->setNom($typeForm);
+                        $tache->setType($typeForm);
+                        $tache->setNom($objet);
                         $tache->setImportance($importance);
 
                         /* contenu de la tache */
@@ -418,7 +421,8 @@ class AjaxHandlerController extends Controller
 
                         /* pour persister la tache en BDD */
                         $em->persist($tache);
-
+                        $em->flush();
+                        
                         $tacheGestionnaire = new Tachegestionnaire ();
                         $tacheGestionnaire->setIdetudiant($idEtudiant);
                         $tacheGestionnaire->setIdtache($tache->getId());
@@ -447,13 +451,12 @@ class AjaxHandlerController extends Controller
                     }
 
                     foreach ($destinataire as $dest) {
-                        $tache->setId($this->getIdTaskNotAttribuate());
                         $tache->setIdetudiant($idEtudiant);
                         $tache->setIdgestionnaire($this->getIdGestionnaire($dest));
                         $tache->setDatecreation(date("Y-m-d"));
                         $tache->setDatefin($echeance);
-                        $tache->setType($objet);
-                        $tache->setNom($detail);
+                        $tache->setType($detail);
+                        $tache->setNom($objet);
                         $tache->setImportance($importance);
 
                         /* contenu de la tache */
@@ -466,7 +469,8 @@ class AjaxHandlerController extends Controller
 
                         /* pour persister la tache en BDD */
                         $em->persist($tache);
-
+                        $em->flush();
+                        
                         $tacheGestionnaire = new Tachegestionnaire ();
                         $tacheGestionnaire->setIdetudiant($idEtudiant);
                         $tacheGestionnaire->setIdtache($tache->getId());
@@ -492,25 +496,27 @@ class AjaxHandlerController extends Controller
                     }
 
                     foreach ($destinataire as $dest) {
-                        $tache->setId($this->getIdTaskNotAttribuate());
                         $tache->setIdetudiant($idEtudiant);
                         $tache->setIdgestionnaire($this->getIdGestionnaire($dest));
                         $tache->setDatecreation(date("Y-m-d"));
                         $tache->setDatefin($echeance);
-                        $tache->setType($objet);
+                        $tache->setType("0");
+                        $tache->setNom($objet);
                         $tache->setImportance($importance);
 
                         /* contenu de la tache */
                         $tmp = [];
                         $tmp ['0'] = $remarque_stage;
+                        $tmp ['1'] =  $nom;
                         if ($file != null) {
-                            $tmp ['1'] = $file;
+                            $tmp ['2'] = $file;
                         }
                         $tache->setStructure(json_encode($tmp));
 
                         /* pour persister la tache en BDD */
                         $em->persist($tache);
-
+                        $em->flush();
+                        
                         $tacheGestionnaire = new Tachegestionnaire ();
                         $tacheGestionnaire->setIdetudiant($idEtudiant);
                         $tacheGestionnaire->setIdtache($tache->getId());
@@ -535,24 +541,28 @@ class AjaxHandlerController extends Controller
                         $echeance = $request->get('echeance_form8');
                     }
 
-                    $tache->setId($this->getIdTaskNotAttribuate());
                     $tache->setIdetudiant($idEtudiant);
-                    $tache->setNom($text);
+                    $tache->setNom($objet);
                     $tache->setDatecreation(date("Y-m-d"));
                     $tache->setDatefin($echeance);
-                    $tache->setType($objet);
+                    $tache->setType(0);
                     $tache->setImportance($importance);
 
                     /* contenu de la tache */
                     $tmp = [];
+                    $tmp['0'] = $text;
                     if ($file != null) {
-                        $tmp ['0'] = $file;
+                        $tmp ['1'] = $file;
                     }
                     $tache->setStructure(json_encode($tmp));
 
                     /* pour persister la tache en BDD */
                     $em->persist($tache);
+					$logger->info('PERSIST TACHE');
 
+					$em->flush();
+					
+					$logger->info("idTache : ".$tache->getId());
                     $tacheEtudiant = new Tacheetudiant ();
                     $tacheEtudiant->setStatus("NONLU");
                     $tacheEtudiant->setIdetudiant($idEtudiant);
@@ -560,7 +570,8 @@ class AjaxHandlerController extends Controller
 
                     /* pour persister la tacheEtudiant en BDD */
                     $em->persist($tacheEtudiant);
-
+                    $logger->info('PERSIST TACHEEtudiant');
+                    
                     break;
                 case 9 :
                     /* text */
@@ -576,11 +587,10 @@ class AjaxHandlerController extends Controller
                     }
 
                     foreach ($destinataire as $dest) {
-                        $tache->setId($this->getIdTaskNotAttribuate());
                         $tache->setIdetudiant($idEtudiant);
                         $tache->setIdgestionnaire($this->getIdGestionnaire($dest));
-                        $tache->setNom($text);
-                        $tache->setDatecreation(date("Y-m-d"));
+                    $tache->setNom($objet);
+                                                $tache->setDatecreation(date("Y-m-d"));
                         $tache->setDatefin($echeance);
                         $tache->setType($objet);
                         $tache->setImportance($importance);
@@ -588,11 +598,13 @@ class AjaxHandlerController extends Controller
                         /* contenu de la tache */
                         $tmp = [];
                         $tmp ['0'] = $file;
+                        $tmp['1'] = $text;
                         $tache->setStructure(json_encode($tmp));
 
                         /* pour persister la tache en BDD */
                         $em->persist($tache);
-
+                        $em->flush();
+                        
                         $tacheGestionnaire = new Tachegestionnaire ();
                         $tacheGestionnaire->setIdetudiant($idEtudiant);
                         $tacheGestionnaire->setIdgestionnaire($this->getIdGestionnaire($dest));
@@ -606,365 +618,19 @@ class AjaxHandlerController extends Controller
                     break;
             }
 
-            print_r('Before flush');
+//             print_r('Before flush');
             /* pour valider les persist effectu�es */
             $em->flush();
-            print_r('after flush');
+//             print_r('after flush');
         }
-        $myArray = array();
-        $myArray ['test'] = "test";
-        $encoders = array(
-            new XmlEncoder (),
-            new JsonEncoder ()
-        );
-        $normalizers = array(
-            new GetSetMethodNormalizer ()
-        );
-        $serializer = new Serializer ($normalizers, $encoders);
+
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
         $jsonContent = $serializer->serialize("success", 'json');
 
-        return new Response ($jsonContent);
+        return new Response($jsonContent);
     }
-
-    public function insertTaskAction2(Request $request)
-    {
-        $idEtudiant = $this->getRequest()->getSession()->get('loginTMP')->getId();
-
-        if ($request->getMethod() == 'POST') {
-            /* EntityManager pour faire les requ�tes */
-            $em = $this->getDoctrine()->getManager();
-
-            $tache = new Tache ();
-
-            $typeForm = substr($request->get('list_form'), -1);
-
-            $destinataire = $request->get('destinataire_form'.$typeForm);
-            $objet = $request->get('objet_form'.$typeForm);
-
-            /* TODO Importance */
-            // $importance =
-
-            switch ($typeForm) {
-                case 2 :
-                    /* dur�e */
-                    $duree = $request->get('duree_absence');
-
-                    /* motif */
-                    $motif = $request->get('motif_justification_absence');
-
-                    /* fichier */
-                    $file = $request->get('absence_InputFile');
-
-                    /* �ch�ance */
-                    if ($request->get('checkbox_form2') == true) {
-                        $echeance = $request->get('echeance_form2');
-                    }
-
-                    foreach ($destinataire as $dest) {
-                        $tache->setIdetudiant($idEtudiant);
-                        $tache->setIdgestionnaire($dest);
-                        $tache->setDatecreation(date("Y-m-d"));
-                        $tache->setDatefin($echeance);
-                        $tache->setType($objet);
-                        $tache->setNom($motif);
-                        /* contenu de la tache */
-                        $tmp = [];
-                        $tmp ['0'] = $duree;
-                        if ($file != null) {
-                            $tmp ['1'] = $file;
-                        }
-                        $tache->setStructure(json_encode($tmp));
-
-                        $tacheGestionnaire = new Tachegestionnaire ();
-                        $tacheGestionnaire->setIdetudiant($idEtudiant);
-                        $tacheGestionnaire->setIdtache($tache->getId());
-                        $tacheGestionnaire->setStatus("NONLU");
-                        $tacheGestionnaire->setIdgestionnaire();
-
-                        /* pour persister la tache en BDD */
-                        $em->persist($tache);
-
-                        $em->flush();
-                        /* pour persister la tacheEtudiant en BDD */
-                        $em->persist($tacheGestionnaire);
-                    }
-
-                    break;
-                case 3 :
-                    /* date et heure du RDV */
-                    $duree = $request->get('date_rdv');
-
-                    /* motif */
-                    $motif = $request->get('motif_rdv');
-
-                    /* �ch�ance */
-                    if ($request->get('checkbox_form3') == true) {
-                        $echeance = $request->get('echeance_form3');
-                    }
-
-                    foreach ($destinataire as $dest) {
-                        $tache->setIdetudiant($idEtudiant);
-                        $tache->setIdgestionnaire($dest);
-                        $tache->setDatecreation(date("Y-m-d"));
-                        $tache->setDatefin($echeance);
-                        $tache->setType($objet);
-                        $tache->setNom($motif);
-                        /* contenu de la tache */
-                        $tmp = [];
-                        $tmp ['0'] = $duree;
-                        $tache->setStructure($tmp);
-
-                        /* pour persister la tache en BDD */
-                        $em->persist($tache);
-
-                        $tacheGestionnaire = new Tachegestionnaire ();
-                        $tacheGestionnaire->setIdetudiant($idEtudiant);
-                        $tacheGestionnaire->setIdtache($tache->getId());
-                        $tacheGestionnaire->setStatus("NONLU");
-
-                        /* pour persister la tacheEtudiant en BDD */
-                        $em->persist($tacheGestionnaire);
-                    }
-
-                    break;
-                case 4:
-                    /* type du devoir rendu */
-                    $type = $request->get('list_devoirs');
-
-                    /* nom du devoir */
-                    $nom = $request->get('objet_form4');
-
-                    /* fichier */
-                    $file = $request->get('renduDevoir_InputFile');
-
-                    /* commentaire */
-                    $commentaire = $request->get('commentaire_rendu_devoir');
-
-                    foreach ($destinataire as $dest) {
-                        $tache->setIdetudiant($idEtudiant);
-                        $tache->setIdgestionnaire($dest);
-                        $tache->setDatecreation(date("Y-m-d"));
-                        $tache->setDatefin($echeance);
-                        $tache->setType($objet);
-                        $tache->setNom($type);
-                        /* contenu de la tache */
-                        $tmp = [];
-                        $tmp ['0'] = $file;
-                        $tmp ['1'] = $nom;
-                        $tmp ['2'] = $commentaire;
-                        $tache->setStructure($tmp);
-
-                        /* pour persister la tache en BDD */
-                        $em->persist($tache);
-
-                        $tacheGestionnaire = new Tachegestionnaire ();
-                        $tacheGestionnaire->setIdetudiant($idEtudiant);
-                        $tacheGestionnaire->setIdtache($tache->getId());
-                        $tacheGestionnaire->setStatus("NONLU");
-
-                        /* pour persister la tacheEtudiant en BDD */
-                        $em->persist($tacheGestionnaire);
-                    }
-
-                    break;
-                case 5:
-                    /* type d'inscritpion*/
-                    $typeForm = $request->get('list_inscription');
-
-                    /* motif */
-                    $duree = $request->get('motif_inscription');
-
-                    /* fichier */
-                    $file = $request->get('inscription_InputFile');
-
-                    /* �ch�ance */
-                    if ($request->get('checkbox_form5') == true) {
-                        $echeance = $request->get('echeance_form5');
-                    }
-
-                    foreach ($destinataire as $dest) {
-                        $tache->setIdetudiant($idEtudiant);
-                        $tache->setIdgestionnaire($dest);
-                        $tache->setDatecreation(date("Y-m-d"));
-                        $tache->setDatefin($echeance);
-                        $tache->setType($objet);
-                        $tache->setNom($typeForm);
-
-                        /* contenu de la tache */
-                        $tmp = [];
-                        $tmp ['0'] = $file;
-                        $tmp ['1'] = $duree;
-                        $tache->setStructure($tmp);
-
-                        /* pour persister la tache en BDD */
-                        $em->persist($tache);
-
-                        $tacheGestionnaire = new Tachegestionnaire ();
-                        $tacheGestionnaire->setIdetudiant($idEtudiant);
-                        $tacheGestionnaire->setIdtache($tache->getId());
-                        $tacheGestionnaire->setStatus("NONLU");
-
-                        /* pour persister la tacheEtudiant en BDD */
-                        $em->persist($tacheGestionnaire);
-                    }
-
-                    break;
-                case 6:
-                    /* dates de stage */
-                    $dates_stage = $request->get('dates_stage');
-
-                    /* d�tail */
-                    $detail = $request->get('detail_stage');
-
-                    /* fichier */
-                    $file = $request->get('validStage_InputFile');
-
-                    /* �ch�ance */
-                    if ($request->get('checkbox_form6') == true) {
-                        $echeance = $request->get('echeance_form6');
-                    }
-
-                    foreach ($destinataire as $dest) {
-                        $tache->setIdetudiant($idEtudiant);
-                        $tache->setIdgestionnaire($dest);
-                        $tache->setDatecreation(date("Y-m-d"));
-                        $tache->setDatefin($echeance);
-                        $tache->setType($objet);
-                        $tache->setNom($detail);
-                        /* contenu de la tache */
-                        $tmp = [];
-                        $tmp ['0'] = $file;
-                        $tmp ['2'] = $dates_stage;
-                        $tache->setStructure($tmp);
-
-                        /* pour persister la tache en BDD */
-                        $em->persist($tache);
-
-                        $tacheGestionnaire = new Tachegestionnaire ();
-                        $tacheGestionnaire->setIdetudiant($idEtudiant);
-                        $tacheGestionnaire->setIdtache($tache->getId());
-                        $tacheGestionnaire->setStatus("NONLU");
-
-                        /* pour persister la tacheEtudiant en BDD */
-                        $em->persist($tacheGestionnaire);
-                    }
-
-                    break;
-                case 7:
-                    /* remarque*/
-                    $remarque_stage = $request->get('remarque_stage');
-
-                    /* fichier */
-                    $file = $request->get('pdf_convention_InputFile');
-
-                    /* �ch�ance */
-                    if ($request->get('checkbox_form7') == true) {
-                        $echeance = $request->get('echeance_form7');
-                    }
-
-                    foreach ($destinataire as $dest) {
-                        $tache->setIdetudiant($idEtudiant);
-                        $tache->setIdgestionnaire($dest);
-                        $tache->setDatecreation(date("Y-m-d"));
-                        $tache->setDatefin($echeance);
-                        $tache->setType($objet);
-                        /* contenu de la tache */
-                        $tmp = [];
-                        $tmp ['0'] = $file;
-                        $tmp ['1'] = $remarque_stage;
-                        $tache->setStructure($tmp);
-
-                        /* pour persister la tache en BDD */
-                        $em->persist($tache);
-
-                        $tacheGestionnaire = new Tachegestionnaire ();
-                        $tacheGestionnaire->setIdetudiant($idEtudiant);
-                        $tacheGestionnaire->setIdtache($tache->getId());
-                        $tacheGestionnaire->setStatus("NONLU");
-
-                        /* pour persister la tacheEtudiant en BDD */
-                        $em->persist($tacheGestionnaire);
-                    }
-
-                    break;
-                case 8 :
-                    /* text */
-                    $text = $request->get('texte_form8');
-
-                    /* fichier */
-                    $file = $request->get('taskPerso_InputFile');
-
-                    /* �ch�ance */
-                    if ($request->get('checkbox_for8') == true) {
-                        $echeance = $request->get('echeance_form8');
-                    }
-
-                    $tache->setIdetudiant($idEtudiant);
-                    $tache->setNom($text);
-                    $tache->setDatecreation(date("Y-m-d"));
-                    $tache->setDatefin($echeance);
-                    $tache->setType($objet);
-                    /* contenu de la tache */
-                    $tmp = [];
-                    $tmp ['0'] = $file;
-                    $tache->setStructure($tmp);
-
-                    /* pour persister la tache en BDD */
-                    $em->persist($tache);
-
-                    $tacheEtudiant = new Tacheetudiant ();
-                    $tacheEtudiant->setType("NONLU");
-                    $tacheEtudiant->setIdetudiant($idEtudiant);
-                    $tacheEtudiant->setIdtache($tache->getId());
-
-                    /* pour persister la tacheEtudiant en BDD */
-                    $em->persist($tacheEtudiant);
-
-                    break;
-                case 9 :
-                    /* text */
-                    $text = $request->get('text_autre_demande');
-
-                    /* fichier */
-                    $file = $request->get('demandeNonRepertoriee_InputFile');
-
-                    /* �ch�ance */
-                    if ($request->get('checkbox_form6') == true) {
-                        $echeance = $request->get('echeance_form6');
-                    }
-
-                    foreach ($destinataire as $dest) {
-                        $tache->setIdetudiant($idEtudiant);
-                        $tache->setIdgestionnaire($dest);
-                        $tache->setNom($text);
-                        $tache->setDatecreation(date("Y-m-d"));
-                        $tache->setDatefin($echeance);
-                        $tache->setType($objet);
-                        /* contenu de la tache */
-                        $tmp = [];
-                        $tmp ['0'] = $file;
-                        $tache->setStructure($tmp);
-
-                        /* pour persister la tache en BDD */
-                        $em->persist($tache);
-
-                        $tacheGestionnaire = new Tachegestionnaire ();
-                        $tacheGestionnaire->setIdetudiant($idEtudiant);
-                        $tacheGestionnaire->setIdtache($tache->getId());
-                        $tacheGestionnaire->setStatus("NONLU");
-
-                        /* pour persister la tacheEtudiant en BDD */
-                        $em->persist($tacheEtudiant);
-                    }
-
-                    break;
-            }
-
-            /* pour valider les persist effectu�es */
-            $em->flush();
-        }
-    }
-
 
     public function removeTaskAction(Request $request)
     {
@@ -1087,10 +753,7 @@ class AjaxHandlerController extends Controller
 
     public function removeValidTaskAction(Request $request)
     {
-
         $em = $this->getDoctrine()->getEntityManager();
-        //echo "id=".$request->get('id')."<br>";
-
         $criteria = Criteria::create()
             ->where(Criteria::expr()->eq("idetudiant", $this->getRequest()->getSession()->get('loginTMP')->getId()))
             ->andWhere( Criteria::expr()->eq("status","VALIDE"));
@@ -1098,6 +761,7 @@ class AjaxHandlerController extends Controller
         $taches = $this->getDoctrine()->getRepository('PolytechDashboardHomeBundle:Tacheetudiant')->matching(
             $criteria
         );
+
         $idetudiant=$this->getRequest()->getSession()->get('loginTMP')->getId();
         $query = $em->createQuery("DELETE PolytechDashboardHomeBundle:Tacheetudiant t WHERE t.idetudiant = $idetudiant AND t.status = 'VALIDE' ");
         $query->execute();
@@ -1111,16 +775,38 @@ class AjaxHandlerController extends Controller
         }
         $em->flush();
 
-        /*  $query = $em->createQuery("DELETE PolytechDashboardHomeBundle:Tacheetudiant t WHERE t.idtache = $idtache AND t.status = 'VALIDE' ");
-          $query->execute();
-          $query = $em->createQuery("DELETE PolytechDashboardHomeBundle:Tache t WHERE t.id = $idtache");
-          $query->execute();
-          $criteria = Criteria::create()
-              ->where(Criteria::expr()->eq("idtache", $request->get('id')))
-              ->setFirstResult(0)
-              ->setMaxResults(20);
-          $em->flush();
-  */
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+        $jsonContent = $serializer->serialize($myArray, 'json');
+
+        return new Response($jsonContent);
+    }
+
+    public function removeSendedValidTaskAction(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq("idetudiant", $this->getRequest()->getSession()->get('loginTMP')->getId()))
+            ->andWhere( Criteria::expr()->eq("status","VALIDE"));
+
+        $taches = $this->getDoctrine()->getRepository('PolytechDashboardHomeBundle:Tachegestionnaire')->matching(
+            $criteria
+        );
+
+        $idetudiant=$this->getRequest()->getSession()->get('loginTMP')->getId();
+        $query = $em->createQuery("DELETE PolytechDashboardHomeBundle:Tachegestionnaire t WHERE t.idetudiant = $idetudiant AND t.status = 'VALIDE' ");
+        $query->execute();
+
+        $myArray = array();
+        foreach ($taches as $tache) {
+            $myArray [] = $tache;
+            $idtache=$tache->getIdtache();
+            $query = $em->createQuery("DELETE PolytechDashboardHomeBundle:Tache t WHERE t.id = $idtache ");
+            $query->execute();
+        }
+        $em->flush();
 
         $encoders = array(new XmlEncoder(), new JsonEncoder());
         $normalizers = array(new GetSetMethodNormalizer());

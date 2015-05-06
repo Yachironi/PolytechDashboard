@@ -68,3 +68,8 @@ polytech_dashboard_getMytasksRendred:
 polytech_dashboard_removeValidTask:
     path:     /removeValidTask
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:removeValidTask"}
+
+polytech_dashboard_removeSendedValidTask:
+    path:     /removeSendedValidTask
+    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:removeSendedValidTask"}
+

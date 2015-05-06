@@ -467,15 +467,20 @@ function clickOnImportance(id_importance_selected, other_id_importance_1, other_
         importance_selected.classList.add(name_importance_selected);
     }
     
-    var tmp = 'importance'+id_importance_selected.substring(14);
+    var inputName = 'importance'+id_importance_selected.substring(14);
     
+    console.log(inputName);
+
     oFormObject = document.forms['insertTaskForm'];
+    console.log(document.getElementById(inputName))
     
-    oFormObject.elements[tmp].value = id_importance_selected.substring(13,14);
-    
+    console.log(document.getElementById(inputName).value);
+    document.getElementById(inputName).value = id_importance_selected.substring(13,14);
+    console.log(document.getElementById(inputName).value);
+
 //    document.getElementById(tmp).value = id_importance_selected.substring(13,14);
 //    var value = document.getElementById(tmp).value;
-    console.log("nom de l'input : "+tmp+" id : "+id_importance_selected.substring(13,14));
+    console.log("nom de l'input : "+inputName+" id : "+id_importance_selected.substring(13,14));
 }
 
 function clickOnImportanceEditTask(id){
@@ -805,12 +810,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     $("#EnvoyerTaskToInsert").click(function() {
    // $("#result").click(function() {
-       //console.log($('#insertTaskForm').serializeArray());
+       console.log($('#insertTaskForm').serializeArray());
     	  event.preventDefault();
 
+    	    console.log("CLICK BOUTON ENVOYER");
 
         var formData = {};
-        $('#insertTaskForm').serializeArray().map(function(item) {
+        $('#insertTaskFormNew').serializeArray().map(function(item) {
             if ( formData[item.name] ) {
                 if ( typeof(formData[item.name]) === "string" ) {
                     formData[item.name] = [formData[item.name]];
@@ -821,6 +827,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             }
         });
 
+        console.log("DATA : ");
         console.log(formData);
         $.ajax({
             type: 'POST',
@@ -830,6 +837,47 @@ document.addEventListener("DOMContentLoaded", function(event) {
             success: function(data){
                 console.log("success");
                 console.log(data);
+                $.ajax({
+                    type: 'POST',
+                    url: '/getMytasksRendred',
+                    success: function(data){
+                        console.log("success================> getMytasksRendred");
+                        //  $("my_tasks").append("################################# ####");
+                        $("#my_tasks").html(data);
+
+                        $(function () {
+                            $(".table-task").dataTable({
+                                "bAutoWidth": false,
+                                "aoColumns": [
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    {"bSortable": false, "bSearchable": false},
+                                ]
+                            });
+                        });
+                        /*var w = window.open();
+                         var html = data;
+
+                         $(w.document.body).html(html);*/
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(xhr.status);
+                        console.log(thrownError);
+                        console.log()
+                        var w = window.open();
+                        var html = xhr.responseText;
+
+                        $(w.document.body).html(html);
+                    }
+                });
+                /* afficher le formulaire 1*/
+                document.getElementById('list_form').selectedIndex = 0;
+                afficheForm('list_form');
+                generateNotification('success', "Tache ajoutée a la base de donnée")
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 console.log(xhr.status);
@@ -938,7 +986,7 @@ function suprimeVALIDTask(){
         success: function(data){
             //  console.log("success");
             // console.log("le php a retourné => "+data);
-
+            generateNotification('success','opération terminée avec succès');
             $.ajax({
                 type: 'POST',
                 url: '/getMytasksRendred',
@@ -989,4 +1037,80 @@ function suprimeVALIDTask(){
     });
 
     $('#insertTaskForm').trigger("reset");
+}
+
+
+function suprimeVALIDTaskSended(){
+
+    console.log("appel remove==========>");
+    $.ajax({
+        type: 'POST',
+        url: '/removeSendedValidTask',
+        success: function(data){
+            //  console.log("success");
+            // console.log("le php a retourné => "+data);
+            generateNotification('success','opération terminée avec succès');
+            $.ajax({
+                type: 'POST',
+                url: '/getMytasksRendred',
+                success: function(data){
+                    console.log("success================> getMytasksRendred");
+                    //  $("my_tasks").append("################################# ####");
+                    $("#my_tasks").html(data);
+
+                    $(function () {
+                        $(".table-task").dataTable({
+                            "bAutoWidth": false,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                {"bSortable": false, "bSearchable": false},
+                            ]
+                        });
+                    });
+                    /*var w = window.open();
+                     var html = data;
+
+                     $(w.document.body).html(html);*/
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                    console.log()
+                    var w = window.open();
+                    var html = xhr.responseText;
+
+                    $(w.document.body).html(html);
+                }
+            });
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+            console.log()
+            var w = window.open();
+            var html = xhr.responseText;
+
+            $(w.document.body).html(html);
+        }
+    });
+
+    $('#insertTaskForm').trigger("reset");
+}
+
+function generateNotification(type, text) {
+
+    var n = noty({
+        text        : text,
+        type        : type,
+        layout      : 'topRight', /* bottomRight */
+        theme       : 'relax',
+        maxVisible  : 1,
+        timeout: 1000
+    });
+    console.log('html: ' + n.options.id);
 }
