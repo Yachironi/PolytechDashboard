@@ -200,6 +200,9 @@ class AjaxHandlerController extends Controller
 
     public function getIdGestionnaire($email)
     {
+    	$logger = $this->get('logger');
+    	$logger->info('$email : '.$email);
+    	 
         $gestionnaire = $this->getDoctrine()->getRepository('PolytechDashboardHomeBundle:Gestionnaire')->findOneByEmail(
             $email
         );
@@ -255,20 +258,15 @@ class AjaxHandlerController extends Controller
                     /* fichier */
                     $file = $request->get('absence_InputFile');
 
-                    /* echeance */
-                    $echeance = "";
-                    if ($request->get('checkbox_form2') == true) {
-                        $echeance = $request->get('echeance_form2');
-                    }
-
                     foreach ($destinataire as $dest) {
                         $tache->setIdetudiant($idEtudiant);
                         $tache->setIdgestionnaire($this->getIdGestionnaire($dest));
                         $tache->setDatecreation(date("Y-m-d"));
-                        $tache->setDatefin($echeance);
+                        $tache->setDatefin("");
                         $tache->setImportance($importance);
                         $tache->setNom($objet);                        
-                        
+                        $tache->setType($typeForm);
+                                                
                         /* contenu de la tache */
                         $tmp = [];
 
@@ -319,7 +317,8 @@ class AjaxHandlerController extends Controller
                         $tache->setDatefin($echeance);
                         $tache->setNom($objet);
                         $tache->setImportance($importance);
-
+                        $tache->setType($typeForm);
+                                                
                         /* contenu de la tache */
                         $tmp = [];
                         $tmp ['0'] = $duree;
@@ -359,14 +358,15 @@ class AjaxHandlerController extends Controller
                         $tache->setIdgestionnaire($this->getIdGestionnaire($dest));
                         $tache->setDatecreation(date("Y-m-d"));
                         $tache->setDatefin("");
-                        $tache->setType($type);
+                        $tache->setType($typeForm);
                         $tache->setNom($objet);
                         /* contenu de la tache */
                         $tmp = [];
                         $tmp ['0'] = $nom;
                         $tmp ['1'] = $commentaire;
+                        $tmp ['2'] = $type;
                         if ($file != null) {
-                            $tmp ['2'] = $file;
+                            $tmp ['3'] = $file;
                         }
                         $tache->setStructure(json_encode($tmp));
 
@@ -455,15 +455,16 @@ class AjaxHandlerController extends Controller
                         $tache->setIdgestionnaire($this->getIdGestionnaire($dest));
                         $tache->setDatecreation(date("Y-m-d"));
                         $tache->setDatefin($echeance);
-                        $tache->setType($detail);
+                        $tache->setType($typeForm);
                         $tache->setNom($objet);
                         $tache->setImportance($importance);
 
                         /* contenu de la tache */
                         $tmp = [];
                         $tmp ['0'] = $dates_stage;
+                        $tmp ['1'] = $detail;
                         if ($file != null) {
-                            $tmp ['1'] = $file;
+                            $tmp ['2'] = $file;
                         }
                         $tache->setStructure(json_encode($tmp));
 
@@ -489,18 +490,13 @@ class AjaxHandlerController extends Controller
                     /* fichier */
                     $file = $request->get('pdf_convention_InputFile');
 
-                    /* echeance */
-                    $echeance = "";
-                    if ($request->get('checkbox_form7') == true) {
-                        $echeance = $request->get('echeance_form7');
-                    }
 
                     foreach ($destinataire as $dest) {
                         $tache->setIdetudiant($idEtudiant);
                         $tache->setIdgestionnaire($this->getIdGestionnaire($dest));
                         $tache->setDatecreation(date("Y-m-d"));
-                        $tache->setDatefin($echeance);
-                        $tache->setType("0");
+                        $tache->setDatefin("");
+                        $tache->setType($typeForm);
                         $tache->setNom($objet);
                         $tache->setImportance($importance);
 
@@ -545,7 +541,7 @@ class AjaxHandlerController extends Controller
                     $tache->setNom($objet);
                     $tache->setDatecreation(date("Y-m-d"));
                     $tache->setDatefin($echeance);
-                    $tache->setType(0);
+                    $tache->setType($typeForm);
                     $tache->setImportance($importance);
 
                     /* contenu de la tache */
@@ -589,10 +585,10 @@ class AjaxHandlerController extends Controller
                     foreach ($destinataire as $dest) {
                         $tache->setIdetudiant($idEtudiant);
                         $tache->setIdgestionnaire($this->getIdGestionnaire($dest));
-                    $tache->setNom($objet);
-                                                $tache->setDatecreation(date("Y-m-d"));
+                    	$tache->setNom($objet);
+                        $tache->setDatecreation(date("Y-m-d"));
                         $tache->setDatefin($echeance);
-                        $tache->setType($objet);
+                        $tache->setType($typeForm);
                         $tache->setImportance($importance);
 
                         /* contenu de la tache */
