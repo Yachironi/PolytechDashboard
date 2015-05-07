@@ -55,9 +55,11 @@
                         {% else %}
                             <!-- Tache attribue par un gestionnaire -->
                             <td>
-                            {% for admin in myTasks.admins %}
-                 					{% if admin.id == task.getIdgestionnaire() %}
+						{% set continue = false %}
+                              {% for admin in myTasks.admins %}
+                 					{% if admin.id == task.getIdgestionnaire() and continue==false %}
                  						{{ admin.prenom}} {{ admin.nom }}
+                 						{% set continue = true %}
                                     {% endif %}
                 			{% endfor %}
                             </td>
