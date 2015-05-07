@@ -126,7 +126,16 @@
                                     <!-- Corps -->
                                     <div class="modal-body">
                                         <h4>Contenu :</h4>
-                                        <p>{{ task.getStructure() }}</p>
+                                        <p>
+                                        
+                                        {% set type = task.getType() %}
+                                        {% set array = task.getStructure()|slice(2,(task.getStructure()|length)-4)|split("\",\"") %}
+                                        {% if type == 7 %}
+                                        
+                                        	<div>Texte : {{array[0]}}</div>
+                                        	
+                                       	{%endif%}
+                                        </p>
                                     </div>
                                     <!-- Footer -->
                                     <div class="modal-footer">
@@ -134,7 +143,7 @@
                                           <!--  <button class="btn btn-primary pull-left" onclick="doneTask('{{ task.getId() }}')">
                                                 <span class="fa fa-check-square-o"></span> Fait
                                             </button> -->
-                                            <!-- TODO : faire passer getStructure + Faire passer la piece jointe -->
+                                            <!-- TODO :  Faire passer la piece jointe -->
                                             {% set dateFin = task.getDatefin()|date("d/m/Y H:i") %}
                                             <button data-dismiss="modal" class="btn btn-primary pull-left" onclick="editTask('{{ task.getId() }}', '{{ dateFin }}','{{ task.getNom() }}','{{ task.getImportance() }}','{{ task.getStructure() }}')">
                                                 <span class="fa fa-pencil-square-o"></span> Editer
@@ -259,8 +268,13 @@
                                     <!-- En tete -->
                                     <div class="modal-header modal-header-task">
                                         <button type="button" class="close" data-dismiss="modal">x</button>
-                                        <div class="modal-title">Tache n°{{ numTache }} - {{ task.getNom() }}</div>
-
+                                        <div class="modal-title">Tache n°{{ numTache }} - {{ task.getNom() }}
+										 <i class="fa fa-exclamation-triangle importance{{ task.getImportance() }}">
+                                			<div style="display: none;">{{ task.getImportance() }}</div>
+                            			 </i>
+                            			 
+                                        </div>
+                                       
                                     </div>
                                     <!-- En tete présentant le body -->
                                     <div class="modal-header modal-before-body">
@@ -273,8 +287,39 @@
                                     <!-- Corps -->
                                     <div class="modal-body">
                                         <h4>Contenu :</h4>
-                                        <!-- TODO, ajouter le contenu de la tache envoy�e -->
-                                        <p>{{ task.getStructure() }}</p>
+                                        <p>
+                                        {% set type = task.getType() %}
+                                        {% set array = task.getStructure()|slice(2,(task.getStructure()|length)-4)|split("\",\"") %}
+                                        {% if type == 2 %}
+                                        
+                                        	<div>Date et duree de l'absence : {{array[0]}}</div>
+                                        	<div>Motif de justification : {{array[1]}}</div>
+                                        	
+                                        {% elseif type == 3 %}
+
+                                        	<div>Date et heure : {{array[0]}}</div>
+                                        	<div>Motif du rendez-vous : {{array[1]}}</div>
+                                        	
+                                        {% elseif type == 4 %}
+                                        
+                                        	
+                                        	<div>Commentaire : {{array[0]}}</div>
+                                        	
+                                        {% elseif type == 5 %}
+                                        
+                                        	<div>Motif d'inscription : {{array[0]}}</div>
+                                        	
+                                        {% elseif type == 6 %}
+                                        
+                                        	<div>Dates de d�but et de fin du stage : {{array[0]}}</div>
+                                        	<div>Detail :  {{array[1]}}</div>
+                                        {% elseif type == 8 %}
+                                        
+                                        	<div>Texte :  {{array[0]}}</div>
+                                        	
+                                        {% endif %}
+                                        	
+                                        </p>
                                     </div>
                                     <!-- Footer -->
                                     <div class="modal-footer">

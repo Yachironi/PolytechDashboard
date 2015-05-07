@@ -124,7 +124,7 @@ class Tache
     /**
      * Get type
      *
-     * @return string 
+     * @return integer
      */
     public function getType()
     {
