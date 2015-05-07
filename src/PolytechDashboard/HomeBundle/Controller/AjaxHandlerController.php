@@ -221,9 +221,9 @@ class AjaxHandlerController extends Controller {
 							$uploadfile = $uploaddir . basename ( $_FILES ['userfile'] ['name'] );
 							
 							if (move_uploaded_file ( $_FILES ['userfile'] ['tmp_name'], $uploadfile )) {
-								echo "Le fichier est valide, et a été téléchargé avec succès. Voici plus d'informations :\n";
+								echo "Le fichier est valide, et a ï¿½tï¿½ tï¿½lï¿½chargï¿½ avec succï¿½s. Voici plus d'informations :\n";
 							} else {
-								echo "Attaque potentielle par téléchargement de fichiers. Voici plus d'informations :\n";
+								echo "Attaque potentielle par tï¿½lï¿½chargement de fichiers. Voici plus d'informations :\n";
 							}
 						}
 						/* contenu de la tache */
@@ -767,4 +767,24 @@ class AjaxHandlerController extends Controller {
 		
 		return new Response ( $jsonContent );
 	}
+
+
+    public function insertReplayTaskAction(Request $request) {
+
+        $idEtudiant = $this->getRequest ()->getSession ()->get ( 'loginTMP' )->getId ();
+
+
+
+        $encoders = array (
+            new XmlEncoder (),
+            new JsonEncoder ()
+        );
+        $normalizers = array (
+            new GetSetMethodNormalizer ()
+        );
+        $serializer = new Serializer ( $normalizers, $encoders );
+        $jsonContent = $serializer->serialize ( "success", 'json' );
+
+        return new Response ( $jsonContent );
+    }
 }

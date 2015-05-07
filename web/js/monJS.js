@@ -280,10 +280,10 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
     if(type_task == 2){
 
         body.innerHTML = "<form id='form_reply_task_2'>" +
-        "<input type='hidden' name='input_reply_task_objet_task' value='"+id_title+"'>"+
-        "<input type='hidden' name='input_reply_task_type_task' value='"+type_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_task' value='"+id_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_admin' value='"+id_admin+"'>"+
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<div class='form-group'>" +
@@ -320,15 +320,15 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
         });
 
         body.innerHTML = "<form id='form_reply_task_3'>" +
-        "<input type='hidden' name='input_reply_task_objet_task' value='"+id_title+"'>"+
-        "<input type='hidden' name='input_reply_task_type_task' value='"+type_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_task' value='"+id_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_admin' value='"+id_admin+"'>"+
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<div class='form-group'><div class='input-group'><span class='input-group-addon'>" +
         "<input type='radio' id='input_reply_task_3_rad1' name='input_reply_task_3_modif' onchange='modif_reply_task()'  value='1' checked></span>" +
-        "<input type='text' id='input_reply_task_3_dateRDV' name='input_reply_task_3_dateRDV' class='form-control'   value='Je confirme la date du rendez-vous : 12/23/4567 12:34(TODO: recuperer la date du rdv)' disabled></div></div>" +
+        "<input type='text' id='input_reply_task_3_dateRDV' name='input_reply_task_3_dateRDV' class='form-control'   value='2016-05-20 08:00' disabled></div></div>" +
         "<div class='form-group'><div class='input-group'><span class='input-group-addon'>" +
         "<input type='radio' id='input_reply_task_3_rad2' name='input_reply_task_3_modif' onchange='modif_reply_task()' value='2'></span>" +
         "<input type='text' id='input_reply_task_3_dateRDVModif' name='input_reply_task_3_dateRDVModif'class='form-control pull-right'   placeholder='Je choisi une autre date de rendez-vous...' disabled/>" +
@@ -347,10 +347,10 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
     // rendre un devoir
     else if(type_task == 4){
         body.innerHTML = "<form id='form_reply_task_4'>"+
-        "<input type='hidden' name='input_reply_task_objet_task' value='"+id_title+"'>"+
-        "<input type='hidden' name='input_reply_task_type_task' value='"+type_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_task' value='"+id_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_admin' value='"+id_admin+"'>"+
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<div class='form-group'>" +
@@ -363,10 +363,10 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
     // valider sujet de stage
     else if(type_task == 6){
         body.innerHTML = "<form id='form_reply_task_6'>"+
-        "<input type='hidden' name='input_reply_task_objet_task' value='"+id_title+"'>"+
-        "<input type='hidden' name='input_reply_task_type_task' value='"+type_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_task' value='"+id_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_admin' value='"+id_admin+"'>"+
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<div class='form-group'>" +
@@ -389,10 +389,10 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
     // autre
     else{
         body.innerHTML = "<form id='form_reply_task_9'>"+
-        "<input type='hidden' name='input_reply_task_objet_task' value='"+id_title+"'>"+
-        "<input type='hidden' name='input_reply_task_type_task' value='"+type_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_task' value='"+id_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_admin' value='"+id_admin+"'>"+
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<label>Texte</label>" +
@@ -488,69 +488,78 @@ function sendReply(){
     console.log(formData9);
     console.log("=====");
 
+    if(formData2.length)
+    console.log("formData2 non vide");
+    if(formData3.length>0)
+        console.log("formData2 non vide");
+    if(formData4.length>0)
+        console.log("formData2 non vide");
+    if(formData6.length>0)
+        console.log("formData2 non vide");
+    if(formData9.length>0)
+        console.log("formData2 non vide");
 
+    $.ajax({
+        type: 'POST',
+        url: '/insertReplayTask',
+        dataType: 'json',
+        data: formData2,
+        success: function(data) {
+            console.log("success");
+            console.log(data);
 
-    /*
-     $.ajax({
-     type: 'POST',
-     url: '/insertTask',
-     dataType: 'json',
-     data: formData,
-     success: function(data){
-     console.log("success");
-     console.log(data);
-     $.ajax({
-     type: 'POST',
-     url: '/getMytasksRendred',
-     success: function(data){
-     console.log("success================> getMytasksRendred");
-     //  $("my_tasks").append("################################# ####");
-     $("#my_tasks").html(data);
+            $.ajax({
+                type: 'POST',
+                url: '/getMytasksRendred',
+                success: function(data) {
+                    console.log("success================> getMytasksRendred");
+                    //  $("my_tasks").append("################################# ####");
+                    $("#my_tasks").html(data);
 
-     $(function () {
-     $(".table-task").dataTable({
-     "bAutoWidth": false,
-     "aoColumns": [
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     {"bSortable": false, "bSearchable": false},
-     ]
-     });
-     });
+                    $(function() {
+                        $(".table-task").dataTable({
+                            "bAutoWidth": false,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null, {
+                                    "bSortable": false,
+                                    "bSearchable": false
+                                },
+                            ]
+                        });
+                    });
 
-     },
-     error: function (xhr, ajaxOptions, thrownError) {
-     console.log(xhr.status);
-     console.log(thrownError);
-     console.log()
-     var w = window.open();
-     var html = xhr.responseText;
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                    console.log()
+                    var w = window.open();
+                    var html = xhr.responseText;
 
-     $(w.document.body).html(html);
-     }
-     });
+                    $(w.document.body).html(html);
+                }
+            });
 
-     document.getElementById('list_form').selectedIndex = 0;
-     afficheForm('list_form');
-     generateNotification('success', "Tache ajoutée a la base de donnée")
-     },
-     error: function (xhr, ajaxOptions, thrownError) {
-     console.log(xhr.status);
-     console.log(thrownError);
-     console.log()
-     var w = window.open();
-     var html = xhr.responseText;
+            generateNotification('success', "Success")
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+            console.log()
+            var w = window.open();
+            var html = xhr.responseText;
 
-     $(w.document.body).html(html);
-     }
+            $(w.document.body).html(html);
+        }
 
-     });
+    });
+
      console.log("fin ajax");
-     */
 
 }
 
