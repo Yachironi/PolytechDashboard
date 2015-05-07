@@ -129,7 +129,6 @@ function afficheForm(ID){
         }
     }
     /* On affiche le formulaire passé en paramètre */
-    alert(indice_form_a_affiche);
     document.getElementById(list_form[indice_form_a_affiche]).style.display = "block";
     if(indice_form_a_affiche == 0){
         document.getElementById('div_btn_envoyerTaskToInsert').style.display = "none";
