@@ -646,8 +646,9 @@ class AjaxHandlerController extends Controller {
 		$myTasksSend = [ ];
 		$admins = [ ];
 		$adminsTaskSend = [ ];
-		
-		$controller = $this;
+        $myStatueTask = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tacheetudiant' )->findByIdetudiant ( $id );
+
+        $controller = $this;
 		
 		/* liste de taches affect�es a l'etudiant */
 		$tabTasks = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tacheetudiant' )->findByIdetudiant ( $id );
@@ -702,7 +703,8 @@ class AjaxHandlerController extends Controller {
 		$result ['adminsTaskSend'] = $adminsTaskSend;
 		
 		return $this->render ( '@PolytechDashboardHome/Default/pages/tasks/my_tasks.html.twig', array (
-				'myTasks' => $result 
+				'myTasks' => $result ,
+                'myStatueTask'=>$myStatueTask
 		) );
 	}
 	public function removeValidTaskAction(Request $request) {
