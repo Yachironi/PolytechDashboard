@@ -155,12 +155,22 @@
                                             </button>
                                         {% else %}
                                             {% for admin in myTasks.admins %}
+
                                                 {% if admin.id == task.getIdgestionnaire() %}
-                                                    <a href="#replyTask" data-toggle="modal" data-dismiss="modal" onclick="replyTask('title_replyTask', 'body_replyTask', '{{ task.getId() }}', '{{ task.getType() }}', '{{ task.getNom() }}', '{{ admin.prenom }}', '{{ admin.nom }}','{{ admin.id }}')">
-                                                        <div class="btn btn-primary pull-left">
-                                                            <span class="fa fa-reply"></span> Répondre
-                                                        </div>
-                                                    </a>
+                                                    {% set trouve = 0 %}
+                                                    {% for tacheEtu in myStatueTask %}
+                                                        {% if task.getId() == tacheEtu.getIdEtudiant() and tacheEtu.getStatus() == "VALIDE" %}
+                                                            {% set trouve = 1 %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    {% if trouve == 0 %}
+                                                        <a href="#replyTask" data-toggle="modal" data-dismiss="modal" onclick="replyTask('title_replyTask', 'body_replyTask', '{{ task.getId() }}', '{{ task.getType() }}', '{{ task.getNom() }}', '{{ admin.prenom }}', '{{ admin.nom }}','{{ admin.id }}')">
+                                                            <div class="btn btn-primary pull-left">
+                                                                <span class="fa fa-reply"></span> Répondre
+                                                            </div>
+                                                        </a>
+                                                    {% endif %}
+
                                                 {% endif %}
                                             {% endfor %}
 
