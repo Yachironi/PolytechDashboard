@@ -65,15 +65,78 @@ function afficheForm(ID){
     /* On cache les div qu'il faut caché */
     for(i=0; i<size; i++){
         var form = document.getElementById(list_form[i]);
-        if(form == null){
-            alert(i);
-        }
         if(form.style.display == "block" && i != indice_form_a_affiche){
             form.style.display = "none";
+            // On efface les elements
+            if(i == 1){
+                document.getElementById('duree_absence').value = "";
+                document.getElementById('motif_justification_absence').value = "";
+                document.getElementById('absence_InputFile').value = "";
+                clickOnImportance('id_importance1_form2', 'id_importance2_form2', 'id_importance3_form2');
+                /**/
+            }
+            else if(i == 2){
+                document.getElementById('destinataire_form3').value = "";
+                document.getElementById('date_rdv').value = "";
+                document.getElementById('motif_rdv').value = "";
+                clickOnImportance('id_importance1_form3', 'id_importance2_form3', 'id_importance3_form3');
+            }
+            else if(i == 3){
+                document.getElementById('list_cours').selectedIndex = 0;
+                document.getElementById('list_devoirs').selectedIndex = 0;
+                document.getElementById('objet_form4').value = "";
+                document.getElementById('renduDevoir_InputFile').value = "";
+                document.getElementById('commentaire_rendu_devoir').value = "";
+            }
+
+            else if(i == 4){
+                document.getElementById('list_inscription').selectedIndex= 0;
+                document.getElementById('destinataire_form5').value = "";
+                document.getElementById('objet_form5').value = "";
+                document.getElementById('motif_inscription').value = "";
+                document.getElementById('inscription_InputFile').value = "";
+                clickOnImportance('id_importance1_form5', 'id_importance2_form5', 'id_importance3_form5');
+                /**/
+            }
+            else if(i == 5){
+                document.getElementById('dates_stage').value = "";
+                document.getElementById('detail_stage').value = "";
+                document.getElementById('validStage_InputFile').value = "";
+                clickOnImportance('id_importance1_form6', 'id_importance2_form6', 'id_importance3_form6');
+                /**/
+            }
+            else if(i == 6){
+                document.getElementById('remarque_stage').value = "";
+                document.getElementById('pdf_convention_InputFile').value = "";
+                clickOnImportance('id_importance1_form7', 'id_importance2_form7', 'id_importance3_form7');
+                /**/
+            }
+            else if(i == 7){
+
+                document.getElementById('objet_form8').value = "";
+                document.getElementById('texte_form8').value = "";
+                document.getElementById('taskPerso_InputFile').value = "";
+                clickOnImportance('id_importance1_form8', 'id_importance2_form8', 'id_importance3_form8');
+                /**/
+            }
+            else if(i == 8){
+                document.getElementById('objet_form9').value = "";
+                document.getElementById('text_autre_demande').value = "";
+                document.getElementById('demandeNonRepertoriee_InputFile').value = "";
+                clickOnImportance('id_importance1_form9', 'id_importance2_form9', 'id_importance3_form9');
+                /**/
+            }
         }
     }
     /* On affiche le formulaire passé en paramètre */
+    alert(indice_form_a_affiche);
     document.getElementById(list_form[indice_form_a_affiche]).style.display = "block";
+    if(indice_form_a_affiche == 0){
+        document.getElementById('div_btn_envoyerTaskToInsert').style.display = "none";
+    }
+    else{
+        document.getElementById('div_btn_envoyerTaskToInsert').style.display = "block";
+    }
 }
 
 /* TODO */
@@ -986,10 +1049,9 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
     }
 }
 
-document.addEventListener("DOMContentLoaded", function(event) { 
-	$("#buttonEnregistrerEtudiant").click(function() {
-		 
+document.addEventListener("DOMContentLoaded", function(event) {
 
+	$("#buttonEnregistrerEtudiant").click(function() {
 		$.ajax({
 	        type: 'POST',
 	        url: '/updateEtudiant',
@@ -999,7 +1061,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	        }
 	    });
-		
+
 	});
 
     $("#EnvoyerTaskToInsert").click(function() {
