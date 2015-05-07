@@ -129,7 +129,6 @@ function afficheForm(ID){
         }
     }
     /* On affiche le formulaire passé en paramètre */
-    alert(indice_form_a_affiche);
     document.getElementById(list_form[indice_form_a_affiche]).style.display = "block";
     if(indice_form_a_affiche == 0){
         document.getElementById('div_btn_envoyerTaskToInsert').style.display = "none";
@@ -178,55 +177,55 @@ function editTask(idTask, dateFin,objet, importance, texte) {
         $("#TaskForm_echeance_form8").prop('disabled', true);
     }
     $("#TaskForm_echeance_form8").daterangepicker2({
-            timePicker: true,
-            timePicker12Hour:false,
-            timePickerIncrement: 15,
-            format: 'DD/MM/YYYY H:mm'
-        });
-  /*  var id_list_formulaire = 'list_form'
-    activateTag('assign_task');
-
-    // select
-    var select = document.getElementById(id_list_formulaire);
-    select.selectedIndex = 7;
-    afficheForm(id_list_formulaire);
-
-    // objet
-    document.getElementById('objet_form8').value = objet;
-
-    // importance
-    var nom_importance = "importance" + importance;
-    var id_importance = "id_" + nom_importance + "_form8";
-    document.getElementById('id_importance1_form8').classList.remove('importance1-selected');
-    document.getElementById('id_importance1_form8').classList.add('importance1');
-    document.getElementById(id_importance).classList.remove(nom_importance);
-    document.getElementById(id_importance).classList.add(nom_importance + "-selected");
-
-    // dateFin
-    // TODO : condition a verifier
-    if(dateFin != null){
-        var echeance = document.getElementById('echeance_form8');
-        echeance.disabled = false;
-        echeance.value = dateFin;
-        // TODO : si possible, changer la date du datepicker
-    }
-    document.getElementById('checkbox_form8').checked = true;
-*/
-  /*  $.ajax({
-        type: 'POST',
-        url: '/tachesList',
-        dataType: 'json',
-        success: function (data) {
-            $.each(data, function (i, item) {
-                if (item.id == idTask) {
-                    alert(item.id);
-                    $("#texte_form8").html(item.structure);
-                    console.log(item.structure);
-                }
-            })
-        }
+        timePicker: true,
+        timePicker12Hour:false,
+        timePickerIncrement: 15,
+        format: 'DD/MM/YYYY H:mm'
     });
-*/
+    /*  var id_list_formulaire = 'list_form'
+     activateTag('assign_task');
+
+     // select
+     var select = document.getElementById(id_list_formulaire);
+     select.selectedIndex = 7;
+     afficheForm(id_list_formulaire);
+
+     // objet
+     document.getElementById('objet_form8').value = objet;
+
+     // importance
+     var nom_importance = "importance" + importance;
+     var id_importance = "id_" + nom_importance + "_form8";
+     document.getElementById('id_importance1_form8').classList.remove('importance1-selected');
+     document.getElementById('id_importance1_form8').classList.add('importance1');
+     document.getElementById(id_importance).classList.remove(nom_importance);
+     document.getElementById(id_importance).classList.add(nom_importance + "-selected");
+
+     // dateFin
+     // TODO : condition a verifier
+     if(dateFin != null){
+     var echeance = document.getElementById('echeance_form8');
+     echeance.disabled = false;
+     echeance.value = dateFin;
+     // TODO : si possible, changer la date du datepicker
+     }
+     document.getElementById('checkbox_form8').checked = true;
+     */
+    /*  $.ajax({
+     type: 'POST',
+     url: '/tachesList',
+     dataType: 'json',
+     success: function (data) {
+     $.each(data, function (i, item) {
+     if (item.id == idTask) {
+     alert(item.id);
+     $("#texte_form8").html(item.structure);
+     console.log(item.structure);
+     }
+     })
+     }
+     });
+     */
     // TODO : changer la date de creation et mettre celle d'aujourd'hui
 }
 
@@ -623,7 +622,7 @@ function sendReply(){
 
     });
 
-     console.log("fin ajax");
+    console.log("fin ajax");
 
 }
 
@@ -724,14 +723,14 @@ function clickOnImportance(id_importance_selected, other_id_importance_1, other_
         importance_selected.classList.remove(name_importance_selected + "-selected");
         importance_selected.classList.add(name_importance_selected);
     }
-    
+
     var inputName = 'importance'+id_importance_selected.substring(14);
-    
+
     console.log(inputName);
 
     oFormObject = document.forms['insertTaskForm'];
     console.log(document.getElementById(inputName))
-    
+
     console.log(document.getElementById(inputName).value);
     document.getElementById(inputName).value = id_importance_selected.substring(13,14);
     console.log(document.getElementById(inputName).value);
@@ -815,7 +814,7 @@ function afficheFormEditTask(ID){
         'TaskForm7', 'TaskForm8', 'TaskForm9');
 
     var indice_form_a_affiche = document.getElementById(ID).selectedIndex;
-   // var indice_form_a_affiche = ID;
+    // var indice_form_a_affiche = ID;
     var i;
     var size = list_form.length;
 
@@ -1052,25 +1051,25 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
-	$("#buttonEnregistrerEtudiant").click(function() {
-		$.ajax({
-	        type: 'POST',
-	        url: '/updateEtudiant',
-	        dataType: 'json',
-	        data: {'email': $('#profil_InputEmail').val(),'password': $('#profil_InputPassword2').val(),'telephone': $('#profil_InputTel').val()},
-	        success: function(data){
+    $("#buttonEnregistrerEtudiant").click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/updateEtudiant',
+            dataType: 'json',
+            data: {'email': $('#profil_InputEmail').val(),'password': $('#profil_InputPassword2').val(),'telephone': $('#profil_InputTel').val()},
+            success: function(data){
 
-	        }
-	    });
+            }
+        });
 
-	});
+    });
 
     $("#EnvoyerTaskToInsert").click(function() {
-   // $("#result").click(function() {
-       console.log($('#insertTaskForm').serializeArray());
-    	  event.preventDefault();
+        // $("#result").click(function() {
+        console.log($('#insertTaskForm').serializeArray());
+        event.preventDefault();
 
-    	    console.log("CLICK BOUTON ENVOYER");
+        console.log("CLICK BOUTON ENVOYER");
 
         var formData = {};
         $('#insertTaskFormNew').serializeArray().map(function(item) {
@@ -1171,64 +1170,64 @@ function updateTask(id){
     });
     //console.log(formData);
     formData.TaskForm_echeance_form8 = formData.TaskForm_echeance_form8.replace(/\//g,"-");
-   // console.log(formData.TaskForm_echeance_form8);
-        $.ajax({
+    // console.log(formData.TaskForm_echeance_form8);
+    $.ajax({
+        type: 'POST',
+        url: '/updateTask',
+        dataType: 'json',
+        data: formData,
+        success: function(data){
+            //  console.log("success");
+            // console.log("le php a retourné => "+data);
+
+            $.ajax({
                 type: 'POST',
-                url: '/updateTask',
-                dataType: 'json',
-                data: formData,
-            success: function(data){
-              //  console.log("success");
-               // console.log("le php a retourné => "+data);
+                url: '/getMytasksRendred',
+                success: function(data){
+                    console.log("success================> getMytasksRendred");
+                    //  $("my_tasks").append("################################# ####");
+                    $("#my_tasks").html(data);
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/getMytasksRendred',
-                    success: function(data){
-                        console.log("success================> getMytasksRendred");
-                      //  $("my_tasks").append("################################# ####");
-                       $("#my_tasks").html(data);
-
-                        $(function () {
-                            $(".table-task").dataTable({
-                                "bAutoWidth": false,
-                                "aoColumns": [
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    {"bSortable": false, "bSearchable": false},
-                                ]
-                            });
+                    $(function () {
+                        $(".table-task").dataTable({
+                            "bAutoWidth": false,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                {"bSortable": false, "bSearchable": false},
+                            ]
                         });
-                        /*var w = window.open();
-                        var html = data;
+                    });
+                    /*var w = window.open();
+                     var html = data;
 
-                        $(w.document.body).html(html);*/
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        console.log(xhr.status);
-                        console.log(thrownError);
-                        console.log()
-                        var w = window.open();
-                        var html = xhr.responseText;
+                     $(w.document.body).html(html);*/
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                    console.log()
+                    var w = window.open();
+                    var html = xhr.responseText;
 
-                        $(w.document.body).html(html);
-                    }
-                });
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                console.log(xhr.status);
-                console.log(thrownError);
-                console.log()
-                var w = window.open();
-                var html = xhr.responseText;
-
-                $(w.document.body).html(html);
-            }
+                    $(w.document.body).html(html);
+                }
             });
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+            console.log()
+            var w = window.open();
+            var html = xhr.responseText;
+
+            $(w.document.body).html(html);
+        }
+    });
 
     $('#insertTaskForm').trigger("reset");
 

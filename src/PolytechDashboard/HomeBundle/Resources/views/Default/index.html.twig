@@ -11,7 +11,7 @@
         <!-- PARTIE DU HAUT -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="#" onclick="activateTag('main_dashboard')" class="logo"><b>myDashboard</b></a>           <!-- LOGO EN HAUT A GAUCHE -->
+            <a href="#" onclick="activateTag('main_dashboard')" class="logo"><b>Tableau de bord</b></a>           <!-- LOGO EN HAUT A GAUCHE -->
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
@@ -57,11 +57,11 @@
                                     <p>
                                         {{prenom}} {{nom}}
                                         <small>{% if formation.getAnneeetude()<3 %}
-                                    	Peip
-                                    	{%else%}
-                                    	ET
-                                    	{%endif%}
-                                    	{{formation.getAnneeetude()}} - {{formation.getSpecialite()}}</small> 
+                                                Peip
+                                            {%else%}
+                                                ET
+                                            {%endif%}
+                                            {{formation.getAnneeetude()}} - {{formation.getSpecialite()}}</small>
                                     </p>
                                 </li>
 
@@ -95,16 +95,25 @@
                     <div class="modal-body">
                         <div class="form-group" style="vertical-align: middle;">
                             <div class="row"  style="margin: auto; vertical-align: middle;">
-                                
+                                <div class="col-lg-3"></div>
+                                <div id="profil_img" class="col-lg-3" style="margin:none;vertical-align: middle;">
+                                    <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image" style="max-width: 100px; max-height: 100px;"/>
+
+                                    <!-- TODO : etablir le changement de photo -->
+                                    <div class="fileUpload btn btn-default btn-flat btn-sm" style="display:block; width:100px;margin:0;">
+                                        <span class="fa fa-camera"></span> Modifier
+                                        <input type="file" class="upload"/>
+                                    </div>
+                                </div>
                                 <div class="col-lg-6" style="margin: auto; height: 70%; vertical-align: middle;" >
                                     <small><p> {{prenom}} {{nom}}</p>
-                                    <p>{% if formation.getAnneeetude()<3 %}
-                                    	Peip
-                                    	{%else%}
-                                    	ET
-                                    	{%endif%}
-                                    	{{formation.getAnneeetude()}} - {{formation.getSpecialite()}}</p>
-                                    <p>N° étudiant : {{ id }}</p></small>
+                                        <p>{% if formation.getAnneeetude()<3 %}
+                                                Peip
+                                            {%else%}
+                                                ET
+                                            {%endif%}
+                                            {{formation.getAnneeetude()}} - {{formation.getSpecialite()}}</p>
+                                        <p>N° étudiant : {{ id }}</p></small>
                                     <p class="warning_profil_photo">
                                         <i class="icon fa fa-warning"></i>
                                         <label>Taille minimum de la photo : 100x100</label>
@@ -118,10 +127,12 @@
                             <div class="row">
                                 <div class="col-lg-1"></div>
                                 <div class="col-lg-10">
+                                    <!--
                                 <div id="id_div_img" class="form-group">
                                  	<label for="profil_InputPassword1">Photo de profil</label>
                                 	<input id="input-1" type="file" class="file" data-show-upload="false">
                                 </div>
+                                -->
                                     <!-- TODO : Faire verifier le mot de passe et la confirmation -->
                                     <div id="id_div_password1" class="form-group">
                                         <label for="profil_InputPassword1">Nouveau mot de passe</label>
@@ -291,23 +302,23 @@
                             $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
                         } else if (nbNotificationNONLU == 1) {
                             $("#nbNotification").html(nbNotificationNONLU);
-                           if ($( "#my_tasks-notification-tag1" ).html() == "") {
-                        	$("#new_notif").html("0");
-                        }
-                        else {
-                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
-                        }
+                            if ($( "#my_tasks-notification-tag1" ).html() == "") {
+                                $("#new_notif").html("0");
+                            }
+                            else {
+                                $("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                            }
                             //$("#"+item.categorie+"-notification-tag").html("");
                             $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
                             $("#textNbNotification").html("Vous avez une notification");
                         } else {
                             $("#nbNotification").html(nbNotificationNONLU);
                             if ($( "#my_tasks-notification-tag1" ).html() == "") {
-                        	$("#new_notif").html("0");
-                        }
-                        else {
-                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
-                        }
+                                $("#new_notif").html("0");
+                            }
+                            else {
+                                $("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                            }
                             $("#"+item.categorie+"-notification-tag").html(nbNotificationNONLU);
                             $("#"+item.categorie+"-notification-tag").html("");
                             $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
@@ -353,24 +364,24 @@
 
                 // console.log("nbNotificationNONLU = "+nbNotificationNONLU);
                 //function categoriefromId(idNotification,dataGroup){
-                    $.each(dataGroup, function (i, item) {
-                        if (item.id==idNotification){
-                            if(parseInt($("#"+item.categorie+"-notification-tag").text(), 10)>=2){
+                $.each(dataGroup, function (i, item) {
+                    if (item.id==idNotification){
+                        if(parseInt($("#"+item.categorie+"-notification-tag").text(), 10)>=2){
                             $(":regex(id,"+item.categorie+"-notification-tag.*)").html(parseInt($("#"+item.categorie+"-notification-tag").text(), 10)-1);
-                            }else{
-                                $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
-                            }
+                        }else{
+                            $(":regex(id,"+item.categorie+"-notification-tag.*)").html("");
                         }
-                    });
-                    //return null;
+                    }
+                });
+                //return null;
                 //}
 
-  /*              $("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").html(
-                        parseInt($("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").text(), 10)-1);
-*/
-  /*              $(":regex(id,"+categoriefromId(idNotification,dataGroup)+"-notification-tag.*)").html(
-                        parseInt($("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").text(), 10)-1);
-*/
+                /*              $("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").html(
+                 parseInt($("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").text(), 10)-1);
+                 */
+                /*              $(":regex(id,"+categoriefromId(idNotification,dataGroup)+"-notification-tag.*)").html(
+                 parseInt($("#"+categoriefromId(idNotification,dataGroup)+"-notification-tag").text(), 10)-1);
+                 */
                 if (nbNotificationNONLU <=0) {
                     //$("#nbNotification").css("display","none");
                     $("#nbNotification").html("");
@@ -379,20 +390,20 @@
                 } else if (nbNotificationNONLU == 1) {
                     $("#nbNotification").html(nbNotificationNONLU);
                     if ($( "#my_tasks-notification-tag1" ).html() == "") {
-                        	$("#new_notif").html("0");
-                        }
-                        else {
-                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
-                        }
+                        $("#new_notif").html("0");
+                    }
+                    else {
+                        $("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                    }
                     $("#textNbNotification").html("Vous avez une notification");
                 } else {
                     $("#nbNotification").html(nbNotificationNONLU);
-                   if ($( "#my_tasks-notification-tag1" ).html() == "") {
-                        	$("#new_notif").html("0");
-                        }
-                        else {
-                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
-                        }
+                    if ($( "#my_tasks-notification-tag1" ).html() == "") {
+                        $("#new_notif").html("0");
+                    }
+                    else {
+                        $("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                    }
                     $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
                 }
             }
@@ -425,7 +436,7 @@
 
                         if($(":regex(id,"+item.categorie+"-notification-tag.*)").text()==""){
                             $(":regex(id,"+item.categorie+"-notification-tag.*)").html("0")
-                           //$("#"+item.categorie+"-notification-tag").html("0");
+                            //$("#"+item.categorie+"-notification-tag").html("0");
                         }
                         $(":regex(id,"+item.categorie+"-notification-tag.*)").html(parseInt($("#"+item.categorie+"-notification-tag").text(), 10)+1);
 
@@ -452,20 +463,20 @@
                 } else if (nbNotificationNONLU == 1) {
                     $("#nbNotification").html(nbNotificationNONLU);
                     if ($( "#my_tasks-notification-tag1" ).html() == "") {
-                        	$("#new_notif").html("0");
-                        }
-                        else {
-                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
-                        }
+                        $("#new_notif").html("0");
+                    }
+                    else {
+                        $("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                    }
                     $("#textNbNotification").html("Vous avez une notification");
                 } else {
                     $("#nbNotification").html(nbNotificationNONLU);
                     if ($( "#my_tasks-notification-tag1" ).html() == "") {
-                        	$("#new_notif").html("0");
-                        }
-                        else {
-                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
-                        }
+                        $("#new_notif").html("0");
+                    }
+                    else {
+                        $("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                    }
                     $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
                 }
 
@@ -482,47 +493,47 @@
 
                     //console.log($("#notification"+$(this).attr("btnID")).attr('value'));
 
-                   /* $.ajax({
-                        type: 'POST',
-                        url: '/setNotificationAsRead',
-                        dataType: 'json',
-                        data: {'id': $(this).attr("btnID")},
-                        success: function(data){
+                    /* $.ajax({
+                     type: 'POST',
+                     url: '/setNotificationAsRead',
+                     dataType: 'json',
+                     data: {'id': $(this).attr("btnID")},
+                     success: function(data){
 
-                        }
-                    });
-                    var btnid=$(this).attr("btnID");
-                    $("#notification"+btnid).html();
-                    $("#notification"+btnid).remove();
-                    nbNotificationNONLU--;
-                    event.data.nbNotificationNONLU--;
-                   // console.log("nbNotificationNONLU = "+nbNotificationNONLU);
-                    if (nbNotificationNONLU == 0) {
-                        //$("#nbNotification").css("display","none");
-                        $("#nbNotification").html("");
-                        $("#new_notif").html("0");
-                        $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
-                    } else if (nbNotificationNONLU == 1) {
-                        $("#nbNotification").html(nbNotificationNONLU);
-                        if ($( "#my_tasks-notification-tag1" ).html() == "") {
-                        	$("#new_notif").html("0");
-                        }
-                        else {
-                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
-                        }
-                        
-                        $("#textNbNotification").html("Vous avez une notification");
-                    } else {
-                        $("#nbNotification").html(nbNotificationNONLU);
-                        if ($( "#my_tasks-notification-tag1" ).html() == "") {
-                        	$("#new_notif").html("0");
-                        }
-                        else {
-                        	$("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
-                        }
-                        $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
-                    }
-                    */
+                     }
+                     });
+                     var btnid=$(this).attr("btnID");
+                     $("#notification"+btnid).html();
+                     $("#notification"+btnid).remove();
+                     nbNotificationNONLU--;
+                     event.data.nbNotificationNONLU--;
+                     // console.log("nbNotificationNONLU = "+nbNotificationNONLU);
+                     if (nbNotificationNONLU == 0) {
+                     //$("#nbNotification").css("display","none");
+                     $("#nbNotification").html("");
+                     $("#new_notif").html("0");
+                     $("#textNbNotification").html("Vous n'avez pas de nouvelles notifications");
+                     } else if (nbNotificationNONLU == 1) {
+                     $("#nbNotification").html(nbNotificationNONLU);
+                     if ($( "#my_tasks-notification-tag1" ).html() == "") {
+                     $("#new_notif").html("0");
+                     }
+                     else {
+                     $("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                     }
+
+                     $("#textNbNotification").html("Vous avez une notification");
+                     } else {
+                     $("#nbNotification").html(nbNotificationNONLU);
+                     if ($( "#my_tasks-notification-tag1" ).html() == "") {
+                     $("#new_notif").html("0");
+                     }
+                     else {
+                     $("#new_notif").html($( "#my_tasks-notification-tag1" ).html());
+                     }
+                     $("#textNbNotification").html("Vous avez " + nbNotificationNONLU + " notifications");
+                     }
+                     */
                 });
             }
 

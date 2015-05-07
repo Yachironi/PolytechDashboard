@@ -41,13 +41,15 @@
             });
             $("#destinataire_form4").tokenInput("/contactList", {
                 /* Les gestionnaires de cours de l'etudiant */
-                prePopulate: [
-                    {% for profs in myAdmins.Cours %}
+                /*
+                 prePopulate: [
+                {% for profs in myAdmins.Cours %}
                     {%  if profs.getEmail() != '' %}
-                    {"id":"{{profs.getId()}}","nom":"{{ profs.getNom() }}","prenom":"{{ profs.getPrenom() }}","email":"{{ profs.getEmail() }}"},
-                    {% endif %}
+                 {"id":"{{profs.getId()}}","nom":"{{ profs.getNom() }}","prenom":"{{ profs.getPrenom() }}","email":"{{ profs.getEmail() }}"},
+                {% endif %}
                     {% endfor %}
-                ],
+                 ],
+                 */
                 theme: "facebook",
                 propertyToSearch: "nom",
                 resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
@@ -58,19 +60,21 @@
 
             $("#destinataire_form3,#destinataire_form9").tokenInput("/contactList", {
                 /* tous les gestionnaires */
-                prePopulate: [
-                    {"id":"{{ myAdmins.Admin.getId() }}","nom":"{{ myAdmins.Admin.getNom() }}","prenom":"{{ myAdmins.Admin.getPrenom() }}","email":"{{ myAdmins.Admin.getEmail() }}"},
-                    {"id":"{{ myAdmins.Stage.getId() }}","nom":"{{ myAdmins.Stage.getNom() }}","prenom":"{{ myAdmins.Stage.getPrenom() }}","email":"{{ myAdmins.Stage.getEmail() }}"},
-                    {"id":"{{ myAdmins.Formation.getId() }}","nom":"{{ myAdmins.Formation.getNom() }}","prenom":"{{ myAdmins.Formation.getPrenom() }}","email":"{{ myAdmins.Formation.getEmail() }}"},
-                    {"id":"{{myAdmins.RIEurope.getId()}}","nom":"{{ myAdmins.RIEurope.getNom() }}","prenom":"{{ myAdmins.RIEurope.getPrenom() }}","email":"{{ myAdmins.RIEurope.getEmail() }}"},
-                    {"id":"{{myAdmins.RIMonde.getId()}}","nom":"{{ myAdmins.RIMonde.getNom() }}","prenom":"{{ myAdmins.RIMonde.getPrenom() }}","email":"{{ myAdmins.RIMonde.getEmail() }}"},
-                    {"id":"{{myAdmins.Sport.getId()}}","nom":"{{ myAdmins.Sport.getNom() }}","prenom":"{{ myAdmins.Sport.getPrenom() }}","email":"{{ myAdmins.Sport.getEmail() }}"},
-                    {"id":"{{myAdmins.Scolarite.getId()}}","nom":"{{ myAdmins.Scolarite.getNom() }}","prenom":"{{ myAdmins.Scolarite.getPrenom() }}","email":"{{ myAdmins.Scolarite.getEmail() }}"},
-                    {% for profs in myAdmins.Cours %}
-                    {"id":"{{profs.getId()}}","nom":"{{ profs.getNom() }}","prenom":"{{ profs.getPrenom() }}","email":"{{ profs.getEmail() }}"},
-                    {% endfor %}
+                /*
+                 prePopulate: [
+                 {"id":"{{ myAdmins.Admin.getId() }}","nom":"{{ myAdmins.Admin.getNom() }}","prenom":"{{ myAdmins.Admin.getPrenom() }}","email":"{{ myAdmins.Admin.getEmail() }}"},
+                 {"id":"{{ myAdmins.Stage.getId() }}","nom":"{{ myAdmins.Stage.getNom() }}","prenom":"{{ myAdmins.Stage.getPrenom() }}","email":"{{ myAdmins.Stage.getEmail() }}"},
+                 {"id":"{{ myAdmins.Formation.getId() }}","nom":"{{ myAdmins.Formation.getNom() }}","prenom":"{{ myAdmins.Formation.getPrenom() }}","email":"{{ myAdmins.Formation.getEmail() }}"},
+                 {"id":"{{myAdmins.RIEurope.getId()}}","nom":"{{ myAdmins.RIEurope.getNom() }}","prenom":"{{ myAdmins.RIEurope.getPrenom() }}","email":"{{ myAdmins.RIEurope.getEmail() }}"},
+                 {"id":"{{myAdmins.RIMonde.getId()}}","nom":"{{ myAdmins.RIMonde.getNom() }}","prenom":"{{ myAdmins.RIMonde.getPrenom() }}","email":"{{ myAdmins.RIMonde.getEmail() }}"},
+                 {"id":"{{myAdmins.Sport.getId()}}","nom":"{{ myAdmins.Sport.getNom() }}","prenom":"{{ myAdmins.Sport.getPrenom() }}","email":"{{ myAdmins.Sport.getEmail() }}"},
+                 {"id":"{{myAdmins.Scolarite.getId()}}","nom":"{{ myAdmins.Scolarite.getNom() }}","prenom":"{{ myAdmins.Scolarite.getPrenom() }}","email":"{{ myAdmins.Scolarite.getEmail() }}"},
+                {% for profs in myAdmins.Cours %}
+                 {"id":"{{profs.getId()}}","nom":"{{ profs.getNom() }}","prenom":"{{ profs.getPrenom() }}","email":"{{ profs.getEmail() }}"},
+                {% endfor %}
 
-                ],
+                 ],
+                 */
                 theme: "facebook",
                 propertyToSearch: "nom",
                 resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
@@ -111,681 +115,680 @@
             </div>
 
 
-			<!-- Vide -->
-			<div id="form1"></div>
+            <!-- Vide -->
+            <div id="form1"></div>
 
-			<!-- Justifier une absence -->
-			<div id="form2" class="sous_formulaire" style="display: none;">
-				<!-- Destinataire -->
-				<div class="form-group">
-					<label for="destinataire">Destinataire</label>
-					<div class="input-group">
-						<!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
-						<!--<input type="text" class="form-control" id="destinataire_form2"
+            <!-- Justifier une absence -->
+            <div id="form2" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
+                        <!--<input type="text" class="form-control" id="destinataire_form2"
                                value="{{ myAdmins.Admin.getPrenom() }} {{ myAdmins.Admin.getNom() }} - {{ myAdmins.Admin.getEmail() }}"
                                required>-->
-						<input type="text" class="form-control" id="destinataire_form2" name="destinataire_form2"
-							required>
-						<div class="input-group-addon">
-							<a href="#"><i class="fa fa-sort-alpha-asc"></i></a>
-						</div>
-					</div>
-				</div>
-				<!-- Objet & importance -->
-				<div class="form-group">
-					<div class="row">
-						<div class="col-lg-9">
-							<label for="objet_form2">Objet</label> <input type="text" name="objet_form2"
-								class="form-control" id="objet_form2"
-								value="Justification d'absence" required>
-						</div>
-						<div class="col-lg-3">
-							<label>Importance</label>
-							<input type="hidden" id="importance_form2" name="importance_form2" value="1">
-							<div class="select_importance form-control">
-								<a
-									onclick="clickOnImportance('id_importance1_form2', 'id_importance2_form2', 'id_importance3_form2')"
-									style="text-decoration: none;"> <i id="id_importance1_form2"
-									class="fa fa-exclamation-triangle importance1-selected"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance2_form2', 'id_importance1_form2', 'id_importance3_form2')"
-									style="text-decoration: none;"> <i id="id_importance2_form2"
-									class="fa fa-exclamation-triangle importance2"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance3_form2', 'id_importance1_form2', 'id_importance2_form2')"
-									style="text-decoration: none;"> <i id="id_importance3_form2"
-									class="fa fa-exclamation-triangle importance3"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- Date and time range - date début absence -->
-				<div class="form-group">
-					<label>Date et durée de l'absence</label>
-					<div class="input-group">
-						<div class="input-group-addon">
-							<i class="fa fa-clock-o"></i>
-						</div>
-						<input type="text" class="form-control pull-right" name="duree_absence"
-							id="duree_absence" value=""/>
-					</div>
-				</div>
+                        <input type="text" class="form-control" id="destinataire_form2" name="destinataire_form2"
+                               required>
+                        <div class="input-group-addon">
+                            <a href="#"><i class="fa fa-sort-alpha-asc"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet & importance -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form2">Objet</label> <input type="text" name="objet_form2"
+                                                                          class="form-control" id="objet_form2"
+                                                                          value="Justification d'absence" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Importance</label>
+                            <input type="hidden" id="importance_form2" name="importance_form2" value="1">
+                            <div class="select_importance form-control">
+                                <a
+                                        onclick="clickOnImportance('id_importance1_form2', 'id_importance2_form2', 'id_importance3_form2')"
+                                        style="text-decoration: none;"> <i id="id_importance1_form2"
+                                                                           class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance2_form2', 'id_importance1_form2', 'id_importance3_form2')"
+                                        style="text-decoration: none;"> <i id="id_importance2_form2"
+                                                                           class="fa fa-exclamation-triangle importance2"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance3_form2', 'id_importance1_form2', 'id_importance2_form2')"
+                                        style="text-decoration: none;"> <i id="id_importance3_form2"
+                                                                           class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Date and time range - date début absence -->
+                <div class="form-group">
+                    <label>Date et durée de l'absence</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right" name="duree_absence"
+                               id="duree_absence" value=""/>
+                    </div>
+                </div>
 
-				<div class="form-group">
-					<label>Motif de justification</label>
-					<textarea class="form-control" id="motif_justification_absence" name="motif_justification_absence" value=""></textarea>
-				</div>
-				<div class="form-group">
-					<label for="absence_InputFile">Sélectionner votre justificatif</label>
-					<input type="file" id="absence_InputFile" name="absence_InputFile" value="">
-					<input type="file" id="absence_InputFile" name="absence_InputFile" >
-				</div>
+                <div class="form-group">
+                    <label>Motif de justification</label>
+                    <textarea class="form-control" id="motif_justification_absence" name="motif_justification_absence" value=""></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="absence_InputFile">Sélectionner votre justificatif</label>
+                    <input type="file" id="absence_InputFile" name="absence_InputFile" value="">
+                </div>
 
-			</div>
+            </div>
 
-			<!-- Prendre un rendez-vous -->
-			<div id="form3" class="sous_formulaire" style="display: none;">
-				<!-- Destinataire -->
-				<div class="form-group">
-					<label for="destinataire">Destinataire</label>
-					<div class="input-group">
-						<input type="text" class="form-control" id="destinataire_form3" name="destinataire_form3"
-							value="" required>
-						<div class="input-group-addon">
-							<a href="#modal_dest_form3" data-toggle="modal"><i
-								class="fa fa-sort-alpha-asc"></i></a>
-						</div>
-					</div>
-				</div>
-				<!-- Objet & importance -->
-				<div class="form-group">
-					<div class="row">
-						<div class="col-lg-9">
-							<label for="objet_form3">Objet</label> <input type="text" name="objet_form3"
-								class="form-control" id="objet_form3" value="Demande de RDV"
-								required>
-						</div>
-						<div class="col-lg-3">
-							<label>Importance</label>
-							<input type="hidden" id="importance_form3" name="importance_form3" value="1">
-							
-							<div class="select_importance form-control">
-								<a
-									onclick="clickOnImportance('id_importance1_form3', 'id_importance2_form3', 'id_importance3_form3')"
-									style="text-decoration: none;"> <i id="id_importance1_form3"
-									class="fa fa-exclamation-triangle importance1-selected"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance2_form3', 'id_importance1_form3', 'id_importance3_form3')"
-									style="text-decoration: none;"> <i id="id_importance2_form3"
-									class="fa fa-exclamation-triangle importance2"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance3_form3', 'id_importance1_form3', 'id_importance2_form3')"
-									style="text-decoration: none;"> <i id="id_importance3_form3"
-									class="fa fa-exclamation-triangle importance3"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- Date et heure du RDV -->
-				<div class="form-group">
-					<label>Date et heure</label>
-					<div class="input-group">
-						<div class="input-group-addon">
-							<i class="fa fa-clock-o"></i>
-						</div>
-						<input type="text" class="form-control pull-right" id="date_rdv" name="date_rdv" value=""/>
-					</div>
-				</div>
+            <!-- Prendre un rendez-vous -->
+            <div id="form3" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="destinataire_form3" name="destinataire_form3"
+                               value="" required>
+                        <div class="input-group-addon">
+                            <a href="#modal_dest_form3" data-toggle="modal"><i
+                                        class="fa fa-sort-alpha-asc"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet & importance -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form3">Objet</label> <input type="text" name="objet_form3"
+                                                                          class="form-control" id="objet_form3" value="Demande de RDV"
+                                                                          required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Importance</label>
+                            <input type="hidden" id="importance_form3" name="importance_form3" value="1">
 
-				<!-- TODO : ajouter d'autres? -->
-				<div class="form-group">
-					<label>Motif du rendez-vous</label>
-					<textarea class="form-control" id="motif_rdv" name="motif_rdv" value=""></textarea>
-				</div>
+                            <div class="select_importance form-control">
+                                <a
+                                        onclick="clickOnImportance('id_importance1_form3', 'id_importance2_form3', 'id_importance3_form3')"
+                                        style="text-decoration: none;"> <i id="id_importance1_form3"
+                                                                           class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance2_form3', 'id_importance1_form3', 'id_importance3_form3')"
+                                        style="text-decoration: none;"> <i id="id_importance2_form3"
+                                                                           class="fa fa-exclamation-triangle importance2"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance3_form3', 'id_importance1_form3', 'id_importance2_form3')"
+                                        style="text-decoration: none;"> <i id="id_importance3_form3"
+                                                                           class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Date et heure du RDV -->
+                <div class="form-group">
+                    <label>Date et heure</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right" id="date_rdv" name="date_rdv" value=""/>
+                    </div>
+                </div>
 
-				<!-- Echeance -->
-				<div class="form-group">
-					<label>Échéance</label>
-					<div class="input-group">
-						<!-- Checkbox -->
+                <!-- TODO : ajouter d'autres? -->
+                <div class="form-group">
+                    <label>Motif du rendez-vous</label>
+                    <textarea class="form-control" id="motif_rdv" name="motif_rdv" value=""></textarea>
+                </div>
+
+                <!-- Echeance -->
+                <div class="form-group">
+                    <label>Échéance</label>
+                    <div class="input-group">
+                        <!-- Checkbox -->
 						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form3"
-							id="checkbox_form3"
-							onchange="showEcheance('checkbox_form3','echeance_form3')">
+                                                                id="checkbox_form3"
+                                                                onchange="showEcheance('checkbox_form3','echeance_form3')">
 						</span>
-						<!-- Date picker -->
-						<input type="text" class="form-control pull-right" name="echeance_form3"
-							id="echeance_form3" disabled />
-						<div class="input-group-addon">
-							<i class="fa fa-clock-o"></i>
-						</div>
-					</div>
-				</div>
+                        <!-- Date picker -->
+                        <input type="text" class="form-control pull-right" name="echeance_form3"
+                               id="echeance_form3" disabled />
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                </div>
 
-			</div>
+            </div>
 
-			<!-- Rendre un devoir -->
-			<div id="form4" class="sous_formulaire" style="display: none;">
-				<!-- Destinataire -->
-				<div class="form-group">
-					<label for="destinataire">Destinataire</label>
-					<div class="input-group">
-						<input type="text" class="form-control" id="destinataire_form4" name="destinataire_form4"
-							value="" required>
-						<div class="input-group-addon">
-							<a href="#modal_dest_form4" data-toggle="modal"><i
-								class="fa fa-sort-alpha-asc"></i></a>
-						</div>
-					</div>
-				</div>
-				<!-- Cours + type de devoir -->
-				<div class="row">
-					<div class="col-lg-6">
-						<!-- TODO : liste des cours du semestre de l'etudiant -->
-						<div class="form-group">
-							<label for="type">Cours</label> <select class="form-control"
-								id="list_cours"
-								onchange="updateObjetRDV('list_cours', 'list_devoirs', 'objet_form4')">
-								<option value="" selected></option>
-								<!-- Affichage dynamique de la liste de tous les cours auquel l'�tudiant est inscrit-->
-								{% for UE in myUE %} {% for cours in UE.cours %}
-								<option value="{{ cours.getNomcours() }}">{{ cours.getNomcours()
-									}}</option> {% endfor %} {% endfor %}
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<!-- Liste des types de devoir a rendre -->
-						<div class="form-group">
-							<label for="type">Type de devoir</label> <select
-								class="form-control" id="list_devoirs"
-								onchange="updateObjetRDV('list_cours', 'list_devoirs', 'objet_form4')">
-								<!-- TODO : autre a rajouter? -->
-								<option value="" selected></option>
-								<option value="TP">TP</option>
-								<option value="DM">Devoir Maison</option>
-								<option value="Projet">Projet</option>
-								<option value="Autre">Autre</option>
-							</select>
-						</div>
-					</div>
-				</div>
+            <!-- Rendre un devoir -->
+            <div id="form4" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="destinataire_form4" name="destinataire_form4"
+                               value="" required>
+                        <div class="input-group-addon">
+                            <a href="#modal_dest_form4" data-toggle="modal"><i
+                                        class="fa fa-sort-alpha-asc"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cours + type de devoir -->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- TODO : liste des cours du semestre de l'etudiant -->
+                        <div class="form-group">
+                            <label for="type">Cours</label> <select class="form-control"
+                                                                    id="list_cours"
+                                                                    onchange="updateObjetRDV('list_cours', 'list_devoirs', 'objet_form4')">
+                                <option value="" selected></option>
+                                <!-- Affichage dynamique de la liste de tous les cours auquel l'�tudiant est inscrit-->
+                                {% for UE in myUE %} {% for cours in UE.cours %}
+                                    <option value="{{ cours.getNomcours() }}">{{ cours.getNomcours()
+                                        }}</option> {% endfor %} {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Liste des types de devoir a rendre -->
+                        <div class="form-group">
+                            <label for="type">Type de devoir</label> <select
+                                    class="form-control" id="list_devoirs"
+                                    onchange="updateObjetRDV('list_cours', 'list_devoirs', 'objet_form4')">
+                                <!-- TODO : autre a rajouter? -->
+                                <option value="" selected></option>
+                                <option value="TP">TP</option>
+                                <option value="DM">Devoir Maison</option>
+                                <option value="Projet">Projet</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-				<!-- Nom du devoir -->
-				<div class="form-group">
-					<label for="objet_form4">Nom du devoir</label> <input type="text"
-						class="form-control" id="objet_form4" name="objet_form4" value="" required>
-				</div>
+                <!-- Nom du devoir -->
+                <div class="form-group">
+                    <label for="objet_form4">Nom du devoir</label> <input type="text"
+                                                                          class="form-control" id="objet_form4" name="objet_form4" value="" required>
+                </div>
 
-				<div class="form-group">
-					<label for="renduDevoir_InputFile">Sélectionner votre devoir</label>
-					<input type="file" id="renduDevoir_InputFile" name="renduDevoir_InputFile" value="">
-				</div>
+                <div class="form-group">
+                    <label for="renduDevoir_InputFile">Sélectionner votre devoir</label>
+                    <input type="file" id="renduDevoir_InputFile" name="renduDevoir_InputFile" value="">
+                </div>
 
-				<div class="form-group">
-					<label>Ajouter un commentaire</label>
-					<textarea class="form-control" id="commentaire_rendu_devoir" name="commentaire_rendu_devoir" value=""></textarea>
-				</div>
+                <div class="form-group">
+                    <label>Ajouter un commentaire</label>
+                    <textarea class="form-control" id="commentaire_rendu_devoir" name="commentaire_rendu_devoir" value=""></textarea>
+                </div>
 
-			</div>
+            </div>
 
-			<!-- TODO : Faire une demande d'inscription -->
-			<div id="form5" class="sous_formulaire" style="display: none;">
-				<!-- Listes des inscriptions -->
-				<div class="form-group" style="padding-bottom: 20px;">
-					<label for="type">Type d'inscription</label> <select
-						class="form-control" id="list_inscription"
-						onchange="updateInscription('list_inscription', 'destinataire_form5', 'objet_form5','{{ myAdmins.Scolarite.getEmail() }}','{{ myAdmins.RIEurope.getEmail() }}','{{ myAdmins.Formation.getEmail() }}','{{ myAdmins.Sport.getEmail() }}','{{ myAdmins.Admin.getEmail() }}')">
-						<option value="" selected="selected"></option>
-						<option value="TOEIC">TOEIC</option>
-						<option value="Bourse">Bourse</option>
-						<option value="M2R">M2R</option>
-						<option value="Sport">Sport</option>
-						<option value="Polytech">Réinscription à Polytech</option>
-					</select>
-				</div>
+            <!-- TODO : Faire une demande d'inscription -->
+            <div id="form5" class="sous_formulaire" style="display: none;">
+                <!-- Listes des inscriptions -->
+                <div class="form-group" style="padding-bottom: 20px;">
+                    <label for="type">Type d'inscription</label> <select
+                            class="form-control" id="list_inscription"
+                            onchange="updateInscription('list_inscription', 'destinataire_form5', 'objet_form5','{{ myAdmins.Scolarite.getEmail() }}','{{ myAdmins.RIEurope.getEmail() }}','{{ myAdmins.Formation.getEmail() }}','{{ myAdmins.Sport.getEmail() }}','{{ myAdmins.Admin.getEmail() }}')">
+                        <option value="" selected="selected"></option>
+                        <option value="TOEIC">TOEIC</option>
+                        <option value="Bourse">Bourse</option>
+                        <option value="M2R">M2R</option>
+                        <option value="Sport">Sport</option>
+                        <option value="Polytech">Réinscription à Polytech</option>
+                    </select>
+                </div>
 
-				<!-- Destinataire -->
-				<div class="form-group">
-					<label for="destinataire">Destinataire</label>
-					<div class="input-group">
-						<!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
-						<input type="text" class="form-control" id="destinataire_form5" name="destinataire_form5"
-							value="" required>
-						<div class="input-group-addon">
-							<i class="fa fa-sort-alpha-asc"></i>
-						</div>
-					</div>
-				</div>
-				<!-- Objet & importance -->
-				<div class="form-group">
-					<div class="row">
-						<div class="col-lg-9">
-							<label for="objet_form5">Objet</label> <input type="text" name="objet_form5"
-								class="form-control" id="objet_form5" value="" required>
-						</div>
-						<div class="col-lg-3">
-							<label>Importance</label>
-							<input type="hidden" id="importance_form5" name="importance_form5" value="1">
-							
-							<div class="select_importance form-control">
-								<a
-									onclick="clickOnImportance('id_importance1_form5', 'id_importance2_form5', 'id_importance3_form5')"
-									style="text-decoration: none;"> <i id="id_importance1_form5"
-									class="fa fa-exclamation-triangle importance1-selected"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance2_form5', 'id_importance1_form5', 'id_importance3_form5')"
-									style="text-decoration: none;"> <i id="id_importance2_form5"
-									class="fa fa-exclamation-triangle importance2"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance3_form5', 'id_importance1_form5', 'id_importance2_form5')"
-									style="text-decoration: none;"> <i id="id_importance3_form5"
-									class="fa fa-exclamation-triangle importance3"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
+                        <input type="text" class="form-control" id="destinataire_form5" name="destinataire_form5"
+                               value="" required>
+                        <div class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet & importance -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form5">Objet</label> <input type="text" name="objet_form5"
+                                                                          class="form-control" id="objet_form5" value="" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Importance</label>
+                            <input type="hidden" id="importance_form5" name="importance_form5" value="1">
 
-				<div class="form-group">
-					<label>Motif d'inscription</label>
-					<textarea class="form-control" id="motif_inscription" name="motif_inscription"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="inscription_InputFile">Sélectionner une pièce jointe</label>
-					<input type="file" id="inscription_InputFile" name="inscription_InputFile" value="">
-				</div>
+                            <div class="select_importance form-control">
+                                <a
+                                        onclick="clickOnImportance('id_importance1_form5', 'id_importance2_form5', 'id_importance3_form5')"
+                                        style="text-decoration: none;"> <i id="id_importance1_form5"
+                                                                           class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance2_form5', 'id_importance1_form5', 'id_importance3_form5')"
+                                        style="text-decoration: none;"> <i id="id_importance2_form5"
+                                                                           class="fa fa-exclamation-triangle importance2"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance3_form5', 'id_importance1_form5', 'id_importance2_form5')"
+                                        style="text-decoration: none;"> <i id="id_importance3_form5"
+                                                                           class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-				<!-- Echeance -->
-				<div class="form-group">
-					<label>Échéance</label>
-					<div class="input-group">
-						<!-- Checkbox -->
+                <div class="form-group">
+                    <label>Motif d'inscription</label>
+                    <textarea class="form-control" id="motif_inscription" name="motif_inscription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inscription_InputFile">Sélectionner une pièce jointe</label>
+                    <input type="file" id="inscription_InputFile" name="inscription_InputFile" value="">
+                </div>
+
+                <!-- Echeance -->
+                <div class="form-group">
+                    <label>Échéance</label>
+                    <div class="input-group">
+                        <!-- Checkbox -->
 						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form5"
-							id="checkbox_form5"
-							onchange="showEcheance('checkbox_form5','echeance_form5')">
+                                                                id="checkbox_form5"
+                                                                onchange="showEcheance('checkbox_form5','echeance_form5')">
 						</span>
-						<!-- Date picker -->
-						<input type="text" class="form-control pull-right" name="echeance_form5"
-							id="echeance_form5" disabled />
-						<div class="input-group-addon">
-							<i class="fa fa-clock-o"></i>
-						</div>
-					</div>
-				</div>
+                        <!-- Date picker -->
+                        <input type="text" class="form-control pull-right" name="echeance_form5"
+                               id="echeance_form5" disabled />
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                </div>
 
-			</div>
+            </div>
 
-			<!-- Faire valider un sujet de stage -->
-			<div id="form6" class="sous_formulaire" style="display: none;">
-				<!-- Destinataire -->
-				<div class="form-group">
-					<label for="destinataire">Destinataire</label>
-					<div class="input-group">
-						<!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
-						<input type="text" class="form-control" id="destinataire_form6" name="destinataire_form6"
-							value="{{ myAdmins.Stage.getPrenom() }} {{ myAdmins.Stage.getNom() }} - {{ myAdmins.Stage.getEmail() }}"
-							required>
-						<div class="input-group-addon">
-							<i class="fa fa-sort-alpha-asc"></i>
-						</div>
-					</div>
-				</div>
-				<!-- Objet & importance -->
-				<div class="form-group">
-					<div class="row">
-						<div class="col-lg-9">
-							<label for="objet_form6">Objet</label> <input type="text" name="objet_form6"
-								class="form-control" id="objet_form6"
-								value="Validation du sujet de stage" required>
-						</div>
-						<div class="col-lg-3">
-							<label>Importance</label>
-							<input type="hidden" id="importance_form6" name="importance_form6" value="1">
-							
-							<div class="select_importance form-control">
-								<a
-									onclick="clickOnImportance('id_importance1_form6', 'id_importance2_form6', 'id_importance3_form6')"
-									style="text-decoration: none;"> <i id="id_importance1_form6"
-									class="fa fa-exclamation-triangle importance1-selected"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance2_form6', 'id_importance1_form6', 'id_importance3_form6')"
-									style="text-decoration: none;"> <i id="id_importance2_form6"
-									class="fa fa-exclamation-triangle importance2"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance3_form6', 'id_importance1_form6', 'id_importance2_form6')"
-									style="text-decoration: none;"> <i id="id_importance3_form6"
-									class="fa fa-exclamation-triangle importance3"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- Date stage -->
-				<div class="form-group">
-					<label>Dates de début et de fin du stage</label>
-					<div class="input-group">
-						<div class="input-group-addon">
-							<i class="fa fa-clock-o"></i>
-						</div>
-						<input type="text" class="form-control pull-right" name="dates_stage"
-							id="dates_stage" value=""/>
-					</div>
-				</div>
+            <!-- Faire valider un sujet de stage -->
+            <div id="form6" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
+                        <input type="text" class="form-control" id="destinataire_form6" name="destinataire_form6"
+                               value="{{ myAdmins.Stage.getPrenom() }} {{ myAdmins.Stage.getNom() }} - {{ myAdmins.Stage.getEmail() }}"
+                               required>
+                        <div class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet & importance -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form6">Objet</label> <input type="text" name="objet_form6"
+                                                                          class="form-control" id="objet_form6"
+                                                                          value="Validation du sujet de stage" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Importance</label>
+                            <input type="hidden" id="importance_form6" name="importance_form6" value="1">
 
-				<div class="form-group">
-					<label>Détail</label>
-					<textarea class="form-control" id="detail_stage" name="detail_stage" value=""></textarea>
-				</div>
+                            <div class="select_importance form-control">
+                                <a
+                                        onclick="clickOnImportance('id_importance1_form6', 'id_importance2_form6', 'id_importance3_form6')"
+                                        style="text-decoration: none;"> <i id="id_importance1_form6"
+                                                                           class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance2_form6', 'id_importance1_form6', 'id_importance3_form6')"
+                                        style="text-decoration: none;"> <i id="id_importance2_form6"
+                                                                           class="fa fa-exclamation-triangle importance2"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance3_form6', 'id_importance1_form6', 'id_importance2_form6')"
+                                        style="text-decoration: none;"> <i id="id_importance3_form6"
+                                                                           class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Date stage -->
+                <div class="form-group">
+                    <label>Dates de début et de fin du stage</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right" name="dates_stage"
+                               id="dates_stage" value=""/>
+                    </div>
+                </div>
 
-				<div class="form-group">
-					<label for="validStage_InputFile">Sélectionner un fichier</label>
-					<input type="file" id="validStage_InputFile" name="validStage_InputFile" value="">
-				</div>
+                <div class="form-group">
+                    <label>Détail</label>
+                    <textarea class="form-control" id="detail_stage" name="detail_stage" value=""></textarea>
+                </div>
 
-				<!-- Echeance -->
-				<div class="form-group">
-					<label>Échéance</label>
-					<div class="input-group">
-						<!-- Checkbox -->
+                <div class="form-group">
+                    <label for="validStage_InputFile">Sélectionner un fichier</label>
+                    <input type="file" id="validStage_InputFile" name="validStage_InputFile" value="">
+                </div>
+
+                <!-- Echeance -->
+                <div class="form-group">
+                    <label>Échéance</label>
+                    <div class="input-group">
+                        <!-- Checkbox -->
 						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form6"
-							id="checkbox_form6"
-							onchange="showEcheance('checkbox_form6','echeance_form6')">
+                                                                id="checkbox_form6"
+                                                                onchange="showEcheance('checkbox_form6','echeance_form6')">
 						</span>
-						<!-- Date picker -->
-						<input type="text" class="form-control pull-right" name="echeance_form6"
-							id="echeance_form6" disabled />
-						<div class="input-group-addon">
-							<i class="fa fa-clock-o"></i>
-						</div>
-					</div>
-				</div>
+                        <!-- Date picker -->
+                        <input type="text" class="form-control pull-right" name="echeance_form6"
+                               id="echeance_form6" disabled />
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                </div>
 
-			</div>
+            </div>
 
-			<!-- Envoyer une convention de stage -->
-			<div id="form7" class="sous_formulaire" style="display: none;">
-				<!-- Destinataire -->
-				<div class="form-group">
-					<label for="destinataire">Destinataire</label>
-					<div class="input-group">
-						<!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
-						<input type="text" class="form-control" id="destinataire_form7" name="destinataire_form7"
-							value="{{ myAdmins.Admin.getPrenom() }} {{ myAdmins.Admin.getNom() }} - {{ myAdmins.Admin.getEmail() }}"
-							required>
-						<div class="input-group-addon">
-							<i class="fa fa-sort-alpha-asc"></i>
-						</div>
-					</div>
-				</div>
-				<!-- Objet & importance -->
-				<div class="form-group">
-					<div class="row">
-						<div class="col-lg-9">
-							<label for="objet_form7">Objet</label> <input type="text" name="objet_form7"
-								class="form-control" id="objet_form7"
-								value="Convention de stage" required>
-						</div>
-						<div class="col-lg-3">
-							<label>Importance</label>
-							<input type="hidden" id="importance_form7" name="importance_form7" value="1">
-							
-							<div class="select_importance form-control">
-								<a
-									onclick="clickOnImportance('id_importance1_form7', 'id_importance2_form7', 'id_importance3_form7')"
-									style="text-decoration: none;"> <i id="id_importance1_form7"
-									class="fa fa-exclamation-triangle importance1-selected"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance2_form7', 'id_importance1_form7', 'id_importance3_form7')"
-									style="text-decoration: none;"> <i id="id_importance2_form7"
-									class="fa fa-exclamation-triangle importance2"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance3_form7', 'id_importance1_form7', 'id_importance2_form7')"
-									style="text-decoration: none;"> <i id="id_importance3_form7"
-									class="fa fa-exclamation-triangle importance3"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+            <!-- Envoyer une convention de stage -->
+            <div id="form7" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
+                        <input type="text" class="form-control" id="destinataire_form7" name="destinataire_form7"
+                               value="{{ myAdmins.Admin.getPrenom() }} {{ myAdmins.Admin.getNom() }} - {{ myAdmins.Admin.getEmail() }}"
+                               required>
+                        <div class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet & importance -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form7">Objet</label> <input type="text" name="objet_form7"
+                                                                          class="form-control" id="objet_form7"
+                                                                          value="Convention de stage" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Importance</label>
+                            <input type="hidden" id="importance_form7" name="importance_form7" value="1">
 
-				<p class="warning_convention">
-					<i class="icon fa fa-warning"></i> <label>La convention de stage
-						doit être completée directement sur le PDF, sans signatures</label>
-				</p>
+                            <div class="select_importance form-control">
+                                <a
+                                        onclick="clickOnImportance('id_importance1_form7', 'id_importance2_form7', 'id_importance3_form7')"
+                                        style="text-decoration: none;"> <i id="id_importance1_form7"
+                                                                           class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance2_form7', 'id_importance1_form7', 'id_importance3_form7')"
+                                        style="text-decoration: none;"> <i id="id_importance2_form7"
+                                                                           class="fa fa-exclamation-triangle importance2"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance3_form7', 'id_importance1_form7', 'id_importance2_form7')"
+                                        style="text-decoration: none;"> <i id="id_importance3_form7"
+                                                                           class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-				<div class="form-group">
-					<label>Remarque</label>
-					<textarea class="form-control" id="remarque_stage" name="remarque_stage" value=""></textarea>
-				</div>
+                <p class="warning_convention">
+                    <i class="icon fa fa-warning"></i> <label>La convention de stage
+                        doit être completée directement sur le PDF, sans signatures</label>
+                </p>
 
-				<div class="form-group">
-					<label for="stage_InputFile">Sélectionner votre convention de
-						stage</label> <input type="file" id="pdf_convention_InputFile" name="pdf_convention_InputFile" value="">
-				</div>
+                <div class="form-group">
+                    <label>Remarque</label>
+                    <textarea class="form-control" id="remarque_stage" name="remarque_stage" value=""></textarea>
+                </div>
 
-			</div>
+                <div class="form-group">
+                    <label for="stage_InputFile">Sélectionner votre convention de
+                        stage</label> <input type="file" id="pdf_convention_InputFile" name="pdf_convention_InputFile" value="">
+                </div>
 
-			<!-- S'attribuer une tâche personnelle -->
-			<div id="form8" class="sous_formulaire" style="display: none;">
-				<!-- Destinataire -->
-				<div class="form-group">
-					<label for="destinataire">Destinataire</label>
-					<!-- TODO : griser cette partie -->
-					<div class="input-group">
-						<!-- TODO : lorsque cette tache sera envoye, remplacer "moi" par l'etudiant actuel -->
-						<input type="text" class="form-control" id="destinataire_form8" name="destinataire_form8" value="Moi">
-						<div class="input-group-addon">
-							<i class="fa fa-sort-alpha-asc"></i>
-						</div>
-					</div>
-				</div>
-				<!-- Objet & importance -->
-				<div class="form-group">
-					<div class="row">
-						<div class="col-lg-9">
-							<label for="objet_form8">Objet</label> <input type="text" name="objet_form8"
-								class="form-control" id="objet_form8" value="" required>
-						</div>
-						<div class="col-lg-3">
-							<label>Importance</label>
-							<input type="hidden" id="importance_form8" name="importance_form8" value="1">
-							
-							<div class="select_importance form-control">
-								<a
-									onclick="clickOnImportance('id_importance1_form8', 'id_importance2_form8', 'id_importance3_form8')"
-									style="text-decoration: none;"> <i id="id_importance1_form8"
-									class="fa fa-exclamation-triangle importance1-selected"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance2_form8', 'id_importance1_form8', 'id_importance3_form8')"
-									style="text-decoration: none;"> <i id="id_importance2_form8"
-									class="fa fa-exclamation-triangle importance2"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance3_form8', 'id_importance1_form8', 'id_importance2_form8')"
-									style="text-decoration: none;"> <i id="id_importance3_form8"
-									class="fa fa-exclamation-triangle importance3"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+            </div>
 
-				<div class="form-group">
-					<label for="texte_form8">Texte</label>
-					<textarea class="form-control" id="texte_form8" name="texte_form8" value=""></textarea>
-				</div>
-				<div class="form-group">
-					<label for="taskPerso_InputFile">Sélectionner un fichier</label> <input
-						type="file" id="taskPerso_InputFile" name="taskPerso_InputFile" value="">
-				</div>
+            <!-- S'attribuer une tâche personnelle -->
+            <div id="form8" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <!-- TODO : griser cette partie -->
+                    <div class="input-group">
+                        <!-- TODO : lorsque cette tache sera envoye, remplacer "moi" par l'etudiant actuel -->
+                        <input type="text" class="form-control" id="destinataire_form8" name="destinataire_form8" value="Moi">
+                        <div class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet & importance -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form8">Objet</label> <input type="text" name="objet_form8"
+                                                                          class="form-control" id="objet_form8" value="" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Importance</label>
+                            <input type="hidden" id="importance_form8" name="importance_form8" value="1">
 
-				<!-- Echeance -->
-				<div class="form-group">
-					<label>Échéance</label>
-					<div class="input-group">
-						<!-- Checkbox -->
+                            <div class="select_importance form-control">
+                                <a
+                                        onclick="clickOnImportance('id_importance1_form8', 'id_importance2_form8', 'id_importance3_form8')"
+                                        style="text-decoration: none;"> <i id="id_importance1_form8"
+                                                                           class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance2_form8', 'id_importance1_form8', 'id_importance3_form8')"
+                                        style="text-decoration: none;"> <i id="id_importance2_form8"
+                                                                           class="fa fa-exclamation-triangle importance2"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance3_form8', 'id_importance1_form8', 'id_importance2_form8')"
+                                        style="text-decoration: none;"> <i id="id_importance3_form8"
+                                                                           class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="texte_form8">Texte</label>
+                    <textarea class="form-control" id="texte_form8" name="texte_form8" value=""></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="taskPerso_InputFile">Sélectionner un fichier</label> <input
+                            type="file" id="taskPerso_InputFile" name="taskPerso_InputFile" value="">
+                </div>
+
+                <!-- Echeance -->
+                <div class="form-group">
+                    <label>Échéance</label>
+                    <div class="input-group">
+                        <!-- Checkbox -->
 						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form8"
-							id="checkbox_form8"
-							onchange="showEcheance('checkbox_form8','echeance_form8')">
+                                                                id="checkbox_form8"
+                                                                onchange="showEcheance('checkbox_form8','echeance_form8')">
 						</span>
-						<!-- Date picker -->
-						<input type="text" class="form-control pull-right" name="echeance_form8"
-							id="echeance_form8" disabled />
-						<div class="input-group-addon">
-							<i class="fa fa-clock-o"></i>
-						</div>
-					</div>
-				</div>
+                        <!-- Date picker -->
+                        <input type="text" class="form-control pull-right" name="echeance_form8"
+                               id="echeance_form8" disabled />
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                </div>
 
-			</div>
+            </div>
 
-			<!-- Demande non repertoriee -->
-			<div id="form9" class="sous_formulaire" style="display: none;">
-				<!-- Destinataire -->
-				<div class="form-group">
-					<label for="destinataire">Destinataire</label>
-					<div class="input-group">
-						<input type="text" class="form-control" id="destinataire_form9" name="destinataire_form9"
-							required>
-						<div class="input-group-addon">
-							<a href="#modal_dest_form9" data-toggle="modal"><i
-								class="fa fa-sort-alpha-asc"></i></a>
-						</div>
-					</div>
-				</div>
-				<!-- Objet & importance -->
-				<div class="form-group">
-					<div class="row">
-						<div class="col-lg-9">
-							<label for="objet_form9">Objet</label> <input type="text" name="objet_form9"
-								class="form-control" id="objet_form9" value="" required>
-						</div>
-						<div class="col-lg-3">
-							<label>Importance</label>
-							<input type="hidden" id="importance_form9" name="importance_form9" value="1">
-							
-							<div class="select_importance form-control">
-								<a
-									onclick="clickOnImportance('id_importance1_form9', 'id_importance2_form9', 'id_importance3_form9')"
-									style="text-decoration: none;"> <i id="id_importance1_form9"
-									class="fa fa-exclamation-triangle importance1-selected"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance2_form9', 'id_importance1_form9', 'id_importance3_form9')"
-									style="text-decoration: none;"> <i id="id_importance2_form9"
-									class="fa fa-exclamation-triangle importance2"></i>
-								</a> <a
-									onclick="clickOnImportance('id_importance3_form9', 'id_importance1_form9', 'id_importance2_form9')"
-									style="text-decoration: none;"> <i id="id_importance3_form9"
-									class="fa fa-exclamation-triangle importance3"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label>Texte</label>
-					<textarea class="form-control" id="text_autre_demande" name="text_autre_demande"></textarea>
-				</div>
+            <!-- Demande non repertoriee -->
+            <div id="form9" class="sous_formulaire" style="display: none;">
+                <!-- Destinataire -->
+                <div class="form-group">
+                    <label for="destinataire">Destinataire</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="destinataire_form9" name="destinataire_form9"
+                               required>
+                        <div class="input-group-addon">
+                            <a href="#modal_dest_form9" data-toggle="modal"><i
+                                        class="fa fa-sort-alpha-asc"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Objet & importance -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label for="objet_form9">Objet</label> <input type="text" name="objet_form9"
+                                                                          class="form-control" id="objet_form9" value="" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Importance</label>
+                            <input type="hidden" id="importance_form9" name="importance_form9" value="1">
 
-				<div class="form-group">
-					<label for="demandeNonRepertoriee_InputFile">Sélectionner un
-						fichier</label> <input type="file" name="demandeNonRepertoriee_InputFile"
-						id="demandeNonRepertoriee_InputFile">
-				</div>
+                            <div class="select_importance form-control">
+                                <a
+                                        onclick="clickOnImportance('id_importance1_form9', 'id_importance2_form9', 'id_importance3_form9')"
+                                        style="text-decoration: none;"> <i id="id_importance1_form9"
+                                                                           class="fa fa-exclamation-triangle importance1-selected"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance2_form9', 'id_importance1_form9', 'id_importance3_form9')"
+                                        style="text-decoration: none;"> <i id="id_importance2_form9"
+                                                                           class="fa fa-exclamation-triangle importance2"></i>
+                                </a> <a
+                                        onclick="clickOnImportance('id_importance3_form9', 'id_importance1_form9', 'id_importance2_form9')"
+                                        style="text-decoration: none;"> <i id="id_importance3_form9"
+                                                                           class="fa fa-exclamation-triangle importance3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Texte</label>
+                    <textarea class="form-control" id="text_autre_demande" name="text_autre_demande"></textarea>
+                </div>
 
-				<!-- Echeance -->
-				<div class="form-group">
-					<label>Échéance</label>
-					<div class="input-group">
-						<!-- Checkbox -->
+                <div class="form-group">
+                    <label for="demandeNonRepertoriee_InputFile">Sélectionner un
+                        fichier</label> <input type="file" name="demandeNonRepertoriee_InputFile"
+                                               id="demandeNonRepertoriee_InputFile">
+                </div>
+
+                <!-- Echeance -->
+                <div class="form-group">
+                    <label>Échéance</label>
+                    <div class="input-group">
+                        <!-- Checkbox -->
 						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form9"
-							id="checkbox_form9"
-							onchange="showEcheance('checkbox_form9','echeance_form9')">
+                                                                id="checkbox_form9"
+                                                                onchange="showEcheance('checkbox_form9','echeance_form9')">
 						</span>
-						<!-- Date picker -->
-						<input type="text" class="form-control pull-right" name="echeance_form9"
-							id="echeance_form9" disabled />
-						<div class="input-group-addon">
-							<i class="fa fa-clock-o"></i>
-						</div>
-					</div>
-				</div>
+                        <!-- Date picker -->
+                        <input type="text" class="form-control pull-right" name="echeance_form9"
+                               id="echeance_form9" disabled />
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                </div>
 
-			</div>
+            </div>
             <!-- Bouton envoyer -->
             <div class="form-group btn-center" id="div_btn_envoyerTaskToInsert" style="display:none;">
                 <button id="EnvoyerTaskToInsert" class="btn btn-primary">Envoyer</button>
             </div>
-		</form>
-	</div>
+        </form>
+    </div>
 
-	<!-- Debut modal view - destinataire - form3 -->
-	<div class="modal fade" id="modal_dest_form3">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<!-- En tete -->
-				<div class="modal-header modal-header-task">
-					<button type="button" class="close" data-dismiss="modal">x</button>
-					<div class="modal-title">Liste des destinataires</div>
-				</div>
+    <!-- Debut modal view - destinataire - form3 -->
+    <div class="modal fade" id="modal_dest_form3">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- En tete -->
+                <div class="modal-header modal-header-task">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <div class="modal-title">Liste des destinataires</div>
+                </div>
 
-				<!-- Corps -->
-				<div class="modal-body">
-					<div id="arbre_form3"></div>
-				</div>
-				<!-- Footer -->
-				<div class="modal-footer">
-					<button class="btn btn-success" data-dismiss="modal">Ajouter</button>
-					<button class="btn btn-primary" data-dismiss="modal">Fermer</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                <!-- Corps -->
+                <div class="modal-body">
+                    <div id="arbre_form3"></div>
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal">Ajouter</button>
+                    <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<!-- Debut modal view - destinataire - form4 -->
-	<div class="modal fade" id="modal_dest_form4">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<!-- En tete -->
-				<div class="modal-header modal-header-task">
-					<button type="button" class="close" data-dismiss="modal">x</button>
-					<div class="modal-title">Liste des destinataires</div>
-				</div>
+    <!-- Debut modal view - destinataire - form4 -->
+    <div class="modal fade" id="modal_dest_form4">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- En tete -->
+                <div class="modal-header modal-header-task">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <div class="modal-title">Liste des destinataires</div>
+                </div>
 
-				<!-- Corps -->
-				<div class="modal-body">
-					<div id="arbre_form4"></div>
-				</div>
-				<!-- Footer -->
-				<div class="modal-footer">
-					<button class="btn btn-success" data-dismiss="modal">Ajouter</button>
-					<button class="btn btn-primary" data-dismiss="modal">Fermer</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                <!-- Corps -->
+                <div class="modal-body">
+                    <div id="arbre_form4"></div>
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal">Ajouter</button>
+                    <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<!-- Debut modal view - destinataire - for9 -->
-	<div class="modal fade" id="modal_dest_form9">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<!-- En tete -->
-				<div class="modal-header modal-header-task">
-					<button type="button" class="close" data-dismiss="modal">x</button>
-					<div class="modal-title">Liste des destinataires</div>
-				</div>
+    <!-- Debut modal view - destinataire - for9 -->
+    <div class="modal fade" id="modal_dest_form9">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- En tete -->
+                <div class="modal-header modal-header-task">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <div class="modal-title">Liste des destinataires</div>
+                </div>
 
-				<!-- Corps -->
-				<div class="modal-body">
-					<div id="arbre_form9"></div>
-				</div>
-				<!-- Footer -->
-				<div class="modal-footer">
-					<button class="btn btn-success" data-dismiss="modal">Ajouter</button>
-					<button class="btn btn-primary" data-dismiss="modal">Fermer</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                <!-- Corps -->
+                <div class="modal-body">
+                    <div id="arbre_form9"></div>
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal">Ajouter</button>
+                    <button class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
