@@ -73,3 +73,7 @@ polytech_dashboard_removeSendedValidTask:
     path:     /removeSendedValidTask
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:removeSendedValidTask"}
 
+polytech_dashboard_insertReplayTask:
+    path:     /insertReplayTask
+    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:insertReplayTask"}
+
