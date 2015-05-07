@@ -171,11 +171,17 @@ class AjaxHandlerController extends Controller {
 			$i ++;
 		}
 	}
+	
 	public function insertTaskAction(Request $request) {
 		$logger = $this->get ( 'logger' );
 		$logger->info ( '##########INSERT TASK#############' );
 		
+		if($this->getRequest ()->getSession ()->get ( 'loginTMP' ) == null){
+			return $this->redirect('@PolytechDashboardHome/Default/pages/login.html.twig', 301);
+		}
 		$idEtudiant = $this->getRequest ()->getSession ()->get ( 'loginTMP' )->getId ();
+		
+		
 		if ($request->getMethod () == 'POST') {
 			$logger->info ( 'Post' );
 			
@@ -194,6 +200,10 @@ class AjaxHandlerController extends Controller {
 			/* Importance */
 			$importance = $request->get ( 'importance_form' . $typeForm );
 			
+			$logger->info ( 'BEFORE MYFILE' );				
+			$file = $request->get ( 'file' );
+			$logger->info ( 'AFTER MYFILE' .$file);				
+							
 			switch ($typeForm) {
 				case 2 :
                 	 
@@ -205,7 +215,7 @@ class AjaxHandlerController extends Controller {
 					
 					/* fichier */
 					$file = $request->get ( 'absence_InputFile' );
-					$logger->debug('FILE : '.$file);
+					$logger->debug('FILE : '.$_FILES ['absence_InputFile'] ['name']);
 					
 					foreach ( $destinataire as $dest ) {
 						$tache->setIdetudiant ( $idEtudiant );
@@ -215,17 +225,17 @@ class AjaxHandlerController extends Controller {
 						$tache->setImportance ( $importance );
 						$tache->setNom ( $objet );
 						$tache->setType ( $typeForm );
-						if ($file != null) {
+						/*if ($file != null) {
 							$tache->setIdresource ( $file );
 							$uploaddir = '../../../../uploads/';
-							$uploadfile = $uploaddir . basename ( $_FILES ['userfile'] ['name'] );
+							$uploadfile = $uploaddir . basename ( $_FILES ['absence_InputFile'] ['name'] );
 							
-							if (move_uploaded_file ( $_FILES ['userfile'] ['tmp_name'], $uploadfile )) {
-								echo "Le fichier est valide, et a été téléchargé avec succès. Voici plus d'informations :\n";
+							if (move_uploaded_file ( $_FILES ['absence_InputFile'] ['tmp_name'], $uploadfile )) {
+								$logger->debug('Le fichier est valide, et a été téléchargé avec succès. Voici plus d\'informations :\n');
 							} else {
-								echo "Attaque potentielle par téléchargement de fichiers. Voici plus d'informations :\n";
+								$logger->debug('Attaque potentielle par téléchargement de fichiers. Voici plus d\'informations :\n');
 							}
-						}
+						}*/
 						/* contenu de la tache */
 						$tmp = [ ];
 						
@@ -344,10 +354,7 @@ class AjaxHandlerController extends Controller {
 					}
 					
 					break;
-				case 5:
-                    /* type d'inscritpion*/
-                    $typeForm = $request->get ( 'list_inscription' );
-					
+				case 5:					
 					/* motif */
 					$duree = $request->get ( 'motif_inscription' );
 					
