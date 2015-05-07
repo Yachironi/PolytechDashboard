@@ -345,9 +345,7 @@ class AjaxHandlerController extends Controller {
 					
 					break;
 				case 5:
-                    /* type d'inscritpion*/
-                    $typeForm = $request->get ( 'list_inscription' );
-					
+                   
 					/* motif */
 					$duree = $request->get ( 'motif_inscription' );
 					

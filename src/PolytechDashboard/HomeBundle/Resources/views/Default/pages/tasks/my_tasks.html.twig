@@ -132,7 +132,7 @@
                                         
                                         {% set type = task.getType() %}
                                         {% set array = task.getStructure()|slice(2,(task.getStructure()|length)-4)|split("\",\"") %}
-                                        {% if type == 7 %}
+                                        {% if type == 8 %}
                                         
                                         	<div>Texte : {{array[0]}}</div>
                                         	
@@ -313,9 +313,14 @@
                                         	
                                         {% elseif type == 6 %}
                                         
-                                        	<div>Dates de début et de fin du stage : {{array[0]}}</div>
+                                        	<div>Dates de debut et de fin du stage : {{array[0]}}</div>
                                         	<div>Detail :  {{array[1]}}</div>
-                                        {% elseif type == 8 %}
+                                        	
+                                         {% elseif type == 7 %}
+                                        
+                                        	<div>Remarque : {{array[0]}}</div>
+                                        	
+                                        {% elseif type == 9 %}
                                         
                                         	<div>Texte :  {{array[0]}}</div>
                                         	
