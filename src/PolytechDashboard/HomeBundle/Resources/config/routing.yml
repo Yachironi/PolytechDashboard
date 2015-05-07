@@ -81,3 +81,6 @@ polytech_dashboard_insertReplayTask:
     path:     /insertReplayTask
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:insertReplayTask"}
 
+uploadsFile:
+    path:     /uploadsFile
+    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:downloadFile"}

@@ -2,6 +2,7 @@
 
 namespace PolytechDashboard\HomeBundle\Controller;
 
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Doctrine\Common\Collections\Criteria;
 use PolytechDashboard\HomeBundle\Entity\Gestionnaire;
 use PolytechDashboard\HomeBundle\Entity\Tache;
@@ -797,5 +798,12 @@ class AjaxHandlerController extends Controller {
         $jsonContent = $serializer->serialize ( "success", 'json' );
 
         return new Response ( $jsonContent );
+    }
+    
+    public function downloadFileAction(){
+   		$basePath = $this->container->getParameter('kernel.root_dir').'\Resources\docs';
+
+        $filePath = $basePath.'/Cours1.pdf';
+        return new BinaryFileResponse($filePath);
     }
 }
