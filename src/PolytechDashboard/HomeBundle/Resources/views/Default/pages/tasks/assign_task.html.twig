@@ -41,6 +41,7 @@
             });
             $("#destinataire_form4").tokenInput("/contactList", {
                 /* Les gestionnaires de cours de l'etudiant */
+                /*
                 prePopulate: [
                     {% for profs in myAdmins.Cours %}
                     {%  if profs.getEmail() != '' %}
@@ -48,6 +49,7 @@
                     {% endif %}
                     {% endfor %}
                 ],
+                */
                 theme: "facebook",
                 propertyToSearch: "nom",
                 resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
@@ -58,6 +60,7 @@
 
             $("#destinataire_form3,#destinataire_form9").tokenInput("/contactList", {
                 /* tous les gestionnaires */
+                /*
                 prePopulate: [
                     {"id":"{{ myAdmins.Admin.getId() }}","nom":"{{ myAdmins.Admin.getNom() }}","prenom":"{{ myAdmins.Admin.getPrenom() }}","email":"{{ myAdmins.Admin.getEmail() }}"},
                     {"id":"{{ myAdmins.Stage.getId() }}","nom":"{{ myAdmins.Stage.getNom() }}","prenom":"{{ myAdmins.Stage.getPrenom() }}","email":"{{ myAdmins.Stage.getEmail() }}"},
@@ -71,6 +74,7 @@
                     {% endfor %}
 
                 ],
+                */
                 theme: "facebook",
                 propertyToSearch: "nom",
                 resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
