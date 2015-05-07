@@ -55,7 +55,21 @@
                 preventDuplicates: true,
                 tokenValue: "email"
             });
-
+            $("#destinataire_form5").tokenInput("/contactList", {
+                /* Les gestionnaires internationaux, sport et scolarite */
+                prePopulate: [
+                    {"id":"{{myAdmins.RIEurope.getId()}}","nom":"{{ myAdmins.RIEurope.getNom() }}","prenom":"{{ myAdmins.RIEurope.getPrenom() }}","email":"{{ myAdmins.RIEurope.getEmail() }}"},
+                    {"id":"{{myAdmins.RIMonde.getId()}}","nom":"{{ myAdmins.RIMonde.getNom() }}","prenom":"{{ myAdmins.RIMonde.getPrenom() }}","email":"{{ myAdmins.RIMonde.getEmail() }}"},
+                    {"id":"{{myAdmins.Sport.getId()}}","nom":"{{ myAdmins.Sport.getNom() }}","prenom":"{{ myAdmins.Sport.getPrenom() }}","email":"{{ myAdmins.Sport.getEmail() }}"},
+                    {"id":"{{myAdmins.Scolarite.getId()}}","nom":"{{ myAdmins.Scolarite.getNom() }}","prenom":"{{ myAdmins.Scolarite.getPrenom() }}","email":"{{ myAdmins.Scolarite.getEmail() }}"},
+                ],
+                theme: "facebook",
+                propertyToSearch: "nom",
+                resultsFormatter: function(item){ return "<li> <div style='display: inline-block; padding-left: 10px;'> <div>"+item.prenom+" "+item.nom+" </div><div>"+item.email+"</div></div></li>" },
+                tokenFormatter: function(item) { return "<li><p>" + item.email+ "</p></li>" },
+                preventDuplicates: true,
+                tokenValue: "email"
+            });
             $("#destinataire_form3,#destinataire_form9").tokenInput("/contactList", {
                 /* tous les gestionnaires */
                 prePopulate: [
@@ -91,7 +105,7 @@
 <section class="content">
     <!-- Formulaire -->
     <div class="myform" id="form_task">
-        <form  id="insertTaskFormNew">
+        <form  id="insertTaskFormNew" >
             <!-- Listes des formulaires -->
             <div class="form-group" style="padding-bottom: 20px;">
                 <label for="type">Type de formulaire</label>
@@ -178,7 +192,25 @@
 				</div>
 				<div class="form-group">
 					<label for="absence_InputFile">Sélectionner votre justificatif</label>
-					<input type="file" id="absence_InputFile" name="absence_InputFile" >
+					<input type="file" id="absence_InputFile" name="absence_InputFile">
+				</div>
+
+				<!-- Echeance -->
+				<div class="form-group">
+					<label>Échéance</label>
+					<div class="input-group">
+						<!-- Checkbox -->
+						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form2"
+							id="checkbox_form2"
+							onchange="showEcheance('checkbox_form2','echeance_form2')">
+						</span>
+						<!-- Date picker -->
+						<input type="text" class="form-control pull-right" name="echeance_form2"
+							id="echeance_form2" disabled />
+						<div class="input-group-addon">
+							<i class="fa fa-clock-o"></i>
+						</div>
+					</div>
 				</div>
 
 			</div>
@@ -335,7 +367,7 @@
 				<div class="form-group" style="padding-bottom: 20px;">
 					<label for="type">Type d'inscription</label> <select
 						class="form-control" id="list_inscription"
-						onchange="updateInscription('list_inscription', 'destinataire_form5', 'objet_form5','{{ myAdmins.Scolarite.getEmail() }}','{{ myAdmins.RIEurope.getEmail() }}','{{ myAdmins.Formation.getEmail() }}','{{ myAdmins.Sport.getEmail() }}','{{ myAdmins.Admin.getEmail() }}')">
+						onchange="updateInscription('list_inscription', 'destinataire_form5', 'objet_form5')">
 						<option value="" selected="selected"></option>
 						<option value="TOEIC">TOEIC</option>
 						<option value="Bourse">Bourse</option>
@@ -562,6 +594,24 @@
 				<div class="form-group">
 					<label for="stage_InputFile">Sélectionner votre convention de
 						stage</label> <input type="file" id="pdf_convention_InputFile" name="pdf_convention_InputFile">
+				</div>
+
+				<!-- Echeance -->
+				<div class="form-group">
+					<label>Échéance</label>
+					<div class="input-group">
+						<!-- Checkbox -->
+						<span class="input-group-addon"> <input type="checkbox" name="checkbox_form7"
+							id="checkbox_form7"
+							onchange="showEcheance('checkbox_form7','echeance_form7')">
+						</span>
+						<!-- Date picker -->
+						<input type="text" class="form-control pull-right" name="echeance_form7"
+							id="echeance_form7" disabled />
+						<div class="input-group-addon">
+							<i class="fa fa-clock-o"></i>
+						</div>
+					</div>
 				</div>
 
 			</div>

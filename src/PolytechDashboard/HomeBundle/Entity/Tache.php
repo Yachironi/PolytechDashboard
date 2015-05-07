@@ -51,13 +51,6 @@ class Tache
     private $idetudiant;
     
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="idResource", type="integer", nullable=true)
-     */
-    private $idresource;
-    
-    /**
      * @var string
      *
      * @ORM\Column(name="dateCreation", type="text", nullable=true)
@@ -124,7 +117,7 @@ class Tache
     /**
      * Get type
      *
-     * @return integer
+     * @return string 
      */
     public function getType()
     {
@@ -198,29 +191,6 @@ class Tache
     public function getIdetudiant()
     {
     	return $this->idetudiant;
-    }
-    
-    /**
-     * Set idresource
-     *
-     * @param integer $idresource
-     * @return Tache
-     */
-    public function setIdresource($idresource)
-    {
-    	$this->idresource = $idresource;
-    
-    	return $this;
-    }
-    
-    /**
-     * Get idresource
-     *
-     * @return integer
-     */
-    public function getIdresource()
-    {
-    	return $this->idresource;
     }
     
     /**

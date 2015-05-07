@@ -400,16 +400,18 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
 }
 
 function sendReply(){
-    alert("TODO : faire le JS lorsqu'on envoie la réponse (BD + modifier HTML)");
+    //alert("TODO : faire le JS lorsqu'on envoie la réponse (BD + modifier HTML)");
 
-    console.log($('#form_reply_task_2').serializeArray());
+/*    console.log($('#form_reply_task_2').serializeArray());
     console.log($('#form_reply_task_3').serializeArray());
     console.log($('#form_reply_task_4').serializeArray());
     console.log($('#form_reply_task_6').serializeArray());
-    console.log($('#form_reply_task_7').serializeArray());
+    console.log($('#form_reply_task_9').serializeArray());
+*/
 
-        var formData = {};
-        $('#form_reply_task_3').serializeArray().map(function(item) {
+
+    var formData = {};
+        $('#form_reply_task_2').serializeArray().map(function(item) {
             if ( formData[item.name] ) {
                 if ( typeof(formData[item.name]) === "string" ) {
                     formData[item.name] = [formData[item.name]];
@@ -419,10 +421,70 @@ function sendReply(){
                 formData[item.name] = item.value;
             }
         });
+    var formData2 = formData;
+
+    var formData = {};
+    $('#form_reply_task_3').serializeArray().map(function(item) {
+        if ( formData[item.name] ) {
+            if ( typeof(formData[item.name]) === "string" ) {
+                formData[item.name] = [formData[item.name]];
+            }
+            formData[item.name].push(item.value);
+        } else {
+            formData[item.name] = item.value;
+        }
+    });
+    var formData3 = formData;
+
+    var formData = {};
+    $('#form_reply_task_4').serializeArray().map(function(item) {
+        if ( formData[item.name] ) {
+            if ( typeof(formData[item.name]) === "string" ) {
+                formData[item.name] = [formData[item.name]];
+            }
+            formData[item.name].push(item.value);
+        } else {
+            formData[item.name] = item.value;
+        }
+    });
+    var formData4 = formData;
+
+    var formData = {};
+    $('#form_reply_task_6').serializeArray().map(function(item) {
+        if ( formData[item.name] ) {
+            if ( typeof(formData[item.name]) === "string" ) {
+                formData[item.name] = [formData[item.name]];
+            }
+            formData[item.name].push(item.value);
+        } else {
+            formData[item.name] = item.value;
+        }
+    });
+    var formData6 = formData;
+
+    var formData = {};
+    $('#form_reply_task_9').serializeArray().map(function(item) {
+        if ( formData[item.name] ) {
+            if ( typeof(formData[item.name]) === "string" ) {
+                formData[item.name] = [formData[item.name]];
+            }
+            formData[item.name].push(item.value);
+        } else {
+            formData[item.name] = item.value;
+        }
+    });
+    var formData9 = formData;
+
+    console.log("=====");
+    console.log(formData2);
+    console.log(formData3);
+    console.log(formData4);
+    console.log(formData6);
+    console.log(formData9);
+    console.log("=====");
 
 
-        console.log("DATA : ");
-        console.log(formData);
+
 /*
         $.ajax({
             type: 'POST',
@@ -522,26 +584,26 @@ function updateObjetRDV(list_cours, list_devoirs, objet){
 }
 
 /* TODO : chercher les destinataires dans la BD */
-function updateInscription(inscription, destinataire, objet,gestionnaireAdmin,gestionnaireToeic,gestionnaireM2R,gestionnaireSport,gestionnaireBourse){
+function updateInscription(inscription, destinataire, objet){
     var select_inscription = document.getElementById(inscription);
     var value_inscription = select_inscription.options[select_inscription.selectedIndex].value;
     if(value_inscription != ""){
         if(value_inscription == "Polytech"){
-            document.getElementById(destinataire).value = gestionnaireAdmin;
+            document.getElementById(destinataire).value = "Dominique Beau - dominique.beau@u-psud.fr (a chercher dans BD)";
             document.getElementById(objet).value = "[" + value_inscription + "] Demande de réinscription";
         }
         else{
             if(value_inscription == "TOEIC"){
-                document.getElementById(destinataire).value = gestionnaireToeic;
+                document.getElementById(destinataire).value = "Chantal Escudie - chantal.escudie@u-psud.fr (a chercher dans BD)";
             }
             else if(value_inscription == "M2R"){
-                document.getElementById(destinataire).value = gestionnaireM2R;
+                document.getElementById(destinataire).value = "Emmanuelle Frenoux - emmanuelle.frenoux@u-psud.fr (a chercher dans BD)";
             }
             else if(value_inscription == "Sport"){
-                document.getElementById(destinataire).value = gestionnaireSport;
+                document.getElementById(destinataire).value = "Marcelo Bielsa - marcelo.bielsa@u-psud.fr (a chercher dans BD)";
             }
             else if(value_inscription == "Bourse"){
-                document.getElementById(destinataire).value = gestionnaireBourse;
+                document.getElementById(destinataire).value = "Nadia Chapiteau - nadia.chapiteau@u-psud.fr (a chercher dans BD)";
             }
             document.getElementById(objet).value = "[" + value_inscription + "] Demande d'inscription";
         }

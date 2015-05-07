@@ -78,7 +78,7 @@ class LoginController extends Controller {
 			} else {
 				return $this->render ( 'PolytechDashboardHomeBundle:Default:login.html.twig', array (
 						'name' => 'Login Error' 
-				));
+				) );
 			}
 		} /*
 		   * else {

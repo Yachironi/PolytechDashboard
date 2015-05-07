@@ -38,9 +38,9 @@
                     {% if (task.getDatefin()|date("Y-m-d-H-i") <= today_5days ) and (task.getDatefin()|date("Y-m-d-H-i") >= today)%}
                         <!-- <tr style="background-color: rgba(255, 0, 0, 0.5);">
                         -->
-                    <!-- Echeance depassee -->
+                        <!-- Echeance depassee -->
                     {% elseif task.getDatefin()|date("Y-m-d-H-i")  < today %}
-                      <!--  <tr style="background-color: rgba(255, 255, 0, 0.5);">-->
+                        <!--  <tr style="background-color: rgba(255, 255, 0, 0.5);">-->
                     {% else %}
                         <!--<tr>-->
                     {% endif %}
@@ -55,13 +55,13 @@
                         {% else %}
                             <!-- Tache attribue par un gestionnaire -->
                             <td>
-						{% set continue = false %}
-                              {% for admin in myTasks.admins %}
-                 					{% if admin.id == task.getIdgestionnaire() and continue==false %}
-                 						{{ admin.prenom}} {{ admin.nom }}
-                 						{% set continue = true %}
+                                {% set continue = false %}
+                                {% for admin in myTasks.admins %}
+                                    {% if admin.id == task.getIdgestionnaire() and continue==false %}
+                                        {{ admin.prenom}} {{ admin.nom }}
+                                        {% set continue = true %}
                                     {% endif %}
-                			{% endfor %}
+                                {% endfor %}
                             </td>
                         {% endif %}
                         <td>
@@ -112,12 +112,14 @@
                                             De : Moi-meme
                                         {% else %}
                                             <!-- Tache attribue par un gestionnaire -->
-                                            De : 
-                                             {% for admin in myTasks.admins %}
-                 								{% if admin.id == task.getIdgestionnaire() %}
-                 									{{ admin.prenom}} {{ admin.nom }}
-                 								{% endif %}
-                							{% endfor %}
+                                            De :
+                                            {% set continue = false %}
+                                            {% for admin in myTasks.admins %}
+                                                {% if admin.id == task.getIdgestionnaire() and continue==false %}
+                                                    {{ admin.prenom}} {{ admin.nom }}
+                                                    {% set continue = true %}
+                                                {% endif %}
+                                            {% endfor %}
                                         {% endif %}
 
                                         <div class="date_modal">
@@ -129,20 +131,20 @@
                                     <div class="modal-body">
                                         <h4>Contenu :</h4>
                                         <p>
-                                        
-                                        {% set type = task.getType() %}
-                                        {% set array = task.getStructure()|slice(2,(task.getStructure()|length)-4)|split("\",\"") %}
-                                        {% if type == 8 %}
-                                        
-                                        	<div>Texte : {{array[0]}}</div>
-                                        	
-                                       	{%endif%}
+
+                                            {% set type = task.getType() %}
+                                            {% set array = task.getStructure()|slice(2,(task.getStructure()|length)-4)|split("\",\"") %}
+                                            {% if type == 7 %}
+
+                                        <div>Texte : {{array[0]}}</div>
+
+                                        {%endif%}
                                         </p>
                                     </div>
                                     <!-- Footer -->
                                     <div class="modal-footer">
                                         {% if task.getIdgestionnaire() is empty %}
-                                          <!--  <button class="btn btn-primary pull-left" onclick="doneTask('{{ task.getId() }}')">
+                                            <!--  <button class="btn btn-primary pull-left" onclick="doneTask('{{ task.getId() }}')">
                                                 <span class="fa fa-check-square-o"></span> Fait
                                             </button> -->
                                             <!-- TODO :  Faire passer la piece jointe -->
@@ -154,8 +156,10 @@
                                                 <span class="fa fa-times"></span> Supprimer
                                             </button>
                                         {% else %}
+                                            {% set continue = false %}
                                             {% for admin in myTasks.admins %}
-                                                {% if admin.id == task.getIdgestionnaire() %}
+                                                {% if admin.id == task.getIdgestionnaire() and continue==false %}
+                                                    {% set continue = true %}
                                                     <a href="#replyTask" data-toggle="modal" data-dismiss="modal" onclick="replyTask('title_replyTask', 'body_replyTask', '{{ task.getId() }}', '{{ task.getType() }}', '{{ task.getNom() }}', '{{ admin.prenom }}', '{{ admin.nom }}','{{ admin.id }}')">
                                                         <div class="btn btn-primary pull-left">
                                                             <span class="fa fa-reply"></span> Répondre
@@ -211,7 +215,7 @@
                 <!-- Corps -->
                 <div id="body_replyTask" class="modal-body"></div>
                 <!-- Footer -->
-                <div id="footer_replyTask" class="modal-footer">
+                <div class="modal-footer">
                     <button class="btn btn-primary" data-dismiss="modal" onclick="sendReply()">Envoyer</button>
                     <button class="btn btn-primary" data-dismiss="modal">Annuler</button>
                 </div>
@@ -271,12 +275,12 @@
                                     <div class="modal-header modal-header-task">
                                         <button type="button" class="close" data-dismiss="modal">x</button>
                                         <div class="modal-title">Tache n°{{ numTache }} - {{ task.getNom() }}
-										 <i class="fa fa-exclamation-triangle importance{{ task.getImportance() }}">
-                                			<div style="display: none;">{{ task.getImportance() }}</div>
-                            			 </i>
-                            			 
+                                            <i class="fa fa-exclamation-triangle importance{{ task.getImportance() }}">
+                                                <div style="display: none;">{{ task.getImportance() }}</div>
+                                            </i>
+
                                         </div>
-                                       
+
                                     </div>
                                     <!-- En tete présentant le body -->
                                     <div class="modal-header modal-before-body">
@@ -290,42 +294,37 @@
                                     <div class="modal-body">
                                         <h4>Contenu :</h4>
                                         <p>
-                                        {% set type = task.getType() %}
-                                        {% set array = task.getStructure()|slice(2,(task.getStructure()|length)-4)|split("\",\"") %}
-                                        {% if type == 2 %}
-                                        
-                                        	<div>Date et duree de l'absence : {{array[0]}}</div>
-                                        	<div>Motif de justification : {{array[1]}}</div>
-                                        	
+                                            {% set type = task.getType() %}
+                                            {% set array = task.getStructure()|slice(2,(task.getStructure()|length)-4)|split("\",\"") %}
+                                            {% if type == 2 %}
+
+                                        <div>Date et duree de l'absence : {{array[0]}}</div>
+                                        <div>Motif de justification : {{array[1]}}</div>
+
                                         {% elseif type == 3 %}
 
-                                        	<div>Date et heure : {{array[0]}}</div>
-                                        	<div>Motif du rendez-vous : {{array[1]}}</div>
-                                        	
+                                            <div>Date et heure : {{array[0]}}</div>
+                                            <div>Motif du rendez-vous : {{array[1]}}</div>
+
                                         {% elseif type == 4 %}
-                                        
-                                        	
-                                        	<div>Commentaire : {{array[0]}}</div>
-                                        	
+
+
+                                            <div>Commentaire : {{array[0]}}</div>
+
                                         {% elseif type == 5 %}
-                                        
-                                        	<div>Motif d'inscription : {{array[0]}}</div>
-                                        	
+
+                                            <div>Motif d'inscription : {{array[0]}}</div>
+
                                         {% elseif type == 6 %}
-                                        
-                                        	<div>Dates de debut et de fin du stage : {{array[0]}}</div>
-                                        	<div>Detail :  {{array[1]}}</div>
-                                        	
-                                         {% elseif type == 7 %}
-                                        
-                                        	<div>Remarque : {{array[0]}}</div>
-                                        	
-                                        {% elseif type == 9 %}
-                                        
-                                        	<div>Texte :  {{array[0]}}</div>
-                                        	
+
+                                            <div>Dates de d�but et de fin du stage : {{array[0]}}</div>
+                                            <div>Detail :  {{array[1]}}</div>
+                                        {% elseif type == 8 %}
+
+                                            <div>Texte :  {{array[0]}}</div>
+
                                         {% endif %}
-                                        	
+
                                         </p>
                                     </div>
                                     <!-- Footer -->
@@ -371,7 +370,7 @@
                     <div class="modal-title">Confirmation de relance</div>
                 </div>
                 <!-- Corps -->
-                <div id="ge_body_replyTask" class="modal-body">
+                <div id="body_replyTask" class="modal-body">
                     Souhaitez-vous vraiment relancer le destinataire pour cette tâche?
                 </div>
                 <!-- Footer -->
