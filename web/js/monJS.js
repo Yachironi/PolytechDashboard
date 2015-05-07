@@ -65,15 +65,78 @@ function afficheForm(ID){
     /* On cache les div qu'il faut caché */
     for(i=0; i<size; i++){
         var form = document.getElementById(list_form[i]);
-        if(form == null){
-            alert(i);
-        }
         if(form.style.display == "block" && i != indice_form_a_affiche){
             form.style.display = "none";
+            // On efface les elements
+            if(i == 1){
+                document.getElementById('duree_absence').value = "";
+                document.getElementById('motif_justification_absence').value = "";
+                document.getElementById('absence_InputFile').value = "";
+                clickOnImportance('id_importance1_form2', 'id_importance2_form2', 'id_importance3_form2');
+                /**/
+            }
+            else if(i == 2){
+                document.getElementById('destinataire_form3').value = "";
+                document.getElementById('date_rdv').value = "";
+                document.getElementById('motif_rdv').value = "";
+                clickOnImportance('id_importance1_form3', 'id_importance2_form3', 'id_importance3_form3');
+            }
+            else if(i == 3){
+                document.getElementById('list_cours').selectedIndex = 0;
+                document.getElementById('list_devoirs').selectedIndex = 0;
+                document.getElementById('objet_form4').value = "";
+                document.getElementById('renduDevoir_InputFile').value = "";
+                document.getElementById('commentaire_rendu_devoir').value = "";
+            }
+
+            else if(i == 4){
+                document.getElementById('list_inscription').selectedIndex= 0;
+                document.getElementById('destinataire_form5').value = "";
+                document.getElementById('objet_form5').value = "";
+                document.getElementById('motif_inscription').value = "";
+                document.getElementById('inscription_InputFile').value = "";
+                clickOnImportance('id_importance1_form5', 'id_importance2_form5', 'id_importance3_form5');
+                /**/
+            }
+            else if(i == 5){
+                document.getElementById('dates_stage').value = "";
+                document.getElementById('detail_stage').value = "";
+                document.getElementById('validStage_InputFile').value = "";
+                clickOnImportance('id_importance1_form6', 'id_importance2_form6', 'id_importance3_form6');
+                /**/
+            }
+            else if(i == 6){
+                document.getElementById('remarque_stage').value = "";
+                document.getElementById('pdf_convention_InputFile').value = "";
+                clickOnImportance('id_importance1_form7', 'id_importance2_form7', 'id_importance3_form7');
+                /**/
+            }
+            else if(i == 7){
+
+                document.getElementById('objet_form8').value = "";
+                document.getElementById('texte_form8').value = "";
+                document.getElementById('taskPerso_InputFile').value = "";
+                clickOnImportance('id_importance1_form8', 'id_importance2_form8', 'id_importance3_form8');
+                /**/
+            }
+            else if(i == 8){
+                document.getElementById('objet_form9').value = "";
+                document.getElementById('text_autre_demande').value = "";
+                document.getElementById('demandeNonRepertoriee_InputFile').value = "";
+                clickOnImportance('id_importance1_form9', 'id_importance2_form9', 'id_importance3_form9');
+                /**/
+            }
         }
     }
     /* On affiche le formulaire passé en paramètre */
+    alert(indice_form_a_affiche);
     document.getElementById(list_form[indice_form_a_affiche]).style.display = "block";
+    if(indice_form_a_affiche == 0){
+        document.getElementById('div_btn_envoyerTaskToInsert').style.display = "none";
+    }
+    else{
+        document.getElementById('div_btn_envoyerTaskToInsert').style.display = "block";
+    }
 }
 
 /* TODO */
@@ -249,7 +312,25 @@ function doneTask(ID){
 /**
  * Lorsque l'etudiant clique sur le bouton repondre sur une tache qu'un gestionnaire lui a attribue
  */
-function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest, nom_dest){
+
+function modif_reply_task(){
+
+
+    if($("#input_reply_task_3_rad2").is(':checked')){
+        console.log("input_reply_task_3_rad2");
+        $("#input_reply_task_3_dateRDVModif").prop('disabled', false);
+    }else {
+        $("#input_reply_task_3_dateRDVModif").prop('disabled', true);
+
+        console.log("input_reply_task_3_rad1");
+    }
+
+}
+
+/**
+ * Lorsque l'etudiant clique sur le bouton repondre sur une tache qu'un gestionnaire lui a attribue
+ */
+function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest, nom_dest,id_admin){
 
     var type_task = type_task;    // TODO dans la BD type_task pas attribue
     var title = document.getElementById(id_title);
@@ -258,117 +339,293 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
     title.innerHTML = "Re: Tâche n°" + id_task + " - " + nom_task;
 
     // justification
+
     if(type_task == 2){
-        body.innerHTML = "<form>" +
+
+        body.innerHTML = "<form id='form_reply_task_2'>" +
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<div class='form-group'>" +
         "<label>Date et durée de l'absence</label>" +
         "<div class='input-group'>" +
         "<div class='input-group-addon'><i class='fa fa-clock-o'></i></div>" +
-        "<input type='text' class='form-control pull-right' id='duree_absence_reply'/></div></div>" +
+        "<input type='text' class='form-control pull-right' id='input_reply_task_2_duree_absence' name='input_reply_task_2_duree_absence' disabled='true'/></div></div>" +
         "<div class='form-group'>" +
         "<label>Motif de justification</label>" +
-        "<textarea class='form-control'></textarea></div>" +
+        "<textarea class='form-control' id='input_reply_task_2_justification' name='input_reply_task_2_justification' disabled='true'></textarea></div>" +
         "<div class='form-group'>" +
         "<label for='absence_InputFile_reply'>Sélectionner votre justificatif</label>" +
-        "<input type='file' id='absence_InputFile_reply'></div>"
+        "<input type='file' id='input_reply_task_2_file' name='input_reply_task_2_file'></div>"
         + "</form>";
 
-        $('#duree_absence_reply').daterangepicker_reply({
+        $('#input_reply_task_2_duree_absence').daterangepicker_reply({
             timePicker: true,
             timePicker12Hour:false,
             timePickerIncrement: 15,
-            format: 'DD/MM/YYYY H:mm'
+            format: 'YYYY-MM-DD H:mm'
         });
     }
     // prendre un rdv. TODO : recuperer l'heure et la date de rdv
     else if(type_task == 3){
-        body.innerHTML = "<form>" +
+
+        $('input[type=radio][name=input_reply_task_3_modif]').change(function() {
+            console.log('change');
+            /* if (this.value == 'allot') {
+             alert("Allot Thai Gayo Bhai");
+             }
+             else if (this.value == 'transfer') {
+             alert("Transfer Thai Gayo");
+             }*/
+        });
+
+        body.innerHTML = "<form id='form_reply_task_3'>" +
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<div class='form-group'><div class='input-group'><span class='input-group-addon'>" +
-        "<input type='radio' name='btn_radio_rdv_reply'></span>" +
-        "<input type='text' class='form-control' value='Je confirme la date du rendez-vous : 12/23/4567 12:34(TODO: recuperer la date du rdv)' disabled='disabled'></div></div>" +
+        "<input type='radio' id='input_reply_task_3_rad1' name='input_reply_task_3_modif' onchange='modif_reply_task()'  value='1' checked></span>" +
+        "<input type='text' id='input_reply_task_3_dateRDV' name='input_reply_task_3_dateRDV' class='form-control'   value='2016-05-20 08:00' disabled></div></div>" +
         "<div class='form-group'><div class='input-group'><span class='input-group-addon'>" +
-        "<input type='radio' name='btn_radio_rdv_reply'></span>" +
-        "<input type='text' class='form-control pull-right' id='date_rdv_reply' placeholder='Je choisi une autre date de rendez-vous...'/>" +
+        "<input type='radio' id='input_reply_task_3_rad2' name='input_reply_task_3_modif' onchange='modif_reply_task()' value='2'></span>" +
+        "<input type='text' id='input_reply_task_3_dateRDVModif' name='input_reply_task_3_dateRDVModif'class='form-control pull-right'   placeholder='Je choisi une autre date de rendez-vous...' disabled/>" +
         "<div class='input-group-addon'><i class='fa fa-clock-o'></i></div>" +
         "</div></div>"
         + "</form>";
 
-        $('#date_rdv_reply').daterangepicker2_reply({
+        $('#input_reply_task_3_dateRDVModif').daterangepicker2_reply({
             timePicker: true,
             timePicker12Hour:false,
             timePickerIncrement: 15,
-            format: 'DD/MM/YYYY H:mm'
+            format: 'YYYY-MM-DD H:mm'
         });
 
     }
     // rendre un devoir
     else if(type_task == 4){
-        body.innerHTML = "<form>"+
+        body.innerHTML = "<form id='form_reply_task_4'>"+
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<div class='form-group'>" +
-        "<label for='renduDevoir_InputFile_reply'>Sélectionner votre devoir</label>" +
-        "<input type='file' id='renduDevoir_InputFile_reply'></div>" +
+        "<label for='input_reply_task_4_renduDevoir'>Sélectionner votre devoir</label>" +
+        "<input type='file' id='input_reply_task_4_renduDevoir' name='input_reply_task_4_renduDevoir' ></div>" +
         "<div class='form-group'>" +
-        "<label>Ajouter un commentaire</label><textarea class='form-control'></textarea></div>"
+        "<label>Ajouter un commentaire</label><textarea class='form-control' id='input_reply_task_4_commentaire' name='input_reply_task_4_commentaire' ></textarea></div>"
         + "</form>";
     }
     // valider sujet de stage
     else if(type_task == 6){
-        body.innerHTML = "<form>"+
+        body.innerHTML = "<form id='form_reply_task_6'>"+
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<div class='form-group'>" +
         "<label>Dates de début et de fin du stage</label>" +
         "<div class='input-group'>" +
         "<div class='input-group-addon'><i class='fa fa-clock-o'></i></div>" +
-        "<input type='text' class='form-control pull-right' id='dates_stage_reply'/></div></div>" +
+        "<input type='text' class='form-control pull-right' id='input_reply_task_6_date' name='input_reply_task_6_date' /></div></div>" +
         "<div class='form-group'>" +
-        "<label>Détail</label><textarea class='form-control'></textarea></div>"+
+        "<label>Détail</label><textarea class='form-control' id='input_reply_task_6_detail' name='input_reply_task_6_detail'></textarea></div>"+
         "<div class='form-group'>" +
         "<label for='validStage_InputFile_reply'>Sélectionner un fichier</label>" +
-        "<input type='file' id='validStage_InputFile_reply'></div>"
+        "<input type='file' id='input_reply_task_6_file' name='input_reply_task_6_file'></div>"
         + "</form>";
 
-        $('#dates_stage_reply').daterangepicker_reply({
+        $('#input_reply_task_6_date').daterangepicker_reply({
             timePicker: false,
-            format: 'DD/MM/YYYY'
+            format: 'YYYY-MM-DD H:mm'
         });
     }
     // autre
     else{
-        body.innerHTML = "<form>"+
+        body.innerHTML = "<form id='form_reply_task_9'>"+
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<label>Texte</label>" +
-        "<textarea class='form-control'></textarea></div>" +
+        "<textarea class='form-control' id='input_reply_task_9_texte' name='input_reply_task_9_texte'></textarea></div>" +
         "<div class='form-group'>" +
         "<label for='demandeNonRepertoriee_InputFile_reply'>Sélectionner un fichier</label>" +
-        "<input type='file' id='demandeNonRepertoriee_InputFile_reply'></div>"
+        "<input type='file' id='input_reply_task_9_file' name='input_reply_task_9_file'></div>"
         + "</form>";
     }
 }
 
 function sendReply(){
-    alert("TODO : faire le JS lorsqu'on envoie la réponse (BD + modifier HTML)");
+    //alert("TODO : faire le JS lorsqu'on envoie la réponse (BD + modifier HTML)");
+
+    /*    console.log($('#form_reply_task_2').serializeArray());
+     console.log($('#form_reply_task_3').serializeArray());
+     console.log($('#form_reply_task_4').serializeArray());
+     console.log($('#form_reply_task_6').serializeArray());
+     console.log($('#form_reply_task_9').serializeArray());
+     */
+
+
+    var formData = {};
+    $('#form_reply_task_2').serializeArray().map(function(item) {
+        if ( formData[item.name] ) {
+            if ( typeof(formData[item.name]) === "string" ) {
+                formData[item.name] = [formData[item.name]];
+            }
+            formData[item.name].push(item.value);
+        } else {
+            formData[item.name] = item.value;
+        }
+    });
+    var formData2 = formData;
+
+    var formData = {};
+    $('#form_reply_task_3').serializeArray().map(function(item) {
+        if ( formData[item.name] ) {
+            if ( typeof(formData[item.name]) === "string" ) {
+                formData[item.name] = [formData[item.name]];
+            }
+            formData[item.name].push(item.value);
+        } else {
+            formData[item.name] = item.value;
+        }
+    });
+    var formData3 = formData;
+
+    var formData = {};
+    $('#form_reply_task_4').serializeArray().map(function(item) {
+        if ( formData[item.name] ) {
+            if ( typeof(formData[item.name]) === "string" ) {
+                formData[item.name] = [formData[item.name]];
+            }
+            formData[item.name].push(item.value);
+        } else {
+            formData[item.name] = item.value;
+        }
+    });
+    var formData4 = formData;
+
+    var formData = {};
+    $('#form_reply_task_6').serializeArray().map(function(item) {
+        if ( formData[item.name] ) {
+            if ( typeof(formData[item.name]) === "string" ) {
+                formData[item.name] = [formData[item.name]];
+            }
+            formData[item.name].push(item.value);
+        } else {
+            formData[item.name] = item.value;
+        }
+    });
+    var formData6 = formData;
+
+    var formData = {};
+    $('#form_reply_task_9').serializeArray().map(function(item) {
+        if ( formData[item.name] ) {
+            if ( typeof(formData[item.name]) === "string" ) {
+                formData[item.name] = [formData[item.name]];
+            }
+            formData[item.name].push(item.value);
+        } else {
+            formData[item.name] = item.value;
+        }
+    });
+    var formData9 = formData;
+
+    console.log("=====");
+    console.log(formData2);
+    console.log(formData3);
+    console.log(formData4);
+    console.log(formData6);
+    console.log(formData9);
+    console.log("=====");
+
+    if(formData2.length)
+    console.log("formData2 non vide");
+    if(formData3.length>0)
+        console.log("formData2 non vide");
+    if(formData4.length>0)
+        console.log("formData2 non vide");
+    if(formData6.length>0)
+        console.log("formData2 non vide");
+    if(formData9.length>0)
+        console.log("formData2 non vide");
+
+    $.ajax({
+        type: 'POST',
+        url: '/insertReplayTask',
+        dataType: 'json',
+        data: formData2,
+        success: function(data) {
+            console.log("success");
+            console.log(data);
+
+            $.ajax({
+                type: 'POST',
+                url: '/getMytasksRendred',
+                success: function(data) {
+                    console.log("success================> getMytasksRendred");
+                    //  $("my_tasks").append("################################# ####");
+                    $("#my_tasks").html(data);
+
+                    $(function() {
+                        $(".table-task").dataTable({
+                            "bAutoWidth": false,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null, {
+                                    "bSortable": false,
+                                    "bSearchable": false
+                                },
+                            ]
+                        });
+                    });
+
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                    console.log()
+                    var w = window.open();
+                    var html = xhr.responseText;
+
+                    $(w.document.body).html(html);
+                }
+            });
+
+            generateNotification('success', "Success")
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+            console.log()
+            var w = window.open();
+            var html = xhr.responseText;
+
+            $(w.document.body).html(html);
+        }
+
+    });
+
+     console.log("fin ajax");
+
 }
 
-/* Affiche ou cache le champ "echeance" */
-function showEcheance(checkbox, ID){
-    var echeance = document.getElementById(ID);
-    if(document.getElementById(checkbox).checked == true){
-        echeance.disabled = false;
-    }
-    else{
-        echeance.disabled = true;
-        echeance.value = "";
-
-    }
-}
 
 function updateObjetRDV(list_cours, list_devoirs, objet){
     var select_cours = document.getElementById(list_cours);
@@ -792,10 +1049,9 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
     }
 }
 
-document.addEventListener("DOMContentLoaded", function(event) { 
-	$("#buttonEnregistrerEtudiant").click(function() {
-		 
+document.addEventListener("DOMContentLoaded", function(event) {
 
+	$("#buttonEnregistrerEtudiant").click(function() {
 		$.ajax({
 	        type: 'POST',
 	        url: '/updateEtudiant',
@@ -805,7 +1061,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	        }
 	    });
-		
+
 	});
 
     $("#EnvoyerTaskToInsert").click(function() {
@@ -815,7 +1071,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     	    console.log("CLICK BOUTON ENVOYER");
 
-        var formData = new FormData();
+        var formData = {};
         $('#insertTaskFormNew').serializeArray().map(function(item) {
             if ( formData[item.name] ) {
                 if ( typeof(formData[item.name]) === "string" ) {

@@ -201,7 +201,7 @@ class AjaxHandlerController extends Controller {
 			$importance = $request->get ( 'importance_form' . $typeForm );
 			
 			$logger->info ( 'BEFORE MYFILE' );				
-			$file = $request->get ( 'file' );
+			//$file = $request->get ( 'file' );
 			$logger->info ( 'AFTER MYFILE' .$file);				
 							
 			switch ($typeForm) {
@@ -215,7 +215,7 @@ class AjaxHandlerController extends Controller {
 					
 					/* fichier */
 					$file = $request->get ( 'absence_InputFile' );
-					$logger->debug('FILE : '.$_FILES ['absence_InputFile'] ['name']);
+				//	$logger->debug('FILE : '.$_FILES ['absence_InputFile'] ['name']);
 					
 					foreach ( $destinataire as $dest ) {
 						$tache->setIdetudiant ( $idEtudiant );
@@ -655,8 +655,9 @@ class AjaxHandlerController extends Controller {
 		$myTasksSend = [ ];
 		$admins = [ ];
 		$adminsTaskSend = [ ];
-		
-		$controller = $this;
+        $myStatueTask = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tacheetudiant' )->findByIdetudiant ( $id );
+
+        $controller = $this;
 		
 		/* liste de taches affect�es a l'etudiant */
 		$tabTasks = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tacheetudiant' )->findByIdetudiant ( $id );
@@ -711,7 +712,8 @@ class AjaxHandlerController extends Controller {
 		$result ['adminsTaskSend'] = $adminsTaskSend;
 		
 		return $this->render ( '@PolytechDashboardHome/Default/pages/tasks/my_tasks.html.twig', array (
-				'myTasks' => $result 
+				'myTasks' => $result ,
+                'myStatueTask'=>$myStatueTask
 		) );
 	}
 	public function removeValidTaskAction(Request $request) {
@@ -776,4 +778,24 @@ class AjaxHandlerController extends Controller {
 		
 		return new Response ( $jsonContent );
 	}
+
+
+    public function insertReplayTaskAction(Request $request) {
+
+        $idEtudiant = $this->getRequest ()->getSession ()->get ( 'loginTMP' )->getId ();
+
+
+
+        $encoders = array (
+            new XmlEncoder (),
+            new JsonEncoder ()
+        );
+        $normalizers = array (
+            new GetSetMethodNormalizer ()
+        );
+        $serializer = new Serializer ( $normalizers, $encoders );
+        $jsonContent = $serializer->serialize ( "success", 'json' );
+
+        return new Response ( $jsonContent );
+    }
 }
