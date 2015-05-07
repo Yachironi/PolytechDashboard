@@ -551,32 +551,33 @@ function sendReply(){
     console.log(formData9);
     console.log("=====");
 
-    if(formData2.length)
-    console.log("formData2 non vide");
-    if(formData3.length>0)
-        console.log("formData2 non vide");
-    if(formData4.length>0)
-        console.log("formData2 non vide");
-    if(formData6.length>0)
-        console.log("formData2 non vide");
-    if(formData9.length>0)
-        console.log("formData2 non vide");
+    var FormToSend;
+    if(!jQuery.isEmptyObject(formData2))
+        FormToSend=formData2;
+    if(!jQuery.isEmptyObject(formData3))
+        FormToSend=formData3;
+    if(!jQuery.isEmptyObject(formData4))
+        FormToSend=formData4;
+    if(!jQuery.isEmptyObject(formData6))
+        FormToSend=formData6;
+    if(!jQuery.isEmptyObject(formData9))
+        FormToSend=formData9;
+
+
 
     $.ajax({
         type: 'POST',
         url: '/insertReplayTask',
         dataType: 'json',
-        data: formData2,
+        data: FormToSend,
         success: function(data) {
             console.log("success");
+            console.log("Reponse serveur : ");
             console.log(data);
-
             $.ajax({
                 type: 'POST',
                 url: '/getMytasksRendred',
                 success: function(data) {
-                    console.log("success================> getMytasksRendred");
-                    //  $("my_tasks").append("################################# ####");
                     $("#my_tasks").html(data);
 
                     $(function() {

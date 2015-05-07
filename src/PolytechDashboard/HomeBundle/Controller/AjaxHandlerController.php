@@ -5,6 +5,7 @@ namespace PolytechDashboard\HomeBundle\Controller;
 use Doctrine\Common\Collections\Criteria;
 use PolytechDashboard\HomeBundle\Entity\Gestionnaire;
 use PolytechDashboard\HomeBundle\Entity\Tache;
+use PolytechDashboard\HomeBundle\Entity\Reponsetache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -342,7 +343,7 @@ class AjaxHandlerController extends Controller {
 						/* pour persister la tacheEtudiant en BDD */
 						$em->persist ( $tacheGestionnaire );
 					}
-					
+
 					break;
 				case 5:
                    
@@ -774,9 +775,28 @@ class AjaxHandlerController extends Controller {
     public function insertReplayTaskAction(Request $request) {
 
         $idEtudiant = $this->getRequest ()->getSession ()->get ( 'loginTMP' )->getId ();
+        $reponsetache = new Reponsetache();
+        $reponsetache->setIdetudiant ( $idEtudiant );
+        $reponsetache->setIdgestionnaire( $request->get('idGestionnaire') );
+        $reponsetache->setDonnee( $request->get('nom') );
+        $reponsetache->setIdtache($request->get('id')) ;
+        $this->getDoctrine()->getEntityManager()->persist($reponsetache);
+        $this->getDoctrine()->getEntityManager()->flush();
 
 
+        $criteria = Criteria::create ()->where (
+            Criteria::expr ()->eq ( "idetudiant", $this->getRequest ()->getSession ()->get ( 'loginTMP' )->getId () ) )
+            ->andWhere ( Criteria::expr ()->eq ( "idtache", $request->get('id') ) );
 
+        $Tacheetudiants = $this->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tacheetudiant' )->matching ( $criteria );
+
+
+        foreach ( $Tacheetudiants as $Tacheetudiant ) {
+            $myArray [] = $Tacheetudiant;
+            $Tacheetudiant->setStatus("VALIDE");
+            $this->getDoctrine()->getEntityManager()->persist($Tacheetudiant);
+            $this->getDoctrine()->getEntityManager()->flush();
+        }
         $encoders = array (
             new XmlEncoder (),
             new JsonEncoder ()
@@ -785,7 +805,7 @@ class AjaxHandlerController extends Controller {
             new GetSetMethodNormalizer ()
         );
         $serializer = new Serializer ( $normalizers, $encoders );
-        $jsonContent = $serializer->serialize ( "success", 'json' );
+        $jsonContent = $serializer->serialize ( $reponsetache, 'json' );
 
         return new Response ( $jsonContent );
     }
