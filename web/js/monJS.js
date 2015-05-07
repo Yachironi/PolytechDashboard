@@ -129,6 +129,7 @@ function afficheForm(ID){
         }
     }
     /* On affiche le formulaire passé en paramètre */
+    alert(indice_form_a_affiche);
     document.getElementById(list_form[indice_form_a_affiche]).style.display = "block";
     if(indice_form_a_affiche == 0){
         document.getElementById('div_btn_envoyerTaskToInsert').style.display = "none";
@@ -1082,39 +1083,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 formData[item.name] = item.value;
             }
         });
-        
-        var formSelected = $('#list_form').val();
-        var fileSelect;
-        
-        /* insersion du fichier choisi*/
-        switch(formSelected) {
-	        case 'form2':
-	            fileSelect = document.getElementById('absence_InputFile');
-	            break;
-	        case 'form4':
-	            fileSelect = document.getElementById('renduDevoir_InputFile');
-	            break;
-	        case 'form5':
-	            fileSelect = document.getElementById('inscription_InputFile');
-	            break;
-	        case 'form6':
-	            fileSelect = document.getElementById('validStage_InputFile');
-	            break;
-	        case 'form7':
-	            fileSelect = document.getElementById('stage_InputFile');
-	            break;
-	        case 'form8':
-	            fileSelect = document.getElementById('taskPerso_InputFile');
-	            break;
-	        case 'form9':
-	            fileSelect = document.getElementById('demandeNonRepertoriee_InputFile');
-	            break;
-        }
 
-        var file = fileSelect.files[0];
-
-//        formData['myfile'] = file;
-        
         console.log("DATA : ");
         console.log(formData);
         $.ajax({
@@ -1122,9 +1091,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
             url: '/insertTask',
             dataType: 'json',
             data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
             success: function(data){
                 console.log("success");
                 console.log(data);

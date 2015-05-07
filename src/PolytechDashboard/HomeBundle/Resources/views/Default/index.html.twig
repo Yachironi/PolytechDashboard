@@ -95,16 +95,7 @@
                     <div class="modal-body">
                         <div class="form-group" style="vertical-align: middle;">
                             <div class="row"  style="margin: auto; vertical-align: middle;">
-                                <div class="col-lg-3"></div>
-                                <div id="profil_img" class="col-lg-3" style="margin:none;vertical-align: middle;">
-                                    <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image" style="max-width: 100px; max-height: 100px;"/>
-
-                                    <!-- TODO : etablir le changement de photo -->
-                                    <div class="fileUpload btn btn-default btn-flat btn-sm" style="display:block; width:100px;margin:0;">
-                                        <span class="fa fa-camera"></span> Modifier
-                                        <input type="file" class="upload"/>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-lg-6" style="margin: auto; height: 70%; vertical-align: middle;" >
                                     <small><p> {{prenom}} {{nom}}</p>
                                     <p>{% if formation.getAnneeetude()<3 %}
@@ -127,12 +118,10 @@
                             <div class="row">
                                 <div class="col-lg-1"></div>
                                 <div class="col-lg-10">
-                                    <!--
                                 <div id="id_div_img" class="form-group">
                                  	<label for="profil_InputPassword1">Photo de profil</label>
                                 	<input id="input-1" type="file" class="file" data-show-upload="false">
                                 </div>
-                                -->
                                     <!-- TODO : Faire verifier le mot de passe et la confirmation -->
                                     <div id="id_div_password1" class="form-group">
                                         <label for="profil_InputPassword1">Nouveau mot de passe</label>

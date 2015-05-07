@@ -41,10 +41,6 @@ polytech_dashboard_setNotificationCategoryAsRead:
     path:     /setNotificationCategoryAsRead
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:setNotificationCategoryAsRead"}
 
-polytech_dashboard_insertFile:
-    path:     /insertFile
-    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:insertFile"}
-
 polytech_dashboard_insertTask:
     path:     /insertTask
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:insertTask"}
@@ -81,6 +77,3 @@ polytech_dashboard_insertReplayTask:
     path:     /insertReplayTask
     defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:insertReplayTask"}
 
-uploadsFile:
-    path:     /uploadsFile
-    defaults: { _controller: "PolytechDashboardHomeBundle:AjaxHandler:downloadFile"}

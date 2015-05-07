@@ -2,7 +2,6 @@
 
 namespace PolytechDashboard\HomeBundle\Controller;
 
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Doctrine\Common\Collections\Criteria;
 use PolytechDashboard\HomeBundle\Entity\Gestionnaire;
 use PolytechDashboard\HomeBundle\Entity\Tache;
@@ -173,17 +172,11 @@ class AjaxHandlerController extends Controller {
 			$i ++;
 		}
 	}
-	
 	public function insertTaskAction(Request $request) {
 		$logger = $this->get ( 'logger' );
 		$logger->info ( '##########INSERT TASK#############' );
 		
-		if($this->getRequest ()->getSession ()->get ( 'loginTMP' ) == null){
-			return $this->redirect('@PolytechDashboardHome/Default/pages/login.html.twig', 301);
-		}
 		$idEtudiant = $this->getRequest ()->getSession ()->get ( 'loginTMP' )->getId ();
-		
-		
 		if ($request->getMethod () == 'POST') {
 			$logger->info ( 'Post' );
 			
@@ -202,10 +195,6 @@ class AjaxHandlerController extends Controller {
 			/* Importance */
 			$importance = $request->get ( 'importance_form' . $typeForm );
 			
-			$logger->info ( 'BEFORE MYFILE' );				
-			//$file = $request->get ( 'file' );
-			$logger->info ( 'AFTER MYFILE');				
-							
 			switch ($typeForm) {
 				case 2 :
                 	 
@@ -217,7 +206,7 @@ class AjaxHandlerController extends Controller {
 					
 					/* fichier */
 					$file = $request->get ( 'absence_InputFile' );
-				//	$logger->debug('FILE : '.$_FILES ['absence_InputFile'] ['name']);
+					$logger->debug('FILE : '.$file);
 					
 					foreach ( $destinataire as $dest ) {
 						$tache->setIdetudiant ( $idEtudiant );
@@ -227,17 +216,17 @@ class AjaxHandlerController extends Controller {
 						$tache->setImportance ( $importance );
 						$tache->setNom ( $objet );
 						$tache->setType ( $typeForm );
-						/*if ($file != null) {
+						if ($file != null) {
 							$tache->setIdresource ( $file );
 							$uploaddir = '../../../../uploads/';
-							$uploadfile = $uploaddir . basename ( $_FILES ['absence_InputFile'] ['name'] );
+							$uploadfile = $uploaddir . basename ( $_FILES ['userfile'] ['name'] );
 							
-							if (move_uploaded_file ( $_FILES ['absence_InputFile'] ['tmp_name'], $uploadfile )) {
-								$logger->debug('Le fichier est valide, et a été téléchargé avec succès. Voici plus d\'informations :\n');
+							if (move_uploaded_file ( $_FILES ['userfile'] ['tmp_name'], $uploadfile )) {
+								echo "Le fichier est valide, et a ï¿½tï¿½ tï¿½lï¿½chargï¿½ avec succï¿½s. Voici plus d'informations :\n";
 							} else {
-								$logger->debug('Attaque potentielle par téléchargement de fichiers. Voici plus d\'informations :\n');
+								echo "Attaque potentielle par tï¿½lï¿½chargement de fichiers. Voici plus d'informations :\n";
 							}
-						}*/
+						}
 						/* contenu de la tache */
 						$tmp = [ ];
 						
@@ -356,7 +345,8 @@ class AjaxHandlerController extends Controller {
 					}
 
 					break;
-				case 5:					
+				case 5:
+                   
 					/* motif */
 					$duree = $request->get ( 'motif_inscription' );
 					
@@ -782,7 +772,7 @@ class AjaxHandlerController extends Controller {
 	}
 
 
-public function insertReplayTaskAction(Request $request) {
+    public function insertReplayTaskAction(Request $request) {
 
         $idEtudiant = $this->getRequest ()->getSession ()->get ( 'loginTMP' )->getId ();
         $reponsetache = new Reponsetache();
@@ -818,12 +808,5 @@ public function insertReplayTaskAction(Request $request) {
         $jsonContent = $serializer->serialize ( $reponsetache, 'json' );
 
         return new Response ( $jsonContent );
-    }
-    
-    public function downloadFileAction(){
-   		$basePath = $this->container->getParameter('kernel.root_dir').'\Resources\docs';
-
-        $filePath = $basePath.'/Cours1.pdf';
-        return new BinaryFileResponse($filePath);
     }
 }
