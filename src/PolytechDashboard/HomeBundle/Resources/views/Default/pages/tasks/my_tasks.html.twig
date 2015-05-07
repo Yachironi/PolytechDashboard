@@ -33,18 +33,18 @@
                     {% set numTache = numTache+1 %}
                     {% set today = "now"|date("Y-m-d-H-i") %}
                     {% set today_5days = "now+5days"|date("Y-m-d-H-i") %}
-                    <!-- Taches importantes - deadline qui approche (sous 5 jours) -->
-
-                    {% if (task.getDatefin()|date("Y-m-d-H-i") <= today_5days ) and (task.getDatefin()|date("Y-m-d-H-i") >= today)%}
-                        <!-- <tr style="background-color: rgba(255, 0, 0, 0.5);">
-                        -->
-                    <!-- Echeance depassee -->
-                    {% elseif task.getDatefin()|date("Y-m-d-H-i")  < today %}
-                      <!--  <tr style="background-color: rgba(255, 255, 0, 0.5);">-->
-                    {% else %}
-                        <!--<tr>-->
+                    <!-- Taches faites ou pas -->
+                    {% set trouve = 0 %}
+                    {% for tacheEtu in myStatueTask %}
+                    {% if task.getId() == tacheEtu.getIdEtudiant() and tacheEtu.getStatus() == "VALIDE" %}
+                        {% set trouve = 1 %}
                     {% endif %}
-                    <tr>
+                    {% endfor %}
+                    {% if trouve == 1 %}
+                        <tr style="background-color: rgba(194, 194, 194, 0.5);">
+                    {% else %}
+                        <tr>
+                    {% endif %}
                         <td>{{ numTache }}</td>
                         <td>{{ task.getDatecreation()|date("Y/m/d") }}</td>
                         <td>{{ task.getDatefin()|date("Y/m/d") }}</td>
@@ -311,7 +311,7 @@
                                         	
                                         {% elseif type == 6 %}
                                         
-                                        	<div>Dates de début et de fin du stage : {{array[0]}}</div>
+                                        	<div>Dates de dÃ©but et de fin du stage : {{array[0]}}</div>
                                         	<div>Detail :  {{array[1]}}</div>
                                         {% elseif type == 8 %}
                                         

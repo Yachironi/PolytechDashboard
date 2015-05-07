@@ -190,7 +190,9 @@ class AjaxHandlerController extends Controller
         );
         $Etudiant->setTelephone($request->get('telephone'));
         $Etudiant->setEmail($request->get('email'));
-        $Etudiant->setPassword(sha1($request->get('password')));
+        if($request->get('email') != ""){
+            $Etudiant->setPassword(sha1($request->get('password')));
+        }
         $em = $this->getDoctrine()->getManager();
         $em->persist($Etudiant);
         $em->flush();
