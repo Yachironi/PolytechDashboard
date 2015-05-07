@@ -522,26 +522,26 @@ function updateObjetRDV(list_cours, list_devoirs, objet){
 }
 
 /* TODO : chercher les destinataires dans la BD */
-function updateInscription(inscription, destinataire, objet){
+function updateInscription(inscription, destinataire, objet,gestionnaireAdmin,gestionnaireToeic,gestionnaireM2R,gestionnaireSport,gestionnaireBourse){
     var select_inscription = document.getElementById(inscription);
     var value_inscription = select_inscription.options[select_inscription.selectedIndex].value;
     if(value_inscription != ""){
         if(value_inscription == "Polytech"){
-            document.getElementById(destinataire).value = "Dominique Beau - dominique.beau@u-psud.fr (a chercher dans BD)";
+            document.getElementById(destinataire).value = gestionnaireAdmin;
             document.getElementById(objet).value = "[" + value_inscription + "] Demande de réinscription";
         }
         else{
             if(value_inscription == "TOEIC"){
-                document.getElementById(destinataire).value = "Chantal Escudie - chantal.escudie@u-psud.fr (a chercher dans BD)";
+                document.getElementById(destinataire).value = gestionnaireToeic;
             }
             else if(value_inscription == "M2R"){
-                document.getElementById(destinataire).value = "Emmanuelle Frenoux - emmanuelle.frenoux@u-psud.fr (a chercher dans BD)";
+                document.getElementById(destinataire).value = gestionnaireM2R;
             }
             else if(value_inscription == "Sport"){
-                document.getElementById(destinataire).value = "Marcelo Bielsa - marcelo.bielsa@u-psud.fr (a chercher dans BD)";
+                document.getElementById(destinataire).value = gestionnaireSport;
             }
             else if(value_inscription == "Bourse"){
-                document.getElementById(destinataire).value = "Nadia Chapiteau - nadia.chapiteau@u-psud.fr (a chercher dans BD)";
+                document.getElementById(destinataire).value = gestionnaireBourse;
             }
             document.getElementById(objet).value = "[" + value_inscription + "] Demande d'inscription";
         }
