@@ -56,8 +56,9 @@
                             <!-- Tache attribue par un gestionnaire -->
                             <td>
                             {% for admin in myTasks.admins %}
+                                aaa
                  					{% if admin.id == task.getIdgestionnaire() %}
-                 						{{ admin.prenom}} {{ admin.nom }}
+                 						 {{ admin.prenom}} {{ admin.nom }}
                                     {% endif %}
                 			{% endfor %}
                             </td>
@@ -145,7 +146,7 @@
                                         {% else %}
                                             {% for admin in myTasks.admins %}
                                                 {% if admin.id == task.getIdgestionnaire() %}
-                                                    <a href="#replyTask" data-toggle="modal" data-dismiss="modal" onclick="replyTask('title_replyTask', 'body_replyTask', '{{ task.getId() }}', '{{ task.getType() }}', '{{ task.getNom() }}', '{{ admin.prenom }}', '{{ admin.nom }}')">
+                                                    <a href="#replyTask" data-toggle="modal" data-dismiss="modal" onclick="replyTask('title_replyTask', 'body_replyTask', '{{ task.getId() }}', '{{ task.getType() }}', '{{ task.getNom() }}', '{{ admin.prenom }}', '{{ admin.nom }}','{{ admin.id }}')">
                                                         <div class="btn btn-primary pull-left">
                                                             <span class="fa fa-reply"></span> Répondre
                                                         </div>
@@ -200,7 +201,7 @@
                 <!-- Corps -->
                 <div id="body_replyTask" class="modal-body"></div>
                 <!-- Footer -->
-                <div class="modal-footer">
+                <div id="footer_replyTask" class="modal-footer">
                     <button class="btn btn-primary" data-dismiss="modal" onclick="sendReply()">Envoyer</button>
                     <button class="btn btn-primary" data-dismiss="modal">Annuler</button>
                 </div>
@@ -319,7 +320,7 @@
                     <div class="modal-title">Confirmation de relance</div>
                 </div>
                 <!-- Corps -->
-                <div id="body_replyTask" class="modal-body">
+                <div id="ge_body_replyTask" class="modal-body">
                     Souhaitez-vous vraiment relancer le destinataire pour cette tâche?
                 </div>
                 <!-- Footer -->
@@ -342,7 +343,7 @@
                     <div class="modal-title">Modification de tache</div>
                 </div>
                 <!-- Corps -->
-                <div id="body_replyTask" class="modal-body">
+                <div id="edit_replyTask" class="modal-body">
                     {% include '@PolytechDashboardHome/Default/pages/tasks/edit_task.html.twig' %}
 
                 </div>

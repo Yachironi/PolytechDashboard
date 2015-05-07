@@ -24,14 +24,16 @@ class TacheController extends Controller {
 			
 			for($i = 0; $i < $max; $i ++) {
 				$task = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tache' )->findOneById ( $tabTasks [$i]->getIdtache () );
-				$admin = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $task->getIdgestionnaire () );
+				$admin = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )
+                    ->findOneById ( $task->getIdgestionnaire () );
 				
-				if ($admin != null) {
+				if ($admin != null && $task->getIdgestionnaire()==$admin->getId() ) {
 					/* tache affect�e par un gestionnaire */
 					array_push ( $admins, $admin );
-				}
-				array_push ( $myTasksReceived, $task );
-				
+                    array_push ( $myTasksReceived, $task );
+
+                }
+
 				/* suppression des variables temporaires */
 				unset ( $task );
 				unset ( $admin );
@@ -50,8 +52,9 @@ class TacheController extends Controller {
 			for($i = 0; $i < $max; $i ++) {
 				$task = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Tache' )->findOneById ( $tabTasksSend [$i]->getIdtache () );
 				$admin = $controller->getDoctrine ()->getRepository ( 'PolytechDashboardHomeBundle:Gestionnaire' )->findOneById ( $tabTasksSend [$i]->getIdgestionnaire () );
-				
+
 				/* tache affect�e a un gestionnaire */
+
 				array_push ( $adminsTaskSend, $admin );
 				
 				array_push ( $myTasksSend, $task );
