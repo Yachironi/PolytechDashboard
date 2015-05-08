@@ -65,15 +65,77 @@ function afficheForm(ID){
     /* On cache les div qu'il faut caché */
     for(i=0; i<size; i++){
         var form = document.getElementById(list_form[i]);
-        if(form == null){
-            alert(i);
-        }
         if(form.style.display == "block" && i != indice_form_a_affiche){
             form.style.display = "none";
+            // On efface les elements
+            if(i == 1){
+                document.getElementById('duree_absence').value = "";
+                document.getElementById('motif_justification_absence').value = "";
+                document.getElementById('absence_InputFile').value = "";
+                clickOnImportance('id_importance1_form2', 'id_importance2_form2', 'id_importance3_form2');
+                /**/
+            }
+            else if(i == 2){
+                document.getElementById('destinataire_form3').value = "";
+                document.getElementById('date_rdv').value = "";
+                document.getElementById('motif_rdv').value = "";
+                clickOnImportance('id_importance1_form3', 'id_importance2_form3', 'id_importance3_form3');
+            }
+            else if(i == 3){
+                document.getElementById('list_cours').selectedIndex = 0;
+                document.getElementById('list_devoirs').selectedIndex = 0;
+                document.getElementById('objet_form4').value = "";
+                document.getElementById('renduDevoir_InputFile').value = "";
+                document.getElementById('commentaire_rendu_devoir').value = "";
+            }
+
+            else if(i == 4){
+                document.getElementById('list_inscription').selectedIndex= 0;
+                document.getElementById('destinataire_form5').value = "";
+                document.getElementById('objet_form5').value = "";
+                document.getElementById('motif_inscription').value = "";
+                document.getElementById('inscription_InputFile').value = "";
+                clickOnImportance('id_importance1_form5', 'id_importance2_form5', 'id_importance3_form5');
+                /**/
+            }
+            else if(i == 5){
+                document.getElementById('dates_stage').value = "";
+                document.getElementById('detail_stage').value = "";
+                document.getElementById('validStage_InputFile').value = "";
+                clickOnImportance('id_importance1_form6', 'id_importance2_form6', 'id_importance3_form6');
+                /**/
+            }
+            else if(i == 6){
+                document.getElementById('remarque_stage').value = "";
+                document.getElementById('pdf_convention_InputFile').value = "";
+                clickOnImportance('id_importance1_form7', 'id_importance2_form7', 'id_importance3_form7');
+                /**/
+            }
+            else if(i == 7){
+
+                document.getElementById('objet_form8').value = "";
+                document.getElementById('texte_form8').value = "";
+                document.getElementById('taskPerso_InputFile').value = "";
+                clickOnImportance('id_importance1_form8', 'id_importance2_form8', 'id_importance3_form8');
+                /**/
+            }
+            else if(i == 8){
+                document.getElementById('objet_form9').value = "";
+                document.getElementById('text_autre_demande').value = "";
+                document.getElementById('demandeNonRepertoriee_InputFile').value = "";
+                clickOnImportance('id_importance1_form9', 'id_importance2_form9', 'id_importance3_form9');
+                /**/
+            }
         }
     }
     /* On affiche le formulaire passé en paramètre */
     document.getElementById(list_form[indice_form_a_affiche]).style.display = "block";
+    if(indice_form_a_affiche == 0){
+        document.getElementById('div_btn_envoyerTaskToInsert').style.display = "none";
+    }
+    else{
+        document.getElementById('div_btn_envoyerTaskToInsert').style.display = "block";
+    }
 }
 
 /* TODO */
@@ -115,55 +177,55 @@ function editTask(idTask, dateFin,objet, importance, texte) {
         $("#TaskForm_echeance_form8").prop('disabled', true);
     }
     $("#TaskForm_echeance_form8").daterangepicker2({
-            timePicker: true,
-            timePicker12Hour:false,
-            timePickerIncrement: 15,
-            format: 'DD/MM/YYYY H:mm'
-        });
-  /*  var id_list_formulaire = 'list_form'
-    activateTag('assign_task');
-
-    // select
-    var select = document.getElementById(id_list_formulaire);
-    select.selectedIndex = 7;
-    afficheForm(id_list_formulaire);
-
-    // objet
-    document.getElementById('objet_form8').value = objet;
-
-    // importance
-    var nom_importance = "importance" + importance;
-    var id_importance = "id_" + nom_importance + "_form8";
-    document.getElementById('id_importance1_form8').classList.remove('importance1-selected');
-    document.getElementById('id_importance1_form8').classList.add('importance1');
-    document.getElementById(id_importance).classList.remove(nom_importance);
-    document.getElementById(id_importance).classList.add(nom_importance + "-selected");
-
-    // dateFin
-    // TODO : condition a verifier
-    if(dateFin != null){
-        var echeance = document.getElementById('echeance_form8');
-        echeance.disabled = false;
-        echeance.value = dateFin;
-        // TODO : si possible, changer la date du datepicker
-    }
-    document.getElementById('checkbox_form8').checked = true;
-*/
-  /*  $.ajax({
-        type: 'POST',
-        url: '/tachesList',
-        dataType: 'json',
-        success: function (data) {
-            $.each(data, function (i, item) {
-                if (item.id == idTask) {
-                    alert(item.id);
-                    $("#texte_form8").html(item.structure);
-                    console.log(item.structure);
-                }
-            })
-        }
+        timePicker: true,
+        timePicker12Hour:false,
+        timePickerIncrement: 15,
+        format: 'DD/MM/YYYY H:mm'
     });
-*/
+    /*  var id_list_formulaire = 'list_form'
+     activateTag('assign_task');
+
+     // select
+     var select = document.getElementById(id_list_formulaire);
+     select.selectedIndex = 7;
+     afficheForm(id_list_formulaire);
+
+     // objet
+     document.getElementById('objet_form8').value = objet;
+
+     // importance
+     var nom_importance = "importance" + importance;
+     var id_importance = "id_" + nom_importance + "_form8";
+     document.getElementById('id_importance1_form8').classList.remove('importance1-selected');
+     document.getElementById('id_importance1_form8').classList.add('importance1');
+     document.getElementById(id_importance).classList.remove(nom_importance);
+     document.getElementById(id_importance).classList.add(nom_importance + "-selected");
+
+     // dateFin
+     // TODO : condition a verifier
+     if(dateFin != null){
+     var echeance = document.getElementById('echeance_form8');
+     echeance.disabled = false;
+     echeance.value = dateFin;
+     // TODO : si possible, changer la date du datepicker
+     }
+     document.getElementById('checkbox_form8').checked = true;
+     */
+    /*  $.ajax({
+     type: 'POST',
+     url: '/tachesList',
+     dataType: 'json',
+     success: function (data) {
+     $.each(data, function (i, item) {
+     if (item.id == idTask) {
+     alert(item.id);
+     $("#texte_form8").html(item.structure);
+     console.log(item.structure);
+     }
+     })
+     }
+     });
+     */
     // TODO : changer la date de creation et mettre celle d'aujourd'hui
 }
 
@@ -280,10 +342,10 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
     if(type_task == 2){
 
         body.innerHTML = "<form id='form_reply_task_2'>" +
-        "<input type='hidden' name='input_reply_task_objet_task' value='"+id_title+"'>"+
-        "<input type='hidden' name='input_reply_task_type_task' value='"+type_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_task' value='"+id_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_admin' value='"+id_admin+"'>"+
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<div class='form-group'>" +
@@ -320,15 +382,15 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
         });
 
         body.innerHTML = "<form id='form_reply_task_3'>" +
-        "<input type='hidden' name='input_reply_task_objet_task' value='"+id_title+"'>"+
-        "<input type='hidden' name='input_reply_task_type_task' value='"+type_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_task' value='"+id_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_admin' value='"+id_admin+"'>"+
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<div class='form-group'><div class='input-group'><span class='input-group-addon'>" +
         "<input type='radio' id='input_reply_task_3_rad1' name='input_reply_task_3_modif' onchange='modif_reply_task()'  value='1' checked></span>" +
-        "<input type='text' id='input_reply_task_3_dateRDV' name='input_reply_task_3_dateRDV' class='form-control'   value='Je confirme la date du rendez-vous : 12/23/4567 12:34(TODO: recuperer la date du rdv)' disabled></div></div>" +
+        "<input type='text' id='input_reply_task_3_dateRDV' name='input_reply_task_3_dateRDV' class='form-control'   value='2016-05-20 08:00' disabled></div></div>" +
         "<div class='form-group'><div class='input-group'><span class='input-group-addon'>" +
         "<input type='radio' id='input_reply_task_3_rad2' name='input_reply_task_3_modif' onchange='modif_reply_task()' value='2'></span>" +
         "<input type='text' id='input_reply_task_3_dateRDVModif' name='input_reply_task_3_dateRDVModif'class='form-control pull-right'   placeholder='Je choisi une autre date de rendez-vous...' disabled/>" +
@@ -347,10 +409,10 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
     // rendre un devoir
     else if(type_task == 4){
         body.innerHTML = "<form id='form_reply_task_4'>"+
-        "<input type='hidden' name='input_reply_task_objet_task' value='"+id_title+"'>"+
-        "<input type='hidden' name='input_reply_task_type_task' value='"+type_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_task' value='"+id_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_admin' value='"+id_admin+"'>"+
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<div class='form-group'>" +
@@ -363,10 +425,10 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
     // valider sujet de stage
     else if(type_task == 6){
         body.innerHTML = "<form id='form_reply_task_6'>"+
-        "<input type='hidden' name='input_reply_task_objet_task' value='"+id_title+"'>"+
-        "<input type='hidden' name='input_reply_task_type_task' value='"+type_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_task' value='"+id_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_admin' value='"+id_admin+"'>"+
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<div class='form-group'>" +
@@ -389,10 +451,10 @@ function replyTask(id_title, id_body, id_task, type_task,  nom_task, prenom_dest
     // autre
     else{
         body.innerHTML = "<form id='form_reply_task_9'>"+
-        "<input type='hidden' name='input_reply_task_objet_task' value='"+id_title+"'>"+
-        "<input type='hidden' name='input_reply_task_type_task' value='"+type_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_task' value='"+id_task+"'>"+
-        "<input type='hidden' name='input_reply_task_id_admin' value='"+id_admin+"'>"+
+        "<input type='hidden' name='nom' value='"+nom_task+"'>"+
+        "<input type='hidden' name='type' value='"+type_task+"'>"+
+        "<input type='hidden' name='id' value='"+id_task+"'>"+
+        "<input type='hidden' name='idGestionnaire' value='"+id_admin+"'>"+
         "<div class='form-group'>" +
         "<label>Destinataire : </label> " + prenom_dest + " " + nom_dest + "</div>" +
         "<label>Texte</label>" +
@@ -488,69 +550,79 @@ function sendReply(){
     console.log(formData9);
     console.log("=====");
 
+    var FormToSend;
+    if(!jQuery.isEmptyObject(formData2))
+        FormToSend=formData2;
+    if(!jQuery.isEmptyObject(formData3))
+        FormToSend=formData3;
+    if(!jQuery.isEmptyObject(formData4))
+        FormToSend=formData4;
+    if(!jQuery.isEmptyObject(formData6))
+        FormToSend=formData6;
+    if(!jQuery.isEmptyObject(formData9))
+        FormToSend=formData9;
 
 
-    /*
-     $.ajax({
-     type: 'POST',
-     url: '/insertTask',
-     dataType: 'json',
-     data: formData,
-     success: function(data){
-     console.log("success");
-     console.log(data);
-     $.ajax({
-     type: 'POST',
-     url: '/getMytasksRendred',
-     success: function(data){
-     console.log("success================> getMytasksRendred");
-     //  $("my_tasks").append("################################# ####");
-     $("#my_tasks").html(data);
 
-     $(function () {
-     $(".table-task").dataTable({
-     "bAutoWidth": false,
-     "aoColumns": [
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     {"bSortable": false, "bSearchable": false},
-     ]
-     });
-     });
+    $.ajax({
+        type: 'POST',
+        url: '/insertReplayTask',
+        dataType: 'json',
+        data: FormToSend,
+        success: function(data) {
+            console.log("success");
+            console.log("Reponse serveur : ");
+            console.log(data);
+            $.ajax({
+                type: 'POST',
+                url: '/getMytasksRendred',
+                success: function(data) {
+                    $("#my_tasks").html(data);
 
-     },
-     error: function (xhr, ajaxOptions, thrownError) {
-     console.log(xhr.status);
-     console.log(thrownError);
-     console.log()
-     var w = window.open();
-     var html = xhr.responseText;
+                    $(function() {
+                        $(".table-task").dataTable({
+                            "bAutoWidth": false,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null, {
+                                    "bSortable": false,
+                                    "bSearchable": false
+                                },
+                            ]
+                        });
+                    });
 
-     $(w.document.body).html(html);
-     }
-     });
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                    console.log()
+                    var w = window.open();
+                    var html = xhr.responseText;
 
-     document.getElementById('list_form').selectedIndex = 0;
-     afficheForm('list_form');
-     generateNotification('success', "Tache ajoutée a la base de donnée")
-     },
-     error: function (xhr, ajaxOptions, thrownError) {
-     console.log(xhr.status);
-     console.log(thrownError);
-     console.log()
-     var w = window.open();
-     var html = xhr.responseText;
+                    $(w.document.body).html(html);
+                }
+            });
 
-     $(w.document.body).html(html);
-     }
+            generateNotification('success', "Success")
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+            console.log()
+            var w = window.open();
+            var html = xhr.responseText;
 
-     });
-     console.log("fin ajax");
-     */
+            $(w.document.body).html(html);
+        }
+
+    });
+
+    console.log("fin ajax");
 
 }
 
@@ -651,14 +723,14 @@ function clickOnImportance(id_importance_selected, other_id_importance_1, other_
         importance_selected.classList.remove(name_importance_selected + "-selected");
         importance_selected.classList.add(name_importance_selected);
     }
-    
+
     var inputName = 'importance'+id_importance_selected.substring(14);
-    
+
     console.log(inputName);
 
     oFormObject = document.forms['insertTaskForm'];
     console.log(document.getElementById(inputName))
-    
+
     console.log(document.getElementById(inputName).value);
     document.getElementById(inputName).value = id_importance_selected.substring(13,14);
     console.log(document.getElementById(inputName).value);
@@ -742,7 +814,7 @@ function afficheFormEditTask(ID){
         'TaskForm7', 'TaskForm8', 'TaskForm9');
 
     var indice_form_a_affiche = document.getElementById(ID).selectedIndex;
-   // var indice_form_a_affiche = ID;
+    // var indice_form_a_affiche = ID;
     var i;
     var size = list_form.length;
 
@@ -977,28 +1049,27 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
     }
 }
 
-document.addEventListener("DOMContentLoaded", function(event) { 
-	$("#buttonEnregistrerEtudiant").click(function() {
-		 
+document.addEventListener("DOMContentLoaded", function(event) {
 
-		$.ajax({
-	        type: 'POST',
-	        url: '/updateEtudiant',
-	        dataType: 'json',
-	        data: {'email': $('#profil_InputEmail').val(),'password': $('#profil_InputPassword2').val(),'telephone': $('#profil_InputTel').val()},
-	        success: function(data){
+    $("#buttonEnregistrerEtudiant").click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/updateEtudiant',
+            dataType: 'json',
+            data: {'email': $('#profil_InputEmail').val(),'password': $('#profil_InputPassword2').val(),'telephone': $('#profil_InputTel').val()},
+            success: function(data){
 
-	        }
-	    });
-		
-	});
+            }
+        });
+
+    });
 
     $("#EnvoyerTaskToInsert").click(function() {
-   // $("#result").click(function() {
-       console.log($('#insertTaskForm').serializeArray());
-    	  event.preventDefault();
+        // $("#result").click(function() {
+        console.log($('#insertTaskForm').serializeArray());
+        event.preventDefault();
 
-    	    console.log("CLICK BOUTON ENVOYER");
+        console.log("CLICK BOUTON ENVOYER");
 
         var formData = {};
         $('#insertTaskFormNew').serializeArray().map(function(item) {
@@ -1099,64 +1170,64 @@ function updateTask(id){
     });
     //console.log(formData);
     formData.TaskForm_echeance_form8 = formData.TaskForm_echeance_form8.replace(/\//g,"-");
-   // console.log(formData.TaskForm_echeance_form8);
-        $.ajax({
+    // console.log(formData.TaskForm_echeance_form8);
+    $.ajax({
+        type: 'POST',
+        url: '/updateTask',
+        dataType: 'json',
+        data: formData,
+        success: function(data){
+            //  console.log("success");
+            // console.log("le php a retourné => "+data);
+
+            $.ajax({
                 type: 'POST',
-                url: '/updateTask',
-                dataType: 'json',
-                data: formData,
-            success: function(data){
-              //  console.log("success");
-               // console.log("le php a retourné => "+data);
+                url: '/getMytasksRendred',
+                success: function(data){
+                    console.log("success================> getMytasksRendred");
+                    //  $("my_tasks").append("################################# ####");
+                    $("#my_tasks").html(data);
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/getMytasksRendred',
-                    success: function(data){
-                        console.log("success================> getMytasksRendred");
-                      //  $("my_tasks").append("################################# ####");
-                       $("#my_tasks").html(data);
-
-                        $(function () {
-                            $(".table-task").dataTable({
-                                "bAutoWidth": false,
-                                "aoColumns": [
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    {"bSortable": false, "bSearchable": false},
-                                ]
-                            });
+                    $(function () {
+                        $(".table-task").dataTable({
+                            "bAutoWidth": false,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                {"bSortable": false, "bSearchable": false},
+                            ]
                         });
-                        /*var w = window.open();
-                        var html = data;
+                    });
+                    /*var w = window.open();
+                     var html = data;
 
-                        $(w.document.body).html(html);*/
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        console.log(xhr.status);
-                        console.log(thrownError);
-                        console.log()
-                        var w = window.open();
-                        var html = xhr.responseText;
+                     $(w.document.body).html(html);*/
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                    console.log()
+                    var w = window.open();
+                    var html = xhr.responseText;
 
-                        $(w.document.body).html(html);
-                    }
-                });
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                console.log(xhr.status);
-                console.log(thrownError);
-                console.log()
-                var w = window.open();
-                var html = xhr.responseText;
-
-                $(w.document.body).html(html);
-            }
+                    $(w.document.body).html(html);
+                }
             });
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+            console.log()
+            var w = window.open();
+            var html = xhr.responseText;
+
+            $(w.document.body).html(html);
+        }
+    });
 
     $('#insertTaskForm').trigger("reset");
 
