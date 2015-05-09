@@ -1370,3 +1370,18 @@ function generateNotification(type, text) {
     });
     console.log('html: ' + n.options.id);
 }
+
+function addGestionnaire(ID, ID_form){
+
+    var rech = document.getElementsByClassName("node-selected");
+    var str = "";
+    str += rech[0].innerHTML;
+    var gestionnaire = str.substring(140, str.length);
+
+    // condition valide
+    if((gestionnaire.charAt(0) >= 'a' && gestionnaire.charAt(0) <= 'z') || (gestionnaire.charAt(0) >= 'A' && gestionnaire.charAt(0) <= 'A')){
+        alert(gestionnaire);
+    }
+
+    //document.getElementById(ID_form).value += gestionnaire;
+}
