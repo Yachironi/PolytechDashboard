@@ -142,9 +142,9 @@
                                         <label for="profil_InputPassword2">Confirmation du mot de passe</label>
                                         <input type="password" class="form-control" id="profil_InputPassword2" onchange="verifyPassword('profil_InputPassword1','profil_InputPassword2','id_div_password1', 'id_div_password2')">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="profil_InputEmail">Email</label>
-                                        <input type="email" class="form-control" id="profil_InputEmail" value={{email}}>
+                                    <div id ="id_div_email" class="form-group" >
+                                        <label for="profil_InputEmail">Nouveau Email</label>
+                                        <input type="email" class="form-control" id="profil_InputEmail"  onchange="verifMail('profil_InputEmail','id_div_email')">
                                     </div>
                                     <div class="form-group">
                                         <label for="profil_InputTel">Téléphone</label>

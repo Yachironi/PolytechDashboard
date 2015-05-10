@@ -1049,10 +1049,77 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
     }
 }
 
+function verifMail(mdp1, div_mdp1)
+
+{
+    var id_mdp1 = "'" + mdp1 + "'";
+    var id_div_mdp1 = "'" + div_mdp1 + "'";
+    
+	var value_mdp1 = document.getElementById(mdp1).value;
+	var reg = new RegExp('^[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*@[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*[\.]{1}[a-z]{2,6}$', 'i');
+	
+	if(value_mdp1!= ""){
+		if(reg.test(value_mdp1))
+		{
+			if(!document.getElementById(div_mdp1).classList.contains('has-success')){
+	            document.getElementById(div_mdp1).classList.add('has-success');
+	        }
+	        if(!document.getElementById(div_mdp1).classList.contains('has-feedback')) {
+	            document.getElementById(div_mdp1).classList.add('has-feedback');
+	        }
+	        if(document.getElementById(div_mdp1).classList.contains('has-error')) {
+	            document.getElementById(div_mdp1).classList.remove('has-error');
+	        }
+			 document.getElementById(div_mdp1).innerHTML = "<label class='control-label' for='" + mdp1 + "'>Nouveau Email</label>"
+	            + "<input type='email' class='form-control' id='"+ mdp1 +"' value='" + value_mdp1 + "'>"
+	            + "<span class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>";
+			 document.getElementById(mdp1).setAttribute("onchange", "verifMail('" + mdp1 + "','" + div_mdp1 + "')");
+		}
+		else
+		{
+			if(document.getElementById(div_mdp1).classList.contains('has-success')){
+	            document.getElementById(div_mdp1).classList.remove('has-success');
+	        }
+	        if(!document.getElementById(div_mdp1).classList.contains('has-feedback')) {
+	            document.getElementById(div_mdp1).classList.add('has-feedback');
+	        }
+	        if(!document.getElementById(div_mdp1).classList.contains('has-error')) {
+	            document.getElementById(div_mdp1).classList.add('has-error');
+	        }
+	        
+			  document.getElementById(div_mdp1).innerHTML = "<label class='control-label' for='" + mdp1 + "'>Nouveau Email</label>"
+              + "<input type='email' class='form-control' id='"+ mdp1 +"' value='" + value_mdp1 + "'>"
+              + "<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>"
+              + "<span style='color:red;'>Veuillez entrer un email valide</span>";
+			  document.getElementById(mdp1).setAttribute("onchange", "verifMail('" + mdp1 + "','" + div_mdp1 + "')");
+		}
+	}
+	else{
+		if(document.getElementById(div_mdp1).classList.contains('has-success')){
+            document.getElementById(div_mdp1).classList.remove('has-success');
+        }
+        if(!document.getElementById(div_mdp1).classList.contains('has-feedback')) {
+            document.getElementById(div_mdp1).classList.add('has-feedback');
+        }
+        if(!document.getElementById(div_mdp1).classList.contains('has-error')) {
+            document.getElementById(div_mdp1).classList.add('has-error');
+        }
+        
+        document.getElementById(div_mdp1).innerHTML = "<label class='control-label' for='" + mdp1 + "'>Nouveau Email</label>"
+        + "<input type='email' class='form-control' id='"+ mdp1 +"' value='" + value_mdp1 + "'>"
+        + "<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>"
+        + "<span style='color:red;'>Veuillez entrer un email valide</span>";
+        document.getElementById(mdp1).setAttribute("onchange", "verifMail('" + mdp1 + "','" + div_mdp1 + "')");
+        
+	}
+
+}
+
 document.addEventListener("DOMContentLoaded", function(event) {
 	
     $("#buttonEnregistrerEtudiant").click(function() {
-    	if($("label[for='profil_InputPassword2']").css("color") == 'rgb(0, 166, 90)'){
+    	if($("label[for='profil_InputPassword2']").css("color") == 'rgb(0, 166, 90)' && $("label[for='profil_InputEmail']").css("color") == 'rgb(0, 166, 90)'){
+    		
             $.ajax({
                 type: 'POST',
                 url: '/updateEtudiant',
