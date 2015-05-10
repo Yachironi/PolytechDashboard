@@ -1050,17 +1050,24 @@ function verifyPassword(mdp1, mdp2, div_mdp1, div_mdp2){
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
-
+	
     $("#buttonEnregistrerEtudiant").click(function() {
-        $.ajax({
-            type: 'POST',
-            url: '/updateEtudiant',
-            dataType: 'json',
-            data: {'email': $('#profil_InputEmail').val(),'password': $('#profil_InputPassword2').val(),'telephone': $('#profil_InputTel').val()},
-            success: function(data){
+    	if($("label[for='profil_InputPassword2']").css("color") == 'rgb(0, 166, 90)'){
+            $.ajax({
+                type: 'POST',
+                url: '/updateEtudiant',
+                dataType: 'json',
+                data: {'email': $('#profil_InputEmail').val(),'password': $('#profil_InputPassword2').val(),'telephone': $('#profil_InputTel').val()},
+                success: function(data){
 
-            }
-        });
+                }
+            });
+    	}
+    	else{
+    		alert("Formulaire non rempli");
+    	}
+    	
+
 
     });
 
@@ -1369,4 +1376,19 @@ function generateNotification(type, text) {
         timeout: 1000
     });
     console.log('html: ' + n.options.id);
+}
+
+function addGestionnaire(ID, ID_form){
+
+    var rech = document.getElementsByClassName("node-selected");
+    var str = "";
+    str += rech[0].innerHTML;
+    var gestionnaire = str.substring(140, str.length);
+
+    // condition valide
+    if((gestionnaire.charAt(0) >= 'a' && gestionnaire.charAt(0) <= 'z') || (gestionnaire.charAt(0) >= 'A' && gestionnaire.charAt(0) <= 'A')){
+        alert(gestionnaire);
+    }
+
+    //document.getElementById(ID_form).value += gestionnaire;
 }
