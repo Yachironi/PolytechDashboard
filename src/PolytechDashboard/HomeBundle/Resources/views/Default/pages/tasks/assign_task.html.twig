@@ -95,7 +95,7 @@
 <section class="content">
     <!-- Formulaire -->
     <div class="myform" id="form_task">
-        <form  id="insertTaskFormNew">
+        <form  id="insertTaskFormNew" novalidate>
             <!-- Listes des formulaires -->
             <div class="form-group" style="padding-bottom: 20px;">
                 <label for="type">Type de formulaire</label>
@@ -122,7 +122,7 @@
             <div id="form2" class="sous_formulaire" style="display: none;">
                 <!-- Destinataire -->
                 <div class="form-group">
-                    <label for="destinataire">Destinataire</label>
+                    <label for="destinataire">Destinataire *</label>
                     <div class="input-group">
                         <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
                         <!--<input type="text" class="form-control" id="destinataire_form2"
@@ -139,7 +139,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-9">
-                            <label for="objet_form2">Objet</label> <input type="text" name="objet_form2"
+                            <label for="objet_form2">Objet *</label> <input type="text" name="objet_form2"
                                                                           class="form-control" id="objet_form2"
                                                                           value="Justification d'absence" required>
                         </div>
@@ -166,7 +166,7 @@
                 </div>
                 <!-- Date and time range - date début absence -->
                 <div class="form-group">
-                    <label>Date et durée de l'absence</label>
+                    <label>Date et durée de l'absence *</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-clock-o"></i>
@@ -177,7 +177,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Motif de justification</label>
+                    <label>Motif de justification *</label>
                     <textarea class="form-control" id="motif_justification_absence" name="motif_justification_absence" value=""></textarea>
                 </div>
                 <div class="form-group">
@@ -191,7 +191,7 @@
             <div id="form3" class="sous_formulaire" style="display: none;">
                 <!-- Destinataire -->
                 <div class="form-group">
-                    <label for="destinataire">Destinataire</label>
+                    <label for="destinataire">Destinataire *</label>
                     <div class="input-group">
                         <input type="text" class="form-control" id="destinataire_form3" name="destinataire_form3"
                                value="" required>
@@ -205,7 +205,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-9">
-                            <label for="objet_form3">Objet</label> <input type="text" name="objet_form3"
+                            <label for="objet_form3">Objet *</label> <input type="text" name="objet_form3"
                                                                           class="form-control" id="objet_form3" value="Demande de RDV"
                                                                           required>
                         </div>
@@ -233,7 +233,7 @@
                 </div>
                 <!-- Date et heure du RDV -->
                 <div class="form-group">
-                    <label>Date et heure</label>
+                    <label>Date et heure *</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-clock-o"></i>
@@ -244,7 +244,7 @@
 
                 <!-- TODO : ajouter d'autres? -->
                 <div class="form-group">
-                    <label>Motif du rendez-vous</label>
+                    <label>Motif du rendez-vous *</label>
                     <textarea class="form-control" id="motif_rdv" name="motif_rdv" value=""></textarea>
                 </div>
 
@@ -272,7 +272,7 @@
             <div id="form4" class="sous_formulaire" style="display: none;">
                 <!-- Destinataire -->
                 <div class="form-group">
-                    <label for="destinataire">Destinataire</label>
+                    <label for="destinataire">Destinataire *</label>
                     <div class="input-group">
                         <input type="text" class="form-control" id="destinataire_form4" name="destinataire_form4"
                                value="" required>
@@ -287,7 +287,7 @@
                     <div class="col-lg-6">
                         <!-- TODO : liste des cours du semestre de l'etudiant -->
                         <div class="form-group">
-                            <label for="type">Cours</label> <select class="form-control"
+                            <label for="type">Cours *</label> <select class="form-control"
                                                                     id="list_cours"
                                                                     onchange="updateObjetRDV('list_cours', 'list_devoirs', 'objet_form4')">
                                 <option value="" selected></option>
@@ -301,7 +301,7 @@
                     <div class="col-lg-6">
                         <!-- Liste des types de devoir a rendre -->
                         <div class="form-group">
-                            <label for="type">Type de devoir</label> <select
+                            <label for="type">Type de devoir *</label> <select
                                     class="form-control" id="list_devoirs"
                                     onchange="updateObjetRDV('list_cours', 'list_devoirs', 'objet_form4')">
                                 <!-- TODO : autre a rajouter? -->
@@ -322,7 +322,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="renduDevoir_InputFile">Sélectionner votre devoir</label>
+                    <label for="renduDevoir_InputFile">Sélectionner votre devoir *</label>
                     <input type="file" id="renduDevoir_InputFile" name="renduDevoir_InputFile" value="">
                 </div>
 
@@ -337,7 +337,7 @@
             <div id="form5" class="sous_formulaire" style="display: none;">
                 <!-- Listes des inscriptions -->
                 <div class="form-group" style="padding-bottom: 20px;">
-                    <label for="type">Type d'inscription</label> <select
+                    <label for="type">Type d'inscription *</label> <select
                             class="form-control" id="list_inscription"
                             onchange="updateInscription('list_inscription', 'destinataire_form5', 'objet_form5','{{ myAdmins.Scolarite.getEmail() }}','{{ myAdmins.RIEurope.getEmail() }}','{{ myAdmins.Formation.getEmail() }}','{{ myAdmins.Sport.getEmail() }}','{{ myAdmins.Admin.getEmail() }}')">
                         <option value="" selected="selected"></option>
@@ -351,7 +351,7 @@
 
                 <!-- Destinataire -->
                 <div class="form-group">
-                    <label for="destinataire">Destinataire</label>
+                    <label for="destinataire">Destinataire *</label>
                     <div class="input-group">
                         <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
                         <input type="text" class="form-control" id="destinataire_form5" name="destinataire_form5"
@@ -365,7 +365,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-9">
-                            <label for="objet_form5">Objet</label> <input type="text" name="objet_form5"
+                            <label for="objet_form5">Objet *</label> <input type="text" name="objet_form5"
                                                                           class="form-control" id="objet_form5" value="" required>
                         </div>
                         <div class="col-lg-3">
@@ -424,7 +424,7 @@
             <div id="form6" class="sous_formulaire" style="display: none;">
                 <!-- Destinataire -->
                 <div class="form-group">
-                    <label for="destinataire">Destinataire</label>
+                    <label for="destinataire">Destinataire *</label>
                     <div class="input-group">
                         <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
                         <input type="text" class="form-control" id="destinataire_form6" name="destinataire_form6"
@@ -439,7 +439,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-9">
-                            <label for="objet_form6">Objet</label> <input type="text" name="objet_form6"
+                            <label for="objet_form6">Objet *</label> <input type="text" name="objet_form6"
                                                                           class="form-control" id="objet_form6"
                                                                           value="Validation du sujet de stage" required>
                         </div>
@@ -467,7 +467,7 @@
                 </div>
                 <!-- Date stage -->
                 <div class="form-group">
-                    <label>Dates de début et de fin du stage</label>
+                    <label>Dates de début et de fin du stage *</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-clock-o"></i>
@@ -511,7 +511,7 @@
             <div id="form7" class="sous_formulaire" style="display: none;">
                 <!-- Destinataire -->
                 <div class="form-group">
-                    <label for="destinataire">Destinataire</label>
+                    <label for="destinataire">Destinataire *</label>
                     <div class="input-group">
                         <!-- TODO : chercher la personne qui s'occupe de ça dans la BD -->
                         <input type="text" class="form-control" id="destinataire_form7" name="destinataire_form7"
@@ -526,7 +526,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-9">
-                            <label for="objet_form7">Objet</label> <input type="text" name="objet_form7"
+                            <label for="objet_form7">Objet *</label> <input type="text" name="objet_form7"
                                                                           class="form-control" id="objet_form7"
                                                                           value="Convention de stage" required>
                         </div>
@@ -565,7 +565,7 @@
 
                 <div class="form-group">
                     <label for="stage_InputFile">Sélectionner votre convention de
-                        stage</label> <input type="file" id="pdf_convention_InputFile" name="pdf_convention_InputFile" value="">
+                        stage *</label> <input type="file" id="pdf_convention_InputFile" name="pdf_convention_InputFile" value="">
                 </div>
 
             </div>
@@ -574,7 +574,7 @@
             <div id="form8" class="sous_formulaire" style="display: none;">
                 <!-- Destinataire -->
                 <div class="form-group">
-                    <label for="destinataire">Destinataire</label>
+                    <label for="destinataire">Destinataire *</label>
                     <!-- TODO : griser cette partie -->
                     <div class="input-group">
                         <!-- TODO : lorsque cette tache sera envoye, remplacer "moi" par l'etudiant actuel -->
@@ -588,7 +588,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-9">
-                            <label for="objet_form8">Objet</label> <input type="text" name="objet_form8"
+                            <label for="objet_form8">Objet *</label> <input type="text" name="objet_form8"
                                                                           class="form-control" id="objet_form8" value="" required>
                         </div>
                         <div class="col-lg-3">
@@ -615,7 +615,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="texte_form8">Texte</label>
+                    <label for="texte_form8">Texte *</label>
                     <textarea class="form-control" id="texte_form8" name="texte_form8" value=""></textarea>
                 </div>
                 <div class="form-group">
@@ -647,7 +647,7 @@
             <div id="form9" class="sous_formulaire" style="display: none;">
                 <!-- Destinataire -->
                 <div class="form-group">
-                    <label for="destinataire">Destinataire</label>
+                    <label for="destinataire">Destinataire *</label>
                     <div class="input-group">
                         <input type="text" class="form-control" id="destinataire_form9" name="destinataire_form9"
                                required>
@@ -661,7 +661,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-9">
-                            <label for="objet_form9">Objet</label> <input type="text" name="objet_form9"
+                            <label for="objet_form9">Objet *</label> <input type="text" name="objet_form9"
                                                                           class="form-control" id="objet_form9" value="" required>
                         </div>
                         <div class="col-lg-3">
@@ -687,7 +687,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Texte</label>
+                    <label>Texte *</label>
                     <textarea class="form-control" id="text_autre_demande" name="text_autre_demande"></textarea>
                 </div>
 
