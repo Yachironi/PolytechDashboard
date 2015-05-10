@@ -1156,74 +1156,175 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 formData[item.name] = item.value;
             }
         });
+        var formSelected = $('#list_form').find(":selected").attr("value");
+        var error = false;
+        switch (formSelected) {
+        case 'form2':
+            var a=document.getElementById('destinataire_form2').value;
+            var b=document.getElementById('objet_form2').value;
+            var c=document.getElementById('duree_absence').value;
+            var d=document.getElementById('motif_justification_absence').value;
+            
+            if (a==null || a=="",b==null || b=="",c==null || c=="",d==null || d==""){
+            	generateNotification('error','Veuillez remplir tous les champs avec une *');
+            	error = true;
+            }
+                        
+        	break;
+        case 'form3':
+            var a=document.getElementById('destinataire_form3').value;
+            var b=document.getElementById('objet_form3').value;
+            var c=document.getElementById('date_rdv').value;
+            var d=document.getElementById('motif_rdv').value;
+            
+            if (a==null || a=="",b==null || b=="",c==null || c=="",d==null || d==""){
+            	generateNotification('error','Veuillez remplir tous les champs avec une *');
+            	error = true;
+              }
+                        
+        	break;
+        case 'form4':
+            var a=document.getElementById('destinataire_form4').value;
+            var b=document.getElementById('objet_form4').value;
+            var c=$('#list_devoirs').find(":selected").text();
+            var d=$('#list_cours').find(":selected").text();
+            var e=document.getElementById('renduDevoir_InputFile').value;
+            
+            if (a==null || a=="",b==null || b=="",c==null || c=="",d==null || d=="",e==null || e==""){
+            	generateNotification('error','Veuillez remplir tous les champs avec une *');
+            	error = true;
+              }
+                       
+        	break;
+        case 'form5':
+            var a=document.getElementById('destinataire_form5').value;
+            var b=document.getElementById('objet_form5').value;
+            var c=$('#list_inscription').find(":selected").text();
+            
+            if (a==null || a=="",b==null || b=="",c==null || c==""){
+            	generateNotification('error','Veuillez remplir tous les champs avec une *');
+            	error = true;
+              }
+                        
+        	break;
+        case 'form6':
+            var a=document.getElementById('destinataire_form6').value;
+            var b=document.getElementById('objet_form6').value;
+            var c=document.getElementById('dates_stage').value;
+            var d=document.getElementById('dates_stage').value;
 
+            if (a==null || a=="",b==null || b=="",c==null || c=="",d==null || d==""){
+            	generateNotification('error','Veuillez remplir tous les champs avec une *');
+            	error = true;
+              }
+                        
+        	break;
+        case 'form7':
+            var a=document.getElementById('destinataire_form7').value;
+            var b=document.getElementById('objet_form7').value;
+            var c=document.getElementById('pdf_convention_InputFile').value;
+
+            if (a==null || a=="",b==null || b=="",c==null || c==""){
+            	generateNotification('error','Veuillez remplir tous les champs avec une *');
+	        	error = true;
+             }
+                       
+        	break;
+        case 'form8':
+            var a=document.getElementById('destinataire_form8').value;
+            var b=document.getElementById('objet_form8').value;
+            var c=document.getElementById('texte_form8').value;
+
+            if (a==null || a=="",b==null || b=="",c==null || c==""){
+            	generateNotification('error','Veuillez remplir tous les champs avec une *');
+            	error = true;
+
+              }
+                     
+        	break;
+        case 'form9':
+            var a=document.getElementById('destinataire_form9').value;
+            var b=document.getElementById('objet_form9').value;
+            var c=document.getElementById('text_autre_demande').value;
+
+            if (a==null || a=="",b==null || b=="",c==null || c==""){
+            	generateNotification('error','Veuillez remplir tous les champs avec une *');
+            	error = true;
+             }
+                        
+        	break;
+        }
+        
         console.log("DATA : ");
         console.log(formData);
-        $.ajax({
-            type: 'POST',
-            url: '/insertTask',
-            dataType: 'json',
-            data: formData,
-            success: function(data){
-                console.log("success");
-                console.log(data);
-                $.ajax({
-                    type: 'POST',
-                    url: '/getMytasksRendred',
-                    success: function(data){
-                        console.log("success================> getMytasksRendred");
-                        //  $("my_tasks").append("################################# ####");
-                        $("#my_tasks").html(data);
-
-                        $(function () {
-                            $(".table-task").dataTable({
-                                "bAutoWidth": false,
-                                "aoColumns": [
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    {"bSortable": false, "bSearchable": false},
-                                ]
-                            });
-                        });
-                        /*var w = window.open();
-                         var html = data;
-
-                         $(w.document.body).html(html);*/
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        console.log(xhr.status);
-                        console.log(thrownError);
-                        console.log()
-                        var w = window.open();
-                        var html = xhr.responseText;
-
-                        $(w.document.body).html(html);
-                    }
-                });
-                /* afficher le formulaire 1*/
-                document.getElementById('list_form').selectedIndex = 0;
-                afficheForm('list_form');
-                generateNotification('success', "Tache ajoutée a la base de donnée")
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                console.log(xhr.status);
-                console.log(thrownError);
-                console.log()
-                var w = window.open();
-                var html = xhr.responseText;
-
-                $(w.document.body).html(html);
-            }
-
-        });
+        if(error==false){
+	        $.ajax({
+	            type: 'POST',
+	            url: '/insertTask',
+	            dataType: 'json',
+	            data: formData,
+	            success: function(data){
+	                console.log("success");
+	                console.log(data);
+	                $.ajax({
+	                    type: 'POST',
+	                    url: '/getMytasksRendred',
+	                    success: function(data){
+	                        console.log("success================> getMytasksRendred");
+	                        //  $("my_tasks").append("################################# ####");
+	                        $("#my_tasks").html(data);
+	
+	                        $(function () {
+	                            $(".table-task").dataTable({
+	                                "bAutoWidth": false,
+	                                "aoColumns": [
+	                                    null,
+	                                    null,
+	                                    null,
+	                                    null,
+	                                    null,
+	                                    null,
+	                                    {"bSortable": false, "bSearchable": false},
+	                                ]
+	                            });
+	                        });
+	                        /*var w = window.open();
+	                         var html = data;
+	
+	                         $(w.document.body).html(html);*/
+	                    },
+	                    error: function (xhr, ajaxOptions, thrownError) {
+	                        console.log(xhr.status);
+	                        console.log(thrownError);
+	                        console.log()
+	                        var w = window.open();
+	                        var html = xhr.responseText;
+	
+	                        $(w.document.body).html(html);
+	                    }
+	                });
+	                /* afficher le formulaire 1*/
+	                document.getElementById('list_form').selectedIndex = 0;
+	                afficheForm('list_form');
+	                generateNotification('success', "Tache ajoutée a la base de donnée");
+	            },
+	            error: function (xhr, ajaxOptions, thrownError) {
+	                console.log(xhr.status);
+	                console.log(thrownError);
+	                console.log();
+	                var w = window.open();
+	                var html = xhr.responseText;
+	
+	                $(w.document.body).html(html);
+	            }
+	
+	        });
+        }
         console.log("fin ajax");
 
 
     });
+
 });
 
 
